@@ -1,8 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+// Obtener todas las publicaciones ordenadas por fecha
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
 <!doctype html>
@@ -14,31 +20,31 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<Header />
 		
 		<main class="container">
-			<!-- Encabezado sobrio con el logo y presentación -->
 			<section class="hero">
-				<img src="/WhatsApp Image 2026-08-03 at 18.14.50.jpeg" alt="abulia terminal logo" class="hero-logo" />
+				<img src="/logo.jpeg" alt="abulia terminal logo" class="hero-logo" />
 				<h1 class="main-title">abulia terminal</h1>
 				<p class="tagline">revista literaria: ensayo, crítica y creación</p>
 			</section>
 
 			<hr />
 
-			<!-- Lista de publicaciones -->
 			<section class="feed">
 				<h2 class="section-title">publicaciones recientes</h2>
 				
 				<div class="grid-posts">
-					<article class="post-card">
-						<span class="category">ensayo</span>
-						<h3 class="post-title"><a href="#">título de ensayo de prueba</a></h3>
-						<p class="excerpt">Aquí va la bajada o extracto del texto en minúsculas para la vista previa de la portada...</p>
-					</article>
-
-					<article class="post-card">
-						<span class="category">crítica</span>
-						<h3 class="post-title"><a href="#">título de reseña o crítica de prueba</a></h3>
-						<p class="excerpt">Anotaciones iniciales sobre la obra o fragmento destacado para los lectores...</p>
-					</article>
+					{
+						posts.map((post) => (
+							<article class="post-card">
+								<span class="category">
+									{post.data.category || 'publicación'}
+								</span>
+								<h3 class="post-title">
+									<a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+								</h3>
+								<p class="excerpt">{post.data.description}</p>
+							</article>
+						))
+					}
 				</div>
 			</section>
 		</main>
@@ -48,14 +54,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 </html>
 
 <style>
-	:global(root) {
-		--bg-color: #f5f0e6;
-		--text-color: #1a1918;
-		--accent-pink: #e6397d;
-		--accent-orange: #e05a2b;
-		--border-color: #e2dbce;
-	}
-
 	:global(body) {
 		background-color: #f5f0e6;
 		color: #1a1918;
@@ -63,7 +61,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		margin: 0;
 	}
 
-	/* Todo el sistema de interfaz en minúsculas */
 	:global(header), 
 	:global(footer), 
 	.main-title, 
@@ -78,11 +75,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		max-width: 800px;
 		margin: 0 auto;
 		padding: 2.5rem 1.5rem;
-	}
-
-	.hero {
-		text-align: left;
-		padding: 1rem 0;
 	}
 
 	.hero-logo {
@@ -114,9 +106,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	.section-title {
 		font-size: 1rem;
 		font-weight: 600;
-		letter-spacing: 0.02em;
 		margin-bottom: 1.5rem;
-		color: #e05a2b; /* acento terracota tomado de la estrella */
+		color: #e05a2b;
 	}
 
 	.grid-posts {
@@ -133,7 +124,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	.category {
 		font-size: 0.75rem;
 		letter-spacing: 0.05em;
-		color: #e6397d; /* acento magenta del logo */
+		color: #e6397d;
 		font-weight: 600;
 		display: block;
 		margin-bottom: 0.3rem;
