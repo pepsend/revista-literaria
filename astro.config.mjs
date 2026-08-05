@@ -6,7 +6,8 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	// TODO: reemplaza por la URL real de tu sitio en Netlify (afecta sitemap, RSS y canonical)
+	site: 'https://abuliaterminal.netlify.app',
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{

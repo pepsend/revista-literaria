@@ -1,19 +1,18 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'posts'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, date, author, category } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="es">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={category ? `${category} — ${title}` : title} />
 		<style>
 			main {
 				width: calc(100% - 2em);
@@ -49,7 +48,15 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				margin-bottom: 0.5em;
 				color: rgb(var(--gray));
 			}
-			.last-updated-on {
+			.category {
+				margin: 0 0 0.5em 0;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				font-size: 0.8rem;
+				font-weight: 600;
+				color: rgb(var(--accent));
+			}
+			.author {
 				font-style: italic;
 			}
 		</style>
@@ -59,22 +66,14 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<Header />
 		<main>
 			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
 				<div class="prose">
 					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
+						{category && <p class="category">{category}</p>}
 						<h1>{title}</h1>
+						<div class="date">
+							<FormattedDate date={date} />
+							{author && <span class="author"> · {author}</span>}
+						</div>
 						<hr />
 					</div>
 					<slot />

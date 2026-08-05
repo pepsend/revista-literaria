@@ -1,0 +1,117 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_TITLE } from '../../consts';
+import { CATEGORIES } from '../../content.config';
+
+// Convierte "Creación Abúlica" -> "creacion-abulica"
+const slugify = (name) =>
+	name
+		.toLowerCase()
+		.normalize('NFD')
+		.replace(/[̀-ͯ]/g, '')
+		.replace(/\s+/g, '-');
+
+export async function getStaticPaths() {
+	const slug = (name) =>
+		name
+			.toLowerCase()
+			.normalize('NFD')
+			.replace(/[̀-ͯ]/g, '')
+			.replace(/\s+/g, '-');
+	return CATEGORIES.map((name) => ({
+		params: { category: slug(name) },
+		props: { categoryName: name },
+	}));
+}
+
+const { categoryName } = Astro.props;
+
+const posts = (await getCollection('posts'))
+	.filter((post) => post.data.category === categoryName)
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead title={`${categoryName} · ${SITE_TITLE}`} description={`Artículos de la categoría ${categoryName}`} />
+	</head>
+	<body>
+		<Header />
+		<main class="container">
+			<h1 class="page-title">{categoryName}</h1>
+
+			{posts.length === 0 && (
+				<p class="empty">Aún no hay publicaciones en esta categoría.</p>
+			)}
+
+			<div class="grid-posts">
+				{
+					posts.map((post) => (
+						<article class="post-card">
+							<h3 class="post-title">
+								<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+							</h3>
+							<p class="meta">
+								<FormattedDate date={post.data.date} />
+								{post.data.author && <span> · {post.data.author}</span>}
+							</p>
+						</article>
+					))
+				}
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	:global(body) {
+		background-color: #f5f0e6;
+		color: #1a1918;
+		margin: 0;
+	}
+	.container {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 2.5rem 1.5rem;
+	}
+	.page-title {
+		text-transform: lowercase;
+		color: #e05a2b;
+		margin-bottom: 2rem;
+	}
+	.empty {
+		color: #666056;
+	}
+	.grid-posts {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+	.post-card {
+		border-bottom: 1px solid #e2dbce;
+		padding-bottom: 1.2rem;
+	}
+	.post-title {
+		margin: 0 0 0.3rem 0;
+		font-size: 1.2rem;
+		font-weight: 500;
+	}
+	.post-title a {
+		color: #1a1918;
+		text-decoration: none;
+	}
+	.post-title a:hover {
+		color: #e6397d;
+	}
+	.meta {
+		margin: 0;
+		font-size: 0.85rem;
+		color: #666056;
+	}
+</style>

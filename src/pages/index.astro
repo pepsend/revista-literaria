@@ -5,10 +5,17 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-// Obtener todas las publicaciones ordenadas por fecha
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+// Obtener todas las publicaciones ordenadas por fecha (más reciente primero)
+const posts = (await getCollection('posts')).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+
+// Genera un extracto corto a partir del cuerpo del artículo
+const excerpt = (body: string | undefined, length = 180) => {
+	if (!body) return '';
+	const text = body.replace(/[#*_>`\-]/g, '').replace(/\s+/g, ' ').trim();
+	return text.length > length ? text.slice(0, length) + '…' : text;
+};
 ---
 
 <!doctype html>
@@ -21,7 +28,6 @@ const posts = (await getCollection('blog')).sort(
 		
 		<main class="container">
 			<section class="hero">
-				<img src="/logo.jpeg" alt="abulia terminal logo" class="hero-logo" />
 				<h1 class="main-title">abulia terminal</h1>
 				<p class="tagline">revista literaria: ensayo, crítica y creación</p>
 			</section>
@@ -39,9 +45,12 @@ const posts = (await getCollection('blog')).sort(
 									{post.data.category || 'publicación'}
 								</span>
 								<h3 class="post-title">
-									<a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+									<a href={`/blog/${post.id}/`}>{post.data.title}</a>
 								</h3>
-								<p class="excerpt">{post.data.description}</p>
+								{post.data.author && (
+									<p class="author">por {post.data.author}</p>
+								)}
+								<p class="excerpt">{excerpt(post.body)}</p>
 							</article>
 						))
 					}
@@ -143,6 +152,13 @@ const posts = (await getCollection('blog')).sort(
 
 	.post-title a:hover {
 		color: #e6397d;
+	}
+
+	.author {
+		font-size: 0.85rem;
+		color: #666056;
+		font-style: italic;
+		margin: 0 0 0.5rem 0;
 	}
 
 	.excerpt {
