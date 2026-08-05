@@ -16,4 +16,16 @@ collections:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Fecha", name: "date", widget: "datetime" }
       - { label: "Autor", name: "author", widget: "string" }
+      - label: "Categoría"
+        name: "category"
+        widget: "select"
+        options:
+          - "Ensayo"
+          - "Género"
+          - "Crítica"
+          - "Creación Abúlica"
+          - "Poesía"
+          - "Cuento"
+          - "Crónica"
+          - "Artículo"
       - { label: "Contenido", name: "body", widget: "markdown" }
