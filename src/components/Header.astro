@@ -1,110 +1,182 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+
+const categories = [
+	['Ensayo', '/categorias/ensayo'],
+	['Género', '/categorias/genero'],
+	['Crítica', '/categorias/critica'],
+	['Creación Abúlica', '/categorias/creacion-abulica'],
+	['Poesía', '/categorias/poesia'],
+	['Cuento', '/categorias/cuento'],
+	['Crónica', '/categorias/cronica'],
+	['Artículo', '/categorias/articulo'],
+];
 ---
 
-<header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
+<div class="header-wrap">
+	<header>
+		<a class="brand" href="/">{SITE_TITLE}</a>
+
+		<nav class="internal-links">
 			<HeaderLink href="/">Inicio</HeaderLink>
 			<HeaderLink href="/novedades">Novedades</HeaderLink>
-			<HeaderLink href="/linea-editorial">Línea Editorial</HeaderLink>
+			<HeaderLink href="/linea-editorial">Línea editorial</HeaderLink>
 			<HeaderLink href="/manifiesto">Manifiesto</HeaderLink>
 			<HeaderLink href="/colaborar">Colaborar</HeaderLink>
-			
-			<!-- Desplegable de Categorías -->
+
 			<div class="dropdown">
-				<button class="dropbtn">Categorías ▾</button>
+				<button class="dropbtn" type="button">Categorías ▾</button>
 				<div class="dropdown-content">
-					<a href="/categorias/ensayo">Ensayo</a>
-					<a href="/categorias/genero">Género</a>
-					<a href="/categorias/critica">Crítica</a>
-					<a href="/categorias/creacion-abulica">Creación Abúlica</a>
-					<a href="/categorias/poesia">Poesía</a>
-					<a href="/categorias/cuento">Cuento</a>
-					<a href="/categorias/cronica">Crónica</a>
-					<a href="/categorias/articulo">Artículo</a>
+					{categories.map(([label, href]) => <a href={href}>{label}</a>)}
 				</div>
 			</div>
 
-			<HeaderLink href="/contacto">Contáctanos</HeaderLink>
-		</div>
-	</nav>
-</header>
+			<a class="cta" href="/contacto">Contáctanos</a>
+		</nav>
+	</header>
+</div>
 
 <style>
+	.header-wrap {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		padding: 0.9rem 1.5rem;
+		background: linear-gradient(#f5f0e6 70%, rgba(245, 240, 230, 0));
+	}
 	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
-
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
+		max-width: 1200px;
+		margin: 0 auto;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		gap: 1rem;
+		background: #fffdf9;
+		border: 1px solid #ece4d5;
+		border-radius: 999px;
+		padding: 0.5rem 0.75rem 0.5rem 1.4rem;
+		box-shadow: 0 6px 20px rgba(26, 25, 24, 0.07);
 	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
+
+	.brand {
+		font-family: Georgia, 'Times New Roman', serif;
+		font-weight: 700;
+		font-size: 1.25rem;
+		line-height: 1;
+		color: #1a1918;
 		text-decoration: none;
+		text-transform: lowercase;
+		white-space: nowrap;
 	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
+
 	.internal-links {
 		display: flex;
 		align-items: center;
-		gap: 0.5em;
+		gap: 0.15rem;
+		flex-wrap: wrap;
+		justify-content: flex-end;
 	}
 
-	/* Estilos para el menú desplegable */
+	/* Estilo base de los enlaces (HeaderLink renderiza <a>) */
+	.internal-links :global(a) {
+		color: #4a453e;
+		text-decoration: none;
+		font-size: 0.92rem;
+		padding: 0.45rem 0.75rem;
+		border-radius: 999px;
+		transition: background 0.15s ease, color 0.15s ease;
+		white-space: nowrap;
+	}
+	.internal-links :global(a:hover) {
+		background: #f1e9db;
+		color: #1a1918;
+	}
+	/* Estado activo (clase que agrega HeaderLink) */
+	.internal-links :global(a.active) {
+		background: #e7a977;
+		color: #1a1918;
+		font-weight: 600;
+	}
+
+	/* Botón de contacto (CTA) — siempre destacado */
+	.cta,
+	.internal-links :global(a.cta) {
+		background: #e05a2b !important;
+		color: #fff !important;
+		font-weight: 600;
+		padding: 0.45rem 1rem !important;
+	}
+	.cta:hover {
+		background: #c94a1f !important;
+	}
+
+	/* Desplegable de categorías */
 	.dropdown {
 		position: relative;
-		display: inline-block;
 	}
 	.dropbtn {
-		padding: 1em 0.5em;
-		color: var(--black);
-		background: none;
-		border: none;
-		font-size: 1em;
-		cursor: pointer;
 		font-family: inherit;
+		font-size: 0.92rem;
+		color: #4a453e;
+		background: #f1e9db;
+		border: none;
+		cursor: pointer;
+		padding: 0.45rem 0.85rem;
+		border-radius: 999px;
+		transition: background 0.15s ease;
+	}
+	.dropbtn:hover {
+		background: #e7a977;
+		color: #1a1918;
 	}
 	.dropdown-content {
 		display: none;
 		position: absolute;
-		top: 100%;
-		left: 0;
-		background-color: #ffffff;
-		min-width: 180px;
-		box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-		z-index: 10;
-		border: 1px solid #eaeaea;
-	}
-	.dropdown-content a {
-		color: var(--black);
-		padding: 10px 14px;
-		display: block;
-		border-bottom: none;
-	}
-	.dropdown-content a:hover {
-		background-color: #f5f5f5;
+		top: calc(100% + 0.5rem);
+		right: 0;
+		background: #fffdf9;
+		min-width: 200px;
+		border: 1px solid #ece4d5;
+		border-radius: 14px;
+		box-shadow: 0 12px 28px rgba(26, 25, 24, 0.14);
+		padding: 0.4rem;
+		z-index: 60;
 	}
 	.dropdown:hover .dropdown-content {
 		display: block;
+	}
+	.dropdown-content a {
+		display: block;
+		color: #4a453e;
+		padding: 0.5rem 0.75rem;
+		border-radius: 8px;
+		text-decoration: none;
+		font-size: 0.9rem;
+	}
+	.dropdown-content a:hover {
+		background: #f1e9db;
+		color: #1a1918;
+	}
+
+	@media (max-width: 820px) {
+		header {
+			flex-direction: column;
+			border-radius: 20px;
+			align-items: stretch;
+			padding: 0.9rem 1rem;
+		}
+		.brand {
+			text-align: center;
+			font-size: 1.4rem;
+			margin-bottom: 0.4rem;
+		}
+		.internal-links {
+			justify-content: center;
+		}
+		.dropdown-content {
+			right: auto;
+			left: 0;
+		}
 	}
 </style>

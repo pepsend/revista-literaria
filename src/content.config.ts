@@ -24,6 +24,8 @@ const posts = defineCollection({
 		date: z.coerce.date(),
 		author: z.string().optional(),
 		category: z.string().optional(),
+		// Ruta pública a la imagen principal subida desde el CMS (ej: /uploads/foto.jpg)
+		heroImage: z.string().optional(),
 	}),
 });
 

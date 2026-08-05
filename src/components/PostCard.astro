@@ -1,0 +1,100 @@
+---
+import FormattedDate from './FormattedDate.astro';
+
+const DEFAULT_COVER = '/default-cover.svg';
+const { post } = Astro.props;
+const { title, date, author, category, heroImage } = post.data;
+---
+
+<a class="post-card" href={`/blog/${post.id}/`}>
+	<div class="card-image">
+		<img src={heroImage || DEFAULT_COVER} alt={title} loading="lazy" />
+		<div class="overlay"></div>
+		{category && <span class="category">{category}</span>}
+		<div class="card-text">
+			<h3 class="post-title">{title}</h3>
+			<p class="meta">
+				<FormattedDate date={date} />
+				{author && <span> · {author}</span>}
+			</p>
+		</div>
+	</div>
+</a>
+
+<style>
+	.post-card {
+		text-decoration: none;
+		color: inherit;
+		display: block;
+		border-radius: 14px;
+		overflow: hidden;
+		box-shadow: 0 6px 18px rgba(26, 25, 24, 0.08);
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+	}
+	.post-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 14px 30px rgba(26, 25, 24, 0.18);
+	}
+	.card-image {
+		position: relative;
+		aspect-ratio: 4 / 3;
+		overflow: hidden;
+	}
+	.card-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.4s ease;
+	}
+	.post-card:hover .card-image img {
+		transform: scale(1.05);
+	}
+	.overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			to top,
+			rgba(20, 18, 16, 0.85) 0%,
+			rgba(20, 18, 16, 0.35) 45%,
+			rgba(20, 18, 16, 0.05) 100%
+		);
+	}
+	.category {
+		position: absolute;
+		top: 0.9rem;
+		left: 0.9rem;
+		background: #e05a2b;
+		color: #fff;
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		padding: 0.28rem 0.6rem;
+		border-radius: 999px;
+	}
+	.card-text {
+		position: absolute;
+		left: 1.1rem;
+		right: 1.1rem;
+		bottom: 1rem;
+		color: #fff;
+	}
+	.post-title {
+		margin: 0 0 0.35rem 0;
+		font-size: 1.35rem;
+		line-height: 1.2;
+		font-weight: 700;
+		text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+	}
+	.meta {
+		margin: 0;
+		font-size: 0.8rem;
+		color: rgba(255, 255, 255, 0.85);
+	}
+	@media (max-width: 560px) {
+		.post-title {
+			font-size: 1.25rem;
+		}
+	}
+</style>

@@ -3,19 +3,12 @@ import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
+import PostCard from '../../components/PostCard.astro';
 import { SITE_TITLE } from '../../consts';
 import { CATEGORIES } from '../../content.config';
 
-// Convierte "Creación Abúlica" -> "creacion-abulica"
-const slugify = (name) =>
-	name
-		.toLowerCase()
-		.normalize('NFD')
-		.replace(/[̀-ͯ]/g, '')
-		.replace(/\s+/g, '-');
-
 export async function getStaticPaths() {
+	// Convierte "Creación Abúlica" -> "creacion-abulica"
 	const slug = (name) =>
 		name
 			.toLowerCase()
@@ -50,19 +43,7 @@ const posts = (await getCollection('posts'))
 			)}
 
 			<div class="grid-posts">
-				{
-					posts.map((post) => (
-						<article class="post-card">
-							<h3 class="post-title">
-								<a href={`/blog/${post.id}/`}>{post.data.title}</a>
-							</h3>
-							<p class="meta">
-								<FormattedDate date={post.data.date} />
-								{post.data.author && <span> · {post.data.author}</span>}
-							</p>
-						</article>
-					))
-				}
+				{posts.map((post) => <PostCard post={post} />)}
 			</div>
 		</main>
 		<Footer />
@@ -73,45 +54,13 @@ const posts = (await getCollection('posts'))
 	:global(body) {
 		background-color: #f5f0e6;
 		color: #1a1918;
+		font-family: var(--font-atkinson), -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
 		margin: 0;
 	}
-	.container {
-		max-width: 800px;
-		margin: 0 auto;
-		padding: 2.5rem 1.5rem;
-	}
-	.page-title {
-		text-transform: lowercase;
-		color: #e05a2b;
-		margin-bottom: 2rem;
-	}
-	.empty {
-		color: #666056;
-	}
-	.grid-posts {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-	}
-	.post-card {
-		border-bottom: 1px solid #e2dbce;
-		padding-bottom: 1.2rem;
-	}
-	.post-title {
-		margin: 0 0 0.3rem 0;
-		font-size: 1.2rem;
-		font-weight: 500;
-	}
-	.post-title a {
-		color: #1a1918;
-		text-decoration: none;
-	}
-	.post-title a:hover {
-		color: #e6397d;
-	}
-	.meta {
-		margin: 0;
-		font-size: 0.85rem;
-		color: #666056;
-	}
+	.container { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1.5rem 4rem; }
+	.page-title { text-transform: lowercase; color: #e05a2b; margin: 0.5rem 0 1.5rem; }
+	.empty { color: #7a7266; }
+	.grid-posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+	@media (max-width: 900px) { .grid-posts { grid-template-columns: repeat(2, 1fr); } }
+	@media (max-width: 560px) { .grid-posts { grid-template-columns: 1fr; } }
 </style>
