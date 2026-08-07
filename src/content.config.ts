@@ -31,4 +31,13 @@ const posts = defineCollection({
 	}),
 });
 
-export const collections = { posts };
+// Colección de autores: memoria reutilizable de nombre + biografía.
+// La bio se escribe en el cuerpo del archivo (markdown) y se muestra al final de cada texto.
+const authors = defineCollection({
+	loader: glob({ base: './src/content/authors', pattern: '**/*.{md,mdx}' }),
+	schema: z.object({
+		name: z.string(),
+	}),
+});
+
+export const collections = { posts, authors };

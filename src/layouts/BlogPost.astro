@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -9,6 +10,16 @@ type Props = CollectionEntry<'posts'>['data'];
 
 const DEFAULT_COVER = '/default-cover.svg';
 const { title, date, author, category, heroImage, imagePosition = 'center' } = Astro.props;
+
+// Bio del autor: se toma de la colección "authors" y se muestra al final del texto.
+const authorsList = await getCollection('authors');
+const authorEntry = author
+	? authorsList.find((a) => a.data.name.trim() === author.trim())
+	: undefined;
+const AuthorBio =
+	authorEntry && authorEntry.body && authorEntry.body.trim()
+		? (await render(authorEntry)).Content
+		: null;
 ---
 
 <html lang="es">
@@ -42,6 +53,18 @@ const { title, date, author, category, heroImage, imagePosition = 'center' } = A
 			<article class="prose">
 				<slot />
 			</article>
+
+			{
+				AuthorBio && (
+					<aside class="art-author">
+						<p class="art-author-label">// sobre el autor</p>
+						{author && <p class="art-author-name">{author}</p>}
+						<div class="art-author-bio">
+							<AuthorBio />
+						</div>
+					</aside>
+				)
+			}
 
 			<p class="art-end">// fin del texto</p>
 		</main>
@@ -128,6 +151,43 @@ const { title, date, author, category, heroImage, imagePosition = 'center' } = A
 		padding-left: 1.2rem;
 		font-style: italic;
 		color: #3c3428;
+	}
+	.art-author {
+		max-width: 40rem;
+		margin: 3rem auto 0;
+		padding: 1.4rem 1.5rem;
+		border: 2px solid var(--ink);
+		background: var(--paper-2);
+	}
+	.art-author-label {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--pink);
+		margin: 0 0 0.4rem;
+	}
+	.art-author-name {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: 1.3rem;
+		margin: 0 0 0.5rem;
+	}
+	.art-author-bio {
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: 1.02rem;
+		line-height: 1.6;
+		color: #3c3428;
+	}
+	.art-author-bio :global(p) {
+		margin: 0 0 0.7rem;
+	}
+	.art-author-bio :global(p:last-child) {
+		margin-bottom: 0;
+	}
+	.art-author-bio :global(a) {
+		color: var(--pink);
 	}
 	.art-end {
 		max-width: 40rem;

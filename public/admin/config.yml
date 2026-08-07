@@ -17,7 +17,15 @@ collections:
       - { label: "Imagen principal", name: "heroImage", widget: "image", required: false, hint: "Foto de portada que se muestra en la tarjeta y arriba del artículo." }
       - { label: "Encaje de la imagen", name: "imagePosition", widget: "focalpoint", required: false, default: "50% 50%", hint: "Arrastra la imagen con el mouse para elegir qué parte se ve en el marco de portada." }
       - { label: "Fecha", name: "date", widget: "datetime" }
-      - { label: "Autor", name: "author", widget: "string" }
+      - label: "Autor"
+        name: "author"
+        widget: "relation"
+        collection: "authors"
+        value_field: "name"
+        search_fields: ["name"]
+        display_fields: ["name"]
+        required: false
+        hint: "Empieza a escribir y te sugiere autores ya guardados. ¿Autor nuevo? Créalo antes en la sección «Autores» (con su bio) y aquí aparecerá."
       - label: "Categoría"
         name: "category"
         widget: "select"
@@ -31,3 +39,15 @@ collections:
           - "Crónica"
           - "Artículo"
       - { label: "Contenido", name: "body", widget: "markdown" }
+
+  - name: "authors"
+    label: "Autores"
+    label_singular: "Autor"
+    folder: "src/content/authors"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "name"
+    summary: "{{name}}"
+    fields:
+      - { label: "Nombre", name: "name", widget: "string" }
+      - { label: "Biografía", name: "body", widget: "markdown", required: false, hint: "Bio breve que aparece automáticamente al final de cada texto de este autor. Puedes incluir enlaces." }
