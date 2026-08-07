@@ -4,6 +4,9 @@ heroImage: /uploads/shutter-island-film.jpg
 imagePosition: 66% 59%
 date: 2026-08-05T12:20:00.000-04:00
 author: Víctor Fleitas
+authorBio: "Víctor Fleitas: Entre la informática y la literatura. Estudiante de
+  último año de Literatura, lector apasionado, editor en formación y escritor
+  cada vez que las palabras encuentran su momento."
 category: Crítica
 citations: >
   	​Caruth, Cathy. Unclaimed Experience: Trauma, Narrative, and History. Johns Hopkins UP, 1996.
@@ -38,6 +41,3 @@ Hay algo que Shutter Island hace con el espectador que pocas películas se atrev
 
 	​Tanto Caruth como Ricoeur ayudan a entender por qué ese colapso tiene la forma que tiene. El trauma que no fue integrado vuelve disfrazado, persistente, incontrolable —como los sueños de Andrew, como Dolores empapada en el salón de su casa. Y la identidad, que depende de poder narrar quién se es a través del tiempo, se quiebra cuando esa narración se vuelve insoportable. Lo que el film propone, finalmente, es que hay experiencias que dejan a una persona sin historia propia. Y sin historia, solo queda inventar una.
 
-----
-
-Víctor Fleitas: Entre la informática y la literatura. Estudiante de último año de Literatura, lector apasionado, editor en formación y escritor cada vez que las palabras encuentran su momento.
