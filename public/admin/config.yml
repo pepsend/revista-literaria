@@ -25,15 +25,7 @@ collections:
       - { label: "Imagen principal", name: "heroImage", widget: "image", required: false, hint: "Foto de portada que se muestra en la tarjeta y arriba del artículo." }
       - { label: "Encaje de la imagen", name: "imagePosition", widget: "focalpoint", required: false, default: "50% 50%", hint: "Arrastra la imagen con el mouse para elegir qué parte se ve en el marco de portada." }
       - { label: "Fecha", name: "date", widget: "datetime" }
-      - label: "Autor"
-        name: "author"
-        widget: "relation"
-        collection: "authors"
-        value_field: "name"
-        search_fields: ["name"]
-        display_fields: ["name"]
-        required: false
-        hint: "Empieza a escribir y te sugiere autores ya guardados. ¿Autor nuevo? Créalo antes en la sección «Autores» (con su bio) y aquí aparecerá."
+      - { label: "Autor", name: "author", widget: "authorpicker", required: false, hint: "Escribe el nombre del autor: te sugiere los ya guardados y también puedes escribir uno nuevo. Guarda su bio en «Autores» o en el campo de abajo." }
       - { label: "Biografía del autor", name: "authorBio", widget: "text", required: false, hint: "Bio breve que aparece destacada al final del texto. Si la dejas vacía, se usa la que el autor tenga guardada en «Autores»." }
       - label: "Categoría"
         name: "category"

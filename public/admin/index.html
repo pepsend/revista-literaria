@@ -82,6 +82,15 @@
         },
         componentDidMount: function () {
           this._resolve();
+          // El control no siempre se re-renderiza cuando cambia la imagen principal
+          // (campo hermano). Revisamos periódicamente para tomarla apenas se sube.
+          var self = this;
+          this._poll = setInterval(function () {
+            if (self._heroPath() !== self._lastPath) self._resolve();
+          }, 600);
+        },
+        componentWillUnmount: function () {
+          if (this._poll) clearInterval(this._poll);
         },
         componentDidUpdate: function () {
           if (this._heroPath() !== this._lastPath) this._resolve();
@@ -171,6 +180,56 @@
         },
       });
       CMS.registerWidget('focalpoint', FocalControl);
+
+      /* ---------- Widget "authorpicker": escribir libre + sugerir guardados ---------- */
+      var AuthorPicker = createClass({
+        getInitialState: function () {
+          return { names: [] };
+        },
+        componentDidMount: function () {
+          var self = this;
+          fetch('/authors.json')
+            .then(function (r) {
+              return r.json();
+            })
+            .then(function (list) {
+              if (Array.isArray(list)) self.setState({ names: list });
+            })
+            .catch(function () {});
+        },
+        _change: function (e) {
+          this.props.onChange(e.target.value);
+        },
+        render: function () {
+          var listId = 'at-authors-list';
+          return h('div', {}, [
+            h('input', {
+              key: 'inp',
+              type: 'text',
+              value: this.props.value || '',
+              onChange: this._change,
+              list: listId,
+              placeholder: 'Escribe el nombre del autor…',
+              style: {
+                width: '100%',
+                padding: '0.55rem 0.65rem',
+                fontSize: '15px',
+                border: '1px solid #c9c0ad',
+                borderRadius: '4px',
+                background: '#fff',
+              },
+            }),
+            h(
+              'datalist',
+              { key: 'dl', id: listId },
+              this.state.names.map(function (n, i) {
+                return h('option', { key: i, value: n });
+              })
+            ),
+          ]);
+        },
+      });
+      CMS.registerWidget('authorpicker', AuthorPicker);
 
       /* ---------- Estilos reales del sitio en la vista previa ---------- */
       CMS.registerPreviewStyle(
