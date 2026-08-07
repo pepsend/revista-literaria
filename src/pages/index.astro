@@ -43,6 +43,7 @@ const rest = posts.slice(1);
 								class="at-duotone"
 								src={featured.data.heroImage || DEFAULT_COVER}
 								alt={featured.data.title}
+								style={`object-position: ${featured.data.imagePosition || 'center'};`}
 							/>
 							{featured.data.category && <span class="at-tag">{featured.data.category}</span>}
 							<span class="hero-cap">

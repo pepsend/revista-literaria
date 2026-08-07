@@ -26,6 +26,8 @@ const posts = defineCollection({
 		category: z.string().optional(),
 		// Ruta pública a la imagen principal subida desde el CMS (ej: /uploads/foto.jpg)
 		heroImage: z.string().optional(),
+		// Encaje de la portada (object-position): "center", "top", "left bottom", etc.
+		imagePosition: z.string().optional().default('center'),
 	}),
 });
 

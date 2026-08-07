@@ -1,0 +1,110 @@
+/* Estilos de la vista previa del panel — replican el look real del artículo. */
+body {
+  background: #f2e4cc;
+  margin: 0;
+}
+.pv-wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2.2rem 1.5rem 3rem;
+  color: #1b1916;
+  font-family: 'Space Mono', ui-monospace, monospace;
+}
+.pv-tag {
+  display: inline-block;
+  background: #e5468a;
+  color: #1b1916;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border: 2px solid #1b1916;
+  transform: rotate(-3deg);
+}
+.pv-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900;
+  font-variation-settings: 'opsz' 144;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  margin: 1rem 0 0.7rem;
+}
+.pv-meta {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.82rem;
+  color: #8c7f6e;
+  margin: 0 0 1.6rem;
+}
+.pv-meta b {
+  color: #1b1916;
+}
+.pv-hero {
+  margin: 0 0 2rem;
+}
+.pv-hero img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  border: 2px solid #1b1916;
+  filter: grayscale(0.3) contrast(1.05) brightness(0.98);
+}
+.pv-hero--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  margin: 0 0 2rem;
+  border: 2px dashed #8c7f6e;
+  color: #8c7f6e;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.pv-body {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: #241d15;
+}
+.pv-body p {
+  margin: 0 0 1.3rem;
+}
+.pv-body h2,
+.pv-body h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900;
+  line-height: 1.15;
+  margin: 2rem 0 0.8rem;
+}
+.pv-body a {
+  color: #e5468a;
+}
+.pv-body em {
+  font-style: italic;
+}
+.pv-body blockquote {
+  border-left: 3px solid #e5468a;
+  margin: 1.5rem 0;
+  padding-left: 1.2rem;
+  font-style: italic;
+  color: #3c3428;
+}
+.pv-body img {
+  max-width: 100%;
+  height: auto;
+}
+.pv-end {
+  margin: 2.5rem 0 0;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8c7f6e;
+}

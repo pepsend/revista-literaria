@@ -3,9 +3,104 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Content Manager</title>
+    <title>abulia terminal — panel</title>
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      // Fuentes y estilos reales del sitio dentro del panel de previsualización
+      CMS.registerPreviewStyle(
+        'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,900;1,9..144,900&family=Space+Mono:wght@400;700&display=swap'
+      );
+      CMS.registerPreviewStyle('/admin/preview.css');
+
+      // Imagen de portada que se muestra AUNQUE todavía no esté publicada,
+      // con el "encaje" (object-position) elegido, en vivo.
+      var HeroImg = createClass({
+        getInitialState: function () {
+          return { url: '' };
+        },
+        componentDidMount: function () {
+          this._resolve(this.props.path);
+        },
+        componentDidUpdate: function (prev) {
+          if (prev.path !== this.props.path) this._resolve(this.props.path);
+        },
+        _resolve: function (path) {
+          var self = this;
+          if (!path) {
+            self.setState({ url: '' });
+            return;
+          }
+          try {
+            var asset = self.props.getAsset(path);
+            Promise.resolve(asset).then(function (res) {
+              var u = res && res.toString ? res.toString() : res && res.url ? res.url : res;
+              self.setState({ url: u || '' });
+            });
+          } catch (e) {
+            self.setState({ url: '' });
+          }
+        },
+        render: function () {
+          if (!this.state.url) {
+            return h('div', { className: 'pv-hero pv-hero--empty' }, 'sin imagen de portada');
+          }
+          return h(
+            'div',
+            { className: 'pv-hero' },
+            h('img', {
+              src: this.state.url,
+              alt: '',
+              style: { objectPosition: this.props.position || 'center' },
+            })
+          );
+        },
+      });
+
+      var PostPreview = createClass({
+        render: function () {
+          var entry = this.props.entry;
+          var data = entry.get('data');
+          var title = data.get('title');
+          var author = data.get('author');
+          var category = data.get('category');
+          var date = data.get('date');
+          var pos = data.get('imagePosition') || 'center';
+          var hero = data.get('heroImage');
+
+          var dateStr = '';
+          try {
+            dateStr = date
+              ? new Date(date).toLocaleDateString('es-CL', {
+                  day: '2-digit',
+                  month: 'long',
+                  year: 'numeric',
+                })
+              : '';
+          } catch (e) {}
+
+          return h('div', { className: 'pv-wrap' }, [
+            category ? h('span', { className: 'pv-tag', key: 'tag' }, category) : null,
+            h('h1', { className: 'pv-title', key: 'title' }, title || 'Sin título'),
+            h('p', { className: 'pv-meta', key: 'meta' }, [
+              author ? h('b', { key: 'a' }, author) : null,
+              author ? ' — ' : '',
+              dateStr,
+            ]),
+            h(HeroImg, {
+              key: 'hero',
+              path: hero,
+              position: pos,
+              getAsset: this.props.getAsset,
+            }),
+            h('div', { className: 'pv-body', key: 'body' }, this.props.widgetFor('body')),
+            h('p', { className: 'pv-end', key: 'end' }, '// fin del texto'),
+          ]);
+        },
+      });
+
+      CMS.registerPreviewTemplate('posts', PostPreview);
+    </script>
   </body>
 </html>

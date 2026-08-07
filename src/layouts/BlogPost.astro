@@ -8,7 +8,7 @@ import Header from '../components/Header.astro';
 type Props = CollectionEntry<'posts'>['data'];
 
 const DEFAULT_COVER = '/default-cover.svg';
-const { title, date, author, category, heroImage } = Astro.props;
+const { title, date, author, category, heroImage, imagePosition = 'center' } = Astro.props;
 ---
 
 <html lang="es">
@@ -31,7 +31,12 @@ const { title, date, author, category, heroImage } = Astro.props;
 			</header>
 
 			<div class="art-hero">
-				<img class="at-duotone" src={heroImage || DEFAULT_COVER} alt={title} />
+				<img
+					class="at-duotone"
+					src={heroImage || DEFAULT_COVER}
+					alt={title}
+					style={`object-position: ${imagePosition};`}
+				/>
 			</div>
 
 			<article class="prose">
@@ -88,8 +93,9 @@ const { title, date, author, category, heroImage } = Astro.props;
 	.art-hero img {
 		display: block;
 		width: 100%;
-		aspect-ratio: 16 / 8;
+		aspect-ratio: 16 / 9;
 		object-fit: cover;
+		object-position: center;
 		border: 2px solid var(--ink);
 	}
 	.prose {

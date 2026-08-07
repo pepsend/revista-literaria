@@ -15,6 +15,22 @@ collections:
     fields:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Imagen principal", name: "heroImage", widget: "image", required: false, hint: "Foto de portada que se muestra en la tarjeta y arriba del artículo." }
+      - label: "Encaje de la imagen"
+        name: "imagePosition"
+        widget: "select"
+        required: false
+        default: "center"
+        hint: "Qué parte de la foto queda visible en el marco. Muévela y mírala en la vista previa de la derecha."
+        options:
+          - { label: "Centro", value: "center" }
+          - { label: "Arriba", value: "top" }
+          - { label: "Abajo", value: "bottom" }
+          - { label: "Izquierda", value: "left" }
+          - { label: "Derecha", value: "right" }
+          - { label: "Arriba izquierda", value: "left top" }
+          - { label: "Arriba derecha", value: "right top" }
+          - { label: "Abajo izquierda", value: "left bottom" }
+          - { label: "Abajo derecha", value: "right bottom" }
       - { label: "Fecha", name: "date", widget: "datetime" }
       - { label: "Autor", name: "author", widget: "string" }
       - label: "Categoría"
