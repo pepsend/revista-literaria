@@ -216,6 +216,15 @@
           var date = data.get('date');
           var pos = data.get('imagePosition') || 'center';
           var hero = data.get('heroImage');
+          var authorBio = data.get('authorBio');
+          var bioLines = authorBio
+            ? String(authorBio)
+                .split(/\r?\n+/)
+                .map(function (s) {
+                  return s.trim();
+                })
+                .filter(Boolean)
+            : [];
           var citations = data.get('citations');
           var citeLines = citations
             ? String(citations)
@@ -252,6 +261,19 @@
               getAsset: this.props.getAsset,
             }),
             h('div', { className: 'pv-body', key: 'body' }, this.props.widgetFor('body')),
+            bioLines.length
+              ? h('div', { className: 'pv-author', key: 'bio' }, [
+                  h('p', { className: 'pv-author-label', key: 'l' }, '// sobre el autor'),
+                  author ? h('p', { className: 'pv-author-name', key: 'n' }, author) : null,
+                  h(
+                    'div',
+                    { className: 'pv-author-bio', key: 'b' },
+                    bioLines.map(function (p, i) {
+                      return h('p', { key: i }, p);
+                    })
+                  ),
+                ])
+              : null,
             citeLines.length
               ? h('div', { className: 'pv-cites', key: 'cites' }, [
                   h('p', { className: 'pv-cites-label', key: 'l' }, '// obras citadas'),

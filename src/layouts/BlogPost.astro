@@ -9,7 +9,14 @@ import Header from '../components/Header.astro';
 type Props = CollectionEntry<'posts'>['data'];
 
 const DEFAULT_COVER = '/default-cover.svg';
-const { title, date, author, category, heroImage, imagePosition = 'center', citations } = Astro.props;
+const { title, date, author, category, heroImage, imagePosition = 'center', authorBio, citations } =
+	Astro.props;
+
+// Bio del autor escrita en este artículo (una o más líneas → párrafos).
+const postBioLines = (authorBio || '')
+	.split(/\r?\n+/)
+	.map((s) => s.trim())
+	.filter(Boolean);
 
 // Obras citadas: una entrada por línea.
 const citationLines = (citations || '')
@@ -61,6 +68,18 @@ const AuthorBio =
 			</article>
 
 			{
+				(postBioLines.length > 0 || AuthorBio) && (
+					<aside class="art-author">
+						<p class="art-author-label">// sobre el autor</p>
+						{author && <p class="art-author-name">{author}</p>}
+						<div class="art-author-bio">
+							{postBioLines.length > 0 ? postBioLines.map((p) => <p>{p}</p>) : <AuthorBio />}
+						</div>
+					</aside>
+				)
+			}
+
+			{
 				citationLines.length > 0 && (
 					<section class="art-cites">
 						<p class="art-cites-label">// obras citadas</p>
@@ -70,18 +89,6 @@ const AuthorBio =
 							))}
 						</ul>
 					</section>
-				)
-			}
-
-			{
-				AuthorBio && (
-					<aside class="art-author">
-						<p class="art-author-label">// sobre el autor</p>
-						{author && <p class="art-author-name">{author}</p>}
-						<div class="art-author-bio">
-							<AuthorBio />
-						</div>
-					</aside>
 				)
 			}
 

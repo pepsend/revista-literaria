@@ -120,6 +120,45 @@ body {
   white-space: pre-wrap;
   word-break: break-word;
 }
+/* Sobre el autor en el preview — panel oscuro destacado */
+.pv-author {
+  max-width: 46rem;
+  margin: 2.4rem auto 0;
+  padding: 1.5rem 1.6rem;
+  border: 2px solid #1b1916;
+  background: #131211;
+  color: #ebd8c6;
+  box-shadow: 8px 8px 0 #e5468a;
+}
+.pv-author-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #e5468a;
+  margin: 0 0 0.5rem;
+}
+.pv-author-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900;
+  font-size: 1.35rem;
+  margin: 0 0 0.5rem;
+  color: #ebd8c6;
+}
+.pv-author-bio {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: #d8ccb6;
+}
+.pv-author-bio p {
+  margin: 0 0 0.7rem;
+}
+.pv-author-bio p:last-child {
+  margin-bottom: 0;
+}
+
 /* Obras citadas en el preview */
 .pv-cites {
   max-width: 46rem;
