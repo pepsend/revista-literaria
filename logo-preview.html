@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abulia Terminal — Logo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --papel:#F2E4CC; --tinta:#1B1916; --magenta:#E5468A; --naranjo:#DD4B12;
+    --negro:#131211; --crema:#EBD8C6;
+    --pf:'Fraunces', Georgia, serif; --mono:'Space Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0;}
+  body{font-family:var(--mono); background:#2a2724;}
+  .stage{min-height:100vh; display:flex; flex-direction:column;}
+  .panel{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:80px 40px; position:relative;}
+  .panel.dark{background:var(--negro);}
+  .panel.light{background:var(--papel);}
+  .tag{position:absolute; top:20px; left:24px; font-size:11px; letter-spacing:.25em; text-transform:uppercase; opacity:.5;}
+  .panel.dark .tag{color:var(--crema);}
+  .panel.light .tag{color:var(--tinta);}
+
+  /* ---------------- LOGO ---------------- */
+  .logo{font-family:var(--pf); line-height:1; text-align:left; user-select:none;}
+
+  /* línea "at" + punto y coma vectorial */
+  .atline{
+    position:relative; display:inline-block;
+    font-weight:900; font-size:210px; line-height:.72; letter-spacing:-.02em;
+    font-variation-settings:'opsz' 144, 'SOFT' 0, 'WONK' 0;
+  }
+  .semi{
+    position:absolute; left:100%; top:-0.02em; margin-left:0.03em;
+    height:0.44em; width:auto; display:block;
+  }
+  .semi svg{height:100%; width:auto; display:block; fill:var(--naranjo);}
+
+  .name{
+    display:block; font-weight:900; font-size:98px; line-height:.9; letter-spacing:-.015em;
+    font-variation-settings:'opsz' 144;
+    margin-top:26px;   /* aire: "at" un poco más arriba */
+  }
+  .rule{height:4px; background:var(--magenta); width:86%; margin:18px 0 12px;}
+  .rev{font-family:var(--mono); font-weight:700; font-size:17px; letter-spacing:.55em; text-transform:uppercase; padding-left:2px;}
+
+  /* colores por modo */
+  .dark .atline{color:var(--crema); text-shadow:8px 9px 0 var(--magenta);}
+  .dark .name{color:var(--crema);}
+  .dark .rev{color:var(--crema);}
+  .light .atline{color:var(--tinta); text-shadow:8px 9px 0 var(--magenta);}
+  .light .name{color:var(--tinta);}
+  .light .rev{color:var(--tinta);}
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="panel dark">
+      <span class="tag">Modo Terminal · fondo negro</span>
+      <div class="logo">
+        <span class="atline">at<span class="semi" aria-hidden="true"><svg viewBox="0 0 46 132" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="17" r="16"/><circle cx="22" cy="70" r="16"/><path d="M22,82 Q27,113 4,131 Q24,103 10,78 Z"/></svg></span></span>
+        <span class="name">abulia terminal</span>
+        <div class="rule"></div>
+        <span class="rev">revista literaria</span>
+      </div>
+    </div>
+    <div class="panel light">
+      <span class="tag">Modo Editorial · fondo papel</span>
+      <div class="logo">
+        <span class="atline">at<span class="semi" aria-hidden="true"><svg viewBox="0 0 46 132" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="17" r="16"/><circle cx="22" cy="70" r="16"/><path d="M22,82 Q27,113 4,131 Q24,103 10,78 Z"/></svg></span></span>
+        <span class="name">abulia terminal</span>
+        <div class="rule"></div>
+        <span class="rev">revista literaria</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

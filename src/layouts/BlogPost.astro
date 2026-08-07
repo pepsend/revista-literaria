@@ -14,80 +14,122 @@ const { title, date, author, category, heroImage } = Astro.props;
 <html lang="es">
 	<head>
 		<BaseHead title={title} description={category ? `${category} — ${title}` : title} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 1020px;
-				max-width: calc(100% - 2em);
-				margin: 1.5em auto 0;
-			}
-			.hero-image img {
-				display: block;
-				width: 100%;
-				aspect-ratio: 16 / 8;
-				object-fit: cover;
-				border-radius: 16px;
-				box-shadow: 0 10px 30px rgba(26, 25, 24, 0.15);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.category {
-				margin: 0 0 0.5em 0;
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
-				font-size: 0.8rem;
-				font-weight: 600;
-				color: rgb(var(--accent));
-			}
-			.author {
-				font-style: italic;
-			}
-		</style>
 	</head>
-
 	<body>
 		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					<img src={heroImage || DEFAULT_COVER} alt={title} />
-				</div>
-				<div class="prose">
-					<div class="title">
-						{category && <p class="category">{category}</p>}
-						<h1>{title}</h1>
-						<div class="date">
-							<FormattedDate date={date} />
-							{author && <span class="author"> · {author}</span>}
-						</div>
-						<hr />
-					</div>
-					<slot />
-				</div>
+		<main class="article at-container">
+			<a class="back" href="/">← índice</a>
+
+			<header class="art-head">
+				{category && <span class="at-tag">{category}</span>}
+				<h1 class="art-title">{title}</h1>
+				<p class="art-meta">
+					{author && <b>{author}</b>}
+					{author && ' — '}
+					<FormattedDate date={date} />
+				</p>
+			</header>
+
+			<div class="art-hero">
+				<img class="at-duotone" src={heroImage || DEFAULT_COVER} alt={title} />
+			</div>
+
+			<article class="prose">
+				<slot />
 			</article>
+
+			<p class="art-end">// fin del texto</p>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.article {
+		padding-top: 1.5rem;
+		padding-bottom: 2rem;
+	}
+	.back {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--muted);
+		text-decoration: none;
+	}
+	.back:hover {
+		color: var(--pink);
+	}
+	.art-head {
+		max-width: 46rem;
+		margin: 1.5rem auto 0;
+		text-align: center;
+	}
+	.art-title {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: clamp(2.2rem, 6vw, 4rem);
+		line-height: 1.03;
+		margin: 0.8rem 0 0.8rem;
+	}
+	.art-meta {
+		font-family: var(--font-mono);
+		font-size: 0.82rem;
+		color: var(--muted);
+		margin: 0;
+	}
+	.art-meta b {
+		color: var(--ink);
+	}
+	.art-hero {
+		max-width: 60rem;
+		margin: 2rem auto 0;
+	}
+	.art-hero img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 16 / 8;
+		object-fit: cover;
+		border: 2px solid var(--ink);
+	}
+	.prose {
+		max-width: 40rem;
+		margin: 2.5rem auto 0;
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: 1.18rem;
+		line-height: 1.75;
+		color: #241d15;
+	}
+	.prose :global(p) {
+		margin: 0 0 1.3rem;
+	}
+	.prose :global(a) {
+		color: var(--pink);
+	}
+	.prose :global(em) {
+		font-style: italic;
+	}
+	.prose :global(h2),
+	.prose :global(h3) {
+		font-weight: 900;
+		line-height: 1.15;
+		margin: 2rem 0 0.8rem;
+	}
+	.prose :global(blockquote) {
+		border-left: 3px solid var(--pink);
+		margin: 1.5rem 0;
+		padding-left: 1.2rem;
+		font-style: italic;
+		color: #3c3428;
+	}
+	.art-end {
+		max-width: 40rem;
+		margin: 2.5rem auto 0;
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--muted);
+	}
+</style>

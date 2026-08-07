@@ -8,7 +8,6 @@ import { SITE_TITLE } from '../../consts';
 import { CATEGORIES } from '../../content.config';
 
 export async function getStaticPaths() {
-	// Convierte "Creación Abúlica" -> "creacion-abulica"
 	const slug = (name) =>
 		name
 			.toLowerCase()
@@ -35,14 +34,12 @@ const posts = (await getCollection('posts'))
 	</head>
 	<body>
 		<Header />
-		<main class="container">
-			<h1 class="page-title">{categoryName}</h1>
-
-			{posts.length === 0 && (
-				<p class="empty">Aún no hay publicaciones en esta categoría.</p>
-			)}
-
-			<div class="grid-posts">
+		<main class="listing at-container">
+			<p class="at-kicker">categoría</p>
+			<h1 class="listing-title">{categoryName}</h1>
+			<hr class="at-rule" />
+			{posts.length === 0 && <p class="empty">// aún no hay publicaciones en esta categoría</p>}
+			<div class="grid">
 				{posts.map((post) => <PostCard post={post} />)}
 			</div>
 		</main>
@@ -51,16 +48,9 @@ const posts = (await getCollection('posts'))
 </html>
 
 <style>
-	:global(body) {
-		background-color: #f5f0e6;
-		color: #1a1918;
-		font-family: var(--font-atkinson), -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-		margin: 0;
-	}
-	.container { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1.5rem 4rem; }
-	.page-title { text-transform: lowercase; color: #e05a2b; margin: 0.5rem 0 1.5rem; }
-	.empty { color: #7a7266; }
-	.grid-posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-	@media (max-width: 900px) { .grid-posts { grid-template-columns: repeat(2, 1fr); } }
-	@media (max-width: 560px) { .grid-posts { grid-template-columns: 1fr; } }
+	.listing { padding: 2.5rem 1.5rem 4rem; }
+	.listing-title { font-family: var(--font-display); font-weight: 900; font-size: clamp(2.4rem, 7vw, 4rem); line-height: 1; margin: .5rem 0 1.2rem; text-transform: lowercase; }
+	.empty { font-family: var(--font-mono); color: var(--muted); }
+	.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+	@media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
 </style>

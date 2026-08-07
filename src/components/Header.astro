@@ -1,178 +1,158 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import Monogram from './Monogram.astro';
 
 const categories = [
-	['Ensayo', '/categorias/ensayo'],
-	['Género', '/categorias/genero'],
-	['Crítica', '/categorias/critica'],
-	['Creación Abúlica', '/categorias/creacion-abulica'],
-	['Poesía', '/categorias/poesia'],
-	['Cuento', '/categorias/cuento'],
-	['Crónica', '/categorias/cronica'],
-	['Artículo', '/categorias/articulo'],
+	['ensayo', '/categorias/ensayo'],
+	['género', '/categorias/genero'],
+	['crítica', '/categorias/critica'],
+	['creación abúlica', '/categorias/creacion-abulica'],
+	['poesía', '/categorias/poesia'],
+	['cuento', '/categorias/cuento'],
+	['crónica', '/categorias/cronica'],
+	['artículo', '/categorias/articulo'],
 ];
 ---
 
-<div class="header-wrap">
-	<header>
-		<a class="brand" href="/">{SITE_TITLE}</a>
+<header class="site-header">
+	<div class="at-container bar">
+		<a class="brand" href="/" aria-label="abulia terminal — inicio">
+			<Monogram class="brand-mono" />
+			<span class="brand-name">abulia terminal</span>
+		</a>
 
-		<nav class="internal-links">
-			<HeaderLink href="/">Inicio</HeaderLink>
-			<HeaderLink href="/novedades">Novedades</HeaderLink>
-			<HeaderLink href="/linea-editorial">Línea editorial</HeaderLink>
-			<HeaderLink href="/manifiesto">Manifiesto</HeaderLink>
-			<HeaderLink href="/colaborar">Colaborar</HeaderLink>
-
+		<nav class="nav">
+			<a href="/novedades">novedades</a>
+			<a href="/linea-editorial">línea editorial</a>
+			<a href="/manifiesto">manifiesto</a>
+			<a href="/colaborar">colaborar</a>
 			<div class="dropdown">
-				<button class="dropbtn" type="button">Categorías ▾</button>
+				<button class="dropbtn" type="button">categorías ▾</button>
 				<div class="dropdown-content">
 					{categories.map(([label, href]) => <a href={href}>{label}</a>)}
 				</div>
 			</div>
-
-			<a class="cta" href="/contacto">Contáctanos</a>
+			<a class="cta" href="/contacto">contáctanos</a>
 		</nav>
-	</header>
-</div>
+	</div>
+</header>
 
 <style>
-	.header-wrap {
+	.site-header {
 		position: sticky;
 		top: 0;
-		z-index: 50;
-		padding: 0.9rem 1.5rem;
-		background: linear-gradient(#f5f0e6 70%, rgba(245, 240, 230, 0));
+		z-index: 100;
+		background: var(--paper);
+		border-bottom: 2px solid var(--ink);
 	}
-	header {
-		max-width: 1200px;
-		margin: 0 auto;
+	.bar {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
-		background: #fffdf9;
-		border: 1px solid #ece4d5;
-		border-radius: 999px;
-		padding: 0.5rem 0.75rem 0.5rem 1.4rem;
-		box-shadow: 0 6px 20px rgba(26, 25, 24, 0.07);
+		padding-top: 0.7rem;
+		padding-bottom: 0.7rem;
+		flex-wrap: wrap;
 	}
-
 	.brand {
-		font-family: Georgia, 'Times New Roman', serif;
-		font-weight: 700;
-		font-size: 1.25rem;
-		line-height: 1;
-		color: #1a1918;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
 		text-decoration: none;
-		text-transform: lowercase;
-		white-space: nowrap;
+		color: var(--ink);
+	}
+	.brand :global(.brand-mono) {
+		font-size: 1.7rem;
+	}
+	.brand-name {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: 1.25rem;
+		letter-spacing: -0.01em;
 	}
 
-	.internal-links {
+	.nav {
 		display: flex;
 		align-items: center;
 		gap: 0.15rem;
 		flex-wrap: wrap;
-		justify-content: flex-end;
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		text-transform: none;
+		letter-spacing: 0.02em;
 	}
-
-	/* Estilo base de los enlaces (HeaderLink renderiza <a>) */
-	.internal-links :global(a) {
-		color: #4a453e;
+	.nav > a {
 		text-decoration: none;
-		font-size: 0.92rem;
-		padding: 0.45rem 0.75rem;
-		border-radius: 999px;
-		transition: background 0.15s ease, color 0.15s ease;
-		white-space: nowrap;
+		color: var(--ink);
+		padding: 0.4rem 0.6rem;
 	}
-	.internal-links :global(a:hover) {
-		background: #f1e9db;
-		color: #1a1918;
+	.nav > a:hover {
+		background: var(--ink);
+		color: var(--paper);
 	}
-	/* Estado activo (clase que agrega HeaderLink) */
-	.internal-links :global(a.active) {
-		background: #e7a977;
-		color: #1a1918;
-		font-weight: 600;
-	}
-
-	/* Botón de contacto (CTA) — siempre destacado */
-	.cta,
-	.internal-links :global(a.cta) {
-		background: #e05a2b !important;
-		color: #fff !important;
-		font-weight: 600;
-		padding: 0.45rem 1rem !important;
+	.cta {
+		background: var(--orange);
+		color: var(--ink) !important;
+		border: 2px solid var(--ink);
+		font-weight: 700;
 	}
 	.cta:hover {
-		background: #c94a1f !important;
+		background: var(--ink);
+		color: var(--paper) !important;
 	}
 
-	/* Desplegable de categorías */
 	.dropdown {
 		position: relative;
 	}
 	.dropbtn {
-		font-family: inherit;
-		font-size: 0.92rem;
-		color: #4a453e;
-		background: #f1e9db;
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		text-transform: none;
+		letter-spacing: 0.02em;
+		color: var(--ink);
+		background: transparent;
 		border: none;
 		cursor: pointer;
-		padding: 0.45rem 0.85rem;
-		border-radius: 999px;
-		transition: background 0.15s ease;
+		padding: 0.4rem 0.6rem;
 	}
 	.dropbtn:hover {
-		background: #e7a977;
-		color: #1a1918;
+		background: var(--ink);
+		color: var(--paper);
 	}
 	.dropdown-content {
 		display: none;
 		position: absolute;
-		top: calc(100% + 0.5rem);
+		top: 100%;
 		right: 0;
-		background: #fffdf9;
-		min-width: 200px;
-		border: 1px solid #ece4d5;
-		border-radius: 14px;
-		box-shadow: 0 12px 28px rgba(26, 25, 24, 0.14);
-		padding: 0.4rem;
-		z-index: 60;
+		background: var(--paper);
+		min-width: 210px;
+		border: 2px solid var(--ink);
+		padding: 0.3rem;
+		z-index: 110;
 	}
 	.dropdown:hover .dropdown-content {
 		display: block;
 	}
 	.dropdown-content a {
 		display: block;
-		color: #4a453e;
-		padding: 0.5rem 0.75rem;
-		border-radius: 8px;
 		text-decoration: none;
-		font-size: 0.9rem;
+		color: var(--ink);
+		padding: 0.45rem 0.6rem;
+		text-transform: none;
+		letter-spacing: 0;
+		font-size: 0.85rem;
 	}
 	.dropdown-content a:hover {
-		background: #f1e9db;
-		color: #1a1918;
+		background: var(--pink);
+		color: var(--ink);
 	}
 
-	@media (max-width: 820px) {
-		header {
+	@media (max-width: 760px) {
+		.bar {
 			flex-direction: column;
-			border-radius: 20px;
-			align-items: stretch;
-			padding: 0.9rem 1rem;
+			align-items: flex-start;
 		}
-		.brand {
-			text-align: center;
-			font-size: 1.4rem;
-			margin-bottom: 0.4rem;
-		}
-		.internal-links {
-			justify-content: center;
+		.nav {
+			justify-content: flex-start;
 		}
 		.dropdown-content {
 			right: auto;

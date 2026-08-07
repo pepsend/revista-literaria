@@ -7,9 +7,10 @@ import { SITE_TITLE } from '../consts';
 interface Props {
 	title: string;
 	description?: string;
+	kicker?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, kicker } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,8 +20,10 @@ const { title, description } = Astro.props;
 	</head>
 	<body>
 		<Header />
-		<main class="container">
+		<main class="page at-container">
+			{kicker && <p class="at-kicker">{kicker}</p>}
 			<h1 class="page-title">{title}</h1>
+			<hr class="at-rule page-rule" />
 			<div class="prose">
 				<slot />
 			</div>
@@ -30,30 +33,43 @@ const { title, description } = Astro.props;
 </html>
 
 <style>
-	:global(body) {
-		background-color: #f5f0e6;
-		color: #1a1918;
-		margin: 0;
-	}
-	.container {
-		max-width: 720px;
-		margin: 0 auto;
-		padding: 2.5rem 1.5rem;
+	.page {
+		padding: 2.5rem 1.5rem 3rem;
+		max-width: 48rem;
 	}
 	.page-title {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: clamp(2.4rem, 7vw, 4rem);
+		line-height: 1;
+		margin: 0.5rem 0 1.2rem;
 		text-transform: lowercase;
-		color: #e05a2b;
-		margin-bottom: 1.5rem;
+	}
+	.page-rule {
+		margin-bottom: 2rem;
+	}
+	.prose {
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: 1.15rem;
+		line-height: 1.75;
+		color: #241d15;
 	}
 	.prose :global(p) {
-		color: #4a453e;
-		line-height: 1.7;
-		font-size: 1rem;
+		margin: 0 0 1.3rem;
+	}
+	.prose :global(strong) {
+		font-weight: 900;
+	}
+	.prose :global(em) {
+		font-style: italic;
 	}
 	.prose :global(a) {
-		color: #e6397d;
+		color: var(--pink);
 	}
 	.prose :global(h2) {
-		margin-top: 2rem;
+		font-weight: 900;
+		font-size: 1.6rem;
+		margin: 2rem 0 0.8rem;
 	}
 </style>

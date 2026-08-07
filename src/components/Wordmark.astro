@@ -1,0 +1,10 @@
+---
+// Renderiza el nombre con un ; naranja parpadeando sobre la última letra.
+interface Props {
+	text?: string;
+	class?: string;
+}
+const { text = 'abulia terminal', class: className = '' } = Astro.props;
+---
+
+<span class={`wm ${className}`}>{text}<span class="wm-semi" aria-hidden="true">;</span></span>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>abulia terminal — vista previa de la home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,900;1,9..144,900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f2e4cc; --paper-2:#ebdcc2; --ink:#1b1916; --pink:#e5468a;
+    --pink-drip:#f0509a; --orange:#dd4b12; --muted:#8c7f6e; --line:#cfc4ae;
+    --negro:#131211; --crema:#ebd8c6;
+    --font-display:'Fraunces', Georgia, serif;
+    --font-mono:'Space Mono', ui-monospace, monospace;
+    --wrap:1180px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--font-mono); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+  a{color:inherit;}
+  .at-container{max-width:var(--wrap); margin:0 auto; padding:0 1.5rem;}
+  .at-rule{height:2px; background:var(--ink); border:0; margin:0;}
+  .at-tag{
+    display:inline-block; background:var(--pink); color:var(--ink);
+    font-family:var(--font-mono); font-weight:700; font-size:0.72rem;
+    letter-spacing:0.08em; text-transform:uppercase; padding:0.3rem 0.7rem;
+    border:2px solid var(--ink); transform:rotate(-3deg);
+  }
+  .at-kicker{
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.32em;
+    text-transform:uppercase; color:var(--pink); margin:0;
+  }
+
+  /* ---------- MONOGRAMA at; ---------- */
+  .mono{display:inline-block; font-family:var(--font-display); color:var(--ink); line-height:1; user-select:none;}
+  .mono-at{
+    position:relative; display:inline-block; font-weight:900; font-size:1em;
+    line-height:0.72; letter-spacing:-0.02em;
+    font-variation-settings:'opsz' 144;
+  }
+  .mono-semi{position:absolute; left:100%; top:-0.02em; margin-left:0.03em; height:0.44em; width:auto; display:block;}
+  .mono-semi svg{height:100%; width:auto; display:block; fill:var(--orange);}
+
+  /* ---------- HEADER ---------- */
+  .site-header{position:sticky; top:0; z-index:100; background:var(--paper); border-bottom:2px solid var(--ink);}
+  .bar{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:0.7rem 1.5rem; flex-wrap:wrap; max-width:var(--wrap); margin:0 auto;}
+  .brand{display:inline-flex; align-items:center; gap:0.55rem; text-decoration:none; color:var(--ink);}
+  .brand .mono{font-size:1.7rem;}
+  .brand-name{font-family:var(--font-display); font-weight:900; font-size:1.25rem; letter-spacing:-0.01em;}
+  .nav{display:flex; align-items:center; gap:0.15rem; flex-wrap:wrap; font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.02em;}
+  .nav > a, .dropbtn{text-decoration:none; color:var(--ink); padding:0.4rem 0.6rem; background:transparent; border:none; cursor:pointer; font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.02em;}
+  .nav > a:hover, .dropbtn:hover{background:var(--ink); color:var(--paper);}
+  .cta{background:var(--orange); color:var(--ink) !important; border:2px solid var(--ink); font-weight:700;}
+  .cta:hover{background:var(--ink); color:var(--paper) !important;}
+
+  /* ---------- HERO ---------- */
+  .hero{display:grid; grid-template-columns:1.05fr 0.95fr; gap:2.5rem; align-items:center; padding:3.2rem 1.5rem 2.4rem;}
+  .hero-logo{margin:0.7rem 0 0; font-size:clamp(4.5rem,12vw,9.5rem); line-height:0.8;}
+  .hero-name{font-family:var(--font-mono); font-size:0.82rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:1.1rem 0 0;}
+  .hero-name span{color:var(--pink);}
+  .hero-tag{font-family:var(--font-display); font-weight:900; font-style:italic; font-size:clamp(1.5rem,3vw,2.2rem); line-height:1.08; letter-spacing:-0.01em; margin:1rem 0 0; max-width:20ch;}
+  .hero-sub{font-family:var(--font-mono); font-size:0.9rem; line-height:1.6; max-width:40rem; margin:1.2rem 0 0; color:#42392c;}
+  .chev{color:var(--pink); font-weight:700;}
+  .hero-visual{position:relative; display:block; aspect-ratio:4/5; border:2px solid var(--ink); overflow:hidden; text-decoration:none; color:var(--paper); box-shadow:10px 10px 0 var(--pink); background:#221f1c;}
+  .hero-visual .ph{position:absolute; inset:0; background:
+     repeating-linear-gradient(135deg, #2a2622 0 14px, #211d1a 14px 28px);
+     filter:grayscale(.3) contrast(1.05) brightness(.98);}
+  .hero-visual .at-tag{position:absolute; top:14px; left:-8px; z-index:2;}
+  .hero-cap{position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; gap:0.3rem; padding:1.4rem 1.1rem 1rem; background:linear-gradient(to top, rgba(19,18,17,0.92), rgba(19,18,17,0)); z-index:2;}
+  .feat-label{font-family:var(--font-mono); font-size:0.72rem; color:var(--pink);}
+  .hero-cap-title{font-family:var(--font-display); font-weight:900; font-size:clamp(1.3rem,2.4vw,1.75rem); line-height:1.05; color:var(--paper);}
+  .hero-cap-meta{font-family:var(--font-mono); font-size:0.74rem; color:#d8ccb6;}
+  .hero-cap-meta b{color:var(--paper);}
+
+  /* ---------- ÍNDICE (grilla, sin alterar) ---------- */
+  .index{padding-bottom:4rem;}
+  .index-head{display:flex; justify-content:space-between; align-items:baseline; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; padding:0.6rem 0; border-top:2px solid var(--ink);}
+  .index-head .count{color:var(--pink);}
+  .row{display:grid; grid-template-columns:42px 1fr auto; gap:1rem; align-items:baseline; padding:1.1rem 0; border-top:1px solid var(--line); text-decoration:none; color:var(--ink);}
+  .row:hover{background:var(--paper-2);}
+  .rnum{font-family:var(--font-mono); font-weight:700; color:var(--pink);}
+  .rtitle{font-family:var(--font-display); font-weight:600; font-size:1.35rem; line-height:1.1; display:block;}
+  .rcat{font-family:var(--font-mono); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted);}
+  .rmeta{font-family:var(--font-mono); font-size:0.78rem; color:var(--muted); text-align:right; white-space:nowrap;}
+
+  /* ---------- FOOTER ---------- */
+  .site-footer{border-top:2px solid var(--ink); background:var(--negro); color:var(--crema);}
+  .foot{max-width:var(--wrap); margin:0 auto; padding:2rem 1.5rem; display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:center;}
+  .foot .mono{font-size:1.6rem; color:var(--crema);}
+  .foot-nav{display:flex; flex-wrap:wrap; gap:0.25rem 1.1rem; font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.02em;}
+  .foot-nav a{text-decoration:none; color:var(--crema);}
+  .foot-nav a:hover{color:var(--pink);}
+
+  @media(max-width:820px){
+    .hero{grid-template-columns:1fr; gap:1.8rem;}
+    .hero-visual{aspect-ratio:3/2; box-shadow:7px 7px 0 var(--pink);}
+  }
+  @media(max-width:720px){
+    .row{grid-template-columns:30px 1fr;}
+    .rmeta{display:none;}
+  }
+
+  .note{max-width:var(--wrap); margin:1rem auto 0; padding:0 1.5rem; font-family:var(--font-mono); font-size:0.72rem; color:var(--muted);}
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="#">
+        <span class="mono"><span class="mono-at">at<span class="mono-semi" aria-hidden="true"><svg viewBox="0 0 46 132" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="17" r="16"/><circle cx="22" cy="70" r="16"/><path d="M22,82 Q27,113 4,131 Q24,103 10,78 Z"/></svg></span></span></span>
+        <span class="brand-name">abulia terminal</span>
+      </a>
+      <nav class="nav">
+        <a href="#">novedades</a>
+        <a href="#">línea editorial</a>
+        <a href="#">manifiesto</a>
+        <a href="#">colaborar</a>
+        <button class="dropbtn" type="button">categorías ▾</button>
+        <a class="cta" href="#">contáctanos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="at-kicker">iniciativa independiente · revista digital</p>
+        <h1 class="hero-logo"><span class="mono"><span class="mono-at">at<span class="mono-semi" aria-hidden="true"><svg viewBox="0 0 46 132" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="17" r="16"/><circle cx="22" cy="70" r="16"/><path d="M22,82 Q27,113 4,131 Q24,103 10,78 Z"/></svg></span></span></span></h1>
+        <p class="hero-name">abulia terminal <span>· revista literaria</span></p>
+        <p class="hero-tag">literatura sin anestesia para tiempos de colapso.</p>
+        <p class="hero-sub"><span class="chev">&gt;</span> difusión y crítica artísticas, en especial literarias — propuestas experimentales y arriesgadas</p>
+      </div>
+
+      <a class="hero-visual" href="#">
+        <span class="ph"></span>
+        <span class="at-tag">Ensayo</span>
+        <span class="hero-cap">
+          <span class="feat-label">// destacado</span>
+          <span class="hero-cap-title">The Shadows: No todo el pop es cantado</span>
+          <span class="hero-cap-meta"><b>Gabriel Gálvez</b> — 27 jul 2026</span>
+        </span>
+      </a>
+    </section>
+
+    <hr class="at-rule" />
+
+    <!-- ÍNDICE (grilla intacta) -->
+    <section class="index at-container">
+      <div class="index-head">
+        <span>índice</span>
+        <span class="count">4 piezas</span>
+      </div>
+
+      <a class="row" href="#">
+        <span class="rnum">01</span>
+        <span class="rmain">
+          <span class="rtitle">The Shadows: No todo el pop es cantado</span>
+          <span class="rcat">Ensayo</span>
+        </span>
+        <span class="rmeta">27 jul 2026<br>Gabriel Gálvez</span>
+      </a>
+      <a class="row" href="#">
+        <span class="rnum">02</span>
+        <span class="rmain">
+          <span class="rtitle">Fragmentos del derrumbe y la belleza</span>
+          <span class="rcat">Poesía</span>
+        </span>
+        <span class="rmeta">20 jul 2026<br>—</span>
+      </a>
+      <a class="row" href="#">
+        <span class="rnum">03</span>
+        <span class="rmain">
+          <span class="rtitle">Cuerpos que escriben la resistencia</span>
+          <span class="rcat">Crítica</span>
+        </span>
+        <span class="rmeta">12 jul 2026<br>—</span>
+      </a>
+      <a class="row" href="#">
+        <span class="rnum">04</span>
+        <span class="rmain">
+          <span class="rtitle">Notas sobre la abulia y el archivo</span>
+          <span class="rcat">Crónica</span>
+        </span>
+        <span class="rmeta">03 jul 2026<br>—</span>
+      </a>
+    </section>
+    <p class="note">* la imagen del destacado es un marcador de posición; en el sitio real se usa la portada del post. las piezas 02–04 son de ejemplo para mostrar la grilla.</p>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="foot">
+      <span class="mono"><span class="mono-at">at<span class="mono-semi" aria-hidden="true"><svg viewBox="0 0 46 132" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="17" r="16"/><circle cx="22" cy="70" r="16"/><path d="M22,82 Q27,113 4,131 Q24,103 10,78 Z"/></svg></span></span></span>
+      <nav class="foot-nav">
+        <a href="#">novedades</a>
+        <a href="#">línea editorial</a>
+        <a href="#">manifiesto</a>
+        <a href="#">colaborar</a>
+        <a href="#">contáctanos</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

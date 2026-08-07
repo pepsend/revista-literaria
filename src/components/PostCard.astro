@@ -6,85 +6,67 @@ const { post } = Astro.props;
 const { title, date, author, category, heroImage } = post.data;
 ---
 
-<a class="post-card" href={`/blog/${post.id}/`}>
-	<div class="thumb">
-		<img src={heroImage || DEFAULT_COVER} alt={title} loading="lazy" />
+<a class="card" href={`/blog/${post.id}/`}>
+	<div class="card-photo">
+		<img class="at-duotone" src={heroImage || DEFAULT_COVER} alt={title} loading="lazy" />
+		{category && <span class="at-tag">{category}</span>}
 	</div>
-	<div class="body">
-		{category && <span class="cat">{category}</span>}
-		<h3 class="title">{title}</h3>
-		<p class="meta">
+	<div class="card-body">
+		<h3 class="card-title">{title}</h3>
+		<p class="card-meta">
 			<FormattedDate date={date} />
-			{author && <span> · {author}</span>}
+			{author && <span> — {author}</span>}
 		</p>
 	</div>
 </a>
 
 <style>
-	.post-card {
+	.card {
 		display: flex;
 		flex-direction: column;
-		background: #fffdf9;
-		border: 1px solid #ece4d5;
-		border-radius: 14px;
-		overflow: hidden;
 		text-decoration: none;
-		color: inherit;
-		box-shadow: 0 4px 14px rgba(26, 25, 24, 0.06);
-		transition: transform 0.25s ease, box-shadow 0.25s ease;
+		color: var(--ink);
+		border: 2px solid var(--ink);
+		background: var(--paper);
 	}
-	.post-card:hover {
-		transform: translateY(-4px);
-		box-shadow: 0 16px 32px rgba(26, 25, 24, 0.13);
-	}
-
-	.thumb {
-		aspect-ratio: 16 / 10;
+	.card-photo {
+		position: relative;
+		aspect-ratio: 3 / 2;
 		overflow: hidden;
-		background: #efe7db;
+		border-bottom: 2px solid var(--ink);
 	}
-	.thumb img {
+	.card-photo img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 		display: block;
-		transition: transform 0.45s ease;
+		transition: transform 0.5s ease;
 	}
-	.post-card:hover .thumb img {
-		transform: scale(1.04);
+	.card:hover .card-photo img {
+		transform: scale(1.05);
 	}
-
-	.body {
+	.card-photo .at-tag {
+		position: absolute;
+		top: 12px;
+		left: -8px;
+	}
+	.card-body {
 		padding: 1rem 1.15rem 1.25rem;
-		display: flex;
-		flex-direction: column;
-		gap: 0.55rem;
 	}
-	.cat {
-		align-self: flex-start;
-		background: #f4e7dd;
-		color: #b34a22;
-		font-size: 0.68rem;
-		font-weight: 600;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-		padding: 0.28rem 0.62rem;
-		border-radius: 999px;
+	.card-title {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: 1.45rem;
+		line-height: 1.08;
+		margin: 0 0 0.5rem;
 	}
-	.title {
-		font-family: Georgia, 'Times New Roman', serif;
-		font-size: 1.32rem;
-		line-height: 1.25;
-		font-weight: 700;
-		color: #1a1918;
-		margin: 0;
+	.card:hover .card-title {
+		color: var(--pink);
 	}
-	.post-card:hover .title {
-		color: #b34a22;
-	}
-	.meta {
-		font-size: 0.82rem;
-		color: #8a8175;
+	.card-meta {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		color: var(--muted);
 		margin: 0;
 	}
 </style>

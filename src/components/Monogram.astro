@@ -1,0 +1,85 @@
+---
+/**
+ * Monograma "at;" — el logo distintivo de la revista.
+ * El ; naranjo va dibujado como vector, flotando arriba a la derecha de la t.
+ * Props:
+ *   name  → muestra "abulia terminal" debajo
+ *   rule  → línea magenta + "revista literaria"
+ *   class → sizing/color desde el consumidor (usa font-size en .mono)
+ */
+interface Props {
+	name?: boolean;
+	rule?: boolean;
+	class?: string;
+}
+const { name = false, rule = false, class: className = '' } = Astro.props;
+---
+
+<span class={`mono ${className}`}>
+	<span class="mono-at">at<span class="mono-semi" aria-hidden="true"><svg viewBox="0 0 46 132" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="17" r="16"></circle><circle cx="22" cy="70" r="16"></circle><path d="M22,82 Q27,113 4,131 Q24,103 10,78 Z"></path></svg></span></span>
+	{name && <span class="mono-name">abulia terminal</span>}
+	{rule && <span class="mono-rule"></span>}
+	{rule && <span class="mono-rev">revista literaria</span>}
+</span>
+
+<style>
+	.mono {
+		display: inline-block;
+		font-family: var(--font-display);
+		color: var(--ink);
+		line-height: 1;
+		text-align: left;
+		user-select: none;
+	}
+	/* línea "at" + punto y coma vectorial */
+	.mono-at {
+		position: relative;
+		display: inline-block;
+		font-weight: 900;
+		font-size: 1em;
+		line-height: 0.72;
+		letter-spacing: -0.02em;
+		font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0;
+	}
+	.mono-semi {
+		position: absolute;
+		left: 100%;
+		top: -0.02em;
+		margin-left: 0.03em;
+		height: 0.44em;
+		width: auto;
+		display: block;
+	}
+	.mono-semi svg {
+		height: 100%;
+		width: auto;
+		display: block;
+		fill: var(--orange);
+	}
+	.mono-name {
+		display: block;
+		font-weight: 900;
+		font-size: 0.47em;
+		line-height: 0.9;
+		letter-spacing: -0.015em;
+		font-variation-settings: 'opsz' 144;
+		margin-top: 0.12em;
+	}
+	.mono-rule {
+		display: block;
+		height: 0.02em;
+		min-height: 3px;
+		background: var(--pink);
+		width: 86%;
+		margin: 0.09em 0 0.06em;
+	}
+	.mono-rev {
+		display: block;
+		font-family: var(--font-mono);
+		font-weight: 700;
+		font-size: 0.082em;
+		letter-spacing: 0.55em;
+		text-transform: uppercase;
+		padding-left: 0.03em;
+	}
+</style>

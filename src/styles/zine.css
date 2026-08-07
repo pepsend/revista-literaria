@@ -1,0 +1,143 @@
+:root {
+	/* Paleta extraída de los mockups (guía de estilo) */
+	--paper: #f2e4cc;
+	--paper-2: #ebdcc2;
+	--ink: #1b1916;
+	--pink: #e5468a;
+	--pink-drip: #f0509a;
+	--orange: #dd4b12;
+	--muted: #8c7f6e;
+	--line: #cfc4ae;
+	/* Modo terminal (fondo negro) */
+	--negro: #131211;
+	--crema: #ebd8c6;
+	--font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+	--font-mono: 'Space Mono', ui-monospace, 'Courier New', monospace;
+	--wrap: 1180px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--font-mono);
+	font-size: 16px;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Grano de impresión sutil, SOLO como textura del papel (detrás del contenido) */
+body {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+a {
+	color: inherit;
+}
+
+/* Neutralizar reglas de la plantilla base (Bear Blog) */
+main {
+	width: 100%;
+	max-width: none;
+	margin: 0;
+	padding: 0;
+}
+img {
+	border-radius: 0;
+	max-width: 100%;
+	height: auto;
+}
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1.1;
+}
+
+.at-container {
+	max-width: var(--wrap);
+	margin: 0 auto;
+	padding: 0 1.5rem;
+}
+
+/* Etiqueta tipo ticket */
+.at-tag {
+	display: inline-block;
+	background: var(--pink);
+	color: var(--ink);
+	font-family: var(--font-mono);
+	font-weight: 700;
+	font-size: 0.72rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	padding: 0.3rem 0.7rem;
+	border: 2px solid var(--ink);
+	transform: rotate(-3deg);
+}
+
+.at-kicker {
+	font-family: var(--font-mono);
+	font-size: 0.72rem;
+	letter-spacing: 0.32em;
+	text-transform: uppercase;
+	color: var(--pink);
+	margin: 0;
+}
+
+.at-rule {
+	height: 2px;
+	background: var(--ink);
+	border: 0;
+	margin: 0;
+}
+
+/* Wordmark con ; parpadeante sobre la última letra */
+.wm {
+	font-family: var(--font-display);
+	font-weight: 900;
+	letter-spacing: -0.01em;
+	white-space: nowrap;
+	color: var(--ink);
+}
+
+/* Asegurar que todos los títulos grandes sean oscuros y legibles */
+.masthead-title,
+.masthead-title .wm,
+.feat-title,
+.feat-title a,
+.art-title,
+.listing-title,
+.page-title,
+.card-title,
+.rtitle {
+	color: var(--ink);
+}
+.wm-semi {
+	display: inline-block;
+	color: var(--orange);
+	font-weight: 900;
+	font-size: 0.72em;
+	margin-left: 0.04em;
+	transform: translateY(-0.62em);
+	animation: wm-blink 1.05s steps(1, end) infinite;
+}
+@keyframes wm-blink {
+	50% {
+		opacity: 0;
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.wm-semi {
+		animation: none;
+	}
+}
+
+/* Tratamiento duotono para las fotos (unifica y da look serigrafía) */
+.at-duotone {
+	filter: grayscale(0.3) contrast(1.05) brightness(0.98);
+}

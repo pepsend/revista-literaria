@@ -1,0 +1,46 @@
+/* ============================================================
+   Abulia Terminal — Design Tokens
+   Guía de estilo v1 · 2026
+   Uso: guardar en src/styles/tokens.css e importar en el layout global.
+   ============================================================ */
+
+:root{
+  /* ---- Base (Modo Editorial / "papel") ---- */
+  --papel:        #F2E4CC;
+  --papel-claro:  #F8EEDA;
+  --papel-hueso:  #EBDCC2;
+  --tinta:        #1B1916;
+  --tinta-suave:  #4B3D39;
+  --taupe:        #8C7F6E;
+
+  /* ---- Acentos ---- */
+  --magenta:      #E5468A;
+  --magenta-drip: #F0509A;
+  --naranjo:      #DD4B12;
+  --rosa-palido:  #F3C3C9;
+
+  /* ---- Modo Terminal / "colapso" ---- */
+  --negro:        #131211;
+  --negro-2:      #201D1B;
+  --crema-sobre:  #EBD8C6;
+
+  /* ---- Tipografía ---- */
+  --serif-display: 'Playfair Display', Georgia, serif; /* logo + titulares */
+  --serif-texto:   'Spectral', Georgia, serif;         /* cuerpo / lectura */
+  --sans-punk:     'Archivo Black', 'Arial Black', sans-serif; /* portadas */
+  --mono:          'Space Mono', monospace;             /* etiquetas / meta */
+
+  /* ---- Escala tipográfica (px) ---- */
+  --fs-xs: 12px;  --fs-sm: 14px;  --fs-base: 17px;
+  --fs-md: 20px;  --fs-lg: 24px;  --fs-xl: 32px;
+  --fs-2xl: 46px; --fs-3xl: 64px;
+
+  /* ---- Espaciado / layout ---- */
+  --maxw-lectura: 66ch;
+  --maxw-sitio:   1080px;
+  --line-heavy:   2px solid var(--tinta);
+}
+
+/* Google Fonts (o self-host):
+   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap');
+*/
