@@ -6,6 +6,14 @@ backend:
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
+# Biblioteca de medios: Cloudinary. Subes desde tu PC (arrastrar/soltar),
+# se previsualiza al instante y guarda la URL de la imagen. No expone el API Secret.
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: cs8tnt88
+    api_key: "319363133828178"
+
 collections:
   - name: "posts"
     label: "Artículos"

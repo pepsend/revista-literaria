@@ -54,6 +54,11 @@
           cb('');
           return;
         }
+        // URLs absolutas (Cloudinary, blobs, data): se usan tal cual.
+        if (/^(https?:|blob:|data:)/i.test(path)) {
+          cb(path);
+          return;
+        }
         try {
           var a = getAsset ? getAsset(path) : path;
           Promise.resolve(a).then(
