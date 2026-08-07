@@ -97,8 +97,58 @@ body {
   color: #3c3428;
 }
 .pv-body img {
-  max-width: 100%;
+  display: block;
+  width: 100%;
   height: auto;
+  margin: 1.8rem 0;
+  border: 2px solid #1b1916;
+}
+/* El motor del panel puede convertir texto pegado en "código";
+   lo mostramos como prosa para que se vea igual que en el sitio. */
+.pv-body pre,
+.pv-body code {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: #241d15;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0 0 1.3rem;
+  display: block;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+/* Obras citadas en el preview */
+.pv-cites {
+  max-width: 46rem;
+  margin: 2.4rem auto 0;
+  padding: 1.2rem 1.4rem 1.4rem;
+  border: 1px solid #1b1916;
+  background: #ebdcc2;
+}
+.pv-cites-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #e5468a;
+  margin: 0 0 0.8rem;
+}
+.pv-cites-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pv-cites-item {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #3c3428;
+  padding-left: 1.5rem;
+  text-indent: -1.5rem;
+  margin: 0 0 0.6rem;
 }
 .pv-end {
   margin: 2.5rem 0 0;

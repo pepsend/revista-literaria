@@ -28,6 +28,8 @@ const posts = defineCollection({
 		heroImage: z.string().optional(),
 		// Encaje de la portada (object-position): "center", "top", "left bottom", etc.
 		imagePosition: z.string().optional().default('center'),
+		// Bibliografía / obras citadas (una entrada por línea). Se muestra en bloque aparte.
+		citations: z.string().optional(),
 	}),
 });
 

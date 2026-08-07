@@ -216,6 +216,15 @@
           var date = data.get('date');
           var pos = data.get('imagePosition') || 'center';
           var hero = data.get('heroImage');
+          var citations = data.get('citations');
+          var citeLines = citations
+            ? String(citations)
+                .split(/\r?\n+/)
+                .map(function (s) {
+                  return s.trim();
+                })
+                .filter(Boolean)
+            : [];
 
           var dateStr = '';
           try {
@@ -243,6 +252,18 @@
               getAsset: this.props.getAsset,
             }),
             h('div', { className: 'pv-body', key: 'body' }, this.props.widgetFor('body')),
+            citeLines.length
+              ? h('div', { className: 'pv-cites', key: 'cites' }, [
+                  h('p', { className: 'pv-cites-label', key: 'l' }, '// obras citadas'),
+                  h(
+                    'ul',
+                    { className: 'pv-cites-list', key: 'u' },
+                    citeLines.map(function (c, idx) {
+                      return h('li', { className: 'pv-cites-item', key: idx }, c);
+                    })
+                  ),
+                ])
+              : null,
             h('p', { className: 'pv-end', key: 'end' }, '// fin del texto'),
           ]);
         },

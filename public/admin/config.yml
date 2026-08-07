@@ -38,7 +38,25 @@ collections:
           - "Cuento"
           - "Crónica"
           - "Artículo"
-      - { label: "Contenido", name: "body", widget: "markdown" }
+      - label: "Contenido"
+        name: "body"
+        widget: "markdown"
+        hint: "Usa el interruptor «Rich Text» (arriba a la derecha del editor) para el modo visual: negrita, cursiva, títulos, citas, listas, enlaces e insertar imágenes entre párrafos con el botón +."
+        buttons:
+          - bold
+          - italic
+          - code
+          - link
+          - heading-one
+          - heading-two
+          - heading-three
+          - quote
+          - bulleted-list
+          - numbered-list
+        editor_components:
+          - image
+          - code-block
+      - { label: "Obras citadas", name: "citations", widget: "text", required: false, hint: "Bibliografía: una entrada por línea. Se muestra en un bloque aparte al final, distinto del cuerpo." }
 
   - name: "authors"
     label: "Autores"
