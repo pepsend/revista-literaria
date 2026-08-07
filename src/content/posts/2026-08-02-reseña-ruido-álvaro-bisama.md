@@ -1,5 +1,6 @@
 ---
 title: "Reseña. Ruido: Álvaro Bisama"
+heroImage: /uploads/c3-81lvarobisama.jpeg
 date: 2026-08-02T13:43:00.000-04:00
 author: Tomás Ragga
 category: Artículo

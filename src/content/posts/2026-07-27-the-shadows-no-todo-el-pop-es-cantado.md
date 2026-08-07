@@ -1,5 +1,6 @@
 ---
 title: "The Shadows: No todo el pop es cantado"
+heroImage: /uploads/1000212792.png
 date: 2026-07-27T14:00:00.000-04:00
 author: Gabriel Gálvez
 category: Ensayo
