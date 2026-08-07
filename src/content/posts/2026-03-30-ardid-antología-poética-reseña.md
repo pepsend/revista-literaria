@@ -1,7 +1,7 @@
 ---
 title: Ardid, antología poética - Reseña
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786127394/Portada_rl78tt.jpg
-imagePosition: 50% 50%
+imagePosition: 54% 47%
 date: 2026-03-30T18:30:00.000-03:00
 author: Georgina Ramírez
 authorBio: "Nació en Caracas, Venezuela, en 1972. Actualmente reside en Santiago
@@ -27,5 +27,12 @@ Leer a Teresa Calderón es entrar en un territorio donde la memoria respira con 
 
 ​La poesía de Teresa Calderón no necesita gestos mayores, no depende de artificios, se acerca a lo real con una naturalidad que desarma. la fuerza está justamente en lo directo y lo preciso, en cómo nombra las cosas sin rodeos y aun así logra profundidad. Es un modo de escribir que confía en la claridad y en la experiencia, más que en la espectacularidad. Sus versos nos permiten mirar de frente aquello que a veces pasamos por alto, y en esa simpleza aparece el reconocimiento. No adoctrina ni consuela, simplemente conversa. Y en esa conversación la vida —sus dudas, sus ironías, sus lealtades— encuentra un lugar preciso, dicho con la honestidad que ha sido siempre su sello.
 ```
+
+
+
+	​	​	​	​	​	​Teresa Calderón firmando *Ardid, antología poética*
+
+
+
 
 ![](https://res.cloudinary.com/cs8tnt88/image/upload/v1786127573/Sin_ti%CC%81tulo_xr4j9g.png "​Teresa Calderón firmando Ardid, antología poética")
