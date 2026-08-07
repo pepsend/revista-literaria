@@ -5,6 +5,14 @@ imagePosition: 66% 59%
 date: 2026-08-05T12:20:00.000-04:00
 author: Víctor Fleitas
 category: Crítica
+citations: >
+  	​Caruth, Cathy. Unclaimed Experience: Trauma, Narrative, and History. Johns Hopkins UP, 1996.
+
+
+  	​Ricoeur, Paul. Sí mismo como otro. Traducido por Agustín Neira Calvo, Siglo XXI, 1996.
+
+
+  	​Scorsese, Martin, director. Shutter Island. Paramount Pictures, 2010.
 ---
 Hay algo que Shutter Island hace con el espectador que pocas películas se atreven a hacer: lo engaña de la misma manera en que el protagonista se engaña a sí mismo. No es solo un giro de guion. Es que el funcionamiento interno del film reproduce la lógica del trauma: uno no sabe que está dentro de una distorsión hasta que ya no puede salir limpio de ella. Martin Scorsese, adaptando la novela de Dennis Lehane, construye una película sobre un hombre que literalmente no puede ser quien dice ser, y lo hace desde adentro de esa imposibilidad.
 
@@ -29,18 +37,6 @@ Hay algo que Shutter Island hace con el espectador que pocas películas se atrev
 	​Shutter Island no es una película sobre un loco. Es una película sobre lo que hace el dolor cuando no tiene dónde ir. Andrew Laeddis construyó a Teddy Daniels porque necesitaba ser alguien que todavía pudiera funcionar, alguien con una misión y un enemigo visible, alguien cuya historia tuviera sentido. La ficción que habita no es un error, es una respuesta, defectuosa y desesperada, al colapso de una identidad que ya no puede sostenerse sobre su propia historia.
 
 	​Tanto Caruth como Ricoeur ayudan a entender por qué ese colapso tiene la forma que tiene. El trauma que no fue integrado vuelve disfrazado, persistente, incontrolable —como los sueños de Andrew, como Dolores empapada en el salón de su casa. Y la identidad, que depende de poder narrar quién se es a través del tiempo, se quiebra cuando esa narración se vuelve insoportable. Lo que el film propone, finalmente, es que hay experiencias que dejan a una persona sin historia propia. Y sin historia, solo queda inventar una.
-
-----
-
-Obras citadas
-
-	​Caruth, Cathy. Unclaimed Experience: Trauma, Narrative, and History. Johns Hopkins UP, 1996.
-
-	​Ricoeur, Paul. Sí mismo como otro. Traducido por Agustín Neira Calvo, Siglo XXI, 1996.
-
-	​Scorsese, Martin, director. Shutter Island. Paramount Pictures, 2010.
-
-
 
 ----
 
