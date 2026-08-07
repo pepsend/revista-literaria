@@ -6,9 +6,6 @@ date: 2026-08-05T12:20:00.000-04:00
 author: Víctor Fleitas
 category: Crítica
 citations: >
-  Obras citadas
-
-
   	​Caruth, Cathy. Unclaimed Experience: Trauma, Narrative, and History. Johns Hopkins UP, 1996.
 
 
