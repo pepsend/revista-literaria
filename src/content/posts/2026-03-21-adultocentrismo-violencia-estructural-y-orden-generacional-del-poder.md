@@ -1,6 +1,6 @@
 ---
 title: "Adultocentrismo: violencia estructural y orden generacional del poder"
-heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786385686/IMG_0112_vvt2u8.jpg
+heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786402057/ChatGPT_Image_10_ago_2026_18_47_22_ujcdyd.png
 imagePosition: 49% 10%
 date: 2026-03-21T18:42:00.000-03:00
 author: Catalina Villalobos Díaz
