@@ -119,6 +119,12 @@ body {
   margin-top: 0.4rem;
   text-align: center;
 }
+/* Bloque de texto alineado. */
+.pv-body .aln {
+  white-space: pre-wrap;
+  margin: 2rem 0;
+  line-height: 1.6;
+}
 /* El motor del panel puede convertir texto pegado en "código";
    lo mostramos como prosa para que se vea igual que en el sitio. */
 .pv-body pre,

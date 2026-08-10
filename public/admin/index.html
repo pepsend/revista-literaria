@@ -336,6 +336,69 @@
         },
       });
 
+      /* ---------- Editor component "alineado": texto con alineación (tipo Word) ---------- */
+      var alignCss = function (a) {
+        return { izquierda: 'left', centro: 'center', derecha: 'right', justificado: 'justify' }[a] || 'center';
+      };
+      CMS.registerEditorComponent({
+        id: 'alineado',
+        label: 'Texto alineado',
+        fields: [
+          {
+            name: 'text',
+            label: 'Texto',
+            widget: 'text',
+            hint: 'Escribe o pega el texto y elige la alineación. Se respetan los saltos de línea.',
+          },
+          {
+            name: 'align',
+            label: 'Alineación',
+            widget: 'select',
+            options: ['izquierda', 'centro', 'derecha', 'justificado'],
+            default: 'centro',
+            required: false,
+          },
+        ],
+        pattern: /^<div class="aln"[\s\S]*?<\/div>/,
+        fromBlock: function (match) {
+          var s = match[0];
+          var align = (s.match(/data-align="([^"]*)"/) || [])[1] || 'centro';
+          var inner = (s.match(/>([\s\S]*)<\/div>\s*$/) || [])[1] || '';
+          var text = inner
+            .replace(/<br\s*\/?>/gi, '\n')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+          return { text: text, align: align };
+        },
+        toBlock: function (obj) {
+          var align = obj.align || 'centro';
+          var html = escHtml((obj.text || '').replace(/\r\n/g, '\n')).replace(/\n/g, '<br>');
+          return (
+            '<div class="aln" data-aln data-align="' +
+            align +
+            '" style="text-align:' +
+            alignCss(align) +
+            ';white-space:pre-wrap;">' +
+            html +
+            '</div>'
+          );
+        },
+        toPreview: function (obj) {
+          var align = obj.align || 'centro';
+          var html = escHtml((obj.text || '').replace(/\r\n/g, '\n')).replace(/\n/g, '<br>');
+          return (
+            '<div class="aln" data-aln data-align="' +
+            align +
+            '" style="text-align:' +
+            alignCss(align) +
+            ';white-space:pre-wrap;margin:2rem 0;line-height:1.6;">' +
+            html +
+            '</div>'
+          );
+        },
+      });
+
       /* ---------- Estilos reales del sitio en la vista previa ---------- */
       CMS.registerPreviewStyle(
         'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,900;1,9..144,900&family=Space+Mono:wght@400;700&display=swap'
