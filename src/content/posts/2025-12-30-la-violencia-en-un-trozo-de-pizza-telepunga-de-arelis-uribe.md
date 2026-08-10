@@ -1,0 +1,30 @@
+---
+title: La violencia en un trozo de pizza. Telepunga de Arelis Uribe
+heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786405689/ChatGPT_Image_10_ago_2026_19_47_52_eckbcx.png
+imagePosition: 50% 50%
+date: 2025-12-30T19:48:00.000-03:00
+author: Gabriel Gálvez
+category: Crítica
+authorBio: Gabriel Gálvez nació en Santiago de Chile un marzo de 2003, el mismo
+  día que Linkin Park lanzó Meteora. Estudió Literatura y Periodismo. No
+  concluyó ninguna de las dos carreras. Le gusta leer en la micro y cachurear en
+  el Persa Bío-bío.
+citations: >+
+  Uribe, Arelis. Telepunga. Santiago de Chile: Los Libros de la Mujer Rota,
+  2025.
+---
+Me parece gracioso que el mismo año que Telepizza abandona Chile, aparezca en librerías *Telepunga* (Los Libros de la Mujer Rota, 2025), tampoco es que lo haya pillado al tiro, pero han hablado tanto de este libro que en algún momento la referencia hizo el *click* en mi cabeza. El cuento homónimo de Arelis Uribe me demostró que tengo más recuerdos en esas pizzerías de los que pensaba, me sorprende cómo algo tan banal, de repente, se puede volver una referencia de los años 2000, y en un sentido estético, ese es el país que se retrata en estos 9 cuentos.
+
+Lo que pasa es que no es tan común que se abarque la variedad de perspectivas, lenguajes y estratos sociales que tienen los personajes de *Telepunga*. He leído a otras voces de la generación de la autora, y no es que haya incapacidad de aterrizar en comunas lejanas a Providencia, sino que las historias no ofrecen mucha variedad de escenarios, en ese aspecto el libro aprovecha bien su formato, pues resultaría imposible conectar tantas formas de habitar una ciudad en novelas breves. Tampoco son necesariamente santiaguinos todos los cuentos, hay un par de “relatos secuela” que podrían ocurrir en San Bernardo, según mi experiencia de ciudad, donde otros podrían ver Doñihue, Limache o San Carlos y toda la ambigüedad que implica la definición de ‘campo’.
+
+La temática de este libro es clarísima: el abuso. Pero la superficialidad de la palabra no encaja con la lectura de Uribe, su narrativa demuestra un entendimiento del abuso como parte esencial del sistema y en algunos casos como naturaleza humana, o eso es lo que invita a preguntarse. Jennifer es una adolescente con embarazo precoz, y aún no se lo cuenta a nadie. Tras sufrir un accidente es ayudada por Paula, mujer adulta de vida acomodada que quiere adoptar. Lo interesante es que ella también es de padres adoptivos, sin saber nada de su línea genética, un instinto dentro de Paula logra reconocer a su figura materna, representada en Jennifer. Al final de la historia, Paula tendrá que escoger si va a ofrecerse como madre. Es esa red de constructos los que hacen que la crítica vaya más hacia los entornos, que a los individuos.
+
+*Telepunga* es un cuento insigne de esa visión. “Mi jefe me tenía fe y me ascendió a cajera. Y digo ´ascendió´ porque hacer caja te da estatus. Mientras estás frente a la máquina registradora, no tomas pedido por teléfono, ni te quemas en el horno cuando sacas las pizzas, ni te empolvas la pechera con harina, ni picas tomate de pie en la maquina tragadedos del fondo. (…) Aunque ganas lo mismo que los pizzeros estás a otro nivel.” (Uribe 98) Porque los trabajadores en esta pizzería de Gran Avenida no solo son maltratados, mal alimentados y mal pagados, sino que también abusan de una operación que denominaron *el muertito:* “Los repartidores que salían en moto llamaban a la tienda con un nombre inventado desde un teléfono público y pedían una o dos pizzas familiares para recoger. Nadie reclamaba jamás esa orden.” (Uribe 96) Una pillería que tiene sus consecuencias cuando terminan por cerrar el local debido a este robo hormiga.
+
+Quizás el relato más incomprendido por las reseñas es: *Solo para argentinos*. Es el único que no acontece en Chile y, ya sea porque no todos pueden empatizar con las implicancias de vivir fuera o por no terminar de forma trágica, es que se le ha apartado de la temática del compendio. La historia habla de las primeras semanas de una chilena, que llega a estudiar comunicaciones a Mar del Plata, en su estadía no logra adaptarse, no sufre xenofobia, pero tampoco hay un esfuerzo de los compañeros por incorporar a la afuerina, son fríos como un Grido. La chilena termina cediendo a esta nueva cultura y pasa de no ‘pescarlos’, a ‘*flashear* con irse de joda con las pibas y los chabones de la residencia’. La primera vez que lo leí, me quedé pensando en cómo son más las veces en que los chilenos nos adaptamos a un argentino, que los rioplatenses se adaptan a nosotros, ¿Cómo no va a ser un tipo de violencia eso?
+
+Tampoco quiero que se vayan con un perfil sombrío de este libro, pues la autora es buena diseñando personajes queribles, como la Miss Lola, que encarna la típica profe vieja y pesada que imparte historia, pero también es la excéntrica, la solterona, la fumadora que ofrece, coja y pinochetista, todo en una sola persona. También me gusta la periodista que narra; *Nos quedamos a solas*, por su fijación por los personajes anónimos que construyen la realidad, para hacer buenas entrevistas hay que tener bien desarrollado el músculo de la empatía, y hasta a las mejores les ha pasado, que esa atracción por alguien ajeno cruza los cables con otros sentimientos.
+
+Lo que más disfruté de leer a la Arelis, es la idiosincrasia que tienen sus narraciones, su literatura tiene pequeñas sutilezas que hacen de sus mundos más creíbles, como pequeñas observaciones sociales, que se dejan ver, aunque no sean perceptibles a la primera lectura: “A mi mami no le gustaban los milicos, decía que eran asesinos a sueldo. También decía que si alguien había sido torturado era porque en algo andaba metido” (Uribe 27) en ese cuento la mamá es un personaje secundario.
+
+No leí ese éxito que fue: *Quiltras* (Los Libros de la Mujer Rota, 2016), pero estoy seguro que estos cuentos merecen ser igual de traducidos y llegar a todos los lugares que les sea posible.
