@@ -1,7 +1,7 @@
 ---
 title: El retrato infernal de la felicidad conyugal
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786389159/mPun3IS9hLJyKvz5XEMII63cGgWfUo_large_czafks.jpg
-imagePosition: 50% 50%
+imagePosition: 51% 67%
 date: 2026-03-16T19:13:00.000-03:00
 author: Sam G. Sanzana
 category: Cine
@@ -10,7 +10,7 @@ authorBio: Sam G. Sanzana, es licenciado en Literatura con título en pedagogía
   Además, participo en la antología poética (DES)AMOR de la editorial oceánica y
   en la antología de la editorial Letras negras. Escribe en medios como La raza
   cómica y Los libros después de la peste.
-citations: >+
+citations: >
   -Beauvoir, Simon de. La mujer rota. Penguin Random House, 2019.
 
 
