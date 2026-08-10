@@ -188,6 +188,12 @@ const AuthorBio =
 	}
 	.prose :global(figure) {
 		margin: 1.8rem 0;
+		max-width: 100%;
+	}
+	/* La imagen llena el ancho de la figura (el ancho/alineación se fijan inline). */
+	.prose :global(figure img) {
+		width: 100%;
+		margin: 0;
 	}
 	.prose :global(figcaption) {
 		font-family: var(--font-mono);

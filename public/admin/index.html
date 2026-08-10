@@ -231,6 +231,111 @@
       });
       CMS.registerWidget('authorpicker', AuthorPicker);
 
+      /* ---------- Editor component "figura": imagen del cuerpo con ancho, alineación y pie ---------- */
+      var normWidth = function (w) {
+        w = (w == null ? '' : String(w)).trim();
+        if (!w) return '100%';
+        if (/^\d+(\.\d+)?$/.test(w)) return w + '%';
+        return w;
+      };
+      var marginFor = function (align) {
+        if (align === 'izquierda') return '1.8rem auto 1.8rem 0';
+        if (align === 'derecha') return '1.8rem 0 1.8rem auto';
+        return '1.8rem auto';
+      };
+      var escAttr = function (s) {
+        return String(s || '')
+          .replace(/&/g, '&amp;')
+          .replace(/"/g, '&quot;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+      };
+      var escHtml = function (s) {
+        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      };
+      CMS.registerEditorComponent({
+        id: 'figura',
+        label: 'Figura (imagen)',
+        fields: [
+          { name: 'image', label: 'Imagen', widget: 'image' },
+          { name: 'caption', label: 'Pie de foto / título (opcional)', widget: 'string', required: false },
+          {
+            name: 'width',
+            label: 'Ancho',
+            widget: 'string',
+            default: '100%',
+            required: false,
+            hint: 'Porcentaje del ancho del texto. 100% = completo, 60% = más chica.',
+          },
+          {
+            name: 'align',
+            label: 'Alineación',
+            widget: 'select',
+            options: ['izquierda', 'centro', 'derecha'],
+            default: 'centro',
+            required: false,
+          },
+        ],
+        pattern: /^<figure data-fig[\s\S]*?<\/figure>/,
+        fromBlock: function (match) {
+          var s = match[0];
+          var src = (s.match(/<img[^>]*src="([^"]*)"/) || [])[1] || '';
+          var cap = (s.match(/<figcaption>([\s\S]*?)<\/figcaption>/) || [])[1] || '';
+          var width = (s.match(/width:\s*([^;"']+)/) || [])[1] || '100%';
+          var align = (s.match(/data-align="([^"]*)"/) || [])[1] || 'centro';
+          cap = cap.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+          return { image: src, caption: cap, width: width.trim(), align: align };
+        },
+        toBlock: function (obj) {
+          var src = obj.image || '';
+          var cap = obj.caption || '';
+          var width = normWidth(obj.width);
+          var align = obj.align || 'centro';
+          var figcap = cap ? '<figcaption>' + escHtml(cap) + '</figcaption>' : '';
+          return (
+            '<figure data-fig data-align="' +
+            align +
+            '" style="width:' +
+            width +
+            ';margin:' +
+            marginFor(align) +
+            ';"><img src="' +
+            src +
+            '" alt="' +
+            escAttr(cap) +
+            '" />' +
+            figcap +
+            '</figure>'
+          );
+        },
+        toPreview: function (obj) {
+          var src = obj.image || '';
+          var cap = obj.caption || '';
+          var width = normWidth(obj.width);
+          var align = obj.align || 'centro';
+          var figcap = cap
+            ? '<figcaption style="font-family:\'Space Mono\',monospace;font-size:0.75rem;color:#8c7f6e;margin-top:0.4rem;text-align:center;">' +
+              escHtml(cap) +
+              '</figcaption>'
+            : '';
+          return (
+            '<figure data-fig data-align="' +
+            align +
+            '" style="width:' +
+            width +
+            ';margin:' +
+            marginFor(align) +
+            ';"><img src="' +
+            src +
+            '" alt="' +
+            escAttr(cap) +
+            '" style="width:100%;height:auto;display:block;border:2px solid #1b1916;" />' +
+            figcap +
+            '</figure>'
+          );
+        },
+      });
+
       /* ---------- Estilos reales del sitio en la vista previa ---------- */
       CMS.registerPreviewStyle(
         'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,900;1,9..144,900&family=Space+Mono:wght@400;700&display=swap'

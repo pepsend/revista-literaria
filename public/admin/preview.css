@@ -103,6 +103,22 @@ body {
   margin: 1.8rem 0;
   border: 2px solid #1b1916;
 }
+/* Figuras del cuerpo (imagen con ancho/alineación/pie). El ancho y el margen
+   van inline en cada figura; aquí solo el pie y que la imagen llene la figura. */
+.pv-body figure {
+  max-width: 100%;
+}
+.pv-body figure img {
+  width: 100%;
+  margin: 0;
+}
+.pv-body figcaption {
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: #8c7f6e;
+  margin-top: 0.4rem;
+  text-align: center;
+}
 /* El motor del panel puede convertir texto pegado en "código";
    lo mostramos como prosa para que se vea igual que en el sitio. */
 .pv-body pre,
