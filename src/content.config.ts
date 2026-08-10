@@ -6,6 +6,8 @@ import { z } from 'astro/zod';
 export const CATEGORIES = [
 	'Cine',
 	'Reseña',
+	'Crítica',
+	'Género',
 	'Columna',
 	'Poesía',
 	'Novedades',
@@ -14,6 +16,7 @@ export const CATEGORIES = [
 	'Crónica',
 	'Creación Abúlica',
 	'Cuento',
+	'Artículo',
 ] as const;
 
 // Slug de una categoría para las URLs /categorias/[slug]:

@@ -4,7 +4,7 @@ heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786126023/Volver_a
 imagePosition: 50% 47%
 date: 2026-06-08T20:08:00.000-04:00
 author: Catalina Villalobos Díaz
-category: Ensayo
+category: Género
 ---
 Durante décadas, en Chile, Gabriela Mistral fue reducida a una figura dócil, la profesora rural, la autora de rondas infantiles, la mujer maternal que escribía poemas para niños. Una imagen cuidadosamente construida para volverla inofensiva, reduciendo la amplitud de su escritura a la ternura y relegando las dimensiones más incómodas de su pensamiento. Sin embargo, su obra también fue política, áspera, crítica y profundamente lúcida. Volver hoy a Mistral implica desmontar precisamente esa operación de simplificación y domesticación de su figura.
 

@@ -32,6 +32,8 @@ collections:
         options:
           - "Cine"
           - "Reseña"
+          - "Crítica"
+          - "Género"
           - "Columna"
           - "Poesía"
           - "Novedades"
@@ -40,6 +42,7 @@ collections:
           - "Crónica"
           - "Creación Abúlica"
           - "Cuento"
+          - "Artículo"
       - label: "Contenido"
         name: "body"
         widget: "markdown"
