@@ -1,11 +1,11 @@
 ---
 title: "ROBERTO CORRIAL: “SI DAS POEMA A ALGO, NUNCA TE QUEDAS SOLO”"
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786401144/ChatGPT_Image_10_ago_2026_18_32_11_sonx5d.png
-imagePosition: 50% 50%
+imagePosition: 51% 40%
 date: 2026-01-08T21:32:00.000-03:00
 author: Cristian Salgado Poehlmann
 category: Crónica
-authorBio: >+
+authorBio: >
   Cristian Salgado Poehlmann (Santiago, 1982). Estudió Letras. En la actualidad
   se dedica a la ficción y el periodismo. Fiel seguidor de Rangers de Talca.
 ---
