@@ -524,49 +524,6 @@
       });
 
       CMS.registerPreviewTemplate('posts', PostPreview);
-
-      /* ---------- Blindaje del pegado: limpia texto de Word/Docs al vuelo ----------
-         Word y Google Docs pegan cada párrafo con una tabulación + un carácter
-         invisible (U+200B) al inicio. El editor los interpreta como "bloque de
-         código" (las cajas oscuras). Aquí, al pegar dentro del editor de texto,
-         quitamos esos caracteres antes de que el editor los reciba. Solo actúa si
-         detecta basura; un pegado ya limpio pasa sin tocarse. */
-      (function () {
-        function limpiar(t) {
-          return String(t)
-            .replace(/​/g, '')
-            .replace(/﻿/g, '')
-            .replace(/ /g, ' ')
-            .split('\n')
-            .map(function (l) {
-              return l.replace(/^[ \t]+/, '');
-            })
-            .join('\n');
-        }
-        document.addEventListener(
-          'paste',
-          function (e) {
-            var el = e.target;
-            var editable =
-              el && el.closest
-                ? el.closest('[contenteditable="true"],[data-slate-editor="true"]')
-                : null;
-            if (!editable) return; // solo dentro del editor de cuerpo
-            var cd = e.clipboardData || window.clipboardData;
-            if (!cd) return;
-            var t = cd.getData('text/plain');
-            if (!t) return;
-            var limpio = limpiar(t);
-            if (limpio === t) return; // pegado limpio: no intervenir
-            e.preventDefault();
-            e.stopPropagation();
-            try {
-              document.execCommand('insertText', false, limpio);
-            } catch (err) {}
-          },
-          true
-        );
-      })();
     </script>
   </body>
 </html>
