@@ -1,7 +1,7 @@
 ---
 title: Homenaje a Enrique Lihn
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786388796/enrique-lihn_f9neo1.jpg
-imagePosition: 50% 50%
+imagePosition: 49% 81%
 date: 2026-03-28T19:06:00.000-03:00
 author: Tomás Ragga
 category: Novedades
