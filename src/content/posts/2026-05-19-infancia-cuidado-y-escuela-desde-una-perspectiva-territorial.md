@@ -7,13 +7,13 @@ author: Catalina Villalobos Díaz
 authorBio: ""
 category: Género
 citations: >-
-  	​	​Junta Nacional de Auxilio Escolar y Becas (JUNAEB). Programa de Alimentación Escolar. Gobierno de Chile, 2023.
+  		Junta Nacional de Auxilio Escolar y Becas (JUNAEB). Programa de Alimentación Escolar. Gobierno de Chile, 2023.
 
-  	​	​Ministerio de Desarrollo Social y Familia. Encuesta CASEN 2022. Gobierno de Chile, 2022.
+  		Ministerio de Desarrollo Social y Familia. Encuesta CASEN 2022. Gobierno de Chile, 2022.
 
-  	​	​Instituto Nacional de Estadísticas (INE). Encuesta Nacional de Uso del Tiempo. Gobierno de Chile.
+  		Instituto Nacional de Estadísticas (INE). Encuesta Nacional de Uso del Tiempo. Gobierno de Chile.
 
-  	​	​UNICEF Chile. Niñez y adolescencia en contextos urbanos en Chile. UNICEF Chile, 2024.
+  		UNICEF Chile. Niñez y adolescencia en contextos urbanos en Chile. UNICEF Chile, 2024.
 ---
 Hablar de infancia en Chile hoy implica mirar el territorio como una trama viva de relaciones, desigualdades y posibilidades. El barrio, la vivienda, el acceso a áreas verdes, la calidad del aire, la seguridad y las redes comunitarias configuran las experiencias cotidianas desde las cuales niñas y niños comienzan a comprender el mundo. En esos primeros años, cada una de estas dimensiones deja huellas profundas en la forma en que se construyen los vínculos, la percepción de sí mismos y el lugar que ocupan en lo colectivo.
 
