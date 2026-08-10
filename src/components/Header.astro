@@ -1,16 +1,12 @@
 ---
 import Monogram from './Monogram.astro';
+import { CATEGORIES, categorySlug } from '../content.config';
 
-const categories = [
-	['ensayo', '/categorias/ensayo'],
-	['género', '/categorias/genero'],
-	['crítica', '/categorias/critica'],
-	['creación abúlica', '/categorias/creacion-abulica'],
-	['poesía', '/categorias/poesia'],
-	['cuento', '/categorias/cuento'],
-	['crónica', '/categorias/cronica'],
-	['artículo', '/categorias/articulo'],
-];
+// Se genera desde la lista única (CATEGORIES) para no desincronizarse.
+// La interfaz va en minúscula; el slug quita acentos para la URL.
+const categories = CATEGORIES.map(
+	(name) => [name.toLowerCase(), `/categorias/${categorySlug(name)}`] as const,
+);
 ---
 
 <header class="site-header">

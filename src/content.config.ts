@@ -4,15 +4,27 @@ import { z } from 'astro/zod';
 
 // Categorías disponibles (deben coincidir con public/admin/config.yml)
 export const CATEGORIES = [
-	'Ensayo',
-	'Género',
-	'Crítica',
-	'Creación Abúlica',
+	'Cine',
+	'Reseña',
+	'Columna',
 	'Poesía',
-	'Cuento',
+	'Novedades',
+	'Ensayo',
+	'Fotografía',
 	'Crónica',
-	'Artículo',
+	'Creación Abúlica',
+	'Cuento',
 ] as const;
+
+// Slug de una categoría para las URLs /categorias/[slug]:
+// minúsculas, sin acentos, espacios convertidos en guiones.
+// Fuente única para el menú (Header) y las rutas ([category].astro).
+export const categorySlug = (name: string): string =>
+	name
+		.toLowerCase()
+		.normalize('NFD')
+		.replace(/[̀-ͯ]/g, '')
+		.replace(/\s+/g, '-');
 
 const posts = defineCollection({
 	// Carga los artículos que el CMS escribe en src/content/posts/
@@ -44,4 +56,15 @@ const authors = defineCollection({
 	}),
 });
 
-export const collections = { posts, authors };
+// Páginas fijas del sitio (línea editorial, manifiesto, colaborar, contacto),
+// editables desde el panel. El cuerpo va en el markdown del archivo.
+const pages = defineCollection({
+	loader: glob({ base: './src/content/pages', pattern: '**/*.md' }),
+	schema: z.object({
+		title: z.string(),
+		kicker: z.string().optional(),
+		description: z.string().optional(),
+	}),
+});
+
+export const collections = { posts, authors, pages };

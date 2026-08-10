@@ -5,17 +5,11 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import PostCard from '../../components/PostCard.astro';
 import { SITE_TITLE } from '../../consts';
-import { CATEGORIES } from '../../content.config';
+import { CATEGORIES, categorySlug } from '../../content.config';
 
 export async function getStaticPaths() {
-	const slug = (name) =>
-		name
-			.toLowerCase()
-			.normalize('NFD')
-			.replace(/[̀-ͯ]/g, '')
-			.replace(/\s+/g, '-');
 	return CATEGORIES.map((name) => ({
-		params: { category: slug(name) },
+		params: { category: categorySlug(name) },
 		props: { categoryName: name },
 	}));
 }
