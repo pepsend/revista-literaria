@@ -19,46 +19,57 @@ import { SITE_TITLE } from '../consts';
 				<hr class="at-rule mf-rule" />
 			</header>
 
-			<p class="mf-lead">
-				el equipo de abulia terminal comprende las visiones de mundo, la perspectiva
-				ante la vida, desde la literatura, como fuente primordial para su inserción
-				en el mundo terrenal —o su expulsión de él—. pretende que la literatura sea
-				leída, escrita, editada y reeditada en conjunto, colectivamente. es esta
-				percepción del panorama literario en Chile y Latinoamérica la que revela una
-				carencia esencial: el leer en solitario y el escribir en solitario son
-				comprensiones de un mundo que no se ha explorado en su compendio más libre,
-				con todas y cada una de sus aristas posibles. aquí se agotan todas y cada una
-				de esas aristas de colectivizar la actividad literaria, haciendo comunidad
-				discursiva crítica, con argumentos trabajados por medio de los fenómenos
-				presentes en las lecturas.
-			</p>
-
-			<aside class="mf-panel">
-				<p>
-					no pretendemos ser una “cueca absurda” ni sumarnos a las posibilidades ya
-					existentes en el medio, sino acotar aquel corpus para hacerlo nuestro:
-					manipularlo, rellenar sus vacíos abarcables —claro— y hacer esta comunidad
-					abúlica.
-				</p>
-			</aside>
-
 			<div class="mf-body">
-				<p>
-					creemos firmemente en la reformulación de ideas, vengan de la línea de
-					pensamiento que vengan. por eso consideramos vital el resurgimiento de la
-					literatura, frente a la creencia falaz de que es individual —y de que en eso
-					se agota—, sin actividad comunitaria, sin actividad social.
-				</p>
-				<p>
-					somos un grupo de hombres y mujeres plagados de ilusión ante el nuevo
-					porvenir de la literatura, creyendo en nuestras convicciones escriturales,
-					lectoras y editoriales, creativas y profesionales y hasta instintivas.
-					consideramos que el estilismo libertario de la palabra por sí misma debe
-					tener un espacio en el creciente mundo de las letras, los libros y las
-					lecturas activas e inactivas, motivando la cosmovisión de un mundo más
-					libre: de pensamiento, de creencias sin censura, sin impuesto al libro y de
-					creatividad.
-				</p>
+				<section class="mf-item">
+					<span class="mf-num">01</span>
+					<p class="mf-lead">
+						el equipo de abulia terminal comprende las visiones de mundo, la perspectiva
+						ante la vida, desde la literatura, como fuente primordial para su inserción
+						en el mundo terrenal —o su expulsión de él—. pretende que la literatura sea
+						leída, escrita, editada y reeditada en conjunto, colectivamente. es esta
+						percepción del panorama literario en Chile y Latinoamérica la que revela una
+						carencia esencial: el leer en solitario y el escribir en solitario son
+						comprensiones de un mundo que no se ha explorado en su compendio más libre,
+						con todas y cada una de sus aristas posibles. aquí se agotan todas y cada una
+						de esas aristas de colectivizar la actividad literaria, haciendo comunidad
+						discursiva crítica, con argumentos trabajados por medio de los fenómenos
+						presentes en las lecturas.
+					</p>
+				</section>
+
+				<section class="mf-item">
+					<span class="mf-num">02</span>
+					<p>
+						no pretendemos ser una “cueca absurda” ni sumarnos a las posibilidades ya
+						existentes en el medio, sino acotar aquel corpus para hacerlo nuestro:
+						manipularlo, rellenar sus vacíos abarcables —claro— y hacer esta comunidad
+						abúlica.
+					</p>
+				</section>
+
+				<section class="mf-item">
+					<span class="mf-num">03</span>
+					<p>
+						creemos firmemente en la reformulación de ideas, vengan de la línea de
+						pensamiento que vengan. por eso consideramos vital el resurgimiento de la
+						literatura, frente a la creencia falaz de que es individual —y de que en eso
+						se agota—, sin actividad comunitaria, sin actividad social.
+					</p>
+				</section>
+
+				<section class="mf-item">
+					<span class="mf-num">04</span>
+					<p>
+						somos un grupo de hombres y mujeres plagados de ilusión ante el nuevo
+						porvenir de la literatura, creyendo en nuestras convicciones escriturales,
+						lectoras y editoriales, creativas y profesionales y hasta instintivas.
+						consideramos que el estilismo libertario de la palabra por sí misma debe
+						tener un espacio en el creciente mundo de las letras, los libros y las
+						lecturas activas e inactivas, motivando la cosmovisión de un mundo más
+						libre: de pensamiento, de creencias sin censura, sin impuesto al libro y de
+						creatividad.
+					</p>
+				</section>
 			</div>
 		</main>
 		<Footer />
@@ -67,8 +78,8 @@ import { SITE_TITLE } from '../consts';
 
 <style>
 	.mf {
-		max-width: 52rem;
-		padding: 3rem 1.5rem 4.5rem;
+		max-width: 50rem;
+		padding: 3rem 1.5rem 5rem;
 	}
 	.mf-kicker {
 		font-family: var(--font-mono);
@@ -90,51 +101,50 @@ import { SITE_TITLE } from '../consts';
 	.mf-rule {
 		margin: 1.4rem 0 0;
 	}
-
-	.mf-lead {
-		font-family: var(--font-display);
-		font-weight: 400;
-		font-size: 1.2rem;
-		line-height: 1.75;
-		color: #241d15;
-		margin: 2rem 0 0;
-	}
-
-	.mf-panel {
-		margin: 2.4rem 0 0;
-		background: var(--negro);
-		color: var(--crema);
-		border: 2px solid var(--ink);
-		box-shadow: 10px 10px 0 var(--pink);
-		padding: 1.7rem 1.7rem 1.8rem;
-	}
-	.mf-panel p {
-		font-family: var(--font-display);
-		font-weight: 400;
-		font-size: clamp(1.2rem, 2.4vw, 1.45rem);
-		line-height: 1.5;
-		margin: 0;
-		color: var(--crema);
-	}
-
 	.mf-body {
+		margin: 2.4rem 0 0;
+	}
+	.mf-item {
+		display: grid;
+		grid-template-columns: 3.5rem 1fr;
+		gap: 0 1.3rem;
+		align-items: start;
+		padding: 1.8rem 0;
+		border-top: 1px solid var(--line);
+	}
+	.mf-item:first-child {
+		border-top: 0;
+		padding-top: 0.4rem;
+	}
+	.mf-num {
+		font-family: var(--font-mono);
+		font-weight: 700;
+		font-size: 1rem;
+		color: var(--pink);
+		padding-top: 0.35rem;
+		letter-spacing: 0.02em;
+	}
+	.mf-item p {
 		font-family: var(--font-display);
 		font-weight: 400;
-		font-size: 1.2rem;
-		line-height: 1.75;
+		font-size: 1.18rem;
+		line-height: 1.72;
 		color: #241d15;
-		margin: 2.2rem 0 0;
+		margin: 0;
 	}
-	.mf-body p {
-		margin: 0 0 1.3rem;
-	}
-	.mf-body p:last-child {
-		margin-bottom: 0;
+	.mf-item .mf-lead {
+		font-size: 1.34rem;
+		line-height: 1.55;
+		font-weight: 500;
 	}
 
 	@media (max-width: 560px) {
-		.mf-panel {
-			box-shadow: 6px 6px 0 var(--pink);
+		.mf-item {
+			grid-template-columns: 1fr;
+			gap: 0.5rem 0;
+		}
+		.mf-num {
+			padding-top: 0;
 		}
 	}
 </style>
