@@ -1,15 +1,257 @@
 ---
-import Page from '../layouts/Page.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
 ---
 
-<Page title="contáctanos" description="Contacto de abulia terminal">
-	<p>
-		<em>Texto provisional — actualiza tus datos de contacto y redes.</em>
-	</p>
-	<p>
-		Correo: <a href="mailto:contacto@abuliaterminal.cl">contacto@abuliaterminal.cl</a>
-	</p>
-	<p>
-		Instagram: <a href="https://instagram.com/">@abuliaterminal</a>
-	</p>
-</Page>
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead title={`contáctanos · ${SITE_TITLE}`} description="Contacto de abulia terminal" />
+	</head>
+	<body>
+		<Header />
+		<main class="ct at-container">
+			<header class="ct-head">
+				<p class="ct-kicker">escríbenos</p>
+				<h1 class="ct-title">contáctanos</h1>
+				<hr class="at-rule ct-rule" />
+			</header>
+
+			<div class="ct-grid">
+				<div id="ct-form-wrap">
+					<form
+						id="ct-form"
+						class="ct-form"
+						name="contacto"
+						method="POST"
+						action="/gracias/"
+						data-netlify="true"
+						netlify-honeypot="bot-field"
+					>
+						<input type="hidden" name="form-name" value="contacto" />
+						<p class="hp" hidden><label>no llenar: <input name="bot-field" /></label></p>
+
+						<div class="ct-row">
+							<div class="field">
+								<label for="nombre">nombre <span class="req">*</span></label>
+								<input id="nombre" name="nombre" type="text" required />
+							</div>
+							<div class="field">
+								<label for="telefono">número de teléfono</label>
+								<input id="telefono" name="telefono" type="tel" value="+56" />
+							</div>
+						</div>
+
+						<div class="ct-row">
+							<div class="field">
+								<label for="email">correo electrónico <span class="req">*</span></label>
+								<input id="email" name="email" type="email" required />
+							</div>
+							<div class="field">
+								<label for="empresa">empresa (dado el caso)</label>
+								<input id="empresa" name="empresa" type="text" />
+							</div>
+						</div>
+
+						<div class="field">
+							<label for="asunto">asunto <span class="req">*</span></label>
+							<input id="asunto" name="asunto" type="text" required />
+						</div>
+
+						<div class="field">
+							<label for="pregunta">pregunta <span class="req">*</span></label>
+							<textarea id="pregunta" name="pregunta" rows="6" required></textarea>
+						</div>
+
+						<button type="submit" class="ct-submit">enviar</button>
+					</form>
+				</div>
+
+				<aside class="ct-team">
+					<p class="ct-team-label">// equipo</p>
+					<p><strong>Tomás Ragga Sepúlveda:</strong> Fundador, director general, editor y escritor.</p>
+					<p><strong>Víctor Fleitas Larraín:</strong> Cofundador, coordinador editorial y editor.</p>
+				</aside>
+			</div>
+		</main>
+		<Footer />
+		<script is:inline>
+			(function () {
+				var form = document.getElementById('ct-form');
+				if (!form) return;
+				form.addEventListener('submit', function (e) {
+					e.preventDefault();
+					var btn = form.querySelector('button[type="submit"]');
+					if (btn) { btn.disabled = true; btn.textContent = 'enviando…'; }
+					fetch('/', { method: 'POST', body: new FormData(form) })
+						.then(gracias).catch(gracias);
+				});
+				function gracias() {
+					var w = document.getElementById('ct-form-wrap');
+					if (w) w.innerHTML =
+						'<p class="ct-ok">// enviado</p>' +
+						'<p class="ct-ok-msg">gracias por escribirnos. te responderemos pronto.</p>';
+				}
+			})();
+		</script>
+	</body>
+</html>
+
+<style>
+	.ct {
+		max-width: 62rem;
+		padding: 3rem 1.5rem 5rem;
+	}
+	.ct-kicker {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		letter-spacing: 0.28em;
+		text-transform: uppercase;
+		color: var(--pink);
+		margin: 0 0 0.5rem;
+	}
+	.ct-title {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: clamp(2.6rem, 8vw, 4.6rem);
+		line-height: 0.95;
+		letter-spacing: -0.01em;
+		text-transform: lowercase;
+		margin: 0;
+	}
+	.ct-rule {
+		margin: 1.4rem 0 0;
+	}
+	.ct-grid {
+		display: grid;
+		grid-template-columns: 1.6fr 0.9fr;
+		gap: 2.5rem;
+		margin-top: 2.4rem;
+		align-items: start;
+	}
+	.ct-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.2rem;
+	}
+	.field {
+		margin: 0 0 1.3rem;
+	}
+	.field label {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 0.74rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--ink);
+		margin: 0 0 0.4rem;
+	}
+	.req {
+		color: var(--pink);
+	}
+	.field input,
+	.field textarea {
+		width: 100%;
+		font-family: var(--font-display);
+		font-size: 1.02rem;
+		color: var(--ink);
+		background: var(--paper-2);
+		border: 2px solid var(--ink);
+		padding: 0.65rem 0.75rem;
+	}
+	.field textarea {
+		resize: vertical;
+		line-height: 1.5;
+	}
+	.field input:focus,
+	.field textarea:focus {
+		outline: 3px solid var(--pink);
+		outline-offset: 0;
+	}
+	.hp {
+		position: absolute;
+		left: -9999px;
+	}
+	.ct-submit {
+		font-family: var(--font-mono);
+		font-weight: 700;
+		font-size: 0.85rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--ink);
+		background: var(--orange);
+		border: 2px solid var(--ink);
+		padding: 0.7rem 1.6rem;
+		cursor: pointer;
+		box-shadow: 5px 5px 0 var(--ink);
+	}
+	.ct-submit:hover {
+		background: var(--ink);
+		color: var(--paper);
+		box-shadow: 5px 5px 0 var(--pink);
+	}
+	.ct-submit:active {
+		transform: translate(2px, 2px);
+		box-shadow: 3px 3px 0 var(--pink);
+	}
+
+	.ct-team {
+		border-top: 2px solid var(--ink);
+		padding-top: 1rem;
+	}
+	.ct-team-label {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--pink);
+		margin: 0 0 0.9rem;
+	}
+	.ct-team p:not(.ct-team-label) {
+		font-family: var(--font-display);
+		font-size: 1.02rem;
+		line-height: 1.5;
+		color: #241d15;
+		margin: 0 0 1rem;
+	}
+	.ct-team strong {
+		font-weight: 900;
+		color: var(--ink);
+	}
+
+	.ct-ok {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--pink);
+		margin: 0 0 0.6rem;
+	}
+	.ct-ok-msg {
+		font-family: var(--font-display);
+		font-size: clamp(1.3rem, 3vw, 1.8rem);
+		line-height: 1.4;
+		color: var(--ink);
+		border-left: 5px solid var(--pink);
+		padding-left: 1.2rem;
+		margin: 0;
+	}
+
+	@media (max-width: 760px) {
+		.ct-grid {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+		.ct-row {
+			grid-template-columns: 1fr;
+			gap: 0;
+		}
+		.ct-team {
+			border-top: 0;
+			border-left: 3px solid var(--ink);
+			padding: 0 0 0 1rem;
+		}
+	}
+</style>

@@ -7,7 +7,7 @@
 	<body>
 		<!-- Formulario oculto solo para que Netlify detecte "colaborar" en el build.
 		     El formulario real vive en /colaborar y envía con el mismo form-name. -->
-		<form name="colaborar" data-netlify="true" netlify-honeypot="bot-field" hidden>
+		<form name="colaborar" action="/gracias/" data-netlify="true" netlify-honeypot="bot-field" hidden>
 			<input type="hidden" name="form-name" value="colaborar" />
 			<input name="bot-field" />
 			<input type="text" name="nombre" />
@@ -17,6 +17,18 @@
 			<textarea name="descripcion"></textarea>
 			<input type="file" name="documento" />
 			<input type="file" name="imagen" />
+		</form>
+
+		<!-- Detección de "contacto". El formulario real vive en /contacto. -->
+		<form name="contacto" data-netlify="true" netlify-honeypot="bot-field" hidden>
+			<input type="hidden" name="form-name" value="contacto" />
+			<input name="bot-field" />
+			<input type="text" name="nombre" />
+			<input type="tel" name="telefono" />
+			<input type="email" name="email" />
+			<input type="text" name="empresa" />
+			<input type="text" name="asunto" />
+			<textarea name="pregunta"></textarea>
 		</form>
 	</body>
 </html>
