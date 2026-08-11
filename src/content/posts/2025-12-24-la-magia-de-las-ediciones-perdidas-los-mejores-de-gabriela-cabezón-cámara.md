@@ -1,11 +1,11 @@
 ---
 title: "La magia de las ediciones perdidas: Los mejores de Gabriela Cabezón Cámara"
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786478180/ChatGPT_Image_11_ago_2026_15_56_08_p8zj24.png
-imagePosition: 50% 50%
+imagePosition: 51% 62%
 date: 2025-12-24T16:56:00.000-03:00
 author: Sam G. Sanzana
 category: Reseña
-authorBio: >+
+authorBio: >
   Licenciado en literatura, título profesional en pedagogía. Actualmente
   cursando un magister en literatura. Le interesa mucho la investigación
   literaria, así como la escritura poética y de no ficción. En su tiempo libre
