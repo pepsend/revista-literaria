@@ -1,5 +1,7 @@
 ---
-// Renderiza el nombre con un ; naranja parpadeando sobre la última letra.
+// Renderiza el nombre con un símbolo naranja sobre la última letra.
+// En escritorio parpadea (;) — comportamiento original.
+// En móvil, en vez de parpadear, rota entre puntuación literaria.
 interface Props {
 	text?: string;
 	class?: string;
@@ -8,3 +10,35 @@ const { text = 'abulia terminal', class: className = '' } = Astro.props;
 ---
 
 <span class={`wm ${className}`}>{text}<span class="wm-semi" aria-hidden="true">;</span></span>
+
+<style>
+	.wm-semi {
+		transition: opacity 0.16s ease;
+	}
+	/* En móvil no parpadea: el símbolo rota (lo controla el script de abajo). */
+	@media (max-width: 760px) {
+		.wm-semi {
+			animation: none;
+		}
+	}
+</style>
+
+<script>
+	(function () {
+		if (window.innerWidth > 760) return;
+		var els = document.querySelectorAll('.wm-semi');
+		if (!els.length) return;
+		var syms = [';', '.', ',', ':', '…', '—', '«', '»', '"', '¿', '?', '¡', '!', '()'];
+		var i = 0;
+		setInterval(function () {
+			i = (i + 1) % syms.length;
+			els.forEach(function (el) {
+				el.style.opacity = '0';
+				setTimeout(function () {
+					el.textContent = syms[i];
+					el.style.opacity = '1';
+				}, 160);
+			});
+		}, 1500);
+	})();
+</script>
