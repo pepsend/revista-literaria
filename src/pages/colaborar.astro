@@ -110,6 +110,7 @@ const catsText =
 			</div>
 
 			<form
+				id="col-form"
 				class="col-form"
 				name="colaborar"
 				method="POST"
@@ -170,6 +171,20 @@ const catsText =
 			</form>
 		</main>
 		<Footer />
+		<script is:inline>
+			(function () {
+				var form = document.getElementById('col-form');
+				if (!form) return;
+				form.addEventListener('submit', function (e) {
+					e.preventDefault();
+					var btn = form.querySelector('button[type="submit"]');
+					if (btn) { btn.disabled = true; btn.textContent = 'enviando…'; }
+					fetch('/', { method: 'POST', body: new FormData(form) })
+						.then(function () { window.location.href = '/gracias/'; })
+						.catch(function () { window.location.href = '/gracias/'; });
+				});
+			})();
+		</script>
 	</body>
 </html>
 
