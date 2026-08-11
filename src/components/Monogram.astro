@@ -25,27 +25,38 @@ const { name = false, rule = false, class: className = '' } = Astro.props;
 	{rule && <span class="mono-rev">revista literaria</span>}
 </span>
 
-<script>
+<script is:inline>
 	(function () {
-		var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		var els = document.querySelectorAll('.mono-sym');
-		if (!els.length || reduce) return;
-		var syms = [
-			';', '.', ',', ':', '…', '—', '–', '-', '*',
-			'«', '»', '"', '¿', '?', '¡', '!',
-			'>', '<', '()', '[]', '·', '§', '¶', '†', '&', '~'
-		];
-		var i = 0;
-		setInterval(function () {
-			i = (i + 1) % syms.length;
-			els.forEach(function (el) {
-				el.style.opacity = '0';
-				setTimeout(function () {
-					el.textContent = syms[i];
-					el.style.opacity = '1';
-				}, 160);
-			});
-		}, 1500);
+		function start() {
+			if (window.__monoAnim) return;
+			var els = document.querySelectorAll('.mono-sym');
+			if (!els.length) return;
+			var reduce =
+				window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if (reduce) return;
+			window.__monoAnim = true;
+			var syms = [
+				';', '.', ',', ':', '…', '—', '–', '-', '*',
+				'«', '»', '"', '¿', '?', '¡', '!',
+				'>', '<', '()', '[]', '·', '§', '¶', '†', '&', '~'
+			];
+			var i = 0;
+			setInterval(function () {
+				i = (i + 1) % syms.length;
+				els.forEach(function (el) {
+					el.style.opacity = '0';
+					setTimeout(function () {
+						el.textContent = syms[i];
+						el.style.opacity = '1';
+					}, 160);
+				});
+			}, 1500);
+		}
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', start);
+		} else {
+			start();
+		}
 	})();
 </script>
 
@@ -71,11 +82,14 @@ const { name = false, rule = false, class: className = '' } = Astro.props;
 	.mono-semi {
 		position: absolute;
 		left: 100%;
-		top: 0.02em;
-		margin-left: 0.05em;
-		display: block;
-		width: 0.5em;
+		top: 0.04em;
+		margin-left: 0.06em;
+		width: 0.55em;
 		height: 0.5em;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: visible;
 	}
 	.mono-sym {
 		display: inline-block;
@@ -84,6 +98,7 @@ const { name = false, rule = false, class: className = '' } = Astro.props;
 		font-weight: 900;
 		font-size: 0.5em;
 		line-height: 1;
+		white-space: nowrap;
 		font-variation-settings: 'opsz' 144;
 		transition: opacity 0.16s ease;
 	}
