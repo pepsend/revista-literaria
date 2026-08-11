@@ -3,6 +3,15 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE } from '../consts';
+import { CATEGORIES } from '../content.config';
+
+// Lista de categorías real de la web (fuente única), en minúscula y separada
+// con comas y una "y" final. Se actualiza sola si cambian las categorías.
+// Se excluyen "creación abúlica" y "novedades" (no van para colaboradores externos).
+const excluidas = ['creación abúlica', 'novedades'];
+const cats = CATEGORIES.map((c) => c.toLowerCase()).filter((c) => !excluidas.includes(c));
+const catsText =
+	cats.length > 1 ? `${cats.slice(0, -1).join(', ')} y ${cats[cats.length - 1]}` : cats[0];
 ---
 
 <!doctype html>
@@ -25,12 +34,11 @@ import { SITE_TITLE } from '../consts';
 			<div class="col-info">
 				<p>
 					te invitamos a colaborar en nuestro sitio en cualquiera de las siguientes
-					categorías: ensayo, creación abúlica, poesía, cuento, crítica, artículo
-					académico y paper.
+					categorías: {catsText}.
 				</p>
 				<p>
-					para colaborar, es necesario rellenar el formulario presente en el apartado
-					de “colaborar” (revisar aspectos del envío).
+					para colaborar, es necesario rellenar el formulario presente en este apartado
+					(revisar aspectos del envío).
 				</p>
 
 				<h2>consideraciones:</h2>
@@ -64,8 +72,8 @@ import { SITE_TITLE } from '../consts';
 				<h2>aspectos del envío:</h2>
 				<ul>
 					<li>
-						los correos deben ser enviados a: abuliaterminal@gmail.com a través del
-						formulario en el apartado “colaborar”.
+						los correos deben ser enviados a: abuliaterminal@gmail.com a través de este
+						formulario.
 					</li>
 					<li>
 						en “breve descripción de la obra” debe ir lo siguiente: en primer lugar,
