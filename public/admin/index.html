@@ -340,6 +340,12 @@
       var alignCss = function (a) {
         return { izquierda: 'left', centro: 'center', derecha: 'right', justificado: 'justify' }[a] || 'center';
       };
+      var fmtAln_ = function (t) {
+        var s = String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        s = s.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>').replace(/__([^_\n]+)__/g, '<strong>$1</strong>');
+        s = s.replace(/\*([^*\n]+)\*/g, '<em>$1</em>').replace(/_([^_\n]+)_/g, '<em>$1</em>');
+        return s.replace(/\r\n/g, '\n').replace(/\n/g, '<br>');
+      };
       CMS.registerEditorComponent({
         id: 'alineado',
         label: 'Texto alineado',
@@ -348,7 +354,7 @@
             name: 'text',
             label: 'Texto',
             widget: 'text',
-            hint: 'Escribe o pega el texto y elige la alineación. Se respetan los saltos de línea.',
+            hint: 'Escribe el texto y elige la alineación. Para dar formato: **negrita** (con doble asterisco) y *cursiva* (con un asterisco). Se respetan los saltos de línea.',
           },
           {
             name: 'align',
@@ -366,6 +372,8 @@
           var inner = (s.match(/>([\s\S]*)<\/div>\s*$/) || [])[1] || '';
           var text = inner
             .replace(/<br\s*\/?>/gi, '\n')
+            .replace(/<strong>([\s\S]*?)<\/strong>/gi, '**$1**')
+            .replace(/<em>([\s\S]*?)<\/em>/gi, '*$1*')
             .replace(/&lt;/g, '<')
             .replace(/&gt;/g, '>')
             .replace(/&amp;/g, '&');
@@ -373,7 +381,7 @@
         },
         toBlock: function (obj) {
           var align = obj.align || 'centro';
-          var html = escHtml((obj.text || '').replace(/\r\n/g, '\n')).replace(/\n/g, '<br>');
+          var html = fmtAln_(obj.text);
           return (
             '<div class="aln" data-aln data-align="' +
             align +
@@ -386,7 +394,7 @@
         },
         toPreview: function (obj) {
           var align = obj.align || 'centro';
-          var html = escHtml((obj.text || '').replace(/\r\n/g, '\n')).replace(/\n/g, '<br>');
+          var html = fmtAln_(obj.text);
           return (
             '<div class="aln" data-aln data-align="' +
             align +
