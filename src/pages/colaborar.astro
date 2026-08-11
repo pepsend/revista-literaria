@@ -1,19 +1,309 @@
 ---
-import Page from '../layouts/Page.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
 ---
 
-<Page title="colaborar" description="Cómo enviar tus textos a abulia terminal">
-	<p>
-		<em>Texto provisional — ajusta las condiciones a tu criterio.</em>
-	</p>
-	<p>
-		¿Quieres publicar con nosotros? Recibimos ensayos, reseñas, crítica, poesía,
-		cuento y crónica.
-	</p>
-	<h2>Cómo enviar</h2>
-	<p>
-		Escríbenos a <a href="mailto:contacto@abuliaterminal.cl">contacto@abuliaterminal.cl</a>
-		con tu texto adjunto (formato .doc o .md), una breve bio y la categoría
-		sugerida.
-	</p>
-</Page>
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead
+			title={`colaborar · ${SITE_TITLE}`}
+			description="Cómo enviar tus textos a abulia terminal"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="col at-container">
+			<header class="col-head">
+				<p class="col-kicker">súmate</p>
+				<h1 class="col-title">colaborar</h1>
+				<hr class="at-rule col-rule" />
+			</header>
+
+			<div class="col-info">
+				<p>
+					te invitamos a colaborar en nuestro sitio en cualquiera de las siguientes
+					categorías: ensayo, creación abúlica, poesía, cuento, crítica, artículo
+					académico y paper.
+				</p>
+				<p>
+					para colaborar, es necesario rellenar el formulario presente en el apartado
+					de “colaborar” (revisar aspectos del envío).
+				</p>
+
+				<h2>consideraciones:</h2>
+				<ul>
+					<li>la temática de los escritos es libre.</li>
+					<li>
+						los escritos seleccionados ingresan a una fase de revisión que consiste en
+						la edición a través de comentarios y sugerencias para mejorar la redacción
+						o ideas que puedan ser confusas (a nuestro criterio editorial).
+					</li>
+					<li>
+						los derechos de autor pertenecen a las personas seleccionadas y no existe un
+						pago monetario asociado con la publicación.
+					</li>
+				</ul>
+
+				<h2>formalidades:</h2>
+				<ul>
+					<li>no hay una extensión mínima o máxima de los textos.</li>
+					<li>
+						el texto debe estar en formato times new roman 12, interlineado 1.5, en
+						archivo .doc (no .pdf).
+					</li>
+					<li>
+						si el texto contiene imágenes, deben ir al interior del texto según la
+						ubicación correspondiente y adjuntadas al correo en la mayor resolución
+						posible.
+					</li>
+				</ul>
+
+				<h2>aspectos del envío:</h2>
+				<ul>
+					<li>
+						los correos deben ser enviados a: abuliaterminal@gmail.com a través del
+						formulario en el apartado “colaborar”.
+					</li>
+					<li>
+						en “breve descripción de la obra” debe ir lo siguiente: en primer lugar,
+						colaboración (categoría). por ejemplo: colaboración (ensayo), en segundo
+						lugar, el origen y/o intenciones para publicar en la revista (máximo 2 a 4
+						líneas).
+					</li>
+					<li>
+						en “breve biografía” debes escribir una biografía tuya (máximo 3 a 5 líneas)
+						que luego será añadida al final del escrito y a la publicación en rr ss.
+					</li>
+					<li>no se aceptan textos anónimos.</li>
+					<li>
+						te sugerimos añadir tu red social (de preferencia instagram) para etiquetarte
+						en la publicación.
+					</li>
+				</ul>
+
+				<h2>estimaciones:</h2>
+				<ul>
+					<li>
+						desde que respondemos el correo electrónico con la recepción de tu
+						colaboración, nos damos un plazo de 2 semanas para comenzar el periodo de
+						revisión del texto.
+					</li>
+					<li>nos reservamos el derecho de publicación según nuestra línea editorial.</li>
+					<li>
+						nos puedes escribir a redes sociales o al correo electrónico cualquier duda o
+						inquietud que tengas.
+					</li>
+				</ul>
+
+				<p class="col-thanks">agradecemos tu interés en publicar en nuestra página.</p>
+			</div>
+
+			<form
+				class="col-form"
+				name="colaborar"
+				method="POST"
+				action="/gracias"
+				data-netlify="true"
+				netlify-honeypot="bot-field"
+				enctype="multipart/form-data"
+			>
+				<input type="hidden" name="form-name" value="colaborar" />
+				<p class="hp" hidden>
+					<label>no llenar: <input name="bot-field" /></label>
+				</p>
+
+				<div class="field">
+					<label for="nombre">nombre del autor <span class="req">*</span></label>
+					<input id="nombre" name="nombre" type="text" required />
+				</div>
+
+				<div class="field">
+					<label for="email">correo electrónico <span class="req">*</span></label>
+					<input id="email" name="email" type="email" required />
+				</div>
+
+				<div class="field">
+					<label for="redes">redes sociales <span class="req">*</span></label>
+					<input id="redes" name="redes" type="text" required />
+					<span class="hint">de preferencia instagram, para etiquetarte en la publicación.</span>
+				</div>
+
+				<div class="field">
+					<label for="biografia">breve biografía <span class="req">*</span></label>
+					<textarea id="biografia" name="biografia" rows="4" required></textarea>
+					<span class="hint">máximo 3 a 5 líneas.</span>
+				</div>
+
+				<div class="field">
+					<label for="descripcion">breve descripción de la obra <span class="req">*</span></label>
+					<textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+					<span class="hint">
+						colaboración (categoría) + origen y/o intenciones para publicar (máx. 2 a 4
+						líneas).
+					</span>
+				</div>
+
+				<div class="field">
+					<label for="documento">adjuntar el documento (.doc) <span class="req">*</span></label>
+					<input id="documento" name="documento" type="file" accept=".doc,.docx" required />
+					<span class="hint">formato .doc (no .pdf).</span>
+				</div>
+
+				<div class="field">
+					<label for="imagen">imagen obra <span class="req">*</span></label>
+					<input id="imagen" name="imagen" type="file" accept="image/*" required />
+					<span class="hint">adjunta una imagen para acompañar la publicación.</span>
+				</div>
+
+				<button type="submit" class="col-submit">enviar</button>
+			</form>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.col {
+		max-width: 52rem;
+		padding: 3rem 1.5rem 4.5rem;
+	}
+	.col-kicker {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		letter-spacing: 0.28em;
+		text-transform: uppercase;
+		color: var(--pink);
+		margin: 0 0 0.5rem;
+	}
+	.col-title {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: clamp(2.6rem, 8vw, 4.6rem);
+		line-height: 0.95;
+		letter-spacing: -0.01em;
+		text-transform: lowercase;
+		margin: 0;
+	}
+	.col-rule {
+		margin: 1.4rem 0 0;
+	}
+
+	.col-info {
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: 1.12rem;
+		line-height: 1.7;
+		color: #241d15;
+		margin: 2rem 0 0;
+	}
+	.col-info p {
+		margin: 0 0 1.1rem;
+	}
+	.col-info h2 {
+		font-family: var(--font-mono);
+		font-size: 0.82rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--pink);
+		margin: 1.8rem 0 0.7rem;
+	}
+	.col-info ul {
+		margin: 0 0 1.1rem;
+		padding-left: 1.1rem;
+	}
+	.col-info li {
+		margin: 0 0 0.55rem;
+	}
+	.col-info li::marker {
+		color: var(--pink);
+	}
+	.col-thanks {
+		font-weight: 900;
+		margin-top: 1.6rem;
+	}
+
+	/* Formulario */
+	.col-form {
+		margin: 2.8rem 0 0;
+		border-top: 2px solid var(--ink);
+		padding-top: 2rem;
+	}
+	.field {
+		margin: 0 0 1.4rem;
+	}
+	.field label {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 0.76rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--ink);
+		margin: 0 0 0.4rem;
+	}
+	.req {
+		color: var(--pink);
+	}
+	.field input[type='text'],
+	.field input[type='email'],
+	.field textarea {
+		width: 100%;
+		font-family: var(--font-display);
+		font-size: 1.02rem;
+		color: var(--ink);
+		background: var(--paper-2);
+		border: 2px solid var(--ink);
+		padding: 0.65rem 0.75rem;
+	}
+	.field textarea {
+		resize: vertical;
+		line-height: 1.5;
+	}
+	.field input[type='file'] {
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		color: var(--ink);
+	}
+	.field input:focus,
+	.field textarea:focus {
+		outline: 3px solid var(--pink);
+		outline-offset: 0;
+	}
+	.hint {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		color: var(--muted);
+		margin-top: 0.35rem;
+		line-height: 1.4;
+	}
+	.hp {
+		position: absolute;
+		left: -9999px;
+	}
+	.col-submit {
+		font-family: var(--font-mono);
+		font-weight: 700;
+		font-size: 0.85rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--ink);
+		background: var(--orange);
+		border: 2px solid var(--ink);
+		padding: 0.7rem 1.6rem;
+		cursor: pointer;
+		box-shadow: 5px 5px 0 var(--ink);
+	}
+	.col-submit:hover {
+		background: var(--ink);
+		color: var(--paper);
+		box-shadow: 5px 5px 0 var(--pink);
+	}
+	.col-submit:active {
+		transform: translate(2px, 2px);
+		box-shadow: 3px 3px 0 var(--pink);
+	}
+</style>

@@ -1,0 +1,80 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead title={`gracias · ${SITE_TITLE}`} description="Recibimos tu colaboración" />
+	</head>
+	<body>
+		<Header />
+		<main class="gr at-container">
+			<p class="gr-kicker">// recibido</p>
+			<h1 class="gr-title">gracias</h1>
+			<div class="gr-panel">
+				<p>
+					recibimos tu colaboración. te confirmaremos la recepción por correo y, desde
+					ahí, nos tomamos un plazo aproximado de dos semanas para revisar el texto,
+					editarlo y enviarte nuestra propuesta y comentarios antes de publicarlo.
+				</p>
+			</div>
+			<p class="gr-back"><a href="/">← volver al inicio</a></p>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.gr {
+		max-width: 46rem;
+		padding: 4rem 1.5rem 5rem;
+	}
+	.gr-kicker {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--pink);
+		margin: 0 0 0.5rem;
+	}
+	.gr-title {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: clamp(2.6rem, 9vw, 5rem);
+		line-height: 0.95;
+		text-transform: lowercase;
+		margin: 0 0 1.6rem;
+	}
+	.gr-panel {
+		background: var(--negro);
+		color: var(--crema);
+		border: 2px solid var(--ink);
+		box-shadow: 10px 10px 0 var(--pink);
+		padding: 1.7rem 1.7rem 1.8rem;
+	}
+	.gr-panel p {
+		font-family: var(--font-display);
+		font-size: clamp(1.2rem, 2.6vw, 1.5rem);
+		line-height: 1.5;
+		margin: 0;
+		color: var(--crema);
+	}
+	.gr-back {
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		margin: 2rem 0 0;
+	}
+	.gr-back a {
+		color: var(--pink);
+		text-decoration: none;
+	}
+	@media (max-width: 560px) {
+		.gr-panel {
+			box-shadow: 6px 6px 0 var(--pink);
+		}
+	}
+</style>
