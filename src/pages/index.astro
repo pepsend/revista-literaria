@@ -282,4 +282,24 @@ const rest = posts.slice(1);
 			display: none;
 		}
 	}
+
+	@media (max-width: 560px) {
+		.hero {
+			padding: 1.8rem 1.5rem 2.2rem;
+			gap: 1.6rem;
+		}
+		.hero-logo,
+		.hero-name {
+			display: none;
+		}
+		.hero-tag {
+			margin-top: 1rem;
+			font-size: clamp(2rem, 9vw, 2.6rem);
+			max-width: none;
+		}
+		.hero-sub {
+			margin-top: 1rem;
+			font-size: 0.85rem;
+		}
+	}
 </style>
