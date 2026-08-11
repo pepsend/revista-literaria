@@ -1,5 +1,4 @@
 ---
-import Monogram from './Monogram.astro';
 import { CATEGORIES, categorySlug } from '../content.config';
 
 // Se genera desde la lista única (CATEGORIES) para no desincronizarse.
@@ -12,7 +11,6 @@ const categories = CATEGORIES.map(
 <header class="site-header" id="site-header">
 	<div class="at-container bar">
 		<a class="brand" href="/" aria-label="abulia terminal — inicio">
-			<Monogram class="brand-mono" />
 			<span class="brand-name">abulia terminal</span>
 		</a>
 
