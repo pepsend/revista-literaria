@@ -15,7 +15,7 @@ import { SITE_TITLE } from '../consts';
 		<main class="mf at-container">
 			<header class="mf-head">
 				<p class="mf-kicker">por qué</p>
-				<h1 class="mf-title">manifiesto<span class="mf-semi">;</span></h1>
+				<h1 class="mf-title">manifiesto</h1>
 				<hr class="at-rule mf-rule" />
 			</header>
 
@@ -87,10 +87,6 @@ import { SITE_TITLE } from '../consts';
 		text-transform: lowercase;
 		margin: 0;
 	}
-	.mf-semi {
-		color: var(--orange);
-		font-weight: 900;
-	}
 	.mf-rule {
 		margin: 1.4rem 0 0;
 	}
@@ -103,15 +99,6 @@ import { SITE_TITLE } from '../consts';
 		line-height: 1.75;
 		color: #241d15;
 		margin: 2rem 0 0;
-	}
-	.mf-lead::first-letter {
-		float: left;
-		font-family: var(--font-display);
-		font-weight: 900;
-		font-size: 3.6em;
-		line-height: 0.72;
-		color: var(--pink);
-		margin: 0.06em 0.1em 0 0;
 	}
 
 	/* Panel oscuro "terminal" con sombra magenta dura */
@@ -151,9 +138,6 @@ import { SITE_TITLE } from '../consts';
 	@media (max-width: 560px) {
 		.mf-panel {
 			box-shadow: 6px 6px 0 var(--pink);
-		}
-		.mf-lead::first-letter {
-			font-size: 3em;
 		}
 	}
 </style>
