@@ -111,15 +111,17 @@ const catsText =
 
 			<form
 				class="col-form"
+				name="colaborar"
 				method="POST"
-				action="https://formsubmit.co/abuliaterminal@gmail.com"
+				action="/gracias/"
+				data-netlify="true"
+				netlify-honeypot="bot-field"
 				enctype="multipart/form-data"
 			>
-				<input type="hidden" name="_subject" value="nueva colaboración — abulia terminal" />
-				<input type="hidden" name="_next" value="https://abuliaterminal.netlify.app/gracias/" />
-				<input type="hidden" name="_template" value="table" />
-				<input type="hidden" name="_captcha" value="false" />
-				<input type="text" name="_honey" style="display: none" tabindex="-1" autocomplete="off" />
+				<input type="hidden" name="form-name" value="colaborar" />
+				<p class="hp" hidden>
+					<label>no llenar: <input name="bot-field" /></label>
+				</p>
 
 				<div class="field">
 					<label for="nombre">nombre del autor <span class="req">*</span></label>
