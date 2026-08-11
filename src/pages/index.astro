@@ -76,6 +76,15 @@ const rest = posts.slice(1);
 					rest.map((post, i) => (
 						<a class="row" href={`/blog/${post.id}/`}>
 							<span class="rnum">{String(i + 1).padStart(2, '0')}</span>
+							<span class="rthumb">
+								<img
+									class="at-duotone"
+									src={post.data.heroImage || DEFAULT_COVER}
+									alt={post.data.title}
+									loading="lazy"
+									style={`object-position: ${post.data.imagePosition || 'center'};`}
+								/>
+							</span>
 							<span class="rmain">
 								<span class="rtitle">{post.data.title}</span>
 								{post.data.category && <span class="rcat">{post.data.category}</span>}
@@ -226,9 +235,9 @@ const rest = posts.slice(1);
 	}
 	.row {
 		display: grid;
-		grid-template-columns: 42px 1fr auto;
-		gap: 1rem;
-		align-items: baseline;
+		grid-template-columns: 40px 84px 1fr auto;
+		gap: 1.1rem;
+		align-items: center;
 		padding: 1.1rem 0;
 		border-top: 1px solid var(--line);
 		text-decoration: none;
@@ -241,6 +250,23 @@ const rest = posts.slice(1);
 		font-family: var(--font-mono);
 		font-weight: 700;
 		color: var(--pink);
+	}
+	.rthumb {
+		width: 84px;
+		aspect-ratio: 3 / 2;
+		overflow: hidden;
+		border: 2px solid var(--ink);
+		display: block;
+	}
+	.rthumb img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.4s ease;
+	}
+	.row:hover .rthumb img {
+		transform: scale(1.06);
 	}
 	.rtitle {
 		font-family: var(--font-display);
@@ -276,7 +302,11 @@ const rest = posts.slice(1);
 	}
 	@media (max-width: 720px) {
 		.row {
-			grid-template-columns: 30px 1fr;
+			grid-template-columns: 26px 60px 1fr;
+			gap: 0.8rem;
+		}
+		.rthumb {
+			width: 60px;
 		}
 		.rmeta {
 			display: none;
