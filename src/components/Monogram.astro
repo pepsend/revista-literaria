@@ -1,7 +1,8 @@
 ---
 /**
  * Monograma "at;" — el logo distintivo de la revista.
- * El ; naranjo va dibujado como vector, flotando arriba a la derecha de la t.
+ * El símbolo naranjo (arranca como ;) va rotando entre varios signos
+ * de puntuación con una animación suave (espíritu "terminal").
  * Props:
  *   name  → muestra "abulia terminal" debajo
  *   rule  → línea magenta + "revista literaria"
@@ -16,11 +17,37 @@ const { name = false, rule = false, class: className = '' } = Astro.props;
 ---
 
 <span class={`mono ${className}`}>
-	<span class="mono-at">at<span class="mono-semi" aria-hidden="true"><svg viewBox="0 0 46 132" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="17" r="16"></circle><circle cx="22" cy="70" r="16"></circle><path d="M22,82 Q27,113 4,131 Q24,103 10,78 Z"></path></svg></span></span>
+	<span class="mono-at"
+		>at<span class="mono-semi" aria-hidden="true"><span class="mono-sym">;</span></span></span
+	>
 	{name && <span class="mono-name">abulia terminal</span>}
 	{rule && <span class="mono-rule"></span>}
 	{rule && <span class="mono-rev">revista literaria</span>}
 </span>
+
+<script>
+	(function () {
+		var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		var els = document.querySelectorAll('.mono-sym');
+		if (!els.length || reduce) return;
+		var syms = [
+			';', '.', ',', ':', '…', '—', '–', '-', '*',
+			'«', '»', '"', '¿', '?', '¡', '!',
+			'>', '<', '()', '[]', '·', '§', '¶', '†', '&', '~'
+		];
+		var i = 0;
+		setInterval(function () {
+			i = (i + 1) % syms.length;
+			els.forEach(function (el) {
+				el.style.opacity = '0';
+				setTimeout(function () {
+					el.textContent = syms[i];
+					el.style.opacity = '1';
+				}, 160);
+			});
+		}, 1500);
+	})();
+</script>
 
 <style>
 	.mono {
@@ -31,7 +58,7 @@ const { name = false, rule = false, class: className = '' } = Astro.props;
 		text-align: left;
 		user-select: none;
 	}
-	/* línea "at" + punto y coma vectorial */
+	/* línea "at" + símbolo rotativo */
 	.mono-at {
 		position: relative;
 		display: inline-block;
@@ -44,17 +71,21 @@ const { name = false, rule = false, class: className = '' } = Astro.props;
 	.mono-semi {
 		position: absolute;
 		left: 100%;
-		top: -0.02em;
-		margin-left: 0.03em;
-		height: 0.44em;
-		width: auto;
+		top: 0.02em;
+		margin-left: 0.05em;
 		display: block;
+		width: 0.5em;
+		height: 0.5em;
 	}
-	.mono-semi svg {
-		height: 100%;
-		width: auto;
-		display: block;
-		fill: var(--orange);
+	.mono-sym {
+		display: inline-block;
+		color: var(--orange);
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: 0.5em;
+		line-height: 1;
+		font-variation-settings: 'opsz' 144;
+		transition: opacity 0.16s ease;
 	}
 	.mono-name {
 		display: block;
