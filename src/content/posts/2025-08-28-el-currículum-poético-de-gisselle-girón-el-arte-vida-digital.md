@@ -2,7 +2,7 @@
 title: "El currículum poético de Gisselle Girón: el arte vida digital"
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786552176/ChatGPT_Image_12_ago_2026_12_29_24_q7u5vw.png
 imagePosition: 50% 50%
-date: 2025-08-28T16:32:00.000-04:00
+date: 2024-03-06T17:36:00.000-03:00
 author: Javier A. Pérez
 category: Ensayo
 justify: true
