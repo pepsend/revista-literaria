@@ -8,7 +8,8 @@ category: Ensayo
 justify: true
 tags:
   - ensayo
-  - onepiece
+  - GisselleGirón
+  - OnePiece
 ---
 Desde el pasillo al final del mundo, pensar la relación entre currículum vitae y poesía invoca la figura del excepcional Rodrigo Lira, un poeta intrigante de los años ochenta, cuya obra resguarda el episodio morboso del suicidio y otros más o menos infames de su vida, es más, es difícil que su obra y vida no se mezclen, como lo demuestran algunos libros actuales sobre Lira, que escarban tanto en sus creaciones literarias como datos biográficos, imbricándolas al punto de mezclarse\[1].
 
