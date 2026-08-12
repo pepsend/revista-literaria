@@ -284,7 +284,8 @@ const searchText = (p: (typeof posts)[number]) =>
 		font-weight: 900;
 		font-size: clamp(1.3rem, 2.4vw, 1.75rem);
 		line-height: 1.05;
-		color: var(--paper);
+		/* Siempre claro: va sobre el degradado oscuro de la imagen, en ambos modos. */
+		color: var(--crema);
 	}
 	.hero-cap-meta {
 		font-family: var(--font-mono);

@@ -34,10 +34,10 @@ const categories = CATEGORIES.map(
 				class="theme-toggle"
 				id="theme-toggle"
 				type="button"
-				aria-label="Cambiar a modo terminal"
+				aria-label="Cambiar a modo oscuro"
 				aria-pressed="false"
 			>
-				◐ terminal
+				☾ oscuro
 			</button>
 		</nav>
 	</div>
@@ -68,11 +68,11 @@ const categories = CATEGORIES.map(
 		if (themeBtn) {
 			var syncLabel = function () {
 				var on = document.documentElement.getAttribute('data-theme') === 'terminal';
-				themeBtn.textContent = on ? '◑ editorial' : '◐ terminal';
+				themeBtn.textContent = on ? '☀ claro' : '☾ oscuro';
 				themeBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
 				themeBtn.setAttribute(
 					'aria-label',
-					on ? 'Cambiar a modo editorial' : 'Cambiar a modo terminal',
+					on ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro',
 				);
 			};
 			themeBtn.addEventListener('click', function () {
