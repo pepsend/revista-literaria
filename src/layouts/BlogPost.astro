@@ -247,6 +247,21 @@ const AuthorBio =
 
 			<p class="art-end">// fin del texto</p>
 
+			<section class="art-comments">
+				<p class="art-comments-label">// comentarios</p>
+				<div
+					id="cusdis_thread"
+					data-host="https://cusdis.com"
+					data-app-id="a51897a5-67a0-46ee-8abc-a3a8a98b19f1"
+					data-page-id={Astro.url.pathname}
+					data-page-url={shareUrl}
+					data-page-title={title}
+					data-theme="auto"
+				>
+				</div>
+			</section>
+			<script is:inline async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+
 			{
 				relatedCards.length > 0 && (
 					<section class="art-related">
@@ -819,6 +834,25 @@ const AuthorBio =
 		font-family: var(--font-mono);
 		font-size: 0.7rem;
 		color: var(--muted);
+	}
+
+	/* Comentarios */
+	.art-comments {
+		max-width: 40rem;
+		margin: 3rem auto 0;
+	}
+	.art-comments-label {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--pink);
+		margin: 0 0 1rem;
+		border-top: 2px solid var(--ink);
+		padding-top: 0.8rem;
+	}
+	#cusdis_thread {
+		font-family: var(--font-mono);
 	}
 
 	/* Navegación anterior / siguiente */
