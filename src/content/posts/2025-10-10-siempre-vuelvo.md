@@ -5,7 +5,8 @@ imagePosition: 50% 50%
 date: 2025-10-10T14:53:00.000-03:00
 author: Constanza Tapia Ojeda
 category: Cuento
-authorBio: >+
+justify: true
+authorBio: >
   Constanza Tapia Ojeda (@connytetee), chilena, es Analista en Política y
   Asuntos Internacionales, a pesar de eso, le apasiona escribir. Ha publicado en
   la revista JAUJA de la UAH y fue ganadora del tercer lugar en el Concurso de
