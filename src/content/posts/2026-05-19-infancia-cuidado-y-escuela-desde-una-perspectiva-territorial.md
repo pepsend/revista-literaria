@@ -4,8 +4,9 @@ heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786126507/IMG_2003
 imagePosition: 50% 50%
 date: 2026-05-18T22:15:00.000-04:00
 author: Catalina Villalobos Díaz
-authorBio: ""
 category: Género
+justify: true
+authorBio: ""
 citations: >-
   		Junta Nacional de Auxilio Escolar y Becas (JUNAEB). Programa de Alimentación Escolar. Gobierno de Chile, 2023.
 
