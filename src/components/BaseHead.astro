@@ -51,6 +51,15 @@ const socialImage = ogImage
 				document.documentElement.setAttribute('data-theme', 'terminal');
 			}
 		} catch (e) {}
+		try {
+			var s = parseFloat(localStorage.getItem('at-reading-scale'));
+			if (!isNaN(s)) {
+				document.documentElement.style.setProperty(
+					'--reading-scale',
+					String(Math.min(1.6, Math.max(0.85, s))),
+				);
+			}
+		} catch (e) {}
 	})();
 </script>
 

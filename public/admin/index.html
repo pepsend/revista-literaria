@@ -407,6 +407,66 @@
         },
       });
 
+      /* ---------- Editor component "cita": cita destacada (pull quote) ---------- */
+      CMS.registerEditorComponent({
+        id: 'cita',
+        label: 'Cita destacada',
+        fields: [
+          {
+            name: 'text',
+            label: 'Cita',
+            widget: 'text',
+            hint: 'La frase a resaltar en grande. Puedes usar **negrita** y *cursiva*. Se respetan los saltos de línea.',
+          },
+          {
+            name: 'autor',
+            label: 'Autor / fuente',
+            widget: 'string',
+            required: false,
+            hint: 'Opcional: a quién se atribuye la cita.',
+          },
+        ],
+        pattern: /^<blockquote class="pullquote"[\s\S]*?<\/blockquote>/,
+        fromBlock: function (match) {
+          var s = match[0];
+          var autor = (s.match(/<cite>[—\s]*([\s\S]*?)<\/cite>/) || [])[1] || '';
+          var inner = (s.match(/<p>([\s\S]*?)<\/p>/) || [])[1] || '';
+          var text = inner
+            .replace(/<br\s*\/?>/gi, '\n')
+            .replace(/<strong>([\s\S]*?)<\/strong>/gi, '**$1**')
+            .replace(/<em>([\s\S]*?)<\/em>/gi, '*$1*')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+          return { text: text, autor: autor };
+        },
+        toBlock: function (obj) {
+          var html = fmtAln_(obj.text);
+          var a = String(obj.autor == null ? '' : obj.autor)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+          var cite = a ? '<cite>— ' + a + '</cite>' : '';
+          return '<blockquote class="pullquote" data-pq><p>' + html + '</p>' + cite + '</blockquote>';
+        },
+        toPreview: function (obj) {
+          var html = fmtAln_(obj.text);
+          var cite = obj.autor
+            ? '<cite style="display:block;font-family:\'Space Mono\',monospace;font-size:0.8rem;color:#8c7f6e;margin-top:0.6rem;font-style:normal;">— ' +
+              obj.autor +
+              '</cite>'
+            : '';
+          return (
+            '<blockquote class="pullquote" style="border-left:4px solid #e5468a;margin:2rem 0;padding-left:1.2rem;font-family:\'Fraunces\',serif;font-weight:900;font-style:italic;font-size:1.7rem;line-height:1.2;color:#1b1916;">' +
+            '<p style="margin:0;">' +
+            html +
+            '</p>' +
+            cite +
+            '</blockquote>'
+          );
+        },
+      });
+
       /* ---------- Estilos reales del sitio en la vista previa ---------- */
       CMS.registerPreviewStyle(
         'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,900;1,9..144,900&family=Space+Mono:wght@400;700&display=swap'
