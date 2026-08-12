@@ -5,6 +5,7 @@ imagePosition: 51% 62%
 date: 2025-12-24T16:56:00.000-03:00
 author: Sam G. Sanzana
 category: Reseña
+justify: true
 authorBio: >
   Licenciado en literatura, título profesional en pedagogía. Actualmente
   cursando un magister en literatura. Le interesa mucho la investigación
