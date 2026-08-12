@@ -46,6 +46,28 @@ const shareUrl = new URL(Astro.url.pathname, Astro.site).href;
 const waHref = `https://wa.me/?text=${encodeURIComponent(`${title} — ${shareUrl}`)}`;
 const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(shareUrl)}`;
 
+// Imagen absoluta para OG / datos estructurados.
+const ogAbs = heroImage
+	? heroImage.startsWith('http')
+		? heroImage
+		: new URL(heroImage, Astro.site).href
+	: undefined;
+
+// Datos estructurados (schema.org Article) para buscadores y redes.
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: title,
+	datePublished: date.toISOString(),
+	dateModified: date.toISOString(),
+	inLanguage: 'es',
+	mainEntityOfPage: { '@type': 'WebPage', '@id': shareUrl },
+	publisher: { '@type': 'Organization', name: 'abulia terminal' },
+	...(author ? { author: { '@type': 'Person', name: author } } : {}),
+	...(ogAbs ? { image: [ogAbs] } : {}),
+	...(category ? { articleSection: category } : {}),
+};
+
 // Bio del autor escrita en este artículo (una o más líneas → párrafos).
 const postBioLines = (authorBio || '')
 	.split(/\r?\n+/)
@@ -75,7 +97,13 @@ const AuthorBio =
 			title={title}
 			description={category ? `${category} — ${title}` : title}
 			ogImage={heroImage}
+			type="article"
+			publishedTime={date.toISOString()}
+			authorName={author}
+			section={category}
 		/>
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
 	</head>
 	<body>
 		<Header />
@@ -102,6 +130,8 @@ const AuthorBio =
 					class="at-duotone"
 					src={heroImage || DEFAULT_COVER}
 					alt={title}
+					width="1600"
+					height="900"
 					style={`object-position: ${imagePosition};`}
 				/>
 			</div>
@@ -165,6 +195,8 @@ const AuthorBio =
 											src={r.heroImage || DEFAULT_COVER}
 											alt={r.title}
 											loading="lazy"
+											width="300"
+											height="200"
 											style={`object-position: ${r.imagePosition};`}
 										/>
 									</span>

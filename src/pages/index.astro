@@ -52,6 +52,8 @@ const searchText = (p: (typeof posts)[number]) =>
 								class="at-duotone"
 								src={featured.data.heroImage || DEFAULT_COVER}
 								alt={featured.data.title}
+								width="1000"
+								height="1200"
 								style={`object-position: ${featured.data.imagePosition || 'center'};`}
 							/>
 							{featured.data.category && <span class="at-tag">{featured.data.category}</span>}
@@ -106,6 +108,8 @@ const searchText = (p: (typeof posts)[number]) =>
 									src={featured.data.heroImage || DEFAULT_COVER}
 									alt={featured.data.title}
 									loading="lazy"
+									width="240"
+									height="160"
 									style={`object-position: ${featured.data.imagePosition || 'center'};`}
 								/>
 							</span>
@@ -132,6 +136,8 @@ const searchText = (p: (typeof posts)[number]) =>
 									src={post.data.heroImage || DEFAULT_COVER}
 									alt={post.data.title}
 									loading="lazy"
+									width="240"
+									height="160"
 									style={`object-position: ${post.data.imagePosition || 'center'};`}
 								/>
 							</span>
