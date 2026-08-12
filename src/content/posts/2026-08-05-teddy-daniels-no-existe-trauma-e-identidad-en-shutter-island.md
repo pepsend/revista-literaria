@@ -4,10 +4,16 @@ heroImage: /uploads/shutter-island-film.jpg
 imagePosition: 66% 59%
 date: 2026-08-05T12:20:00.000-04:00
 author: Víctor Fleitas
+category: Cine
+justify: true
+tags:
+  - Identidad
+  - trauma
+  - IslaSiniestra
+  - MartinScorsese
 authorBio: "Víctor Fleitas: Entre la informática y la literatura. Estudiante de
   último año de Literatura, lector apasionado, editor en formación y escritor
   cada vez que las palabras encuentran su momento."
-category: Cine
 citations: >
   	Caruth, Cathy. Unclaimed Experience: Trauma, Narrative, and History. Johns Hopkins UP, 1996.
 
