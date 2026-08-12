@@ -1,12 +1,12 @@
 ---
 title: Arturo Buenavista
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786555789/IMG_20240828_222452_499_zmrb7g.jpg
-imagePosition: 50% 50%
+imagePosition: 52% 55%
 date: 2025-10-09T13:30:00.000-03:00
 author: Ricardo Quiroz
 category: Cuento
 justify: true
-authorBio: >+
+authorBio: >
   Ricardo Quiroz (Seudónimo: Ricardo Quiroga), 18 años, peruano, de la ciudad de
   Chancay, fanatico de Jack Kerouac, Jorge Luis Borges y Roberto Bolaño.
 ---
