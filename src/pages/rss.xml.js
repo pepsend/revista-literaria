@@ -7,6 +7,8 @@ export async function GET(context) {
 		(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 	);
 	return rss({
+		// Hoja de estilo: al abrir /rss.xml en el navegador se ve como página, no como código.
+		stylesheet: '/rss-styles.xsl',
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
 		site: context.site,
