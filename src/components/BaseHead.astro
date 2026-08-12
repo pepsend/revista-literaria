@@ -12,11 +12,21 @@ interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata;
+	// Imagen de previsualización al compartir (URL absoluta o ruta del sitio).
+	ogImage?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = FallbackImage } = Astro.props;
+const { title, description, image = FallbackImage, ogImage } = Astro.props;
+
+// URL absoluta de la imagen para redes: usa la del post si viene, si no la de por defecto.
+const siteBase = Astro.site ?? new URL('/', Astro.url);
+const socialImage = ogImage
+	? ogImage.startsWith('http')
+		? ogImage
+		: new URL(ogImage, siteBase).href
+	: new URL(image.src, Astro.url).href;
 ---
 
 <!-- Fuentes: Fraunces (display) + Space Mono (terminal) -->
@@ -55,7 +65,10 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image.src, Astro.url)} />
+<meta property="og:image" content={socialImage} />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImage} />

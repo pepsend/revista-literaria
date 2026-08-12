@@ -30,5 +30,12 @@
 			<input type="text" name="asunto" />
 			<textarea name="pregunta"></textarea>
 		</form>
+
+		<!-- Detección de "suscripcion". El formulario real vive en el footer. -->
+		<form name="suscripcion" action="/gracias/" data-netlify="true" netlify-honeypot="bot-field" hidden>
+			<input type="hidden" name="form-name" value="suscripcion" />
+			<input name="bot-field" />
+			<input type="email" name="email" />
+		</form>
 	</body>
 </html>
