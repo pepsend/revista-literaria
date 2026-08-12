@@ -1,0 +1,300 @@
+---
+// Comentarios propios (nativos, con la estética de la revista).
+// Anónimo o con nombre, sin registro para el lector. Guardado en Supabase.
+// Los valores son PÚBLICOS por diseño (la anon key está protegida por las
+// políticas RLS de la base de datos). Se rellenan una sola vez.
+interface Props {
+	pageId: string;
+}
+const { pageId } = Astro.props;
+
+const SUPABASE_URL = 'https://toxlryhtdbrwodhdsqmy.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_Gvtxs0gey3au8xDC5LGjEw_GYBF4ZXR';
+---
+
+<section class="cmts">
+	<p class="cmts-label">// comentarios</p>
+	<div id="cmts-list" class="cmts-list"><p class="cmts-empty">cargando…</p></div>
+
+	<form id="cmts-form" class="cmts-form" autocomplete="off">
+		<div class="cmts-row">
+			<input
+				type="text"
+				id="cmts-name"
+				maxlength="60"
+				placeholder="tu nombre (opcional)"
+				class="cmts-input"
+			/>
+			<input
+				type="text"
+				id="cmts-website"
+				tabindex="-1"
+				autocomplete="off"
+				class="cmts-hp"
+				aria-hidden="true"
+			/>
+		</div>
+		<textarea
+			id="cmts-body"
+			rows="3"
+			maxlength="4000"
+			required
+			placeholder="escribe un comentario…"
+			class="cmts-textarea"></textarea>
+		<div class="cmts-actions">
+			<span id="cmts-msg" class="cmts-msg"></span>
+			<button type="submit" class="cmts-btn">comentar</button>
+		</div>
+	</form>
+</section>
+
+<script define:vars={{ pageId, SUPABASE_URL, SUPABASE_ANON_KEY }}>
+	(function () {
+		var listEl = document.getElementById('cmts-list');
+		var form = document.getElementById('cmts-form');
+		var msg = document.getElementById('cmts-msg');
+		if (!listEl || !form) return;
+		// Si aún no se configuró la base de datos, no romper nada.
+		if (!/^https:\/\//.test(SUPABASE_URL)) {
+			listEl.innerHTML = '<p class="cmts-empty">comentarios próximamente.</p>';
+			form.style.display = 'none';
+			return;
+		}
+		var headers = { apikey: SUPABASE_ANON_KEY, Authorization: 'Bearer ' + SUPABASE_ANON_KEY };
+
+		function fmtDate(iso) {
+			try {
+				return new Date(iso).toLocaleDateString('es-CL', {
+					day: 'numeric',
+					month: 'short',
+					year: 'numeric',
+				});
+			} catch (e) {
+				return '';
+			}
+		}
+
+		function render(comments) {
+			listEl.textContent = '';
+			if (!comments || !comments.length) {
+				var e = document.createElement('p');
+				e.className = 'cmts-empty';
+				e.textContent = 'sé el primero en comentar.';
+				listEl.appendChild(e);
+				return;
+			}
+			comments.forEach(function (c) {
+				var item = document.createElement('div');
+				item.className = 'cmts-item';
+				var head = document.createElement('div');
+				head.className = 'cmts-head';
+				var name = document.createElement('span');
+				name.className = 'cmts-name';
+				name.textContent = c.name && c.name.trim() ? c.name.trim() : 'Anónimo';
+				var date = document.createElement('span');
+				date.className = 'cmts-date';
+				date.textContent = fmtDate(c.created_at);
+				head.appendChild(name);
+				head.appendChild(date);
+				var body = document.createElement('p');
+				body.className = 'cmts-body';
+				body.textContent = c.body; // textContent = a prueba de XSS
+				item.appendChild(head);
+				item.appendChild(body);
+				listEl.appendChild(item);
+			});
+		}
+
+		function load() {
+			var url =
+				SUPABASE_URL +
+				'/rest/v1/comments?select=id,name,body,created_at&page_id=eq.' +
+				encodeURIComponent(pageId) +
+				'&approved=eq.true&order=created_at.asc';
+			fetch(url, { headers: headers })
+				.then(function (r) {
+					return r.json();
+				})
+				.then(render)
+				.catch(function () {
+					listEl.textContent = '';
+				});
+		}
+
+		form.addEventListener('submit', function (e) {
+			e.preventDefault();
+			var hp = document.getElementById('cmts-website');
+			if (hp && hp.value) return; // trampa anti-bot
+			var name = document.getElementById('cmts-name').value.trim().slice(0, 60);
+			var body = document.getElementById('cmts-body').value.trim();
+			if (!body) return;
+			var btn = form.querySelector('.cmts-btn');
+			if (btn) {
+				btn.disabled = true;
+				btn.textContent = 'enviando…';
+			}
+			if (msg) msg.textContent = '';
+			fetch(SUPABASE_URL + '/rest/v1/comments', {
+				method: 'POST',
+				headers: Object.assign(
+					{ 'Content-Type': 'application/json', Prefer: 'return=representation' },
+					headers,
+				),
+				body: JSON.stringify({ page_id: pageId, name: name || null, body: body }),
+			})
+				.then(function (r) {
+					if (!r.ok) throw new Error('post');
+					return r.json();
+				})
+				.then(function () {
+					document.getElementById('cmts-body').value = '';
+					if (msg) msg.textContent = '¡gracias! comentario publicado.';
+					load();
+				})
+				.catch(function () {
+					if (msg) msg.textContent = 'no se pudo enviar, intenta de nuevo.';
+				})
+				.then(function () {
+					if (btn) {
+						btn.disabled = false;
+						btn.textContent = 'comentar';
+					}
+				});
+		});
+
+		load();
+	})();
+</script>
+
+<style is:global>
+	.cmts {
+		max-width: 40rem;
+		margin: 3rem auto 0;
+	}
+	.cmts-label {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--pink);
+		margin: 0 0 1rem;
+		border-top: 2px solid var(--ink);
+		padding-top: 0.8rem;
+	}
+	.cmts-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-bottom: 1.8rem;
+	}
+	.cmts-empty {
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		color: var(--muted);
+		margin: 0;
+	}
+	.cmts-item {
+		border-left: 2px solid var(--line);
+		padding-left: 0.9rem;
+	}
+	.cmts-head {
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
+		margin-bottom: 0.25rem;
+	}
+	.cmts-name {
+		font-family: var(--font-mono);
+		font-weight: 700;
+		font-size: 0.82rem;
+		color: var(--ink);
+	}
+	.cmts-date {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		color: var(--muted);
+	}
+	.cmts-body {
+		font-family: var(--font-display);
+		font-size: 1.02rem;
+		line-height: 1.55;
+		color: var(--text);
+		margin: 0;
+		white-space: pre-wrap;
+	}
+	.cmts-form {
+		border: 2px solid var(--ink);
+		background: var(--paper-2);
+		padding: 1rem 1.1rem 1.1rem;
+	}
+	.cmts-row {
+		display: flex;
+		gap: 0.6rem;
+	}
+	.cmts-hp {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+	}
+	.cmts-input,
+	.cmts-textarea {
+		width: 100%;
+		border: 2px solid var(--ink);
+		background: var(--paper);
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		color: var(--ink);
+		padding: 0.55rem 0.7rem;
+		outline: none;
+	}
+	.cmts-input:focus,
+	.cmts-textarea:focus {
+		box-shadow: 3px 3px 0 var(--pink);
+	}
+	.cmts-input::placeholder,
+	.cmts-textarea::placeholder {
+		color: var(--muted);
+	}
+	.cmts-textarea {
+		margin-top: 0.6rem;
+		resize: vertical;
+		line-height: 1.5;
+	}
+	.cmts-actions {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-top: 0.7rem;
+	}
+	.cmts-msg {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: var(--orange);
+	}
+	.cmts-btn {
+		border: 2px solid var(--ink);
+		background: var(--pink);
+		color: var(--ink);
+		font-family: var(--font-mono);
+		font-weight: 700;
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		padding: 0.55rem 1rem;
+		cursor: pointer;
+		transition:
+			transform 0.15s ease,
+			box-shadow 0.15s ease;
+	}
+	.cmts-btn:hover {
+		box-shadow: 3px 3px 0 var(--ink);
+		transform: translate(-1px, -1px);
+	}
+	.cmts-btn:disabled {
+		opacity: 0.6;
+		cursor: default;
+	}
+</style>
