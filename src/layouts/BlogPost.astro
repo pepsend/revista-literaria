@@ -83,15 +83,22 @@ const buildOgCard = (url: string, t: string): string => {
 const ogCard = heroImage ? buildOgCard(heroImage, title) : null;
 
 // Tarjeta vertical 9:16 para Instagram Stories (imagen + marca + título + URL).
-const buildStoryCard = (url: string, t: string): string => {
+const buildStoryCard = (url: string, t: string, meta: string): string => {
 	const enc = encodeURIComponent(t);
+	// Línea discreta con género · autor (solo si hay algo). Va encima de la URL.
+	const metaLayer = meta
+		? 'co_rgb:f2e4cc,l_text:Georgia_40_bold:' +
+			encodeURIComponent(meta) +
+			'/g_south,y_220,fl_layer_apply/'
+		: '';
 	const layers =
 		'co_rgb:e5468a,l_text:Georgia_46_bold:abulia%20terminal/g_north,y_180,fl_layer_apply/' +
 		// Ancho junto al texto → el título largo envuelve en varias líneas (no se encoge).
 		'w_880,c_fit,co_rgb:f2e4cc,l_text:Georgia_84_bold:' +
 		enc +
 		'/g_center,fl_layer_apply/' +
-		'co_rgb:f2e4cc,l_text:Georgia_30_bold:abuliaterminal.netlify.app/g_south,y_190,fl_layer_apply';
+		metaLayer +
+		'co_rgb:cbb89f,l_text:Georgia_28_bold:abuliaterminal.netlify.app/g_south,y_150,fl_layer_apply';
 	const overlay = 'w_1080,h_1920,c_fill,g_auto/e_brightness:-34/' + layers;
 	const marker = '/image/upload/';
 	const idx = url.indexOf(marker);
@@ -101,7 +108,9 @@ const buildStoryCard = (url: string, t: string): string => {
 	const abs = url.startsWith('http') ? url : new URL(url, Astro.site).href;
 	return `https://res.cloudinary.com/cs8tnt88/image/fetch/${overlay}/${abs}`;
 };
-const storyCard = heroImage ? buildStoryCard(heroImage, title) : null;
+// Género · autor REALES de este texto (los que no existan, se omiten).
+const storyMeta = [category, author].filter(Boolean).join(' · ');
+const storyCard = heroImage ? buildStoryCard(heroImage, title, storyMeta) : null;
 
 // Datos estructurados (schema.org Article) para buscadores y redes.
 const jsonLd = {
