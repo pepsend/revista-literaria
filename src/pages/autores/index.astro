@@ -1,0 +1,168 @@
+---
+import { getCollection } from 'astro:content';
+import { categorySlug } from '../../content.config';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const posts = await getCollection('posts');
+
+// Agrupa autores (por slug) con su cantidad de piezas.
+const map = new Map<string, { name: string; count: number }>();
+for (const p of posts) {
+	const name = (p.data.author || '').trim();
+	if (!name) continue;
+	const slug = categorySlug(name);
+	if (!map.has(slug)) map.set(slug, { name, count: 0 });
+	map.get(slug)!.count++;
+}
+
+// Ordena alfabéticamente (es-CL).
+const autores = [...map.entries()]
+	.map(([slug, info]) => ({ slug, ...info }))
+	.sort((a, b) => a.name.localeCompare(b.name, 'es'));
+
+const inicial = (name: string) => name.trim().charAt(0).toUpperCase();
+---
+
+<html lang="es">
+	<head>
+		<BaseHead
+			title="Autores — abulia terminal"
+			description="Quiénes escriben en abulia terminal"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="autores-idx at-container">
+			<a class="back" href="/">← índice</a>
+
+			<header class="ai-head">
+				<p class="ai-kicker">// autores</p>
+				<h1 class="ai-title">quiénes escriben</h1>
+				<p class="ai-count">
+					{autores.length} autor{autores.length === 1 ? '' : 'es'}
+				</p>
+			</header>
+
+			{autores.length === 0 && <p class="ai-empty">// aún sin autores</p>}
+
+			<section class="ai-grid">
+				{
+					autores.map((a) => (
+						<a class="ai-card" href={`/autores/${a.slug}/`}>
+							<span class="ai-avatar" aria-hidden="true">
+								{inicial(a.name)}
+							</span>
+							<span class="ai-body">
+								<span class="ai-name">{a.name}</span>
+								<span class="ai-pieces">
+									{a.count} pieza{a.count === 1 ? '' : 's'}
+								</span>
+							</span>
+						</a>
+					))
+				}
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.autores-idx {
+		padding-top: 1.5rem;
+		padding-bottom: 4rem;
+	}
+	.back {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--muted);
+		text-decoration: none;
+	}
+	.back:hover {
+		color: var(--pink);
+	}
+	.ai-head {
+		margin: 2rem 0 0;
+	}
+	.ai-kicker {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: var(--pink);
+		margin: 0 0 0.4rem;
+	}
+	.ai-title {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: clamp(2.2rem, 6vw, 3.8rem);
+		line-height: 1.02;
+		margin: 0;
+	}
+	.ai-count {
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		color: var(--muted);
+		margin: 0.6rem 0 0;
+	}
+	.ai-empty {
+		font-family: var(--font-mono);
+		color: var(--muted);
+		margin: 2rem 0 0;
+	}
+	.ai-grid {
+		margin: 2.5rem 0 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: 1rem;
+	}
+	.ai-card {
+		display: flex;
+		align-items: center;
+		gap: 0.9rem;
+		padding: 0.9rem 1rem;
+		border: 2px solid var(--ink);
+		background: var(--paper-2);
+		text-decoration: none;
+		color: var(--ink);
+		transition: box-shadow 0.2s ease, transform 0.2s ease;
+	}
+	.ai-card:hover {
+		box-shadow: 6px 6px 0 var(--pink);
+		transform: translate(-2px, -2px);
+	}
+	.ai-avatar {
+		flex: 0 0 auto;
+		width: 48px;
+		height: 48px;
+		display: grid;
+		place-items: center;
+		background: var(--ink);
+		color: var(--paper);
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: 1.5rem;
+		line-height: 1;
+	}
+	.ai-body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+		min-width: 0;
+	}
+	.ai-name {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.1rem;
+		line-height: 1.1;
+	}
+	.ai-pieces {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		color: var(--muted);
+	}
+</style>

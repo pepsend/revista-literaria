@@ -41,6 +41,11 @@ const {
 // Relacionados válidos (descarta posibles nulos por seguridad).
 const relatedCards = (related || []).filter(Boolean) as CardData[];
 
+// URL canónica del texto para los botones de compartir.
+const shareUrl = new URL(Astro.url.pathname, Astro.site).href;
+const waHref = `https://wa.me/?text=${encodeURIComponent(`${title} — ${shareUrl}`)}`;
+const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(shareUrl)}`;
+
 // Bio del autor escrita en este artículo (una o más líneas → párrafos).
 const postBioLines = (authorBio || '')
 	.split(/\r?\n+/)
@@ -104,6 +109,17 @@ const AuthorBio =
 			<article class="prose">
 				<slot />
 			</article>
+
+			<section class="art-share">
+				<span class="art-share-label">// compartir</span>
+				<div class="art-share-btns">
+					<a class="share-btn" href={waHref} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+					<a class="share-btn" href={xHref} target="_blank" rel="noopener noreferrer">X</a>
+					<button class="share-btn" type="button" id="copy-link" data-url={shareUrl}>
+						copiar enlace
+					</button>
+				</div>
+			</section>
 
 			{
 				(postBioLines.length > 0 || AuthorBio) && (
@@ -189,7 +205,51 @@ const AuthorBio =
 				)
 			}
 		</main>
+		<button id="to-top" class="to-top" type="button" aria-label="Volver arriba">↑</button>
 		<Footer />
+		<script is:inline>
+			(function () {
+				// Copiar enlace del texto
+				var copyBtn = document.getElementById('copy-link');
+				if (copyBtn) {
+					copyBtn.addEventListener('click', function () {
+						var url = copyBtn.getAttribute('data-url') || location.href;
+						var done = function () {
+							copyBtn.textContent = '¡copiado!';
+							setTimeout(function () {
+								copyBtn.textContent = 'copiar enlace';
+							}, 1600);
+						};
+						if (navigator.clipboard && navigator.clipboard.writeText) {
+							navigator.clipboard.writeText(url).then(done).catch(done);
+						} else {
+							var ta = document.createElement('textarea');
+							ta.value = url;
+							document.body.appendChild(ta);
+							ta.select();
+							try {
+								document.execCommand('copy');
+							} catch (e) {}
+							document.body.removeChild(ta);
+							done();
+						}
+					});
+				}
+				// Volver arriba
+				var toTop = document.getElementById('to-top');
+				if (toTop) {
+					var onScroll = function () {
+						if (window.scrollY > 600) toTop.classList.add('show');
+						else toTop.classList.remove('show');
+					};
+					window.addEventListener('scroll', onScroll, { passive: true });
+					onScroll();
+					toTop.addEventListener('click', function () {
+						window.scrollTo({ top: 0, behavior: 'smooth' });
+					});
+				}
+			})();
+		</script>
 	</body>
 </html>
 
@@ -551,6 +611,86 @@ const AuthorBio =
 		}
 		.art-nav-empty {
 			display: none;
+		}
+	}
+
+	/* Compartir */
+	.art-share {
+		max-width: 40rem;
+		margin: 2.5rem auto 0;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.7rem 1rem;
+		border-top: 2px solid var(--ink);
+		padding-top: 1.1rem;
+	}
+	.art-share-label {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--pink);
+	}
+	.art-share-btns {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+	.share-btn {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		color: var(--ink);
+		background: transparent;
+		border: 2px solid var(--ink);
+		padding: 0.4rem 0.75rem;
+		text-decoration: none;
+		cursor: pointer;
+		transition: background 0.15s ease, color 0.15s ease;
+	}
+	.share-btn:hover {
+		background: var(--ink);
+		color: var(--paper);
+	}
+
+	/* Volver arriba */
+	.to-top {
+		position: fixed;
+		right: 1.1rem;
+		bottom: 1.1rem;
+		z-index: 90;
+		width: 46px;
+		height: 46px;
+		display: grid;
+		place-items: center;
+		font-size: 1.3rem;
+		line-height: 1;
+		color: var(--ink);
+		background: var(--pink);
+		border: 2px solid var(--ink);
+		cursor: pointer;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(8px);
+		transition:
+			opacity 0.2s ease,
+			transform 0.2s ease,
+			visibility 0.2s ease;
+	}
+	.to-top.show {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+	.to-top:hover {
+		box-shadow: 4px 4px 0 var(--ink);
+	}
+	@media (max-width: 560px) {
+		.to-top {
+			right: 0.8rem;
+			bottom: 0.8rem;
+			width: 42px;
+			height: 42px;
 		}
 	}
 </style>
