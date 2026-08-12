@@ -1,7 +1,7 @@
 ---
 title: Los caminos que conducen al dolor
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786569498/los_caminos_que_conducen_la_dolo._imagne_II_pof5eu.jpg
-imagePosition: 50% 50%
+imagePosition: 63% 21%
 date: 2026-04-09T17:19:00.000-04:00
 author: Tomás Ragga
 category: Poesía
