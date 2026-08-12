@@ -26,9 +26,8 @@ const rest = posts.slice(1);
 		<main>
 			<section class="hero at-container">
 				<div class="hero-copy">
-					<p class="at-kicker">iniciativa independiente · revista digital</p>
-					<h1 class="hero-logo"><Monogram /></h1>
 					<p class="hero-name">abulia terminal <span>· revista literaria</span></p>
+					<h1 class="hero-logo"><Monogram /></h1>
 					<p class="hero-tag">literatura y fenómenos culturales</p>
 					<p class="hero-sub">
 						<span class="chev">&gt;</span> revista digital para difusión y crítica de fenómenos
@@ -109,14 +108,14 @@ const rest = posts.slice(1);
 		display: grid;
 		grid-template-columns: 1.05fr 0.95fr;
 		gap: 2.5rem;
-		align-items: start;
+		align-items: center;
 		padding: 3.2rem 1.5rem 2.4rem;
 	}
 	.hero-copy {
 		min-width: 0;
 	}
 	.hero-logo {
-		margin: 0.7rem 0 0;
+		margin: 0;
 		font-size: clamp(4.5rem, 12vw, 9.5rem);
 		line-height: 0.8;
 	}
@@ -126,7 +125,7 @@ const rest = posts.slice(1);
 		letter-spacing: 0.14em;
 		text-transform: uppercase;
 		color: var(--muted);
-		margin: 1.1rem 0 0;
+		margin: 0 0 0.9rem;
 	}
 	.hero-name span {
 		color: var(--pink);
@@ -157,7 +156,7 @@ const rest = posts.slice(1);
 	.hero-visual {
 		position: relative;
 		display: block;
-		aspect-ratio: 4 / 5;
+		aspect-ratio: 5 / 6;
 		border: 2px solid var(--ink);
 		overflow: hidden;
 		text-decoration: none;
@@ -318,8 +317,7 @@ const rest = posts.slice(1);
 			padding: 1.8rem 1.5rem 2.2rem;
 			gap: 1.6rem;
 		}
-		.hero-logo,
-		.hero-name {
+		.hero-logo {
 			display: none;
 		}
 		.hero-tag {
