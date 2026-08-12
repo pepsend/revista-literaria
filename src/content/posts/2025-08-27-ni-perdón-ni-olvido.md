@@ -1,7 +1,7 @@
 ---
 title: NI PERDÓN NI OLVIDO
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786567623/unnamed_dgddj5.jpg
-imagePosition: 50% 50%
+imagePosition: 51% 100%
 date: 2025-08-27T18:47:00.000-04:00
 author: Sebastián Alvarado
 category: Cuento
