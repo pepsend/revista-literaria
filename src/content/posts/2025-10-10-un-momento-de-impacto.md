@@ -1,7 +1,7 @@
 ---
 title: Un momento de impacto
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786499994/un_momento_de_impacto_yukcmd.png
-imagePosition: 50% 50%
+imagePosition: 51% 17%
 date: 2025-10-10T15:59:00.000-03:00
 author: Marimar Altamirano
 category: Ensayo
