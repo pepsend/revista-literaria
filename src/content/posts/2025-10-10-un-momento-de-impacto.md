@@ -1,0 +1,24 @@
+---
+title: Un momento de impacto
+heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786499994/un_momento_de_impacto_yukcmd.png
+imagePosition: 50% 50%
+date: 2025-10-10T15:59:00.000-03:00
+author: Marimar Altamirano
+category: Ensayo
+authorBio: Marimar nació el 22 de febrero en Avellaneda, Santa Fe. Desde niña
+  mostró pasión por la escritura y la música. Después de la secundaria, estudió
+  música y desarrolló habilidades en la guitarra. Ha publicado un libro de
+  microrrelatos con una editorial independiente y ha sido reconocida en varios
+  concursos literarios, obteniendo menciones y premios. Actualmente, se dedica a
+  su proyecto de autopublicación de libros, donde combina su amor por la
+  escritura y la música en sus obras.
+---
+En nuestra vida, solemos comenzar numerosos libros y series y abandonarlos en el camino. Pienso que esto ocurre porque, a menudo, no logran resonar con nosotros de manera profunda, como para justificar la inversión de nuestro tiempo en ellos. No nos conmueven hasta el punto de dejar de lado todas las demás opciones y dedicarles nuestra atención exclusiva. Por ejemplo, tal vez empezamos a ver una serie popular como La casa de papel y, a pesar de su éxito generalizado, no logramos conectarnos con la trama o los personajes, por lo que decidimos no seguir con ella. O quizás leemos un libro aclamado como El Código Da Vinci, pero nos resulta menos impactante de lo que esperábamos y lo dejamos en la estantería.
+
+Sin embargo, cuando finalmente llega ese libro, película o serie que penetra en nuestro ser de tal forma que lo único que deseamos es hablar de ello, estamos tan eufóricos que sentimos la necesidad imperiosa de compartir nuestra experiencia con todos nuestros conocidos. Recuerdo el impacto que me causó la serie Stranger Things; su complejidad y profundidad hicieron que pasara horas discutiendo teorías y detalles con amigos. Nos sumergimos en un proceso de investigación exhaustiva: buscamos información sobre el director, el escritor, el elenco, la vida y las obras de los creadores, e incluso la banda sonora. En esos instantes, sentimos que la obra se ha infiltrado en nuestro ser y nos ha provocado una especie de cosquilleo emocional. Este fenómeno lo denomino un momento de impacto.
+
+A medida que los días avanzan, la intensidad de esa experiencia inicial se apacigua y volvemos a nuestra rutina cotidiana. Recordamos con cierta nostalgia esa sensación vibrante que, hace unos días, nos daba vida, pero que ahora se ha disipado, dejándonos con una necesidad insaciable de más. Por ejemplo, después de leer El amor en los tiempos del cólera de Gabriel García Márquez, me fascinó tanto que deseaba leer más obras del autor. Sin embargo, con el tiempo, aunque la obra todavía me es significativa, su impacto ya no es tan potente como al principio. Es comparable a superar un enamoramiento pasajero, en el que la intensidad de los sentimientos disminuye con el tiempo. A pesar de que esa obra ocupará un lugar especial en nuestro corazón durante toda nuestra vida, si nos quedamos atrapados en la misma emoción, estaremos condenados a vivir solo para esa experiencia, sin explorar lo que otras obras podrían ofrecernos. Peor aún, podríamos quedarnos atrapados en el miedo de no volver a sentir nada comparable, lo que limitaría nuestra capacidad de experimentar nuevas emociones y descubrimientos.
+
+En ocasiones, leer otros libros o conocer otros autores puede resultar una tarea desalentadora. Sin embargo, ¿si no nos damos el valor de intentar explorar nuevas opciones, a pesar de la pereza inicial? Es probable que, al principio, nos encontremos con una serie que, aunque divertida, no llegue a resonar con nosotros en el nivel que esperábamos, o con un libro que abandonemos después de la página tres. Por ejemplo, intentarlo con La casa de los espíritus de Isabel Allende, y, aunque no tenga el mismo impacto que nuestras series habituales, quizá nos ofrezca una experiencia enriquecedora. No podemos esperar que cada experiencia cultural nos toque el alma de manera profunda, porque, si así fuera, la magia de la novedad se perdería. Si una experiencia se repite constantemente, pierde su sentido y se vuelve trivial, y sinceramente, las trivialidades son abrumadoramente aburridas.
+
+El punto es que no debemos esperar que cada obra que exploremos nos conmueva profundamente. A menudo, solo a través de la exposición a diversas experiencias culturales es que podemos darnos cuenta de que algo ha logrado penetrar tan profundamente en nuestro ser. Así, durante semanas nos mantiene sonriendo y disfrutando, como lo hicimos con esa primera experiencia inolvidable. Un buen ejemplo es la serie de Harry Potter, que nos atrapó a muchos en su mundo mágico y, aunque el fervor inicial puede disminuir, la influencia perdura a lo largo del tiempo. A medida que comprendemos que el "para siempre", no es lo que nos contaron.
