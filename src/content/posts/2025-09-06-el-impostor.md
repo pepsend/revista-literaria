@@ -1,12 +1,12 @@
 ---
 title: El impostor
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786556645/1000027745_bsvsmz.jpg
-imagePosition: 50% 50%
+imagePosition: 49% 41%
 date: 2025-09-06T17:44:00.000-04:00
 author: Gabriel Palomo
 category: Cuento
 justify: true
-authorBio: >+
+authorBio: >
   Gabriel Palomo Ponce (1988). Oriundo de Valparaíso. Escritor, poeta y profesor
   de Lenguaje y Comunicación. Fue becario del taller de poesía de Fundación
   Neruda (2008). Publicó el libro Rinconada. Crónicas del adentro y del afuera
