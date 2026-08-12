@@ -87,11 +87,12 @@ const buildStoryCard = (url: string, t: string): string => {
 	const enc = encodeURIComponent(t);
 	const layers =
 		'co_rgb:e5468a,l_text:Georgia_46_bold:abulia%20terminal/g_north,y_180,fl_layer_apply/' +
-		'co_rgb:f2e4cc,l_text:Georgia_74_bold:' +
+		// Ancho junto al texto → el título largo envuelve en varias líneas (no se encoge).
+		'w_880,c_fit,co_rgb:f2e4cc,l_text:Georgia_84_bold:' +
 		enc +
-		'/g_center,w_920,c_fit,fl_layer_apply/' +
+		'/g_center,fl_layer_apply/' +
 		'co_rgb:f2e4cc,l_text:Georgia_30_bold:abuliaterminal.netlify.app/g_south,y_190,fl_layer_apply';
-	const overlay = 'w_1080,h_1920,c_fill,g_auto/e_brightness:-30/' + layers;
+	const overlay = 'w_1080,h_1920,c_fill,g_auto/e_brightness:-34/' + layers;
 	const marker = '/image/upload/';
 	const idx = url.indexOf(marker);
 	if (idx !== -1 && url.includes('res.cloudinary.com')) {
@@ -192,8 +193,14 @@ const AuthorBio =
 					<a class="share-btn" href={waHref} target="_blank" rel="noopener noreferrer">WhatsApp</a>
 					<a class="share-btn" href={xHref} target="_blank" rel="noopener noreferrer">X</a>
 					{storyCard && (
-						<button class="share-btn" type="button" id="share-story" data-story={storyCard}>
-							Historias
+						<button
+							class="share-btn"
+							type="button"
+							id="share-story"
+							data-story={storyCard}
+							data-url={shareUrl}
+						>
+							Instagram
 						</button>
 					)}
 					<button class="share-btn" type="button" id="copy-link" data-url={shareUrl}>
@@ -366,6 +373,10 @@ const AuthorBio =
 					storyBtn.addEventListener('click', function () {
 						var imgUrl = storyBtn.getAttribute('data-story');
 						if (!imgUrl) return;
+						// Copiar la URL del texto al portapapeles para pegarla en el sticker de enlace.
+						try {
+							if (navigator.clipboard) navigator.clipboard.writeText(storyBtn.getAttribute('data-url') || '');
+						} catch (e) {}
 						var prev = storyBtn.textContent;
 						storyBtn.disabled = true;
 						storyBtn.textContent = 'preparando…';
