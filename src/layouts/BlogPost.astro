@@ -32,6 +32,7 @@ const {
 	imagePosition = 'center',
 	authorBio,
 	citations,
+	tags = [],
 	newer = null,
 	older = null,
 	related = [],
@@ -139,6 +140,21 @@ const AuthorBio =
 			<article class="prose">
 				<slot />
 			</article>
+
+			{
+				tags.length > 0 && (
+					<section class="art-tags">
+						<span class="art-tags-label">// etiquetas</span>
+						<span class="art-tags-list">
+							{tags.map((t) => (
+								<a class="tag-chip" href={`/tags/${categorySlug(t.trim())}/`}>
+									#{t.trim()}
+								</a>
+							))}
+						</span>
+					</section>
+				)
+			}
 
 			<section class="art-share">
 				<span class="art-share-label">// compartir</span>
@@ -644,6 +660,46 @@ const AuthorBio =
 		.art-nav-empty {
 			display: none;
 		}
+	}
+
+	/* Etiquetas */
+	.art-tags {
+		max-width: 40rem;
+		margin: 2.5rem auto 0;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.6rem 0.8rem;
+	}
+	.art-tags-label {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--pink);
+	}
+	.art-tags-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+	}
+	.tag-chip {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: var(--ink);
+		background: var(--paper-2);
+		border: 1px solid var(--line);
+		padding: 0.25rem 0.6rem;
+		text-decoration: none;
+		transition:
+			background 0.15s ease,
+			border-color 0.15s ease,
+			color 0.15s ease;
+	}
+	.tag-chip:hover {
+		background: var(--pink);
+		border-color: var(--ink);
+		color: var(--ink);
 	}
 
 	/* Compartir */

@@ -1,0 +1,86 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+import { SITE_TITLE } from '../../consts';
+import { categorySlug } from '../../content.config';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('posts');
+	// Reúne etiquetas únicas (slug → nombre original de la primera aparición).
+	const map = new Map<string, string>();
+	for (const p of posts) {
+		for (const t of p.data.tags || []) {
+			const name = (t || '').trim();
+			if (!name) continue;
+			const slug = categorySlug(name);
+			if (!map.has(slug)) map.set(slug, name);
+		}
+	}
+	return [...map.entries()].map(([slug, name]) => ({
+		params: { tag: slug },
+		props: { tagName: name },
+	}));
+}
+
+const { tagName } = Astro.props;
+const tagSlug = categorySlug(tagName);
+
+const posts = (await getCollection('posts'))
+	.filter((post) => (post.data.tags || []).some((t) => categorySlug((t || '').trim()) === tagSlug))
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead
+			title={`#${tagName} · ${SITE_TITLE}`}
+			description={`Textos etiquetados con ${tagName}`}
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="listing at-container">
+			<p class="at-kicker">etiqueta</p>
+			<h1 class="listing-title">#{tagName}</h1>
+			<hr class="at-rule" />
+			{posts.length === 0 && <p class="empty">// aún no hay textos con esta etiqueta</p>}
+			<div class="grid">
+				{posts.map((post) => <PostCard post={post} />)}
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.listing {
+		padding: 2.5rem 1.5rem 4rem;
+	}
+	.listing-title {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: clamp(2.4rem, 7vw, 4rem);
+		line-height: 1;
+		margin: 0.5rem 0 1.2rem;
+		text-transform: lowercase;
+	}
+	.empty {
+		font-family: var(--font-mono);
+		color: var(--muted);
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 1.5rem;
+		margin-top: 2rem;
+	}
+	@media (max-width: 560px) {
+		.grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

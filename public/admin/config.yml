@@ -60,6 +60,7 @@ collections:
         editor_components:
           - figura
           - alineado
+      - { label: "Etiquetas", name: "tags", widget: "list", required: false, hint: "Palabras clave por tema (ej.: memoria, ciudad, cine chileno). Enter para agregar cada una. Ayudan a relacionar y descubrir textos. Opcional." }
       - { label: "Biografía del autor", name: "authorBio", widget: "text", required: false, hint: "Bio breve que aparece destacada al final del texto. Si la dejas vacía, se usa la que el autor tenga guardada en «Autores»." }
       - { label: "Obras citadas", name: "citations", widget: "text", required: false, hint: "Bibliografía: una entrada por línea. Se muestra en un bloque aparte al final, distinto del cuerpo." }
 
