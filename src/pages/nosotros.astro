@@ -1,0 +1,98 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead title={`sobre nosotros · ${SITE_TITLE}`} description="Quiénes somos en abulia terminal" />
+	</head>
+	<body>
+		<Header />
+		<main class="ns at-container">
+			<header class="ns-head">
+				<p class="ns-kicker">quiénes somos</p>
+				<h1 class="ns-title">sobre nosotros</h1>
+				<hr class="at-rule ns-rule" />
+			</header>
+
+			<p class="ns-a">
+				Somos un equipo de seres —algunos, entrometidos en la literatura; otros, más bien,
+				estudiosos de ella— que vibra, contenida y a ratos inconteniblemente, con
+				<em>el poder de la palabra</em>.
+			</p>
+
+			<span class="ns-tick"></span>
+
+			<p class="ns-b">
+				Un grupo de académicos, escritores y poetas que impulsa este proyecto desde sus
+				entrañas, con la esperanza de conmover a <em>algún lector audaz y compasivo</em>.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.ns {
+		max-width: 50rem;
+		padding: 3rem 1.5rem 5rem;
+	}
+	.ns-kicker {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		letter-spacing: 0.28em;
+		text-transform: uppercase;
+		color: var(--pink);
+		margin: 0 0 0.5rem;
+	}
+	.ns-title {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: clamp(2.6rem, 8vw, 4.6rem);
+		line-height: 0.95;
+		letter-spacing: -0.01em;
+		text-transform: lowercase;
+		margin: 0;
+	}
+	.ns-rule {
+		margin: 1.4rem 0 0;
+	}
+	.ns-a {
+		font-family: var(--font-display);
+		font-weight: 500;
+		font-size: clamp(1.55rem, 3.6vw, 2.4rem);
+		line-height: 1.25;
+		letter-spacing: -0.01em;
+		color: var(--ink);
+		margin: 2.4rem 0 0;
+	}
+	.ns-a em {
+		font-style: italic;
+		color: var(--pink);
+	}
+	.ns-tick {
+		display: block;
+		width: 84px;
+		height: 5px;
+		background: var(--pink);
+		margin: 2.2rem 0;
+	}
+	.ns-b {
+		font-family: var(--font-display);
+		font-weight: 500;
+		font-style: italic;
+		font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+		line-height: 1.3;
+		color: var(--ink);
+		margin: 0;
+		max-width: 40ch;
+	}
+	.ns-b em {
+		font-style: italic;
+		color: var(--orange);
+	}
+</style>
