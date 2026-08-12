@@ -13,6 +13,16 @@ const posts = (await getCollection('posts')).sort(
 );
 const featured = posts[0];
 const rest = posts.slice(1);
+
+// Normaliza texto para búsqueda (minúsculas, sin acentos).
+const norm = (s: string) =>
+	(s || '')
+		.toLowerCase()
+		.normalize('NFD')
+		.replace(/[̀-ͯ]/g, '');
+// Texto buscable de un post: título + autor + categoría.
+const searchText = (p: (typeof posts)[number]) =>
+	norm(`${p.data.title} ${p.data.author ?? ''} ${p.data.category ?? ''}`);
 ---
 
 <!doctype html>
@@ -67,13 +77,54 @@ const rest = posts.slice(1);
 					<span class="count">{posts.length} pieza{posts.length === 1 ? '' : 's'}</span>
 				</div>
 
+				<div class="index-search">
+					<span class="search-chev">&gt;</span>
+					<input
+						id="buscador"
+						type="search"
+						placeholder="buscar por título o autor…"
+						autocomplete="off"
+						aria-label="Buscar en el índice"
+					/>
+				</div>
+
 				{rest.length === 0 && posts.length <= 1 && (
 					<p class="empty">// sin más publicaciones por ahora</p>
 				)}
 
 				{
+					featured && (
+						<a
+							class="row is-feat"
+							href={`/blog/${featured.id}/`}
+							data-search={searchText(featured)}
+						>
+							<span class="rnum feat">✦</span>
+							<span class="rthumb">
+								<img
+									class="at-duotone"
+									src={featured.data.heroImage || DEFAULT_COVER}
+									alt={featured.data.title}
+									loading="lazy"
+									style={`object-position: ${featured.data.imagePosition || 'center'};`}
+								/>
+							</span>
+							<span class="rmain">
+								<span class="rtitle">{featured.data.title}</span>
+								{featured.data.category && <span class="rcat">{featured.data.category}</span>}
+							</span>
+							<span class="rmeta">
+								<FormattedDate date={featured.data.date} />
+								{featured.data.author && <br />}
+								{featured.data.author}
+							</span>
+						</a>
+					)
+				}
+
+				{
 					rest.map((post, i) => (
-						<a class="row" href={`/blog/${post.id}/`}>
+						<a class="row" href={`/blog/${post.id}/`} data-search={searchText(post)}>
 							<span class="rnum">{String(i + 1).padStart(2, '0')}</span>
 							<span class="rthumb">
 								<img
@@ -96,7 +147,41 @@ const rest = posts.slice(1);
 						</a>
 					))
 				}
+
+				<p id="sin-resultados" class="empty" style="display:none">// sin resultados</p>
 			</section>
+
+			<script is:inline>
+				(function () {
+					var input = document.getElementById('buscador');
+					if (!input) return;
+					var rows = Array.prototype.slice.call(document.querySelectorAll('.index .row'));
+					var empty = document.getElementById('sin-resultados');
+					function norm(s) {
+						return (s || '')
+							.toLowerCase()
+							.normalize('NFD')
+							.replace(/[̀-ͯ]/g, '');
+					}
+					function apply() {
+						var q = norm(input.value.trim());
+						var visible = 0;
+						rows.forEach(function (r) {
+							var show;
+							if (!q) {
+								show = !r.classList.contains('is-feat');
+							} else {
+								show = (r.getAttribute('data-search') || '').indexOf(q) !== -1;
+							}
+							r.style.display = show ? 'grid' : 'none';
+							if (show) visible++;
+						});
+						if (empty) empty.style.display = q && visible === 0 ? 'block' : 'none';
+					}
+					input.addEventListener('input', apply);
+					apply();
+				})();
+			</script>
 		</main>
 
 		<Footer />
@@ -225,6 +310,43 @@ const rest = posts.slice(1);
 		border-top: 2px solid var(--ink);
 	}
 	.index-head .count {
+		color: var(--pink);
+	}
+	.index-search {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		border: 2px solid var(--ink);
+		background: var(--paper);
+		padding: 0.55rem 0.8rem;
+		margin: 0 0 0.4rem;
+	}
+	.search-chev {
+		font-family: var(--font-mono);
+		font-weight: 700;
+		color: var(--pink);
+	}
+	.index-search input {
+		flex: 1;
+		min-width: 0;
+		border: 0;
+		background: transparent;
+		font-family: var(--font-mono);
+		font-size: 0.9rem;
+		color: var(--ink);
+		outline: none;
+		padding: 0;
+	}
+	.index-search input::placeholder {
+		color: var(--muted);
+	}
+	.index-search:focus-within {
+		box-shadow: 4px 4px 0 var(--pink);
+	}
+	.row.is-feat {
+		display: none;
+	}
+	.rnum.feat {
 		color: var(--pink);
 	}
 	.empty {
