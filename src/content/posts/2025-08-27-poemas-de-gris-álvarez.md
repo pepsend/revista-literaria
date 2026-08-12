@@ -2,14 +2,14 @@
 title: '"poemas" de Gris Álvarez'
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786567400/portadadisco_ghxcis.jpg
 imagePosition: 50% 50%
-date: 2025-08-27T19:43:00.000-04:00
+date: 2025-02-26T20:48:00.000-03:00
 author: Gris Álvarez
 category: Poesía
 justify: false
 tags:
   - poesía
   - grisálvarez
-authorBio: >+
+authorBio: >
   Gris Álvarez. Editor en Revista Sinfuturo e investigador de la literatura
   fantasma. Publica en 2024, su poemario El último patio con Cerro Ediciones.
 ---
