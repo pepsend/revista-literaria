@@ -20,6 +20,7 @@ type Props = CollectionEntry<'posts'>['data'] & {
 	older?: CardData | null;
 	related?: (CardData | null)[];
 	readingMinutes?: number;
+	headings?: { depth: number; slug: string; text: string }[];
 };
 
 const DEFAULT_COVER = '/default-cover.svg';
@@ -38,10 +39,15 @@ const {
 	older = null,
 	related = [],
 	readingMinutes,
+	headings = [],
 } = Astro.props;
 
 // Relacionados válidos (descarta posibles nulos por seguridad).
 const relatedCards = (related || []).filter(Boolean) as CardData[];
+
+// Índice de contenidos: subtítulos h2/h3. Solo se muestra en textos estructurados.
+const toc = (headings || []).filter((h) => h.depth === 2 || h.depth === 3);
+const showToc = toc.length >= 3;
 
 // URL canónica del texto para los botones de compartir.
 const shareUrl = new URL(Astro.url.pathname, Astro.site).href;
@@ -123,6 +129,7 @@ const AuthorBio =
 
 	</head>
 	<body>
+		<div class="read-progress" aria-hidden="true"><span id="read-progress-fill"></span></div>
 		<Header />
 		<main class="article at-container">
 			<a class="back" href="/">← índice</a>
@@ -152,6 +159,21 @@ const AuthorBio =
 					style={`object-position: ${imagePosition};`}
 				/>
 			</div>
+
+			{
+				showToc && (
+					<nav class="art-toc" aria-label="Índice del texto">
+						<p class="art-toc-label">// índice</p>
+						<ol class="art-toc-list">
+							{toc.map((h) => (
+								<li class:list={['toc-item', { 'toc-sub': h.depth === 3 }]}>
+									<a href={`#${h.slug}`}>{h.text}</a>
+								</li>
+							))}
+						</ol>
+					</nav>
+				)
+			}
 
 			<article class:list={['prose', { 'prose--justify': justify }]}>
 				<slot />
@@ -312,6 +334,19 @@ const AuthorBio =
 						window.scrollTo({ top: 0, behavior: 'smooth' });
 					});
 				}
+				// Barra de progreso de lectura
+				var pf = document.getElementById('read-progress-fill');
+				if (pf) {
+					var updP = function () {
+						var h = document.documentElement;
+						var max = h.scrollHeight - h.clientHeight;
+						var p = max > 0 ? (h.scrollTop / max) * 100 : 0;
+						pf.style.width = p + '%';
+					};
+					window.addEventListener('scroll', updP, { passive: true });
+					window.addEventListener('resize', updP, { passive: true });
+					updP();
+				}
 			})();
 		</script>
 	</body>
@@ -321,6 +356,72 @@ const AuthorBio =
 	.article {
 		padding-top: 1.5rem;
 		padding-bottom: 2rem;
+	}
+
+	/* Barra de progreso de lectura */
+	.read-progress {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		z-index: 200;
+		background: transparent;
+		pointer-events: none;
+	}
+	#read-progress-fill {
+		display: block;
+		height: 100%;
+		width: 0;
+		background: var(--pink);
+		transition: width 0.1s linear;
+	}
+
+	/* Índice de contenidos */
+	.art-toc {
+		max-width: 40rem;
+		margin: 2rem auto 0;
+		border: 2px solid var(--ink);
+		background: var(--paper-2);
+		padding: 1rem 1.2rem 1.1rem;
+	}
+	.art-toc-label {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--pink);
+		margin: 0 0 0.6rem;
+	}
+	.art-toc-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.toc-item {
+		margin: 0 0 0.35rem;
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		line-height: 1.35;
+	}
+	.toc-item:last-child {
+		margin-bottom: 0;
+	}
+	.toc-item a {
+		color: var(--ink);
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+	}
+	.toc-item a:hover {
+		color: var(--pink);
+		border-bottom-color: var(--pink);
+	}
+	.toc-sub {
+		padding-left: 1.1rem;
+		font-size: 0.8rem;
+	}
+	.toc-sub a {
+		color: var(--muted);
 	}
 	.back {
 		font-family: var(--font-mono);
@@ -408,6 +509,8 @@ const AuthorBio =
 		font-weight: 900;
 		line-height: 1.15;
 		margin: 2rem 0 0.8rem;
+		/* Para que al saltar desde el índice el título no quede bajo el header fijo. */
+		scroll-margin-top: 90px;
 	}
 	.prose :global(blockquote) {
 		border-left: 3px solid var(--pink);
