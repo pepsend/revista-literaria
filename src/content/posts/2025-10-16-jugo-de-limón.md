@@ -1,7 +1,7 @@
 ---
 title: Jugo de limón
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786498982/Imagen_de_referencia_yi5qos.jpg
-imagePosition: 50% 50%
+imagePosition: 50% 65%
 date: 2025-10-16T13:43:00.000-03:00
 author: Malena Falicoff
 category: Poesía
