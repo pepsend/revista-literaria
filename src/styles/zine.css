@@ -11,9 +11,24 @@
 	/* Modo terminal (fondo negro) */
 	--negro: #131211;
 	--crema: #ebd8c6;
+	/* Texto del cuerpo (se invierte en modo Terminal) */
+	--text: #241d15;
+	--text-soft: #3c3428;
 	--font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
 	--font-mono: 'Space Mono', ui-monospace, 'Courier New', monospace;
 	--wrap: 1180px;
+}
+
+/* Modo Terminal (fondo negro). Se activa con data-theme="terminal" en <html>.
+   Solo redefine la paleta: el resto del sitio usa estas variables y se adapta. */
+:root[data-theme='terminal'] {
+	--paper: #14110f;
+	--paper-2: #1d1a16;
+	--ink: #ebd8c6;
+	--muted: #9a8f7e;
+	--line: #39332c;
+	--text: #ece0d0;
+	--text-soft: #cabda8;
 }
 
 * {

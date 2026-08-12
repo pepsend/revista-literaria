@@ -29,6 +29,17 @@ const socialImage = ogImage
 	: new URL(image.src, Astro.url).href;
 ---
 
+<!-- Tema guardado (modo Terminal): se aplica antes de pintar para evitar parpadeo. -->
+<script is:inline>
+	(function () {
+		try {
+			if (localStorage.getItem('at-theme') === 'terminal') {
+				document.documentElement.setAttribute('data-theme', 'terminal');
+			}
+		} catch (e) {}
+	})();
+</script>
+
 <!-- Fuentes: Fraunces (display) + Space Mono (terminal) -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -1,0 +1,101 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<html lang="es">
+	<head>
+		<BaseHead title="404 — abulia terminal" description="Página no encontrada" />
+	</head>
+	<body>
+		<Header />
+		<main class="nf at-container">
+			<p class="nf-kicker">// error 404</p>
+			<h1 class="nf-code">404</h1>
+			<p class="nf-title">esta página se perdió en la transmisión</p>
+			<p class="nf-lead">
+				El enlace que seguiste no existe o el texto ya no está aquí. Puede que haya cambiado de
+				lugar.
+			</p>
+			<div class="nf-actions">
+				<a class="nf-btn" href="/">← volver al índice</a>
+				<a class="nf-btn ghost" href="/novedades">ver novedades</a>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.nf {
+		min-height: 52vh;
+		padding: 4rem 1.5rem 5rem;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		max-width: 46rem;
+	}
+	.nf-kicker {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.24em;
+		color: var(--pink);
+		margin: 0;
+	}
+	.nf-code {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: clamp(5rem, 22vw, 11rem);
+		line-height: 0.85;
+		margin: 0.4rem 0 0;
+		letter-spacing: -0.02em;
+	}
+	.nf-title {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-style: italic;
+		font-size: clamp(1.4rem, 4vw, 2.2rem);
+		line-height: 1.1;
+		margin: 1rem 0 0;
+	}
+	.nf-lead {
+		font-family: var(--font-mono);
+		font-size: 0.92rem;
+		line-height: 1.6;
+		color: var(--text-soft);
+		margin: 1rem 0 0;
+		max-width: 34rem;
+	}
+	.nf-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.8rem;
+		margin: 2rem 0 0;
+	}
+	.nf-btn {
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		text-decoration: none;
+		color: var(--paper);
+		background: var(--ink);
+		border: 2px solid var(--ink);
+		padding: 0.7rem 1.1rem;
+		transition: transform 0.15s ease, box-shadow 0.15s ease;
+	}
+	.nf-btn:hover {
+		box-shadow: 5px 5px 0 var(--pink);
+		transform: translate(-2px, -2px);
+	}
+	.nf-btn.ghost {
+		color: var(--ink);
+		background: transparent;
+	}
+	.nf-btn.ghost:hover {
+		box-shadow: 5px 5px 0 var(--ink);
+	}
+</style>
