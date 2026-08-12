@@ -5,6 +5,7 @@ imagePosition: 50% 50%
 date: 2026-05-02T17:03:00.000-04:00
 author: " Sam G. Sanzana"
 category: Cine
+justify: true
 citations: >-
   ​-Corlett, Michael. “Sexual Orientation and Identity in The Strange Case of Dr
   Jekyll and Mr Hyde”. Literary cultures.2017 (1), 1.
