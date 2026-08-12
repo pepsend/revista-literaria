@@ -41,7 +41,8 @@ h4,
 h5,
 h6 {
 	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
+	/* var(--ink) se invierte a crema en modo oscuro (antes era negro fijo). */
+	color: var(--ink);
 	line-height: 1.2;
 }
 h1 {
