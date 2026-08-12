@@ -2,21 +2,22 @@
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 
-// Convierte una entrada de post en una "tarjeta" ligera y serializable
-// (solo lo que necesitan la navegación y los relacionados).
-const toCard = (p: CollectionEntry<'posts'> | undefined | null) =>
-	p
-		? {
-				slug: p.id,
-				title: p.data.title,
-				category: p.data.category ?? null,
-				date: p.data.date,
-				heroImage: p.data.heroImage ?? null,
-				imagePosition: p.data.imagePosition ?? 'center',
-			}
-		: null;
-
 export async function getStaticPaths() {
+	// Convierte una entrada de post en una "tarjeta" ligera y serializable
+	// (solo lo que necesitan la navegación y los relacionados).
+	// Debe vivir DENTRO de getStaticPaths: Astro lo aísla y no ve el scope externo.
+	const toCard = (p: CollectionEntry<'posts'> | undefined | null) =>
+		p
+			? {
+					slug: p.id,
+					title: p.data.title,
+					category: p.data.category ?? null,
+					date: p.data.date,
+					heroImage: p.data.heroImage ?? null,
+					imagePosition: p.data.imagePosition ?? 'center',
+				}
+			: null;
+
 	const posts = await getCollection('posts');
 	// Orden por fecha, del más reciente al más antiguo (igual que el índice).
 	const sorted = [...posts].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
