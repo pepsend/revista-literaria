@@ -2,19 +2,68 @@
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 
+// Convierte una entrada de post en una "tarjeta" ligera y serializable
+// (solo lo que necesitan la navegación y los relacionados).
+const toCard = (p: CollectionEntry<'posts'> | undefined | null) =>
+	p
+		? {
+				slug: p.id,
+				title: p.data.title,
+				category: p.data.category ?? null,
+				date: p.data.date,
+				heroImage: p.data.heroImage ?? null,
+				imagePosition: p.data.imagePosition ?? 'center',
+			}
+		: null;
+
 export async function getStaticPaths() {
 	const posts = await getCollection('posts');
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
-}
-type Props = CollectionEntry<'posts'>;
+	// Orden por fecha, del más reciente al más antiguo (igual que el índice).
+	const sorted = [...posts].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const post = Astro.props;
+	return sorted.map((post, i) => {
+		// Vecinos por cronología (pueden no existir → null).
+		const newer = sorted[i - 1] ?? null; // más reciente
+		const older = sorted[i + 1] ?? null; // más antigua
+
+		// Relacionados: misma categoría (si tiene), excluyendo el actual; hasta 3.
+		// Si no alcanzan, se completa con los más recientes restantes.
+		const cat = post.data.category;
+		const sameCat = cat ? sorted.filter((p) => p.id !== post.id && p.data.category === cat) : [];
+		let relatedEntries = sameCat.slice(0, 3);
+		if (relatedEntries.length < 3) {
+			const chosen = new Set(relatedEntries.map((p) => p.id));
+			const fill = sorted.filter((p) => p.id !== post.id && !chosen.has(p.id));
+			relatedEntries = relatedEntries.concat(fill.slice(0, 3 - relatedEntries.length));
+		}
+
+		// Tiempo de lectura estimado desde el cuerpo (markdown), ~200 palabras/min.
+		const words = ((post.body || '').replace(/[#>*_`~\[\]()!\-]/g, ' ').match(/\S+/g) || []).length;
+		const readingMinutes = Math.max(1, Math.round(words / 200));
+
+		return {
+			params: { slug: post.id },
+			props: {
+				post,
+				newer: toCard(newer),
+				older: toCard(older),
+				related: relatedEntries.map(toCard),
+				readingMinutes,
+			},
+		};
+	});
+}
+
+const { post, newer, older, related, readingMinutes } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data}>
+<BlogPost
+	{...post.data}
+	newer={newer}
+	older={older}
+	related={related}
+	readingMinutes={readingMinutes}
+>
 	<Content />
 </BlogPost>

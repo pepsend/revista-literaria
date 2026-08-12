@@ -6,11 +6,39 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 
-type Props = CollectionEntry<'posts'>['data'];
+type CardData = {
+	slug: string;
+	title: string;
+	category: string | null;
+	date: Date;
+	heroImage: string | null;
+	imagePosition: string;
+};
+type Props = CollectionEntry<'posts'>['data'] & {
+	newer?: CardData | null;
+	older?: CardData | null;
+	related?: (CardData | null)[];
+	readingMinutes?: number;
+};
 
 const DEFAULT_COVER = '/default-cover.svg';
-const { title, date, author, category, heroImage, imagePosition = 'center', authorBio, citations } =
-	Astro.props;
+const {
+	title,
+	date,
+	author,
+	category,
+	heroImage,
+	imagePosition = 'center',
+	authorBio,
+	citations,
+	newer = null,
+	older = null,
+	related = [],
+	readingMinutes,
+} = Astro.props;
+
+// Relacionados válidos (descarta posibles nulos por seguridad).
+const relatedCards = (related || []).filter(Boolean) as CardData[];
 
 // Bio del autor escrita en este artículo (una o más líneas → párrafos).
 const postBioLines = (authorBio || '')
@@ -51,6 +79,7 @@ const AuthorBio =
 					{author && <b>{author}</b>}
 					{author && ' — '}
 					<FormattedDate date={date} />
+					{readingMinutes && <span class="art-rt"> · {readingMinutes} min de lectura</span>}
 				</p>
 			</header>
 
@@ -93,6 +122,59 @@ const AuthorBio =
 			}
 
 			<p class="art-end">// fin del texto</p>
+
+			{
+				relatedCards.length > 0 && (
+					<section class="art-related">
+						<p class="art-related-label">// seguir leyendo</p>
+						<div class="art-related-grid">
+							{relatedCards.map((r) => (
+								<a class="rel-card" href={`/blog/${r.slug}/`}>
+									<span class="rel-thumb">
+										<img
+											class="at-duotone"
+											src={r.heroImage || DEFAULT_COVER}
+											alt={r.title}
+											loading="lazy"
+											style={`object-position: ${r.imagePosition};`}
+										/>
+									</span>
+									<span class="rel-body">
+										{r.category && <span class="rel-cat">{r.category}</span>}
+										<span class="rel-title">{r.title}</span>
+										<span class="rel-date">
+											<FormattedDate date={r.date} />
+										</span>
+									</span>
+								</a>
+							))}
+						</div>
+					</section>
+				)
+			}
+
+			{
+				(older || newer) && (
+					<nav class="art-nav" aria-label="Navegación entre textos">
+						{older ? (
+							<a class="art-nav-link prev" href={`/blog/${older.slug}/`}>
+								<span class="art-nav-dir">← más antigua</span>
+								<span class="art-nav-title">{older.title}</span>
+							</a>
+						) : (
+							<span class="art-nav-empty" />
+						)}
+						{newer ? (
+							<a class="art-nav-link next" href={`/blog/${newer.slug}/`}>
+								<span class="art-nav-dir">más reciente →</span>
+								<span class="art-nav-title">{newer.title}</span>
+							</a>
+						) : (
+							<span class="art-nav-empty" />
+						)}
+					</nav>
+				)
+			}
 		</main>
 		<Footer />
 	</body>
@@ -304,5 +386,139 @@ const AuthorBio =
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		color: var(--muted);
+	}
+	.art-rt {
+		color: var(--pink);
+	}
+
+	/* Seguir leyendo — relacionados */
+	.art-related {
+		max-width: 60rem;
+		margin: 3.5rem auto 0;
+	}
+	.art-related-label {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--pink);
+		margin: 0 0 1rem;
+		border-top: 2px solid var(--ink);
+		padding-top: 0.8rem;
+	}
+	.art-related-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.2rem;
+	}
+	.rel-card {
+		display: flex;
+		flex-direction: column;
+		border: 2px solid var(--ink);
+		background: var(--paper-2);
+		text-decoration: none;
+		color: var(--ink);
+		transition: box-shadow 0.2s ease, transform 0.2s ease;
+	}
+	.rel-card:hover {
+		box-shadow: 6px 6px 0 var(--pink);
+		transform: translate(-2px, -2px);
+	}
+	.rel-thumb {
+		display: block;
+		aspect-ratio: 3 / 2;
+		overflow: hidden;
+		border-bottom: 2px solid var(--ink);
+	}
+	.rel-thumb img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.4s ease;
+	}
+	.rel-card:hover .rel-thumb img {
+		transform: scale(1.05);
+	}
+	.rel-body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+		padding: 0.8rem 0.9rem 1rem;
+	}
+	.rel-cat {
+		font-family: var(--font-mono);
+		font-size: 0.66rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--pink);
+	}
+	.rel-title {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: 1.08rem;
+		line-height: 1.12;
+	}
+	.rel-date {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		color: var(--muted);
+	}
+
+	/* Navegación anterior / siguiente */
+	.art-nav {
+		max-width: 60rem;
+		margin: 2.5rem auto 0;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+	}
+	.art-nav-link {
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+		padding: 0.9rem 1.1rem;
+		border: 1px solid var(--line);
+		text-decoration: none;
+		color: var(--ink);
+		transition: border-color 0.2s ease, background 0.2s ease;
+	}
+	.art-nav-link:hover {
+		border-color: var(--ink);
+		background: var(--paper-2);
+	}
+	.art-nav-link.next {
+		text-align: right;
+	}
+	.art-nav-dir {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--pink);
+	}
+	.art-nav-title {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.02rem;
+		line-height: 1.15;
+	}
+	.art-nav-empty {
+		display: block;
+	}
+
+	@media (max-width: 640px) {
+		.art-related-grid {
+			grid-template-columns: 1fr;
+		}
+		.art-nav {
+			grid-template-columns: 1fr;
+		}
+		.art-nav-link.next {
+			text-align: left;
+		}
+		.art-nav-empty {
+			display: none;
+		}
 	}
 </style>
