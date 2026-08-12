@@ -32,6 +32,7 @@ const {
 	imagePosition = 'center',
 	authorBio,
 	citations,
+	justify = true,
 	tags = [],
 	newer = null,
 	older = null,
@@ -152,7 +153,7 @@ const AuthorBio =
 				/>
 			</div>
 
-			<article class="prose">
+			<article class:list={['prose', { 'prose--justify': justify }]}>
 				<slot />
 			</article>
 
@@ -383,6 +384,11 @@ const AuthorBio =
 		font-size: 1.18rem;
 		line-height: 1.75;
 		color: var(--text);
+	}
+	/* Justificado del cuerpo (interruptor por artículo). Solo párrafos:
+	   los poemas del bloque «Texto alineado» conservan su alineación propia. */
+	.prose--justify :global(p) {
+		text-align: justify;
 	}
 	.prose :global(p) {
 		margin: 0 0 1.3rem;

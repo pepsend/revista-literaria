@@ -49,6 +49,8 @@ const posts = defineCollection({
 		citations: z.string().optional(),
 		// Etiquetas por tema (lista). Opcional: los textos antiguos sin etiquetas siguen igual.
 		tags: z.array(z.string()).optional(),
+		// Justificar el cuerpo del texto (como en Word). Por defecto sí.
+		justify: z.boolean().optional().default(true),
 	}),
 });
 
