@@ -54,6 +54,21 @@ const ogAbs = heroImage
 		: new URL(heroImage, Astro.site).href
 	: undefined;
 
+// Tarjeta OG: dibuja el título sobre la foto (solo si el hero está en Cloudinary).
+// Para textos futuros funciona automáticamente; si el hero no es de Cloudinary,
+// se usa la imagen tal cual (fallback).
+const buildOgCard = (url: string, t: string): string | null => {
+	const marker = '/image/upload/';
+	const idx = url.indexOf(marker);
+	if (idx === -1 || !url.includes('res.cloudinary.com')) return null;
+	const before = url.slice(0, idx + marker.length);
+	const after = url.slice(idx + marker.length);
+	const txt = encodeURIComponent(t);
+	const transform = `w_1200,h_630,c_fill,g_auto/e_brightness:-30/co_rgb:f2e4cc,l_text:Georgia_72_bold:${txt},g_south_west,x_72,y_96,w_1056,c_fit`;
+	return `${before}${transform}/${after}`;
+};
+const ogCard = heroImage ? buildOgCard(heroImage, title) : null;
+
 // Datos estructurados (schema.org Article) para buscadores y redes.
 const jsonLd = {
 	'@context': 'https://schema.org',
@@ -97,7 +112,7 @@ const AuthorBio =
 		<BaseHead
 			title={title}
 			description={category ? `${category} — ${title}` : title}
-			ogImage={heroImage}
+			ogImage={ogCard ?? heroImage}
 			type="article"
 			publishedTime={date.toISOString()}
 			authorName={author}
