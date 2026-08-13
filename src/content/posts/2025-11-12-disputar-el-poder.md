@@ -1,7 +1,7 @@
 ---
 title: Disputar el Poder
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786582539/Foto_baiz0k.jpg
-imagePosition: 50% 50%
+imagePosition: 50% 63%
 date: 2025-11-12T20:58:00.000-03:00
 author: Joshua Restovich
 category: Ensayo
