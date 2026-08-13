@@ -1,7 +1,7 @@
 ---
 title: Injusticia en la balanza
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786581059/George_Stinney_Jr_FOTO_COLOR._Injusticia_en_la_balanza_slbtdj.jpg
-imagePosition: 50% 50%
+imagePosition: 52% 22%
 date: 2024-06-07T21:30:00.000-04:00
 author: Valentina Ragga
 category: Creación Abúlica
