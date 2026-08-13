@@ -1,7 +1,7 @@
 ---
 title: Impelida Indagación
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786579988/2f5515cc-a4a0-42a9-b217-1bd13036658a_ecbdxd.png
-imagePosition: 50% 50%
+imagePosition: 55% 24%
 date: 2024-03-02T21:14:00.000-03:00
 author: Tomás Ragga
 category: Crónica
