@@ -24,15 +24,15 @@ De *Dos poemas verdes y uno aguachento* (LAR Ediciones, 2019):
 
 ​Se levanta un resonar desde el pasto mojado. 
 
-	​	​Una percusión hecha de pasos con barro. 
+```
+​	​Una percusión hecha de pasos con barro. 
 
-	​	​Los trailes hacen de cuerda y avisan que ya viene, que corran, que viene, que es tiempo, que corran. 
+​	​Los trailes hacen de cuerda y avisan que ya viene, que corran, que viene, que es tiempo, que corran. 
 
-	​	​Los perros ladran, los perros aúllan, pero son las perras las que rasguñan la pared escribiendo notas de socorro, las perras que han sido montadas, las perras descaderadas. 
+​	​Los perros ladran, los perros aúllan, pero son las perras las que rasguñan la pared escribiendo notas de socorro, las perras que han sido montadas, las perras descaderadas. 
 
-	​Los árboles son violines silbando agónicas notas que son presagio de la sangre, de la sangre robada, de la sangre apagada; y las flores, destinadas a ser feroces notas de piano, prefieren borrarse de la partitura. 
-
- 
+​Los árboles son violines silbando agónicas notas que son presagio de la sangre, de la sangre robada, de la sangre apagada; y las flores, destinadas a ser feroces notas de piano, prefieren borrarse de la partitura. 
+```
 
 En la noche retumba el concierto sobre el pasto mojado. 
 
@@ -46,8 +46,6 @@ Las perras mensajeras han sido envenenadas. 
 
 Los árboles siguen siendo violines.
 
-
-
 \    **Barraco**
 La vida sería el barraco
 
@@ -57,8 +55,6 @@ de ubres amarradas
 
 que cuelgan en la carrera.
 
- 
-
 La vida sería el barraco,
 
 acorralándote contra el cerco
@@ -67,8 +63,6 @@ con la púa rajando tu ojo,
 
 con tu dueño radiante mirando.
 
- 
-
 La vida sería el barraco
 
 que te rompe sin que tú quieras
@@ -76,8 +70,6 @@ que te rompe sin que tú quieras
 que te irrumpe hasta las uñas
 
 que te muerde arrebatado la oreja.
-
- 
 
 La vida sería el barraco
 
@@ -97,36 +89,37 @@ media vuelta
 
 y al revés.
 
-	​	​Un, dos, tres
+```
+​	​Un, dos, tres
 
-	​	​un, dos, tres
+​	​un, dos, tres
 
-	​	​mano con cola 
+​	​mano con cola 
 
-	​	​garra con pie.
+​	​garra con pie.
 
-	​	​	​	​Cinco, seis
+​	​	​	​Cinco, seis
 
-	​	​	​	​cinco, seis
+​	​	​	​cinco, seis
 
-	​	​	​	​no hay comida
+​	​	​	​no hay comida
 
-	​	​	​	​hoy ni después.
+​	​	​	​hoy ni después.
 
-	​	​	​	​	​	​Cinco, seis
+​	​	​	​	​	​Cinco, seis
 
-	​	​	​	​	​	​cinco, seis
+​	​	​	​	​	​cinco, seis
 
-	​	​	​	​	​	​te ha atrapado
+​	​	​	​	​	​te ha atrapado
 
-	​	​	​	​	​	​el gato inglés.
+​	​	​	​	​	​el gato inglés.
+```
 
 \    
 
 \    **Quiltra**
 
 *(*Poema inspirado en *How To Wear Your Mother’s Lipstick* deWarsan Shire*)*
-
 
 Mi madre nunca usó delineador,
 
@@ -140,9 +133,11 @@ La base le fue muy cara
 
 y los brillos, pesados.
 
-	​	​	​	​	​	​	​	​Mi madre nunca se pintó.
+```
+​	​	​	​	​	​	​	​Mi madre nunca se pintó.
 
-	​	​	​	​	​	​	​	​Mi madre nunca se amó.
+​	​	​	​	​	​	​	​Mi madre nunca se amó.
+```
 
 Su cara nunca fue suya
 
@@ -162,11 +157,11 @@ no con base, te digo.
 
 Con decepción.
 
-	​	​	​	​	​	​	​Mi madre no fue curvilínea
+```
+​	​	​	​	​	​	​Mi madre no fue curvilínea
 
-	​	​	​	​	​	​	​ni en la cadera ni en la sonrisa.
-
- 
+​	​	​	​	​	​	​ni en la cadera ni en la sonrisa.
+```
 
 \    **Ovejas**
 
@@ -178,19 +173,11 @@ que sonaron como piedras
 
 siendo, en realidad, manzanas
 
- 
-
 y yo salí
-
- 
 
 y ninguna me siguió
 
- 
-
 De *Volverse señor* (Ediciones Cola de Gato, 2022):
-
-
 
  **\    De niño**
 
@@ -202,8 +189,6 @@ cerraba los ojos
 
 para adivinar en qué parte del camino estábamos
 
- 
-
 De adulto
 
 en la mañana
@@ -211,8 +196,6 @@ en la mañana
 cierro los ojos
 
 para adivinar en qué parte dejó de existir un camino
-
- 
 
 De niño
 
@@ -222,8 +205,6 @@ viajar en la cima de un árbol
 
 para ir más rápido que los autos
 
- 
-
 De adulto
 
 deseo
@@ -231,8 +212,6 @@ deseo
 viajar en la cima de un árbol
 
 desde que entendí que no se mueven
-
- 
 
 De niño
 
@@ -242,8 +221,6 @@ que la luna
 
 nos seguía a todas partes
 
- 
-
 De adulto
 
 me asusta
@@ -251,8 +228,6 @@ me asusta
 que ni siquiera la luna
 
 me siga
-
- 
 
  **\    ¿Cómo suena la soledad?**
 
@@ -264,19 +239,25 @@ Y espero una respuesta.
 
 ¿Acaso como un sollozo
 
-	​	​escapando con una película?
+```
+​	​escapando con una película?
+```
 
            	​	​	​ ¿Acaso como una lágrima
 
-	​	​	​	​	​	​rodando con una cebolla picada?
+```
+​	​	​	​	​	​rodando con una cebolla picada?
+```
 
 ¿O como alguien a las 4 a.m.
 
-	​	​repitiendo el mismo video?
+```
+​	​repitiendo el mismo video?
 
-	​	​	​¿O como alguien a las 04:05 a.m.
+​	​	​¿O como alguien a las 04:05 a.m.
 
-	​	​	​	​	​	​escuchando la misma canción?
+​	​	​	​	​	​escuchando la misma canción?
+```
 
 ¿Cómo suena la soledad?
 
@@ -297,8 +278,5 @@ Pregunto.
 Y espero una respuesta.
 
 ¿Cómo suena la soledad?
-
-
-
 
 Pregunto
