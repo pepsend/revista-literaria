@@ -1,5 +1,6 @@
 ---
 title: El Hopper de Puente Alto
+heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786580621/puente_alto_20_3x2_horizontal_ltohnf.jpg
 imagePosition: 50% 50%
 date: 2024-03-28T21:18:00.000-03:00
 author: Javier A. Pérez Díaz
