@@ -1,10 +1,11 @@
 ---
 title: "The Shadows: No todo el pop es cantado"
-heroImage: /uploads/1000212792.png
-imagePosition: 39% 29%
+heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786735937/The_Shadows_n5trld.png
+imagePosition: 39% 33%
 date: 2026-07-27T14:00:00.000-04:00
 author: Gabriel Gálvez
 category: Ensayo
+justify: true
 ---
 La música instrumental siempre ha tenido un lugar importante para mí. Muchas veces discreta, suele pensarse que su sonido es para llenar silencios, pues si no estás esperando ser atendido en la clínica, sería imposible escucharla por placer. Como dice Marisol García en su último libro, hay que quitarnos del imaginario que ese ruido genérico que suena en los gimnasios o en las tiendas de retail, sea etiquetable como música. Al menos no califican como canciones, contrario a la música instrumental.
 
