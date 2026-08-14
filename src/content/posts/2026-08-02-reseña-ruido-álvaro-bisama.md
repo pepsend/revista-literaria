@@ -1,11 +1,12 @@
 ---
 title: "Reseña. Ruido: Álvaro Bisama"
-heroImage: /uploads/c3-81lvarobisama.jpeg
+heroImage: https://res.cloudinary.com/cs8tnt88/image/fetch/v1786732788/https://abuliaterminal.cl/uploads/c3-81lvarobisama.jpeg
 imagePosition: 48% 26%
 date: 2026-08-02T13:43:00.000-04:00
 author: Tomás Ragga
 category: Reseña
-citations: >+
+justify: true
+citations: >
   Bisama, Álvaro. Ruido. Santiago de Chile: Alfaguara, 2012.
 
 
