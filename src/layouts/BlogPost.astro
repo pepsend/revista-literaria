@@ -98,7 +98,7 @@ const buildStoryCard = (url: string, t: string, meta: string): string => {
 		enc +
 		'/g_center,fl_layer_apply/' +
 		metaLayer +
-		'co_rgb:cbb89f,l_text:Georgia_28_bold:abuliaterminal.netlify.app/g_south,y_150,fl_layer_apply';
+		'co_rgb:cbb89f,l_text:Georgia_28_bold:abuliaterminal.cl/g_south,y_150,fl_layer_apply';
 	const overlay = 'w_1080,h_1920,c_fill,g_auto/e_brightness:-34/' + layers;
 	const marker = '/image/upload/';
 	const idx = url.indexOf(marker);
@@ -111,6 +111,29 @@ const buildStoryCard = (url: string, t: string, meta: string): string => {
 // Género · autor REALES de este texto (los que no existan, se omiten).
 const storyMeta = [category, author].filter(Boolean).join(' · ');
 const storyCard = heroImage ? buildStoryCard(heroImage, title, storyMeta) : null;
+
+// Plantilla para "compartir una frase": el lector marca texto y se inserta en __Q__.
+const buildQuoteTemplate = (url: string, attribution: string): string => {
+	const attr = attribution ? encodeURIComponent(attribution) : '';
+	const attrLayer = attr
+		? 'co_rgb:cbb89f,l_text:Georgia_34_bold:' + attr + '/g_south,y_140,fl_layer_apply/'
+		: '';
+	const layers =
+		'co_rgb:e5468a,l_text:Georgia_40_bold:abulia%20terminal/g_north,y_120,fl_layer_apply/' +
+		'w_900,c_fit,co_rgb:f2e4cc,l_text:Georgia_60_italic:__Q__/g_center,fl_layer_apply/' +
+		attrLayer;
+	const overlay = 'w_1080,h_1350,c_fill,g_auto/e_brightness:-48/' + layers;
+	const marker = '/image/upload/';
+	const idx = url.indexOf(marker);
+	if (idx !== -1 && url.includes('res.cloudinary.com')) {
+		return `${url.slice(0, idx + marker.length)}${overlay}/${url.slice(idx + marker.length)}`;
+	}
+	const abs = url.startsWith('http') ? url : new URL(url, Astro.site).href;
+	return `https://res.cloudinary.com/cs8tnt88/image/fetch/${overlay}/${abs}`;
+};
+const quoteTemplate = heroImage
+	? buildQuoteTemplate(heroImage, author ? `— ${author}` : 'abulia terminal')
+	: null;
 
 // Datos estructurados (schema.org Article) para buscadores y redes.
 const jsonLd = {
@@ -347,6 +370,20 @@ const AuthorBio =
 			}
 		</main>
 		<button id="to-top" class="to-top" type="button" aria-label="Volver arriba">↑</button>
+		{
+			quoteTemplate && (
+				<button
+					id="quote-share"
+					class="quote-share"
+					type="button"
+					hidden
+					data-tpl={quoteTemplate}
+					data-url={shareUrl}
+				>
+					❝ compartir frase
+				</button>
+			)
+		}
 		<Footer />
 		<script is:inline>
 			(function () {
@@ -457,6 +494,90 @@ const AuthorBio =
 				};
 				if (rsDec) rsDec.addEventListener('click', function () { rsSet(-0.1); });
 				if (rsInc) rsInc.addEventListener('click', function () { rsSet(0.1); });
+			})();
+		</script>
+
+		<script is:inline>
+			(function () {
+				var btn = document.getElementById('quote-share');
+				var prose = document.querySelector('.prose');
+				if (!btn || !prose) return;
+				var tpl = btn.getAttribute('data-tpl');
+				var pageUrl = btn.getAttribute('data-url') || '';
+				var current = '';
+
+				function selectedText() {
+					var s = window.getSelection();
+					if (!s || s.rangeCount === 0 || s.isCollapsed) return '';
+					var node = s.anchorNode;
+					if (!node || !prose.contains(node)) return '';
+					return s.toString().replace(/\s+/g, ' ').trim();
+				}
+				function hide() {
+					btn.hidden = true;
+					current = '';
+				}
+				function show() {
+					var t = selectedText();
+					if (t.length < 8) {
+						hide();
+						return;
+					}
+					current = t;
+					btn.hidden = false;
+					var rect = window.getSelection().getRangeAt(0).getBoundingClientRect();
+					var top = window.scrollY + rect.top - btn.offsetHeight - 10;
+					var left = window.scrollX + rect.left + rect.width / 2 - btn.offsetWidth / 2;
+					var maxLeft = window.scrollX + document.documentElement.clientWidth - btn.offsetWidth - 8;
+					left = Math.max(window.scrollX + 8, Math.min(left, maxLeft));
+					if (top < window.scrollY + 6) top = window.scrollY + rect.bottom + 10;
+					btn.style.top = top + 'px';
+					btn.style.left = left + 'px';
+				}
+				document.addEventListener('mouseup', function () {
+					setTimeout(show, 10);
+				});
+				document.addEventListener('touchend', function () {
+					setTimeout(show, 10);
+				});
+				window.addEventListener('scroll', hide, { passive: true });
+				btn.addEventListener('mousedown', function (e) {
+					e.preventDefault();
+				});
+				btn.addEventListener('click', function () {
+					var t = current || selectedText();
+					if (!t) {
+						hide();
+						return;
+					}
+					if (t.length > 240) t = t.slice(0, 238).trim() + '…';
+					var img = tpl.replace('__Q__', encodeURIComponent(t));
+					try {
+						if (navigator.clipboard) navigator.clipboard.writeText(pageUrl);
+					} catch (e) {}
+					var label = btn.textContent;
+					btn.textContent = 'preparando…';
+					fetch(img)
+						.then(function (r) {
+							return r.blob();
+						})
+						.then(function (blob) {
+							var file = new File([blob], 'cita-abulia-terminal.jpg', {
+								type: blob.type || 'image/jpeg',
+							});
+							if (navigator.canShare && navigator.canShare({ files: [file] })) {
+								return navigator.share({ files: [file] });
+							}
+							window.open(img, '_blank');
+						})
+						.catch(function () {
+							window.open(img, '_blank');
+						})
+						.then(function () {
+							btn.textContent = label;
+							hide();
+						});
+				});
 			})();
 		</script>
 	</body>
@@ -1065,6 +1186,27 @@ const AuthorBio =
 	}
 	.to-top:hover {
 		box-shadow: 4px 4px 0 var(--ink);
+	}
+
+	/* Botón flotante "compartir frase" (aparece al marcar texto) */
+	.quote-share {
+		position: absolute;
+		z-index: 120;
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: var(--paper);
+		background: var(--ink);
+		border: 2px solid var(--ink);
+		padding: 0.35rem 0.7rem;
+		cursor: pointer;
+		white-space: nowrap;
+		box-shadow: 3px 3px 0 var(--pink);
+	}
+	.quote-share:hover {
+		background: var(--pink);
+		color: var(--ink);
 	}
 	@media (max-width: 560px) {
 		.to-top {
