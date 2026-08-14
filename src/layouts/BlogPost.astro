@@ -416,39 +416,37 @@ const AuthorBio =
 						}
 					});
 				}
-				// Compartir en Instagram Stories (celular): imagen 9:16 → menú nativo
+				// Compartir a Instagram (celular): imagen 9:16. Se pre-descarga en segundo
+				// plano para que al tocar el botón el compartir sea SÍNCRONO (iOS pierde el
+				// permiso del gesto si hay un fetch en medio).
 				var storyBtn = document.getElementById('share-story');
 				if (storyBtn) {
-					storyBtn.addEventListener('click', function () {
-						var imgUrl = storyBtn.getAttribute('data-story');
-						if (!imgUrl) return;
-						// Copiar la URL del texto al portapapeles para pegarla en el sticker de enlace.
-						try {
-							if (navigator.clipboard) navigator.clipboard.writeText(storyBtn.getAttribute('data-url') || '');
-						} catch (e) {}
-						var prev = storyBtn.textContent;
-						storyBtn.disabled = true;
-						storyBtn.textContent = 'preparando…';
-						fetch(imgUrl)
+					var storyImg = storyBtn.getAttribute('data-story');
+					var storyFile = null;
+					if (storyImg) {
+						fetch(storyImg)
 							.then(function (r) {
 								return r.blob();
 							})
-							.then(function (blob) {
-								var file = new File([blob], 'abulia-terminal.jpg', {
-									type: blob.type || 'image/jpeg',
+							.then(function (b) {
+								storyFile = new File([b], 'abulia-terminal.jpg', {
+									type: b.type || 'image/jpeg',
 								});
-								if (navigator.canShare && navigator.canShare({ files: [file] })) {
-									return navigator.share({ files: [file], title: document.title });
-								}
-								window.open(imgUrl, '_blank');
 							})
-							.catch(function () {
-								window.open(imgUrl, '_blank');
-							})
-							.then(function () {
-								storyBtn.disabled = false;
-								storyBtn.textContent = prev;
-							});
+							.catch(function () {});
+					}
+					storyBtn.addEventListener('click', function () {
+						if (storyFile && navigator.canShare && navigator.canShare({ files: [storyFile] })) {
+							navigator.share({ files: [storyFile] }).catch(function () {});
+							try {
+								if (navigator.clipboard) navigator.clipboard.writeText(storyBtn.getAttribute('data-url') || '');
+							} catch (e) {}
+							return;
+						}
+						try {
+							if (navigator.clipboard) navigator.clipboard.writeText(storyBtn.getAttribute('data-url') || '');
+						} catch (e) {}
+						if (storyImg) window.open(storyImg, '_blank');
 					});
 				}
 				// Volver arriba
@@ -508,6 +506,29 @@ const AuthorBio =
 				var tpl = btn.getAttribute('data-tpl');
 				var pageUrl = btn.getAttribute('data-url') || '';
 				var current = '';
+				var readyText = '';
+				var readyFile = null;
+
+				function cldEnc(t) {
+					return encodeURIComponent(t).replace(/%2C/g, '%252C').replace(/%2F/g, '%252F');
+				}
+				function imgFor(t) {
+					return tpl.replace('__Q__', cldEnc(t));
+				}
+				function prefetch(t) {
+					if (t === readyText) return;
+					readyText = t;
+					readyFile = null;
+					fetch(imgFor(t))
+						.then(function (r) {
+							return r.blob();
+						})
+						.then(function (b) {
+							if (readyText === t)
+								readyFile = new File([b], 'cita-abulia-terminal.jpg', { type: b.type || 'image/jpeg' });
+						})
+						.catch(function () {});
+				}
 
 				function selectedText() {
 					var s = window.getSelection();
@@ -518,7 +539,6 @@ const AuthorBio =
 				}
 				function hide() {
 					btn.hidden = true;
-					current = '';
 				}
 				function show() {
 					var t = selectedText();
@@ -526,6 +546,7 @@ const AuthorBio =
 						hide();
 						return;
 					}
+					if (t.length > 240) t = t.slice(0, 238).trim() + '…';
 					current = t;
 					btn.hidden = false;
 					var rect = window.getSelection().getRangeAt(0).getBoundingClientRect();
@@ -536,6 +557,7 @@ const AuthorBio =
 					if (top < window.scrollY + 6) top = window.scrollY + rect.bottom + 10;
 					btn.style.top = top + 'px';
 					btn.style.left = left + 'px';
+					prefetch(current);
 				}
 				document.addEventListener('mouseup', function () {
 					setTimeout(show, 10);
@@ -548,40 +570,31 @@ const AuthorBio =
 					e.preventDefault();
 				});
 				btn.addEventListener('click', function () {
-					var t = current || selectedText();
+					var t = current;
 					if (!t) {
 						hide();
 						return;
 					}
-					if (t.length > 240) t = t.slice(0, 238).trim() + '…';
-					// Doble-codifica coma y barra: son separadores de Cloudinary.
-					var enc = encodeURIComponent(t).replace(/%2C/g, '%252C').replace(/%2F/g, '%252F');
-					var img = tpl.replace('__Q__', enc);
+					// Si la imagen ya está lista → compartir SÍNCRONO (preserva el gesto en iOS).
+					if (
+						readyFile &&
+						readyText === t &&
+						navigator.canShare &&
+						navigator.canShare({ files: [readyFile] })
+					) {
+						navigator.share({ files: [readyFile] }).catch(function () {});
+						try {
+							if (navigator.clipboard) navigator.clipboard.writeText(pageUrl);
+						} catch (e) {}
+						hide();
+						return;
+					}
+					// Si aún no está lista → abrir la imagen para guardarla y publicarla.
 					try {
 						if (navigator.clipboard) navigator.clipboard.writeText(pageUrl);
 					} catch (e) {}
-					var label = btn.textContent;
-					btn.textContent = 'preparando…';
-					fetch(img)
-						.then(function (r) {
-							return r.blob();
-						})
-						.then(function (blob) {
-							var file = new File([blob], 'cita-abulia-terminal.jpg', {
-								type: blob.type || 'image/jpeg',
-							});
-							if (navigator.canShare && navigator.canShare({ files: [file] })) {
-								return navigator.share({ files: [file] });
-							}
-							window.open(img, '_blank');
-						})
-						.catch(function () {
-							window.open(img, '_blank');
-						})
-						.then(function () {
-							btn.textContent = label;
-							hide();
-						});
+					window.open(imgFor(t), '_blank');
+					hide();
 				});
 			})();
 		</script>
