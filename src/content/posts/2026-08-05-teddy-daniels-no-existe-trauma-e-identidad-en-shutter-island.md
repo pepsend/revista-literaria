@@ -1,7 +1,7 @@
 ---
 title: "Teddy Daniels no existe: trauma e identidad en Shutter Island"
-heroImage: /uploads/shutter-island-film.jpg
-imagePosition: 66% 59%
+heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786735872/Shutter_bbb31e.jpg
+imagePosition: 57% 94%
 date: 2026-08-05T12:20:00.000-04:00
 author: Víctor Fleitas
 category: Cine
