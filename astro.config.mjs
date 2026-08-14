@@ -60,7 +60,7 @@ export default defineConfig({
 		remarkPlugins: [remarkTidyProse],
 	},
 	// TODO: reemplaza por la URL real de tu sitio en Netlify (afecta sitemap, RSS y canonical)
-	site: 'https://abuliaterminal.netlify.app',
+	site: 'https://abuliaterminal.cl',
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{
