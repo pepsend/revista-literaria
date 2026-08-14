@@ -65,8 +65,13 @@ const ogAbs = heroImage
 // Tarjeta OG: dibuja el título sobre la foto (solo si el hero está en Cloudinary).
 // Para textos futuros funciona automáticamente; si el hero no es de Cloudinary,
 // se usa la imagen tal cual (fallback).
+// Codifica texto para Cloudinary: doble-codifica coma y barra (son separadores de
+// sus transformaciones). Sin esto, cualquier frase/título con comas rompe la tarjeta.
+const cldText = (s: string): string =>
+	encodeURIComponent(s).replace(/%2C/g, '%252C').replace(/%2F/g, '%252F');
+
 const buildOgCard = (url: string, t: string): string => {
-	const txt = encodeURIComponent(t);
+	const txt = cldText(t);
 	const overlay = `w_1200,h_630,c_fill,g_auto/e_brightness:-30/co_rgb:f2e4cc,l_text:Georgia_64_bold:${txt},g_south_west,x_72,y_94,w_1056,c_fit`;
 	const marker = '/image/upload/';
 	const idx = url.indexOf(marker);
@@ -84,12 +89,10 @@ const ogCard = heroImage ? buildOgCard(heroImage, title) : null;
 
 // Tarjeta vertical 9:16 para Instagram Stories (imagen + marca + título + URL).
 const buildStoryCard = (url: string, t: string, meta: string): string => {
-	const enc = encodeURIComponent(t);
+	const enc = cldText(t);
 	// Línea discreta con género · autor (solo si hay algo). Va encima de la URL.
 	const metaLayer = meta
-		? 'co_rgb:f2e4cc,l_text:Georgia_40_bold:' +
-			encodeURIComponent(meta) +
-			'/g_south,y_220,fl_layer_apply/'
+		? 'co_rgb:f2e4cc,l_text:Georgia_40_bold:' + cldText(meta) + '/g_south,y_220,fl_layer_apply/'
 		: '';
 	const layers =
 		'co_rgb:e5468a,l_text:Georgia_46_bold:abulia%20terminal/g_north,y_180,fl_layer_apply/' +
@@ -114,7 +117,7 @@ const storyCard = heroImage ? buildStoryCard(heroImage, title, storyMeta) : null
 
 // Plantilla para "compartir una frase": el lector marca texto y se inserta en __Q__.
 const buildQuoteTemplate = (url: string, attribution: string): string => {
-	const attr = attribution ? encodeURIComponent(attribution) : '';
+	const attr = attribution ? cldText(attribution) : '';
 	const attrLayer = attr
 		? 'co_rgb:cbb89f,l_text:Georgia_34_bold:' + attr + '/g_south,y_140,fl_layer_apply/'
 		: '';
@@ -551,7 +554,9 @@ const AuthorBio =
 						return;
 					}
 					if (t.length > 240) t = t.slice(0, 238).trim() + '…';
-					var img = tpl.replace('__Q__', encodeURIComponent(t));
+					// Doble-codifica coma y barra: son separadores de Cloudinary.
+					var enc = encodeURIComponent(t).replace(/%2C/g, '%252C').replace(/%2F/g, '%252F');
+					var img = tpl.replace('__Q__', enc);
 					try {
 						if (navigator.clipboard) navigator.clipboard.writeText(pageUrl);
 					} catch (e) {}
