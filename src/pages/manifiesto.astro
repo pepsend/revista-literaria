@@ -14,7 +14,6 @@ import { SITE_TITLE } from '../consts';
 		<Header />
 		<main class="mf at-container">
 			<header class="mf-head">
-				<p class="mf-kicker">por qué existimos</p>
 				<h1 class="mf-title">manifiesto</h1>
 				<hr class="mf-rule" />
 			</header>
@@ -100,19 +99,22 @@ import { SITE_TITLE } from '../consts';
 	.mf-body p {
 		font-family: var(--font-display);
 		font-weight: 400;
-		font-size: 1.2rem;
-		line-height: 1.85;
+		font-size: 1.15rem;
+		line-height: 1.7;
 		color: var(--text);
-		margin: 0 0 1.9rem;
+		margin: 0 0 1.5rem;
+		text-align: justify;
+		-webkit-hyphens: auto;
+		hyphens: auto;
 	}
 	.mf-body p:last-child {
 		margin-bottom: 0;
 	}
 	.mf-lead {
-		font-size: clamp(1.35rem, 3vw, 1.7rem) !important;
+		font-size: clamp(1.3rem, 2.8vw, 1.6rem) !important;
 		line-height: 1.5 !important;
 		color: var(--ink) !important;
-		margin-bottom: 2.6rem !important;
+		margin-bottom: 2rem !important;
 	}
 	@media (max-width: 560px) {
 		.mf {
