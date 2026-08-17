@@ -46,6 +46,9 @@ const {
 // Relacionados válidos (descarta posibles nulos por seguridad).
 const relatedCards = (related || []).filter(Boolean) as CardData[];
 
+// Etiquetas limpias: sin vacías ni espacios sobrantes (evita enlaces rotos).
+const cleanTags = (tags || []).map((t) => (t || '').trim()).filter(Boolean);
+
 // Índice de contenidos: subtítulos h2/h3. Solo se muestra en textos estructurados.
 const toc = (headings || []).filter((h) => h.depth === 2 || h.depth === 3);
 const showToc = toc.length >= 3;
@@ -270,13 +273,13 @@ const AuthorBio =
 			</article>
 
 			{
-				tags.length > 0 && (
+				cleanTags.length > 0 && (
 					<section class="art-tags">
 						<span class="art-tags-label">// etiquetas</span>
 						<span class="art-tags-list">
-							{tags.map((t) => (
-								<a class="tag-chip" href={`/tags/${categorySlug(t.trim())}/`}>
-									#{t.trim()}
+							{cleanTags.map((t) => (
+								<a class="tag-chip" href={`/tags/${categorySlug(t)}/`}>
+									#{t}
 								</a>
 							))}
 						</span>

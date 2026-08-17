@@ -3,7 +3,7 @@ title: Haikukenna
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786588761/IMG-20240718-WA0016_nnek5a.jpg
 imagePosition: 50% 50%
 date: 2024-08-11T22:40:00.000-04:00
-author: " Joshua Restovich"
+author: "Joshua Restovich"
 category: Poesía
 justify: true
 authorBio: " oriundo de la Patagonia chilena, tiene 27 años. Es biólogo

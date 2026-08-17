@@ -3,7 +3,7 @@ title: Yo soy tú, tú eres yo and we’re all going to the world’s fair
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786126787/Were-All-Going-to-the-Worlds-Fair-SD_jiudp4.webp
 imagePosition: 50% 50%
 date: 2026-05-02T17:03:00.000-04:00
-author: " Sam G. Sanzana"
+author: "Sam G. Sanzana"
 category: Cine
 justify: true
 citations: >-

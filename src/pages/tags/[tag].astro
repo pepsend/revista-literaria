@@ -29,7 +29,12 @@ const { tagName } = Astro.props;
 const tagSlug = categorySlug(tagName);
 
 const posts = (await getCollection('posts'))
-	.filter((post) => (post.data.tags || []).some((t) => categorySlug((t || '').trim()) === tagSlug))
+	.filter((post) =>
+		(post.data.tags || [])
+			.map((t) => (t || '').trim())
+			.filter(Boolean)
+			.some((t) => categorySlug(t) === tagSlug),
+	)
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
