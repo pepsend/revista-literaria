@@ -20,56 +20,45 @@ import { SITE_TITLE } from '../consts';
 			</header>
 
 			<div class="mf-body">
-				<section class="mf-item">
-					<span class="mf-num">01</span>
-					<p class="mf-lead">
-						el equipo de abulia terminal comprende las visiones de mundo, la perspectiva
-						ante la vida, desde la literatura, como fuente primordial para su inserción
-						en el mundo terrenal —o su expulsión de él—. pretende que la literatura sea
-						leída, escrita, editada y reeditada en conjunto, colectivamente. es esta
-						percepción del panorama literario en Chile y Latinoamérica la que revela una
-						carencia esencial: el leer en solitario y el escribir en solitario son
-						comprensiones de un mundo que no se ha explorado en su compendio más libre,
-						con todas y cada una de sus aristas posibles. aquí se agotan todas y cada una
-						de esas aristas de colectivizar la actividad literaria, haciendo comunidad
-						discursiva crítica, con argumentos trabajados por medio de los fenómenos
-						presentes en las lecturas.
-					</p>
-				</section>
-
-				<section class="mf-item">
-					<span class="mf-num">02</span>
-					<p>
-						no pretendemos ser una “cueca absurda” ni sumarnos a las posibilidades ya
-						existentes en el medio, sino acotar aquel corpus para hacerlo nuestro:
-						manipularlo, rellenar sus vacíos abarcables —claro— y hacer esta comunidad
-						abúlica.
-					</p>
-				</section>
-
-				<section class="mf-item">
-					<span class="mf-num">03</span>
-					<p>
-						creemos firmemente en la reformulación de ideas, vengan de la línea de
-						pensamiento que vengan. por eso consideramos vital el resurgimiento de la
-						literatura, frente a la creencia falaz de que es individual —y de que en eso
-						se agota—, sin actividad comunitaria, sin actividad social.
-					</p>
-				</section>
-
-				<section class="mf-item">
-					<span class="mf-num">04</span>
-					<p>
-						somos un grupo de hombres y mujeres plagados de ilusión ante el nuevo
-						porvenir de la literatura, creyendo en nuestras convicciones escriturales,
-						lectoras y editoriales, creativas y profesionales y hasta instintivas.
-						consideramos que el estilismo libertario de la palabra por sí misma debe
-						tener un espacio en el creciente mundo de las letras, los libros y las
-						lecturas activas e inactivas, motivando la cosmovisión de un mundo más
-						libre: de pensamiento, de creencias sin censura, sin impuesto al libro y de
-						creatividad.
-					</p>
-				</section>
+				<p class="mf-lead">
+					comprendemos la literatura no como un refugio pasivo, sino como una fuente
+					primordial para articular nuestras visiones de mundo, enfrentar la existencia y
+					decidir nuestra inserción —o expulsión— de la realidad terrenal. sin negar ni
+					desmerecer la intimidad de la lectura y la escritura en solitario, reconocemos que
+					entender el panorama literario en Chile y Latinoamérica desde el aislamiento es
+					limitar el pensamiento a una sola dimensión.
+				</p>
+				<p>
+					pretendemos que la literatura se lea, se escriba, se edite y se reescriba en
+					comunidad. agotamos todas las aristas de la creación colectiva para construir una
+					comunidad discursiva y crítica, cuyos argumentos se forjen al calor de los textos y
+					los fenómenos de nuestro tiempo. reivindicamos un trabajo editorial colaborativo y
+					cercano entre editor y creador, orientado a pulir, potenciar y acompañar cada obra
+					sin invisibilizar ni perder jamás la voz propia del autor.
+				</p>
+				<p>
+					no buscamos sumarnos a las inercias del medio ni ser una comparsa más en la escena
+					habitual. reclamamos el corpus cultural para hacerlo nuestro: intervenirlo,
+					manipularlo, habitar sus vacíos y desarmar sus certidumbres. nos definimos como un
+					espacio abiertamente cultural y de resistencia que se sitúa en la tensión entre la
+					tradición y la ruptura, tensionando los discursos oficiales para edificar, desde la
+					disidencia estética, esta comunidad abúlica.
+				</p>
+				<p>
+					creemos firmemente en la reformulación constante de las ideas, vengan de la línea de
+					pensamiento que vengan, enfrentando la creencia falaz de que la literatura agota su
+					sentido en lo individual. reivindicamos la potencia de la palabra como un hecho
+					social y comunitario, capaz de agitar conciencias y desmantelar dogmas.
+				</p>
+				<p>
+					somos un colectivo movido por la convicción de que la creación —en sus dimensiones
+					escritural, lectora, editorial e instintiva— debe mantener intacto su carácter
+					libre. impulsamos y motivamos activamente a cada autor a publicar, perfeccionar su
+					propuesta y no darse jamás por vencido. reclamamos un espacio para el estilismo
+					libertario de la palabra en un circuito vivo de lecturas activas e inactivas,
+					promoviendo una cosmovisión sin censuras, sin barreras de acceso, libre de impuestos
+					al libro y al pensamiento, donde la creatividad sea una herramienta de emancipación.
+				</p>
 			</div>
 		</main>
 		<Footer />
@@ -104,47 +93,21 @@ import { SITE_TITLE } from '../consts';
 	.mf-body {
 		margin: 2.4rem 0 0;
 	}
-	.mf-item {
-		display: grid;
-		grid-template-columns: 3.5rem 1fr;
-		gap: 0 1.3rem;
-		align-items: start;
-		padding: 1.8rem 0;
-		border-top: 1px solid var(--line);
-	}
-	.mf-item:first-child {
-		border-top: 0;
-		padding-top: 0.4rem;
-	}
-	.mf-num {
-		font-family: var(--font-mono);
-		font-weight: 700;
-		font-size: 1rem;
-		color: var(--pink);
-		padding-top: 0.35rem;
-		letter-spacing: 0.02em;
-	}
-	.mf-item p {
+	.mf-body p {
 		font-family: var(--font-display);
 		font-weight: 400;
 		font-size: 1.18rem;
 		line-height: 1.72;
 		color: var(--text);
-		margin: 0;
+		margin: 0 0 1.5rem;
 	}
-	.mf-item .mf-lead {
+	.mf-body p:last-child {
+		margin-bottom: 0;
+	}
+	.mf-body p.mf-lead {
 		font-size: 1.34rem;
 		line-height: 1.55;
 		font-weight: 500;
-	}
-
-	@media (max-width: 560px) {
-		.mf-item {
-			grid-template-columns: 1fr;
-			gap: 0.5rem 0;
-		}
-		.mf-num {
-			padding-top: 0;
-		}
+		margin-bottom: 1.8rem;
 	}
 </style>
