@@ -3,7 +3,7 @@ title: "Un sorpresivo Bajos de Mena: Lanzamiento Grifo n°46"
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786578500/imagen_3x2_horizontal_sin_deformar_doznfp.jpg
 imagePosition: 58% 42%
 date: 2024-01-02T20:38:00.000-03:00
-author: Javier A. Pérez
+author: Javier A. Pérez Díaz
 category: Novedades
 justify: true
 tags:

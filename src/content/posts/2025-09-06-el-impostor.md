@@ -3,7 +3,7 @@ title: El impostor
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1786556645/1000027745_bsvsmz.jpg
 imagePosition: 49% 41%
 date: 2025-09-06T17:44:00.000-04:00
-author: Gabriel Palomo
+author: Gabriel Palomo Ponce
 category: Cuento
 justify: true
 authorBio: >
