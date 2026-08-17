@@ -16,55 +16,49 @@ import { SITE_TITLE } from '../consts';
 			<header class="mf-head">
 				<p class="mf-kicker">por qué existimos</p>
 				<h1 class="mf-title">manifiesto</h1>
-				<hr class="at-rule mf-rule" />
+				<hr class="mf-rule" />
 			</header>
 
 			<div class="mf-body">
 				<p class="mf-lead">
-					comprendemos la literatura no como un refugio pasivo, sino como
-					<em>una fuente primordial</em> para articular nuestras visiones de mundo, enfrentar la
-					existencia y decidir nuestra inserción —o expulsión— de la realidad terrenal. sin
-					negar ni desmerecer la intimidad de la lectura y la escritura en solitario,
-					reconocemos que entender el panorama literario en Chile y Latinoamérica desde el
-					aislamiento es limitar el pensamiento a una sola dimensión.
+					comprendemos la literatura no como un refugio pasivo, sino como una fuente primordial
+					para articular nuestras visiones de mundo, enfrentar la existencia y decidir nuestra
+					inserción —o expulsión— de la realidad terrenal. sin negar ni desmerecer la intimidad
+					de la lectura y la escritura en solitario, reconocemos que entender el panorama
+					literario en Chile y Latinoamérica desde el aislamiento es limitar el pensamiento a
+					una sola dimensión.
 				</p>
-
-				<span class="mf-tick"></span>
-
 				<p>
-					pretendemos que la literatura se lea, se escriba, se edite y se reescriba
-					<em>en comunidad</em>. agotamos todas las aristas de la creación colectiva para
-					construir una comunidad discursiva y crítica, cuyos argumentos se forjen al calor de
-					los textos y los fenómenos de nuestro tiempo. reivindicamos un trabajo editorial
-					colaborativo y cercano entre editor y creador, orientado a pulir, potenciar y
-					acompañar cada obra sin invisibilizar ni perder jamás la voz propia del autor.
+					pretendemos que la literatura se lea, se escriba, se edite y se reescriba en
+					comunidad. agotamos todas las aristas de la creación colectiva para construir una
+					comunidad discursiva y crítica, cuyos argumentos se forjen al calor de los textos y
+					los fenómenos de nuestro tiempo. reivindicamos un trabajo editorial colaborativo y
+					cercano entre editor y creador, orientado a pulir, potenciar y acompañar cada obra sin
+					invisibilizar ni perder jamás la voz propia del autor.
 				</p>
 				<p>
 					no buscamos sumarnos a las inercias del medio ni ser una comparsa más en la escena
 					habitual. reclamamos el corpus cultural para hacerlo nuestro: intervenirlo,
 					manipularlo, habitar sus vacíos y desarmar sus certidumbres. nos definimos como un
-					espacio abiertamente cultural y de <em>resistencia</em> que se sitúa en la tensión
-					entre la tradición y la ruptura, tensionando los discursos oficiales para edificar,
-					desde la disidencia estética, esta comunidad abúlica.
+					espacio abiertamente cultural y de resistencia que se sitúa en la tensión entre la
+					tradición y la ruptura, tensionando los discursos oficiales para edificar, desde la
+					disidencia estética, esta comunidad abúlica.
 				</p>
 				<p>
 					creemos firmemente en la reformulación constante de las ideas, vengan de la línea de
 					pensamiento que vengan, enfrentando la creencia falaz de que la literatura agota su
-					sentido en lo individual. reivindicamos <em>la potencia de la palabra</em> como un
-					hecho social y comunitario, capaz de agitar conciencias y desmantelar dogmas.
+					sentido en lo individual. reivindicamos la potencia de la palabra como un hecho social
+					y comunitario, capaz de agitar conciencias y desmantelar dogmas.
 				</p>
 				<p>
 					somos un colectivo movido por la convicción de que la creación —en sus dimensiones
-					escritural, lectora, editorial e instintiva— debe mantener intacto su carácter
-					libre. impulsamos y motivamos activamente a cada autor a publicar, perfeccionar su
-					propuesta y no darse jamás por vencido. reclamamos un espacio para el estilismo
-					libertario de la palabra en un circuito vivo de lecturas activas e inactivas,
-					promoviendo una cosmovisión sin censuras, sin barreras de acceso, libre de impuestos
-					al libro y al pensamiento, donde la creatividad sea
-					<em class="mf-strong">una herramienta de emancipación</em>.
+					escritural, lectora, editorial e instintiva— debe mantener intacto su carácter libre.
+					impulsamos y motivamos activamente a cada autor a publicar, perfeccionar su propuesta
+					y no darse jamás por vencido. reclamamos un espacio para el estilismo libertario de la
+					palabra en un circuito vivo de lecturas activas e inactivas, promoviendo una
+					cosmovisión sin censuras, sin barreras de acceso, libre de impuestos al libro y al
+					pensamiento, donde la creatividad sea una herramienta de emancipación.
 				</p>
-
-				<p class="mf-sign" aria-hidden="true">at<span>;</span></p>
 			</div>
 		</main>
 		<Footer />
@@ -73,83 +67,56 @@ import { SITE_TITLE } from '../consts';
 
 <style>
 	.mf {
-		max-width: 46rem;
-		padding: 3rem 1.5rem 5rem;
+		max-width: 42rem;
+		padding: 4.5rem 1.5rem 6rem;
 	}
 	.mf-kicker {
 		font-family: var(--font-mono);
-		font-size: 0.78rem;
-		letter-spacing: 0.28em;
+		font-size: 0.72rem;
+		letter-spacing: 0.34em;
 		text-transform: uppercase;
-		color: var(--pink);
-		margin: 0 0 0.5rem;
+		color: var(--muted);
+		margin: 0 0 0.9rem;
 	}
 	.mf-title {
 		font-family: var(--font-display);
 		font-weight: 900;
-		font-size: clamp(2.8rem, 9vw, 5rem);
+		font-size: clamp(3rem, 11vw, 5.5rem);
 		line-height: 0.9;
-		letter-spacing: -0.015em;
+		letter-spacing: -0.02em;
 		text-transform: lowercase;
+		color: var(--ink);
 		margin: 0;
 	}
 	.mf-rule {
-		margin: 1.4rem 0 0;
+		height: 1px;
+		background: var(--line);
+		border: 0;
+		margin: 2.4rem 0 0;
 	}
 	.mf-body {
-		margin: 2.6rem 0 0;
+		margin: 3rem 0 0;
 	}
 	.mf-body p {
 		font-family: var(--font-display);
 		font-weight: 400;
-		font-size: 1.16rem;
-		line-height: 1.78;
+		font-size: 1.2rem;
+		line-height: 1.85;
 		color: var(--text);
-		margin: 0 0 1.5rem;
+		margin: 0 0 1.9rem;
 	}
-	.mf-body em {
-		font-style: italic;
-		color: var(--pink);
+	.mf-body p:last-child {
+		margin-bottom: 0;
 	}
-	.mf-body em.mf-strong {
-		color: var(--orange);
-	}
-
-	/* Entrada grande con capital destacada */
 	.mf-lead {
-		font-size: clamp(1.35rem, 3.2vw, 1.85rem);
-		line-height: 1.42;
-		font-weight: 500;
-		margin: 0;
+		font-size: clamp(1.35rem, 3vw, 1.7rem) !important;
+		line-height: 1.5 !important;
+		color: var(--ink) !important;
+		margin-bottom: 2.6rem !important;
 	}
-	.mf-lead::first-letter {
-		float: left;
-		font-family: var(--font-display);
-		font-weight: 900;
-		font-size: 4.6rem;
-		line-height: 0.7;
-		color: var(--pink);
-		padding: 0.06em 0.14em 0 0;
-	}
-
-	.mf-tick {
-		display: block;
-		width: 84px;
-		height: 5px;
-		background: var(--pink);
-		margin: 2.4rem 0;
-	}
-
-	/* Cierre con el monograma */
-	.mf-body .mf-sign {
-		font-family: var(--font-display);
-		font-weight: 900;
-		font-size: 2.6rem;
-		line-height: 1;
-		color: var(--ink);
-		margin: 2.8rem 0 0;
-	}
-	.mf-body .mf-sign span {
-		color: var(--orange);
+	@media (max-width: 560px) {
+		.mf {
+			padding-top: 3rem;
+		}
 	}
 </style>
