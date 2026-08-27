@@ -151,6 +151,11 @@ const jsonLd = {
 	inLanguage: 'es',
 	mainEntityOfPage: { '@type': 'WebPage', '@id': shareUrl },
 	publisher: { '@type': 'Organization', name: 'abulia terminal' },
+	isPartOf: {
+		'@type': 'Periodical',
+		name: 'abulia terminal',
+		issn: '3087-3258',
+	},
 	...(author ? { author: { '@type': 'Person', name: author } } : {}),
 	...(ogAbs ? { image: [ogAbs] } : {}),
 	...(category ? { articleSection: category } : {}),
