@@ -30,7 +30,7 @@ Fue por el barrio El Golf, en la comuna de Las Condes, donde Gustavo se establec
 
 <figure data-fig data-align="centro" style="width:50%;margin:1.8rem auto;"><img src="https://res.cloudinary.com/cs8tnt88/image/upload/v1788906298/1_k9h3cz.jpg" alt="Gustavo Cerati en el metro de Santiago. Por Javier Godoy." /><figcaption>Gustavo Cerati en el metro de Santiago. Por Javier Godoy.</figcaption></figure>
 
-<div class="aln" data-aln data-align="centro" style="text-align:center;white-space:pre-wrap;"><em>La intimidad del Gustavo Cerati santiaguino</em></div>
+<p class="art-sub" data-sub>La intimidad del Gustavo Cerati santiaguino</p>
 
 Entre esas salidas, está la conocida visita al cerro Santa Lucía y el viaje en metro que el fotógrafo nacional Javier Godoy se encargó de registrar. 
 
@@ -66,7 +66,7 @@ Y esto fue otro de los temas de los que Cerati habló con Julio Osses durante es
 
 Fue también durante los años noventa y establecido en nuestro país cuando se hizo amigo de Francisco González, exintegrante de *Lucybell*, y la periodista y conductora radial Verónica Calabi. Sin embargo, fue el trabajo de producción para el álbum Sueños en tránsito de la artista nacional Nicole el que lo estableció como productor en nuestro país y con quien también tuvo lazos de amistad.
 
-<div class="aln" data-aln data-align="centro" style="text-align:center;white-space:pre-wrap;"><em>El recuerdo de un artista eterno</em></div>
+<p class="art-sub" data-sub>El recuerdo de un artista eterno</p>
 
 Fue el 4 de septiembre de 2014 cuando el mundo de la música se paralizó ante la noticia del fallecimiento del artista. En Chile, medios radiales y televisivos recordaron su figura desde que se anunció esta noticia hasta que se realizó su entierro en el cementerio de la Chacarita en Buenos Aires. Una cobertura que probablemente saldría de la boca de más de un chileno ante la pregunta de qué muerte de un artista le impactó.
 

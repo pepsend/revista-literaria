@@ -125,6 +125,18 @@ body {
   margin: 2rem 0;
   line-height: 1.6;
 }
+
+/* Subtitulo de seccion (componente "Subtitulo"). Mismo look que el sitio. */
+.pv-body .art-sub {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 1.4em;
+  line-height: 1.25;
+  text-align: center;
+  color: #1b1916;
+  margin: 2.9rem 0 1.4rem;
+}
 /* El motor del panel puede convertir texto pegado en "código";
    lo mostramos como prosa para que se vea igual que en el sitio. */
 .pv-body pre,

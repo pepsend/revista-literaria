@@ -467,6 +467,46 @@
         },
       });
 
+      /* ---------- Editor component "subtitulo": subtitulo de seccion ---------- */
+      var escSub_ = function (t) {
+        return String(t == null ? '' : t)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+      };
+      CMS.registerEditorComponent({
+        id: 'subtitulo',
+        label: 'Subtitulo',
+        fields: [
+          {
+            name: 'text',
+            label: 'Subtitulo',
+            widget: 'string',
+            hint: 'Titulo de una seccion dentro del articulo. Va centrado y en cursiva, mas grande que el cuerpo.',
+          },
+        ],
+        pattern: /^<p class="art-sub"[\s\S]*?<\/p>/,
+        fromBlock: function (match) {
+          var inner = (match[0].match(/>([\s\S]*?)<\/p>\s*$/) || [])[1] || '';
+          var text = inner
+            .replace(/<br\s*\/?>/gi, ' ')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+          return { text: text };
+        },
+        toBlock: function (obj) {
+          return '<p class="art-sub" data-sub>' + escSub_(obj.text) + '</p>';
+        },
+        toPreview: function (obj) {
+          return (
+            '<p class="art-sub" style="font-family:\'Fraunces\',Georgia,serif;font-weight:600;font-style:italic;font-size:1.4em;line-height:1.25;text-align:center;color:#1b1916;margin:2.9rem 0 1.4rem;">' +
+            escSub_(obj.text) +
+            '</p>'
+          );
+        },
+      });
+
       /* ---------- Estilos reales del sitio en la vista previa ---------- */
       CMS.registerPreviewStyle(
         'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,900;1,9..144,900&family=Space+Mono:wght@400;700&display=swap'

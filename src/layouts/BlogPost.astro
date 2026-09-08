@@ -876,6 +876,20 @@ const AuthorBio =
 		}
 	}
 
+	/* Subtitulo de seccion del articulo (componente "Subtitulo" del CMS).
+	   Independiente del bloque .aln de poemas: no se achica en movil. */
+	.prose :global(.art-sub) {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-style: italic;
+		font-size: 1.4em;
+		line-height: 1.25;
+		text-align: center;
+		text-wrap: balance;
+		color: var(--ink);
+		margin: 2.9rem 0 1.4rem;
+	}
+
 	/* Obras citadas — bloque distinto, on-brand, con sangría francesa */
 	.art-cites {
 		max-width: 40rem;
