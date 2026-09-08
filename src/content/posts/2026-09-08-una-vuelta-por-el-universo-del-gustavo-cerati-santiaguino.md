@@ -28,15 +28,9 @@ Fue por el barrio El Golf, en la comuna de Las Condes, donde Gustavo se establec
 
  Como un chileno más, Gustavo vivió la tranquilidad que no pudo tener en el caos de la fanaticada argentina, donde los fans lo abordaban, y, en cambio, en suelo chileno, podía sentirse como un ciudadano más. Fue también el lugar ideal en donde podía salir a pasear y criar a sus hijos fuera del costo de la fama. 
 
-
-
-
-
-<figure data-fig data-align="centro" style="width:80%;margin:1.8rem auto;"><img src="https://res.cloudinary.com/cs8tnt88/image/upload/v1788906298/1_k9h3cz.jpg" alt="Gustavo Cerati en el metro de Santiago. Por Javier Godoy." /><figcaption>Gustavo Cerati en el metro de Santiago. Por Javier Godoy.</figcaption></figure>
+<figure data-fig data-align="centro" style="width:50%;margin:1.8rem auto;"><img src="https://res.cloudinary.com/cs8tnt88/image/upload/v1788906298/1_k9h3cz.jpg" alt="Gustavo Cerati en el metro de Santiago. Por Javier Godoy." /><figcaption>Gustavo Cerati en el metro de Santiago. Por Javier Godoy.</figcaption></figure>
 
 <div class="aln" data-aln data-align="centro" style="text-align:center;white-space:pre-wrap;"><em>La intimidad del Gustavo Cerati santiaguino</em></div>
-
-
 
 Entre esas salidas, está la conocida visita al cerro Santa Lucía y el viaje en metro que el fotógrafo nacional Javier Godoy se encargó de registrar. 
 
@@ -50,11 +44,7 @@ Fue de esta forma como nació la idea de ir al cerro Santa Lucía, por lo cual l
 
 <figure data-fig data-align="centro" style="width:80%;margin:1.8rem auto;"><img src="https://res.cloudinary.com/cs8tnt88/image/upload/v1788907160/2_mpgzuf.jpg" alt="Gustavo Cerati en el metro de Santiago. Por Javier Godoy." /><figcaption>Gustavo Cerati en el metro de Santiago. Por Javier Godoy.</figcaption></figure>
 
-
-
 Después de eso fueron hacia el cerro Santa Lucía, lugar donde turistas argentinos también lo reconocieron y Godoy pudo sacar más. registros de esa salida. Ante la pregunta de Julio Osses sobre qué es Santiago, si Buenos Aires es “la ciudad de la furia”, Cerati le respondió: “Santiago para mí representa la calma”.
-
- 
 
 Por otro lado, el periodista y comunicador radial Marcelo Comparini también tuvo la oportunidad de compartir con el artista en suelo chileno. Él ha sido amigo cercano de Cecilia Amenábar desde incluso antes de que ella se casara con Cerati y fue en el matrimonio de ella donde lo pudo conocer cara a cara.
 
@@ -66,8 +56,6 @@ Comparini lo recuerda como un gran artista, pero además como un hombre, una per
 
 <figure data-fig data-align="centro" style="width:80%;margin:1.8rem auto;"><img src="https://res.cloudinary.com/cs8tnt88/image/upload/v1788907435/3_gqjujp.png" alt="Gustavo Cerati junto a Cecilia Amenábar y Marcelo Comparini para el programa Plaza Italia en 1997." /><figcaption>Gustavo Cerati junto a Cecilia Amenábar y Marcelo Comparini para el programa Plaza Italia en 1997.</figcaption></figure>
 
-
-
 Contó, además, que el ambiente familiar entre los Cerati-Amenábar era muy interesante, pues siempre estaban rodeados de música. Era la música por sobre todo, señalaba, recordando aquellas ocasiones en las que tuvo la oportunidad de ir a su hogar en Santiago y recordar a un pequeño Benito Cerati, quien siempre se colocaba frente al parlante para escuchar *Oasis*.
 
 Es así como el locutor radial y ex *Plaza Italia* lo recuerda, como alguien que disfrutó de su tranquilidad en Santiago. “Ir al supermercado de la esquina, comprar unas manzanas y volverse caminando a la casa, era algo que \[en] Argentina era imposible que hiciese. Así que yo creo que disfrutó mucho ese semi anonimato, esa tranquilidad que le daba que el chileno fuese mucho más recatado y no tan cargoso con la gente famosa”, cerró al respecto.
@@ -77,8 +65,6 @@ Y esto fue otro de los temas de los que Cerati habló con Julio Osses durante es
 “El argentino, cuando te aborda para algo, sobre todo si eres un personaje público, es terriblemente irrespetuoso. Se caga en todo y te dice ‘che, fírmame un autógrafo’ en cualquier momento. Te estás por comer un tallarín y te agarran en la mitad del tallarín. Acá es al revés. Hay una timidez respetuosa que no sé cómo llamarla, pero que me encanta”, comentó en la entrevista de Osses.
 
 Fue también durante los años noventa y establecido en nuestro país cuando se hizo amigo de Francisco González, exintegrante de *Lucybell*, y la periodista y conductora radial Verónica Calabi. Sin embargo, fue el trabajo de producción para el álbum Sueños en tránsito de la artista nacional Nicole el que lo estableció como productor en nuestro país y con quien también tuvo lazos de amistad.
-
-
 
 <div class="aln" data-aln data-align="centro" style="text-align:center;white-space:pre-wrap;"><em>El recuerdo de un artista eterno</em></div>
 
@@ -92,11 +78,7 @@ El fallecimiento de Gustavo Cerati impactó de tal forma que su hermana, Laura C
 
 <figure data-fig data-align="centro" style="width:80%;margin:1.8rem auto;"><img src="https://res.cloudinary.com/cs8tnt88/image/upload/v1788907990/Captura_de_pantalla_2026-09-08_a_la_s_7.52.38_p._m._rwdtnj.png" alt="Fotografía al celular de Laura Cerati (imagen publicada vía Instagram)." /><figcaption>Fotografía al celular de Laura Cerati (imagen publicada vía Instagram).</figcaption></figure>
 
-
-
 Hoy en día tanto su hijo Benito como su hija Lisa Cerati recuerdan la figura paterna que fue Gustavo Cerati en la intimidad, cuando las luces del escenario se apagaban y él volvía a casa para estar con ellos, o bien, enviarles un mensaje a sus seres queridos. 
-
- 
 
 Para sus fans, Gustavo Cerati es un artista de nivel cuya figura jamás morirá. Es común encontrar en su aniversario de fallecimiento o cumpleaños mensajes de fans de todo el mundo, y al igual que la expresión “gracias totales”, sus palabras quedaron inmortalizadas en el tiempo.
 
