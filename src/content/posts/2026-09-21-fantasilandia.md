@@ -1,7 +1,7 @@
 ---
 title: Fantasilandia
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1790029981/7727_nfqnhj.jpg
-imagePosition: 50% 50%
+imagePosition: 49% 39%
 date: 2026-09-21T19:33:00.000-03:00
 author: Daniela Arriagada Muñoz
 category: Crónica
@@ -11,7 +11,8 @@ tags:
   - Cuerpos
   - Fantasilandia
 authorBio: Estudiante de primer año de Licenciatura en Lengua y Literatura en la
-  Universidad Alberto Hurtado.
+  Universidad Alberto Hurtado. El borderline y las alucinaciones son el impulso
+  de cada palabra que leen y de lo que les puedo llegar a compartir.
 ---
 Subí a un juego con mi amiga, nos dijeron que probáramos separadas ya que yo no cabía. En ese momento me sucedió algo, parte de mi cerebro se aisló de mi cuerpo, no disfruté ese juego. No grité ni reí como lo hice en los anteriores. Sabía que mis 137 problemas me restringían disfrutar en su totalidad. En todos los juegos me preocupaba entrar en los asientos y que los seguros quedaran bien, incluso si eso me asfixiara. Sabía semanas antes que tenía un gran problema que resolver y todo era tan sólido como la grasita que tenía en todo mi cuerpo. Admito aquí, en estas palabras, que estoy totalmente avergonzada de haber llegado a esto. Solo veo chicas delgadas a las cuales me gustaría imitar, lejos ha sido mi sueño que aún no he cumplido, pero que todavía puedo llevar a cabo. El tiempo lo tengo, solo me falta un poquito de confianza y de autoestima.
 
