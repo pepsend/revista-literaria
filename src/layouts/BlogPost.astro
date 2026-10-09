@@ -95,17 +95,17 @@ const buildStoryCard = (url: string, t: string, meta: string): string => {
 	const enc = cldText(t);
 	// Línea discreta con género · autor (solo si hay algo). Va encima de la URL.
 	const metaLayer = meta
-		? 'co_rgb:f2e4cc,l_text:Georgia_40_bold:' + cldText(meta) + '/g_south,y_220,fl_layer_apply/'
+		? 'co_rgb:f2e4cc,l_text:Georgia_40_bold:' + cldText(meta) + '/e_shadow:60,x_2,y_3,co_black/g_south,y_220,fl_layer_apply/'
 		: '';
 	const layers =
-		'co_rgb:e5468a,l_text:Georgia_46_bold:abulia%20terminal/g_north,y_180,fl_layer_apply/' +
+		'co_rgb:e5468a,l_text:Georgia_46_bold:abulia%20terminal/e_shadow:60,x_2,y_3,co_black/g_north,y_180,fl_layer_apply/' +
 		// Ancho junto al texto → el título largo envuelve en varias líneas (no se encoge).
 		'w_880,c_fit,co_rgb:f2e4cc,l_text:Georgia_84_bold:' +
 		enc +
-		'/g_center,fl_layer_apply/' +
+		'/e_shadow:75,x_2,y_4,co_black/g_center,fl_layer_apply/' +
 		metaLayer +
-		'co_rgb:cbb89f,l_text:Georgia_28_bold:abuliaterminal.cl/g_south,y_150,fl_layer_apply';
-	const overlay = 'w_1080,h_1920,c_fill,g_auto,f_jpg,q_auto:good/e_saturation:-15/e_contrast:8/co_black,e_colorize:12/' + layers;
+		'co_rgb:cbb89f,l_text:Georgia_28_bold:abuliaterminal.cl/e_shadow:60,x_1,y_2,co_black/g_south,y_150,fl_layer_apply';
+	const overlay = 'w_1080,h_1920,c_fill,g_auto,f_jpg,q_auto:good/e_saturation:-15/e_contrast:8/co_black,e_colorize:10/' + layers;
 	const marker = '/image/upload/';
 	const idx = url.indexOf(marker);
 	if (idx !== -1 && url.includes('res.cloudinary.com')) {
@@ -122,13 +122,13 @@ const storyCard = heroImage ? buildStoryCard(heroImage, title, storyMeta) : null
 const buildQuoteTemplate = (url: string, attribution: string): string => {
 	const attr = attribution ? cldText(attribution) : '';
 	const attrLayer = attr
-		? 'co_rgb:cbb89f,l_text:Georgia_34_bold:' + attr + '/g_south,y_180,fl_layer_apply/'
+		? 'co_rgb:cbb89f,l_text:Georgia_34_bold:' + attr + '/e_shadow:60,x_2,y_3,co_black/g_south,y_180,fl_layer_apply/'
 		: '';
 	const layers =
-		'co_rgb:e5468a,l_text:Georgia_46_bold:abulia%20terminal/g_north,y_180,fl_layer_apply/' +
-		'w_880,c_fit,co_rgb:f2e4cc,l_text:Georgia_64_italic:__Q__/g_center,fl_layer_apply/' +
+		'co_rgb:e5468a,l_text:Georgia_46_bold:abulia%20terminal/e_shadow:60,x_2,y_3,co_black/g_north,y_180,fl_layer_apply/' +
+		'w_880,c_fit,co_rgb:f2e4cc,l_text:Georgia_64_italic:__Q__/e_shadow:75,x_2,y_4,co_black/g_center,fl_layer_apply/' +
 		attrLayer;
-	const overlay = 'w_1080,h_1920,c_fill,g_auto,f_jpg,q_auto:good/e_saturation:-15/e_contrast:8/co_black,e_colorize:12/' + layers;
+	const overlay = 'w_1080,h_1920,c_fill,g_auto,f_jpg,q_auto:good/e_saturation:-15/e_contrast:8/co_black,e_colorize:10/' + layers;
 	const marker = '/image/upload/';
 	const idx = url.indexOf(marker);
 	if (idx !== -1 && url.includes('res.cloudinary.com')) {
