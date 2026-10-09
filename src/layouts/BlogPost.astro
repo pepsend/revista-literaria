@@ -102,7 +102,7 @@ const buildStoryCard = (url: string, t: string, meta: string): string => {
 		? 'co_rgb:d2c7b5,l_text:Georgia_40_bold:' + cldText(meta) + '/g_south,y_260,fl_layer_apply/'
 		: '';
 	const layers =
-		'co_rgb:ffffff,l_text:Georgia_40_bold:abulia%20terminal/g_north,y_90,fl_layer_apply/' +
+		'co_rgb:ffffff,l_text:Georgia_40_bold:abulia%20terminal/e_shadow:70,x_0,y_2,co_black/g_north,y_90,fl_layer_apply/' +
 		lineLayer +
 		'w_920,c_fit,co_rgb:ffffff,l_text:Georgia_72_bold:' +
 		enc +
@@ -130,7 +130,7 @@ const buildQuoteTemplate = (url: string, attribution: string): string => {
 		? 'co_rgb:d2c7b5,l_text:Georgia_38_bold:' + attr + '/g_south,y_220,fl_layer_apply/'
 		: '';
 	const layers =
-		'co_rgb:ffffff,l_text:Georgia_40_bold:abulia%20terminal/g_north,y_90,fl_layer_apply/' +
+		'co_rgb:ffffff,l_text:Georgia_40_bold:abulia%20terminal/e_shadow:70,x_0,y_2,co_black/g_north,y_90,fl_layer_apply/' +
 		lineLayer +
 		'w_920,c_fit,co_rgb:ffffff,l_text:Georgia_56_italic:%E2%80%9C__Q__%E2%80%9D/g_south,y_360,fl_layer_apply/' +
 		attrLayer +
