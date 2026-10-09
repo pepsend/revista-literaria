@@ -25,6 +25,6 @@ Desde Calbuco, Región de Los Lagos, he escrito un texto dramático llamado *Una
 \
 “Una obra imposible de nombrar” es un proyecto desarrollado con la Beca de Creación Literaria, Categoría Infanto-Juvenil, del Fondo del Libro y La Lectura 2024, del Ministerio de las Culturas, Las Artes y El Patrimonio.
 
-<figure data-fig data-align="centro" style="width:100%;margin:1.8rem auto;"><img src="https://res.cloudinary.com/cs8tnt88/image/upload/v1791510018/Imagen2_a06lyt.png" alt="" /></figure>
+<figure data-fig data-align="centro" style="width:100%;margin:1.8rem auto;"><img src="https://res.cloudinary.com/cs8tnt88/image/upload/v1791510723/aqui_se_lee_hlxcn2.png" alt="" /></figure>
 
-<figure data-fig data-align="centro" style="width:100%;margin:1.8rem auto;"><img src="https://res.cloudinary.com/cs8tnt88/image/upload/v1791510024/Imagen1_jgtasm.png" alt="" /></figure>
+<figure data-fig data-align="centro" style="width:100%;margin:1.8rem auto;"><img src="https://res.cloudinary.com/cs8tnt88/image/upload/v1791510727/ministerio_kwhekw.png" alt="" /></figure>
