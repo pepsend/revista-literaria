@@ -91,21 +91,25 @@ const buildOgCard = (url: string, t: string): string => {
 const ogCard = heroImage ? buildOgCard(heroImage, title) : null;
 
 // Tarjeta vertical 9:16 para Instagram Stories (imagen + marca + título + URL).
+// Arquitectura editorial:
+// 1. Imagen en la parte superior (1080x1180): sin textos encima que tapen la obra.
+// 2. Extensión a 1080x1920 con fondo negro mate (#0e0e0e) en la parte inferior.
+// 3. Línea divisoria elegante y textos (título, autor, URL) en el bloque oscuro.
 const buildStoryCard = (url: string, t: string, meta: string): string => {
 	const enc = cldText(t);
-	// Línea discreta con género · autor (solo si hay algo). Va encima de la URL.
+	const lineLayer = 'b_rgb:3d3d3d,w_920,h_2,c_fill,l_text:arial_2:./g_north,y_1180,fl_layer_apply/';
 	const metaLayer = meta
-		? 'co_rgb:f2e4cc,l_text:Georgia_40_bold:' + cldText(meta) + '/e_shadow:60,x_2,y_3,co_black/g_south,y_220,fl_layer_apply/'
+		? 'co_rgb:d2c7b5,l_text:Georgia_40_bold:' + cldText(meta) + '/g_south,y_260,fl_layer_apply/'
 		: '';
 	const layers =
-		'co_rgb:e5468a,l_text:Georgia_46_bold:abulia%20terminal/e_shadow:60,x_2,y_3,co_black/g_north,y_180,fl_layer_apply/' +
-		// Ancho junto al texto → el título largo envuelve en varias líneas (no se encoge).
-		'w_880,c_fit,co_rgb:f2e4cc,l_text:Georgia_84_bold:' +
+		'co_rgb:ffffff,l_text:Georgia_40_bold:abulia%20terminal/g_north,y_90,fl_layer_apply/' +
+		lineLayer +
+		'w_920,c_fit,co_rgb:ffffff,l_text:Georgia_72_bold:' +
 		enc +
-		'/e_shadow:75,x_2,y_4,co_black/g_center,fl_layer_apply/' +
+		'/g_south,y_380,fl_layer_apply/' +
 		metaLayer +
-		'co_rgb:cbb89f,l_text:Georgia_28_bold:abuliaterminal.cl/e_shadow:60,x_1,y_2,co_black/g_south,y_150,fl_layer_apply';
-	const overlay = 'w_1080,h_1920,c_fill,g_auto,f_jpg,q_auto:good/e_saturation:-15/e_contrast:8/co_black,e_colorize:10/' + layers;
+		'co_rgb:8e8880,l_text:Georgia_28_bold:abuliaterminal.cl/g_south,y_150,fl_layer_apply';
+	const overlay = 'w_1080,h_1180,c_fill,g_auto,f_jpg,q_auto:good/w_1080,h_1920,c_pad,g_north,b_rgb:0e0e0e/' + layers;
 	const marker = '/image/upload/';
 	const idx = url.indexOf(marker);
 	if (idx !== -1 && url.includes('res.cloudinary.com')) {
@@ -121,14 +125,17 @@ const storyCard = heroImage ? buildStoryCard(heroImage, title, storyMeta) : null
 // Plantilla para "compartir una frase": el lector marca texto y se inserta en __Q__.
 const buildQuoteTemplate = (url: string, attribution: string): string => {
 	const attr = attribution ? cldText(attribution) : '';
+	const lineLayer = 'b_rgb:3d3d3d,w_920,h_2,c_fill,l_text:arial_2:./g_north,y_1180,fl_layer_apply/';
 	const attrLayer = attr
-		? 'co_rgb:cbb89f,l_text:Georgia_34_bold:' + attr + '/e_shadow:60,x_2,y_3,co_black/g_south,y_180,fl_layer_apply/'
+		? 'co_rgb:d2c7b5,l_text:Georgia_38_bold:' + attr + '/g_south,y_220,fl_layer_apply/'
 		: '';
 	const layers =
-		'co_rgb:e5468a,l_text:Georgia_46_bold:abulia%20terminal/e_shadow:60,x_2,y_3,co_black/g_north,y_180,fl_layer_apply/' +
-		'w_880,c_fit,co_rgb:f2e4cc,l_text:Georgia_64_italic:__Q__/e_shadow:75,x_2,y_4,co_black/g_center,fl_layer_apply/' +
-		attrLayer;
-	const overlay = 'w_1080,h_1920,c_fill,g_auto,f_jpg,q_auto:good/e_saturation:-15/e_contrast:8/co_black,e_colorize:10/' + layers;
+		'co_rgb:ffffff,l_text:Georgia_40_bold:abulia%20terminal/g_north,y_90,fl_layer_apply/' +
+		lineLayer +
+		'w_920,c_fit,co_rgb:ffffff,l_text:Georgia_56_italic:%E2%80%9C__Q__%E2%80%9D/g_south,y_360,fl_layer_apply/' +
+		attrLayer +
+		'co_rgb:8e8880,l_text:Georgia_28_bold:abuliaterminal.cl/g_south,y_140,fl_layer_apply';
+	const overlay = 'w_1080,h_1180,c_fill,g_auto,f_jpg,q_auto:good/w_1080,h_1920,c_pad,g_north,b_rgb:0e0e0e/' + layers;
 	const marker = '/image/upload/';
 	const idx = url.indexOf(marker);
 	if (idx !== -1 && url.includes('res.cloudinary.com')) {
