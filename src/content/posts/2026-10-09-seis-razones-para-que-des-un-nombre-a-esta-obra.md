@@ -4,8 +4,15 @@ heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1791510344/cf352b4a
 imagePosition: 50% 47%
 date: 2026-10-08T22:46:00.000-03:00
 author: "Matías Díaz Huirimilla "
-category: Creación Abúlica
+category: Artículo
 justify: true
+authorBio: |-
+  Matías Díaz Huirimilla es escritor. Ha publicado  Dos poemas 
+  verdes y uno aguachento (2019) y Volverse señor (2022), La Trilogía del Pop 
+  (2023) y "Una obra imposible de nombrar" (2026). Esta última con el apoyo 
+  de la Beca de Creación Literaria, en la categoría Infanto Juvenil, del 
+  Fondo del Libro y La Lectura 2024, del Ministerio de Las Culturas, Las 
+  Artes y El Patrimonio.
 ---
 Desde Calbuco, Región de Los Lagos, he escrito un texto dramático llamado *Una obra imposible de nombrar*. En agosto pasado, Editorial Escafandra presentó una humilde y dedicada edición de dicha obra en la biblioteca de nuestra comuna. Quizá no has oído de mí, de Editorial Escafandra o de Calbuco, pero seguro sí sabes de la niñez, la adolescencia, la violencia de género y de Chayanne, el cantante. Por lo mismo, escribo este artículo para invitarte a leer mi texto o, más bien, a darle un nombre a esta obra “imposible de nombrar”. Intentaré convencerte con seis razones:
 
