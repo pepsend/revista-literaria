@@ -1,7 +1,7 @@
 ---
 title: Seis razones para que des un nombre a esta obra
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1791510344/cf352b4a-8a56-4758-92b1-a186c96ad292_mgc9nb.jpg
-imagePosition: 50% 47%
+imagePosition: 50% 45%
 date: 2026-10-08T22:46:00.000-03:00
 author: "Matías Díaz Huirimilla "
 category: Artículo
