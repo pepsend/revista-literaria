@@ -1,11 +1,10 @@
 ---
-// Import the global.css file here so that it is included on
+// Import the global.css and zine.css files here so that they are included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import '../styles/zine.css';
 import type { ImageMetadata } from 'astro';
 import { SITE_TITLE } from '../consts';
-import { Font } from 'astro:assets';
 
 interface Props {
 	title: string;
@@ -64,9 +63,13 @@ const socialImage = ogImage
 	})();
 </script>
 
-<!-- Fuentes: Fraunces (display) + Space Mono (terminal) -->
+<!-- Optimización de conexiones a CDNs esenciales -->
+<link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+<link rel="dns-prefetch" href="https://res.cloudinary.com" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- Fuentes: Fraunces (display) + Space Mono (terminal) -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,600;1,9..144,900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
 	rel="stylesheet"
@@ -74,7 +77,7 @@ const socialImage = ogImage
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -85,29 +88,35 @@ const socialImage = ogImage
 	title={SITE_TITLE}
 	href={new URL('rss.xml', Astro.site)}
 />
-<meta name="theme-color" content="#f2e4cc" />
-
-<Font cssVariable="--font-atkinson" preload />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2e4cc" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#14110f" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
+<meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:site_name" content="abulia terminal" />
+<meta property="og:locale" content="es_CL" />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={socialImage} />
+<meta property="og:image:alt" content={title} />
 {type === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
 {type === 'article' && authorName && <meta property="article:author" content={authorName} />}
 {type === 'article' && section && <meta property="article:section" content={section} />}
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@abuliaterminal" />
+<meta name="twitter:url" content={canonicalURL} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={socialImage} />

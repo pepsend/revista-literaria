@@ -7,6 +7,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import Comments from '../components/Comments.astro';
+import { getOptimizedImageUrl, getResponsiveSrcSet } from '../utils/images';
 
 type CardData = {
 	slug: string;
@@ -157,13 +158,30 @@ const jsonLd = {
 	dateModified: date.toISOString(),
 	inLanguage: 'es',
 	mainEntityOfPage: { '@type': 'WebPage', '@id': shareUrl },
-	publisher: { '@type': 'Organization', name: 'abulia terminal' },
+	publisher: {
+		'@type': 'Organization',
+		name: 'abulia terminal',
+		url: 'https://abuliaterminal.cl/',
+		logo: {
+			'@type': 'ImageObject',
+			url: 'https://abuliaterminal.cl/og-default.png',
+		},
+	},
 	isPartOf: {
 		'@type': 'Periodical',
 		name: 'abulia terminal',
 		issn: '3087-3258',
+		url: 'https://abuliaterminal.cl/',
 	},
-	...(author ? { author: { '@type': 'Person', name: author } } : {}),
+	...(author
+		? {
+				author: {
+					'@type': 'Person',
+					name: author,
+					url: `https://abuliaterminal.cl/autores/${categorySlug(author)}/`,
+				},
+			}
+		: {}),
 	...(ogAbs ? { image: [ogAbs] } : {}),
 	...(category ? { articleSection: category } : {}),
 };
@@ -194,8 +212,8 @@ const AuthorBio =
 <html lang="es">
 	<head>
 		<BaseHead
-			title={title}
-			description={category ? `${category} — ${title}` : title}
+			title={`${title} · abulia terminal`}
+			description={category ? `${category} · ${author ? author + ' — ' : ''}${title}. En abulia terminal, revista literaria.` : `${title} · abulia terminal`}
 			ogImage={ogCard ?? heroImage}
 			type="article"
 			publishedTime={date.toISOString()}
@@ -229,10 +247,15 @@ const AuthorBio =
 			<div class="art-hero">
 				<img
 					class="at-duotone"
-					src={heroImage || DEFAULT_COVER}
+					src={getOptimizedImageUrl(heroImage, { width: 1200, height: 675, crop: 'fill', quality: 'auto:good' })}
+					srcset={getResponsiveSrcSet(heroImage, [480, 768, 1080, 1400], 16 / 9)}
+					sizes="(max-width: 960px) 100vw, 960px"
 					alt={title}
-					width="1600"
-					height="900"
+					width="1200"
+					height="675"
+					fetchpriority="high"
+					loading="eager"
+					decoding="async"
 					style={`object-position: ${imagePosition};`}
 				/>
 			</div>
@@ -240,6 +263,17 @@ const AuthorBio =
 			<div class="art-share art-share--top">
 				<span class="art-share-label">// compartir</span>
 				<div class="art-share-btns">
+					<button
+						class="share-btn share-btn--native"
+						type="button"
+						id="native-share"
+						data-title={title}
+						data-url={shareUrl}
+						style="display: none;"
+						aria-label="Compartir en tu dispositivo"
+					>
+						⤤ compartir
+					</button>
 					<a class="share-btn" href={waHref} target="_blank" rel="noopener noreferrer">WhatsApp</a>
 					<a class="share-btn" href={xHref} target="_blank" rel="noopener noreferrer">X</a>
 					{storyCard && (
@@ -359,9 +393,10 @@ const AuthorBio =
 									<span class="rel-thumb">
 										<img
 											class="at-duotone"
-											src={r.heroImage || DEFAULT_COVER}
+											src={getOptimizedImageUrl(r.heroImage, { width: 360, height: 240, crop: 'fill', quality: 'auto:good' })}
 											alt={r.title}
 											loading="lazy"
+											decoding="async"
 											width="300"
 											height="200"
 											style={`object-position: ${r.imagePosition};`}
@@ -448,25 +483,39 @@ const AuthorBio =
 						}
 					});
 				}
-				// Compartir a Instagram (celular): imagen 9:16. Se pre-descarga en segundo
-				// plano para que al tocar el botón el compartir sea SÍNCRONO (iOS pierde el
-				// permiso del gesto si hay un fetch en medio).
+				// Botón nativo de compartir para celulares (iOS Safari / Android Chrome)
+				var nativeBtn = document.getElementById('native-share');
+				if (nativeBtn && navigator.share) {
+					nativeBtn.style.display = 'inline-flex';
+					nativeBtn.addEventListener('click', function () {
+						navigator.share({
+							title: nativeBtn.getAttribute('data-title') || document.title,
+							url: nativeBtn.getAttribute('data-url') || location.href,
+						}).catch(function () {});
+					});
+				}
+				// Compartir a Instagram (celular): imagen 9:16.
+				// Se pre-descarga solo al interactuar (hover o touchstart) para no malgastar datos móviles.
 				var storyBtn = document.getElementById('share-story');
 				if (storyBtn) {
 					var storyImg = storyBtn.getAttribute('data-story');
 					var storyFile = null;
-					if (storyImg) {
+					var isPrep = false;
+					var prepStory = function () {
+						if (!storyImg || storyFile || isPrep) return;
+						isPrep = true;
 						fetch(storyImg)
-							.then(function (r) {
-								return r.blob();
-							})
+							.then(function (r) { return r.blob(); })
 							.then(function (b) {
 								storyFile = new File([b], 'abulia-terminal.jpg', {
 									type: b.type || 'image/jpeg',
 								});
 							})
-							.catch(function () {});
-					}
+							.catch(function () {})
+							.finally(function () { isPrep = false; });
+					};
+					storyBtn.addEventListener('mouseenter', prepStory, { passive: true });
+					storyBtn.addEventListener('touchstart', prepStory, { passive: true });
 					storyBtn.addEventListener('click', function () {
 						if (storyFile && navigator.canShare && navigator.canShare({ files: [storyFile] })) {
 							navigator.share({ files: [storyFile] }).catch(function () {});
@@ -806,6 +855,14 @@ const AuthorBio =
 	   los poemas del bloque «Texto alineado» conservan su alineación propia. */
 	.prose--justify :global(p) {
 		text-align: justify;
+		text-justify: inter-word;
+		hyphens: auto;
+		-webkit-hyphens: auto;
+	}
+	@media (max-width: 480px) {
+		.prose--justify :global(p) {
+			text-align: left;
+		}
 	}
 	.prose :global(p) {
 		margin: 0 0 1.3rem;
@@ -1287,10 +1344,23 @@ const AuthorBio =
 		color: var(--ink);
 		background: transparent;
 		border: 2px solid var(--ink);
-		padding: 0.24rem 0.55rem;
+		padding: 0.3rem 0.6rem;
 		text-decoration: none;
 		cursor: pointer;
+		min-height: 36px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
 		transition: background 0.15s ease, color 0.15s ease;
+	}
+	.share-btn--native {
+		background: var(--pink);
+		color: var(--ink);
+		font-weight: 700;
+	}
+	.share-btn--native:hover {
+		background: var(--ink);
+		color: var(--paper);
 	}
 	.share-btn:hover {
 		background: var(--ink);
