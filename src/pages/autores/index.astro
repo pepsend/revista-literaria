@@ -38,14 +38,14 @@ const inicial = (name: string) => name.trim().charAt(0).toUpperCase();
 			<a class="back" href="/">← índice</a>
 
 			<header class="ai-head">
-				<p class="ai-kicker">// autores</p>
+				<p class="ai-kicker">directorio de autores</p>
 				<h1 class="ai-title">quiénes escriben</h1>
 				<p class="ai-count">
 					{autores.length} autor{autores.length === 1 ? '' : 'es'}
 				</p>
 			</header>
 
-			{autores.length === 0 && <p class="ai-empty">// aún sin autores</p>}
+			{autores.length === 0 && <p class="ai-empty">aún sin autores registrados</p>}
 
 			<section class="ai-grid">
 				{
@@ -126,14 +126,15 @@ const inicial = (name: string) => name.trim().charAt(0).toUpperCase();
 		gap: 0.9rem;
 		padding: 0.9rem 1rem;
 		border: 2px solid var(--ink);
+		box-shadow: 2px 2px 0 var(--ink);
 		background: var(--paper-2);
 		text-decoration: none;
 		color: var(--ink);
 		transition: box-shadow 0.2s ease, transform 0.2s ease;
 	}
 	.ai-card:hover {
-		box-shadow: 6px 6px 0 var(--pink);
-		transform: translate(-2px, -2px);
+		box-shadow: 4px 4px 0 var(--ink);
+		transform: translate(-1px, -1px);
 	}
 	.ai-avatar {
 		flex: 0 0 auto;

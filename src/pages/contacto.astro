@@ -70,7 +70,7 @@ import { SITE_TITLE } from '../consts';
 				</div>
 
 				<aside class="ct-team">
-					<p class="ct-team-label">// equipo</p>
+					<p class="ct-team-label">equipo editorial</p>
 					<p><strong>Tomás Ragga Sepúlveda</strong> — escribe y edita.</p>
 					<p><strong>Víctor Fleitas Larraín</strong> — edita y coordina.</p>
 				</aside>
@@ -91,7 +91,7 @@ import { SITE_TITLE } from '../consts';
 				function gracias() {
 					var w = document.getElementById('ct-form-wrap');
 					if (w) w.innerHTML =
-						'<p class="ct-ok">// enviado</p>' +
+						'<p class="ct-ok">mensaje enviado</p>' +
 						'<p class="ct-ok-msg">gracias por escribirnos. te responderemos pronto.</p>';
 				}
 			})();
@@ -190,11 +190,11 @@ import { SITE_TITLE } from '../consts';
 	.ct-submit:hover {
 		background: var(--ink);
 		color: var(--paper);
-		box-shadow: 5px 5px 0 var(--pink);
+		box-shadow: 5px 5px 0 var(--ink);
 	}
 	.ct-submit:active {
 		transform: translate(2px, 2px);
-		box-shadow: 3px 3px 0 var(--pink);
+		box-shadow: 3px 3px 0 var(--ink);
 	}
 
 	.ct-team {

@@ -261,7 +261,7 @@ const AuthorBio =
 			</div>
 
 			<div class="art-share art-share--top">
-				<span class="art-share-label">// compartir</span>
+				<span class="art-share-label">compartir</span>
 				<div class="art-share-btns">
 					<button
 						class="share-btn share-btn--native"
@@ -294,7 +294,7 @@ const AuthorBio =
 			</div>
 
 			<div class="reading-size" role="group" aria-label="Tamaño del texto">
-				<span class="rs-label">// tamaño</span>
+				<span class="rs-label">cuerpo</span>
 				<button id="rs-dec" class="rs-btn" type="button" aria-label="Achicar texto">A−</button>
 				<button id="rs-inc" class="rs-btn" type="button" aria-label="Agrandar texto">A+</button>
 			</div>
@@ -302,7 +302,7 @@ const AuthorBio =
 			{
 				showToc && (
 					<nav class="art-toc" aria-label="Índice del texto">
-						<p class="art-toc-label">// índice</p>
+						<p class="art-toc-label">índice del texto</p>
 						<ol class="art-toc-list">
 							{toc.map((h) => (
 								<li class:list={['toc-item', { 'toc-sub': h.depth === 3 }]}>
@@ -321,7 +321,7 @@ const AuthorBio =
 			{
 				cleanTags.length > 0 && (
 					<section class="art-tags">
-						<span class="art-tags-label">// etiquetas</span>
+						<span class="art-tags-label">archivo & temas</span>
 						<span class="art-tags-list">
 							{cleanTags.map((t) => (
 								<a class="tag-chip" href={`/tags/${categorySlug(t)}/`}>
@@ -336,7 +336,7 @@ const AuthorBio =
 			{
 				(postBioLines.length > 0 || AuthorBio) && (
 					<aside class="art-author">
-						<p class="art-author-label">// sobre el autor</p>
+						<p class="art-author-label">nota biográfica</p>
 						{author && (
 							<p class="art-author-name">
 								<a href={`/autores/${categorySlug(author)}/`}>{author}</a>
@@ -352,7 +352,7 @@ const AuthorBio =
 			{
 				citationLines.length > 0 && (
 					<section class="art-cites">
-						<p class="art-cites-label">// obras citadas</p>
+						<p class="art-cites-label">obras citadas & referencias</p>
 						<ul class="art-cites-list">
 							{citationLines.map((c) => (
 								<li class="art-cites-item">{c}</li>
@@ -362,11 +362,11 @@ const AuthorBio =
 				)
 			}
 
-			<p class="art-end">// fin del texto</p>
+			<p class="art-end">— abulia terminal</p>
 
 			<aside class="art-support">
 				<div class="art-support-box">
-					<p class="art-support-kicker">// apoyo editorial</p>
+					<p class="art-support-kicker">apoyo a la revista</p>
 					<h3 class="art-support-title">¿te gustó esta lectura?</h3>
 					<p class="art-support-desc">
 						<em>abulia terminal</em> es una revista independiente y autogestionada sin publicidad invasiva ni muros de pago.
@@ -1013,7 +1013,7 @@ const AuthorBio =
 		border: 2px solid var(--ink);
 		background: var(--negro);
 		color: var(--crema);
-		box-shadow: 8px 8px 0 var(--pink);
+		box-shadow: 4px 4px 0 var(--ink);
 	}
 	.art-author-label {
 		font-family: var(--font-mono);
@@ -1110,7 +1110,7 @@ const AuthorBio =
 		background: #ffffff;
 		border: 1px solid var(--ink);
 		padding: 2px 6px;
-		border-radius: 3px;
+		border-radius: 0;
 		display: inline-flex;
 		align-items: center;
 	}
@@ -1176,7 +1176,7 @@ const AuthorBio =
 		transition: box-shadow 0.2s ease, transform 0.2s ease;
 	}
 	.rel-card:hover {
-		box-shadow: 6px 6px 0 var(--pink);
+		box-shadow: 4px 4px 0 var(--ink);
 		transform: translate(-2px, -2px);
 	}
 	.rel-thumb {

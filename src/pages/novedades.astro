@@ -22,7 +22,7 @@ const posts = (await getCollection('posts')).sort(
 			<p class="at-kicker">lo último</p>
 			<h1 class="listing-title">novedades</h1>
 			<hr class="at-rule" />
-			{posts.length === 0 && <p class="empty">// sin publicaciones todavía</p>}
+			{posts.length === 0 && <p class="empty">sin publicaciones todavía</p>}
 			<div class="grid">
 				{posts.map((post) => <PostCard post={post} />)}
 			</div>

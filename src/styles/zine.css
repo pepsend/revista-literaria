@@ -92,7 +92,7 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 0 1.5rem;
 }
 
-/* Etiqueta tipo ticket */
+/* Etiqueta tipo marbete editorial de imprenta */
 .at-tag {
 	display: inline-block;
 	background: var(--pink);
@@ -100,25 +100,40 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: var(--font-mono);
 	font-weight: 700;
 	font-size: 0.72rem;
-	letter-spacing: 0.08em;
+	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	padding: 0.3rem 0.7rem;
-	border: 2px solid var(--ink);
-	transform: rotate(-3deg);
+	padding: 0.25rem 0.65rem;
+	border: 1.5px solid var(--ink);
+	box-shadow: 2px 2px 0 var(--ink);
+	transform: none;
+	transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+.at-tag:hover {
+	background: var(--ink);
+	color: var(--paper);
+	box-shadow: 2px 2px 0 var(--pink);
 }
 
 .at-kicker {
 	font-family: var(--font-mono);
 	font-size: 0.72rem;
-	letter-spacing: 0.32em;
+	letter-spacing: 0.22em;
 	text-transform: uppercase;
 	color: var(--pink);
 	margin: 0;
+	font-weight: 700;
 }
 
 .at-rule {
 	height: 2px;
 	background: var(--ink);
+	border: 0;
+	margin: 0;
+}
+
+.at-rule-fine {
+	height: 1px;
+	background: var(--line);
 	border: 0;
 	margin: 0;
 }

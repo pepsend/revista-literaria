@@ -48,11 +48,12 @@ const cardSrcSet = getResponsiveSrcSet(heroImage, [360, 480, 640], 3 / 2);
 		color: var(--ink);
 		border: 2px solid var(--ink);
 		background: var(--paper);
+		box-shadow: 3px 3px 0 var(--ink);
 		transition: transform 0.2s ease, box-shadow 0.2s ease;
 	}
 	.card:hover {
-		transform: translate(-2px, -2px);
-		box-shadow: 6px 6px 0 var(--pink);
+		transform: translate(-1px, -1px);
+		box-shadow: 5px 5px 0 var(--ink);
 	}
 	.card-photo {
 		position: relative;
@@ -69,12 +70,12 @@ const cardSrcSet = getResponsiveSrcSet(heroImage, [360, 480, 640], 3 / 2);
 		transition: transform 0.5s ease;
 	}
 	.card:hover .card-photo img {
-		transform: scale(1.05);
+		transform: scale(1.03);
 	}
 	.card-photo .at-tag {
 		position: absolute;
 		top: 12px;
-		left: -8px;
+		left: 12px;
 	}
 	.card-body {
 		padding: 1rem 1.15rem 1.25rem;
@@ -84,9 +85,9 @@ const cardSrcSet = getResponsiveSrcSet(heroImage, [360, 480, 640], 3 / 2);
 	}
 	.card-title {
 		font-family: var(--font-display);
-		font-weight: 900;
-		font-size: 1.45rem;
-		line-height: 1.08;
+		font-weight: 700;
+		font-size: 1.4rem;
+		line-height: 1.1;
 		margin: 0 0 0.5rem;
 	}
 	.card:hover .card-title {
