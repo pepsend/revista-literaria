@@ -1,0 +1,634 @@
+---
+// Componente de donaciones / aportes para Abulia Terminal
+// Cuenta de destino: Mercado Pago (Tomás Ignacio Ragga Sepúlveda)
+---
+
+<dialog id="donate-modal" class="donate-dialog" aria-labelledby="donate-dialog-title" aria-modal="true">
+	<div class="donate-dialog-inner">
+		<!-- Cabecera modal -->
+		<div class="donate-head">
+			<div class="donate-head-meta">
+				<span class="at-kicker">// aporte voluntario</span>
+				<h2 id="donate-dialog-title" class="donate-title">apoyar a abulia terminal</h2>
+			</div>
+			<button type="button" class="donate-close" id="donate-close-btn" aria-label="Cerrar ventana">
+				<span aria-hidden="true">✕</span>
+			</button>
+		</div>
+
+		<hr class="at-rule donate-rule" />
+
+		<!-- Mensaje editorial -->
+		<p class="donate-lead">
+			somos una revista literaria independiente y autogestionada. tu aporte voluntario
+			nos ayuda a financiar servidores, dominio y retribuir el trabajo de autores y colaboradores.
+		</p>
+
+		<!-- Ficha de datos bancarios con estética de ticket editorial -->
+		<div class="donate-card">
+			<div class="donate-card-header">
+				<span class="donate-card-tag">Mercado Pago · Cuenta Vista</span>
+				<span class="donate-card-tef">Transferencia (TEF)</span>
+			</div>
+
+			<dl class="donate-fields">
+				<div class="donate-field">
+					<dt>Titular</dt>
+					<dd class="donate-val">
+						<span class="donate-text">Tomás Ignacio Ragga Sepúlveda</span>
+					</dd>
+				</div>
+
+				<div class="donate-field">
+					<dt>RUT</dt>
+					<dd class="donate-val">
+						<code class="donate-code">20.638.381-K</code>
+						<button
+							type="button"
+							class="donate-copy-btn"
+							data-copy="20638381K"
+							aria-label="Copiar RUT"
+							title="Copiar RUT para transferencias"
+						>
+							copiar
+						</button>
+					</dd>
+				</div>
+
+				<div class="donate-field">
+					<dt>Banco / Institución</dt>
+					<dd class="donate-val">
+						<span class="donate-text">Mercado Pago</span>
+						<span class="donate-hint">(Mercado Pago Emisora S.A.)</span>
+					</dd>
+				</div>
+
+				<div class="donate-field">
+					<dt>Tipo de cuenta</dt>
+					<dd class="donate-val">
+						<span class="donate-text">Cuenta Vista</span>
+					</dd>
+				</div>
+
+				<div class="donate-field">
+					<dt>N° de cuenta</dt>
+					<dd class="donate-val">
+						<code class="donate-code">1055093009</code>
+						<button
+							type="button"
+							class="donate-copy-btn"
+							data-copy="1055093009"
+							aria-label="Copiar número de cuenta"
+							title="Copiar número de cuenta"
+						>
+							copiar
+						</button>
+					</dd>
+				</div>
+
+				<div class="donate-field">
+					<dt>Correo</dt>
+					<dd class="donate-val">
+						<code class="donate-code">t.traggas@gmail.com</code>
+						<button
+							type="button"
+							class="donate-copy-btn"
+							data-copy="t.traggas@gmail.com"
+							aria-label="Copiar correo"
+							title="Copiar correo"
+						>
+							copiar
+						</button>
+					</dd>
+				</div>
+			</dl>
+		</div>
+
+		<!-- Acciones principales -->
+		<div class="donate-actions">
+			<button
+				type="button"
+				class="donate-btn-primary"
+				id="donate-copy-all-btn"
+				title="Copiar todos los datos de transferencia de una sola vez"
+			>
+				<svg class="donate-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+					<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+				</svg>
+				<span class="donate-btn-label">copiar todos los datos</span>
+			</button>
+
+			<a
+				href="https://www.mercadopago.cl"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="donate-btn-secondary"
+				title="Ir al sitio o abrir la app de Mercado Pago"
+			>
+				abrir Mercado Pago ↗
+			</a>
+		</div>
+
+		<!-- Mensaje de confirmación accesible -->
+		<p id="donate-status" class="donate-status" role="status" aria-live="polite"></p>
+
+		<!-- Garantías de seguridad y compatibilidad bancaria -->
+		<div class="donate-security">
+			<span class="donate-lock-icon" aria-hidden="true">🔒</span>
+			<p>
+				<strong>Transferencia segura:</strong> puedes transferir desde cualquier banco chileno
+				(BancoEstado, Banco de Chile, Santander, Bci, etc.) seleccionando <em>Mercado Pago</em>
+				como institución de destino, o enviando directamente desde tu app de Mercado Pago al correo.
+			</p>
+		</div>
+	</div>
+</dialog>
+
+<script is:inline>
+	(function () {
+		var modal = document.getElementById('donate-modal');
+		if (!modal) return;
+
+		var closeBtn = document.getElementById('donate-close-btn');
+		var copyAllBtn = document.getElementById('donate-copy-all-btn');
+		var statusEl = document.getElementById('donate-status');
+		var statusTimer = null;
+
+		var ALL_DATA_TEXT = [
+			'Titular: Tomás Ignacio Ragga Sepúlveda',
+			'RUT: 20.638.381-K',
+			'Banco: Mercado Pago',
+			'Tipo de cuenta: Cuenta Vista',
+			'N° de cuenta: 1055093009',
+			'Correo: t.traggas@gmail.com',
+			'Asunto: Aporte Abulia Terminal'
+		].join('\n');
+
+		function showStatus(msg) {
+			if (!statusEl) return;
+			statusEl.textContent = msg;
+			statusEl.classList.add('is-visible');
+			if (statusTimer) clearTimeout(statusTimer);
+			statusTimer = setTimeout(function () {
+				statusEl.textContent = '';
+				statusEl.classList.remove('is-visible');
+			}, 3500);
+		}
+
+		function copyToClipboard(text, onSuccess) {
+			if (navigator.clipboard && window.isSecureContext) {
+				navigator.clipboard.writeText(text).then(function () {
+					if (onSuccess) onSuccess();
+				}).catch(function () {
+					fallbackCopy(text, onSuccess);
+				});
+			} else {
+				fallbackCopy(text, onSuccess);
+			}
+		}
+
+		function fallbackCopy(text, onSuccess) {
+			try {
+				var ta = document.createElement('textarea');
+				ta.value = text;
+				ta.style.position = 'fixed';
+				ta.style.left = '-9999px';
+				ta.style.top = '-9999px';
+				document.body.appendChild(ta);
+				ta.focus();
+				ta.select();
+				var ok = document.execCommand('copy');
+				document.body.removeChild(ta);
+				if (ok && onSuccess) onSuccess();
+			} catch (err) {
+				showStatus('No se pudo copiar automáticamente. Por favor copia los datos manualmente.');
+			}
+		}
+
+		function openModal() {
+			if (typeof modal.showModal === 'function') {
+				modal.showModal();
+			} else {
+				modal.setAttribute('open', '');
+			}
+			document.body.style.overflow = 'hidden';
+		}
+
+		function closeModal() {
+			if (typeof modal.close === 'function') {
+				modal.close();
+			} else {
+				modal.removeAttribute('open');
+			}
+			document.body.style.overflow = '';
+		}
+
+		// Delegación global: cualquier elemento con data-open-donate abre el modal
+		document.addEventListener('click', function (e) {
+			var trigger = e.target && e.target.closest ? e.target.closest('[data-open-donate]') : null;
+			if (trigger) {
+				e.preventDefault();
+				openModal();
+			}
+		});
+
+		// Cerrar al hacer clic en el botón de cierre
+		if (closeBtn) {
+			closeBtn.addEventListener('click', function () {
+				closeModal();
+			});
+		}
+
+		// Cerrar al hacer clic en el backdrop (fondo oscuro)
+		modal.addEventListener('click', function (e) {
+			if (e.target === modal) {
+				closeModal();
+			}
+		});
+
+		// Restaurar scroll si se cierra con la tecla Esc
+		modal.addEventListener('cancel', function () {
+			document.body.style.overflow = '';
+		});
+		modal.addEventListener('close', function () {
+			document.body.style.overflow = '';
+		});
+
+		// Copiar campo individual
+		var copyButtons = modal.querySelectorAll('[data-copy]');
+		copyButtons.forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				var val = btn.getAttribute('data-copy');
+				if (!val) return;
+				copyToClipboard(val, function () {
+					var original = btn.textContent;
+					btn.textContent = '✓';
+					btn.classList.add('is-copied');
+					showStatus('✓ Copiado al portapapeles: ' + val);
+					setTimeout(function () {
+						btn.textContent = original;
+						btn.classList.remove('is-copied');
+					}, 2000);
+				});
+			});
+		});
+
+		// Copiar todos los datos de transferencia juntos
+		if (copyAllBtn) {
+			copyAllBtn.addEventListener('click', function () {
+				copyToClipboard(ALL_DATA_TEXT, function () {
+					var lbl = copyAllBtn.querySelector('.donate-btn-label');
+					var origText = lbl ? lbl.textContent : 'copiar todos los datos';
+					if (lbl) lbl.textContent = '✓ ¡datos copiados!';
+					copyAllBtn.classList.add('is-copied');
+					showStatus('✓ Todos los datos copiados para tu app bancaria.');
+					setTimeout(function () {
+						if (lbl) lbl.textContent = origText;
+						copyAllBtn.classList.remove('is-copied');
+					}, 2500);
+				});
+			});
+		}
+	})();
+</script>
+
+<style>
+	/* Diálogo nativo modal con diseño editorial Abulia Terminal */
+	.donate-dialog {
+		margin: auto;
+		padding: 0;
+		border: 2px solid var(--ink);
+		background: var(--paper);
+		color: var(--ink);
+		width: min(540px, calc(100vw - 2rem));
+		max-height: 90vh;
+		overflow-y: auto;
+		box-shadow: 6px 6px 0 var(--ink);
+	}
+
+	.donate-dialog::backdrop {
+		background: rgba(19, 18, 17, 0.72);
+		backdrop-filter: blur(3px);
+		-webkit-backdrop-filter: blur(3px);
+	}
+
+	.donate-dialog-inner {
+		padding: 1.6rem 1.8rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1.1rem;
+	}
+
+	.donate-head {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+
+	.donate-head-meta {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+
+	.donate-title {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: 1.45rem;
+		line-height: 1.15;
+		margin: 0;
+		color: var(--ink);
+		letter-spacing: -0.01em;
+	}
+
+	.donate-close {
+		background: transparent;
+		border: 1.5px solid var(--ink);
+		color: var(--ink);
+		font-family: var(--font-mono);
+		font-size: 1.1rem;
+		line-height: 1;
+		width: 36px;
+		height: 36px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		flex-shrink: 0;
+		transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+	}
+
+	.donate-close:hover {
+		background: var(--ink);
+		color: var(--paper);
+	}
+
+	.donate-lead {
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		line-height: 1.55;
+		color: var(--text-soft);
+		margin: 0;
+	}
+
+	/* Tarjeta de datos tipo ticket bancario */
+	.donate-card {
+		border: 1.5px solid var(--ink);
+		background: var(--paper-2);
+		padding: 1rem 1.1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+	}
+
+	.donate-card-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		border-bottom: 1px dashed var(--line);
+		padding-bottom: 0.6rem;
+		font-family: var(--font-mono);
+	}
+
+	.donate-card-tag {
+		font-size: 0.72rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--ink);
+		background: var(--pink);
+		padding: 0.2rem 0.5rem;
+		border: 1px solid var(--ink);
+	}
+
+	.donate-card-tef {
+		font-size: 0.7rem;
+		color: var(--muted);
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	.donate-fields {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.55rem;
+	}
+
+	.donate-field {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 0.8rem;
+		font-family: var(--font-mono);
+		font-size: 0.82rem;
+		flex-wrap: wrap;
+		border-bottom: 1px dotted var(--line);
+		padding-bottom: 0.45rem;
+	}
+
+	.donate-field:last-child {
+		border-bottom: none;
+		padding-bottom: 0;
+	}
+
+	.donate-field dt {
+		color: var(--muted);
+		font-size: 0.74rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		flex-shrink: 0;
+	}
+
+	.donate-val {
+		margin: 0;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		color: var(--ink);
+		font-weight: 500;
+		text-align: right;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+	}
+
+	.donate-val strong {
+		font-weight: 700;
+	}
+
+	.donate-code {
+		font-family: var(--font-mono);
+		font-weight: 700;
+		font-size: 0.86rem;
+		background: var(--paper);
+		border: 1px solid var(--line);
+		padding: 0.15rem 0.4rem;
+		color: var(--ink);
+		border-radius: 0;
+	}
+
+	.donate-hint {
+		font-size: 0.72rem;
+		color: var(--muted);
+	}
+
+	.donate-copy-btn {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		background: transparent;
+		color: var(--ink);
+		border: 1px solid var(--ink);
+		padding: 0.18rem 0.45rem;
+		cursor: pointer;
+		transition: background 0.12s ease, color 0.12s ease;
+	}
+
+	.donate-copy-btn:hover {
+		background: var(--ink);
+		color: var(--paper);
+	}
+
+	.donate-copy-btn.is-copied {
+		background: var(--pink);
+		color: var(--ink);
+		font-weight: 700;
+		border-color: var(--ink);
+	}
+
+	/* Botones de acción */
+	.donate-actions {
+		display: flex;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+		margin-top: 0.2rem;
+	}
+
+	.donate-btn-primary,
+	.donate-btn-secondary {
+		font-family: var(--font-mono);
+		font-size: 0.82rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.1rem;
+		cursor: pointer;
+		border: 2px solid var(--ink);
+		transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+	}
+
+	.donate-btn-primary {
+		flex: 1 1 13rem;
+		background: var(--pink);
+		color: var(--ink);
+	}
+
+	.donate-btn-primary:hover {
+		box-shadow: 3px 3px 0 var(--ink);
+		transform: translate(-1px, -1px);
+	}
+
+	.donate-btn-primary.is-copied {
+		background: var(--orange);
+		color: var(--paper);
+	}
+
+	.donate-btn-secondary {
+		flex: 1 1 11rem;
+		background: transparent;
+		color: var(--ink);
+	}
+
+	.donate-btn-secondary:hover {
+		background: var(--ink);
+		color: var(--paper);
+		box-shadow: 3px 3px 0 var(--ink);
+		transform: translate(-1px, -1px);
+	}
+
+	.donate-icon {
+		flex-shrink: 0;
+	}
+
+	/* Estado accesible */
+	.donate-status {
+		margin: -0.3rem 0 0;
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		color: var(--orange);
+		min-height: 1.2rem;
+		transition: opacity 0.2s ease;
+	}
+
+	/* Nota de seguridad */
+	.donate-security {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.65rem;
+		padding: 0.75rem 0.9rem;
+		background: var(--paper-2);
+		border: 1px solid var(--line);
+		font-family: var(--font-mono);
+		font-size: 0.74rem;
+		line-height: 1.5;
+		color: var(--text-soft);
+	}
+
+	.donate-security p {
+		margin: 0;
+	}
+
+	.donate-lock-icon {
+		font-size: 0.9rem;
+		line-height: 1.2;
+		flex-shrink: 0;
+	}
+
+	/* Responsive móvil */
+	@media (max-width: 580px) {
+		.donate-dialog-inner {
+			padding: 1.25rem 1rem;
+			gap: 0.9rem;
+		}
+
+		.donate-title {
+			font-size: 1.25rem;
+		}
+
+		.donate-card {
+			padding: 0.85rem;
+		}
+
+		.donate-field {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.25rem;
+		}
+
+		.donate-val {
+			width: 100%;
+			justify-content: space-between;
+			text-align: left;
+		}
+
+		.donate-actions {
+			flex-direction: column;
+		}
+
+		.donate-btn-primary,
+		.donate-btn-secondary {
+			width: 100%;
+			padding: 0.7rem 0.8rem;
+		}
+	}
+</style>

@@ -1,5 +1,6 @@
 ---
 import Wordmark from './Wordmark.astro';
+import DonateModal from './DonateModal.astro';
 const today = new Date();
 ---
 
@@ -45,6 +46,14 @@ const today = new Date();
 				<a href="/colaborar">colaborar</a>
 				<a href="/autores">autores</a>
 				<a href="/contacto">contáctanos</a>
+				<button
+					type="button"
+					class="foot-donate-btn"
+					data-open-donate
+					aria-label="Donar a abulia terminal"
+				>
+					donar
+				</button>
 				<a href="/rss.xml" target="_blank" rel="noopener noreferrer">rss</a>
 				<a
 					class="foot-ig"
@@ -62,6 +71,7 @@ const today = new Date();
 			<span class="copy">abulia terminal © {today.getFullYear()}</span>
 		</div>
 	</div>
+	<DonateModal />
 </footer>
 
 <style>
@@ -99,6 +109,23 @@ const today = new Date();
 	}
 	.foot-nav a:hover {
 		color: var(--pink);
+	}
+	.foot-donate-btn {
+		background: transparent;
+		border: 1px dashed var(--pink);
+		color: var(--pink);
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		padding: 0.2rem 0.55rem;
+		cursor: pointer;
+		letter-spacing: 0.02em;
+		transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+	}
+	.foot-donate-btn:hover {
+		background: var(--pink);
+		color: var(--ink);
+		border-style: solid;
+		border-color: var(--ink);
 	}
 	.foot-nav a.foot-ig {
 		display: inline-flex;

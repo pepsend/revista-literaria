@@ -330,6 +330,20 @@ const AuthorBio =
 
 			<p class="art-end">// fin del texto</p>
 
+			<aside class="art-support">
+				<div class="art-support-box">
+					<p class="art-support-kicker">// apoyo editorial</p>
+					<h3 class="art-support-title">¿te gustó esta lectura?</h3>
+					<p class="art-support-desc">
+						<em>abulia terminal</em> es una revista independiente y autogestionada sin publicidad invasiva ni muros de pago.
+						Si deseas respaldar nuestra labor y la retribución de autores y colaboradores, puedes realizar un aporte voluntario.
+					</p>
+					<button type="button" class="art-support-btn" data-open-donate aria-label="Donar a abulia terminal">
+						donar vía Mercado Pago →
+					</button>
+				</div>
+			</aside>
+
 			<Comments pageId={Astro.url.pathname} />
 
 			{
@@ -981,6 +995,71 @@ const AuthorBio =
 	.art-author-bio :global(a) {
 		color: var(--pink);
 	}
+	/* Bloque de apoyo editorial / donaciones al final del artículo */
+	.art-support {
+		max-width: 40rem;
+		margin: 2.5rem auto 0;
+	}
+	.art-support-box {
+		border: 2px solid var(--ink);
+		background: var(--paper-2);
+		padding: 1.4rem 1.6rem;
+		box-shadow: 4px 4px 0 var(--ink);
+	}
+	.art-support-kicker {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--pink);
+		margin: 0 0 0.4rem;
+	}
+	.art-support-title {
+		font-family: var(--font-display);
+		font-size: 1.3rem;
+		font-weight: 900;
+		line-height: 1.2;
+		color: var(--ink);
+		margin: 0 0 0.6rem;
+		letter-spacing: -0.01em;
+	}
+	.art-support-desc {
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		line-height: 1.55;
+		color: var(--text-soft);
+		margin: 0 0 1.1rem;
+	}
+	.art-support-btn {
+		font-family: var(--font-mono);
+		font-size: 0.82rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		background: var(--pink);
+		color: var(--ink);
+		border: 2px solid var(--ink);
+		padding: 0.65rem 1.1rem;
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+	}
+	.art-support-btn:hover {
+		box-shadow: 3px 3px 0 var(--ink);
+		transform: translate(-1px, -1px);
+	}
+	@media (max-width: 580px) {
+		.art-support-box {
+			padding: 1.1rem 1.1rem;
+		}
+		.art-support-btn {
+			width: 100%;
+			justify-content: center;
+		}
+	}
+
 	.art-end {
 		max-width: 40rem;
 		margin: 2.5rem auto 0;

@@ -14,9 +14,19 @@ const categories = CATEGORIES.map(
 			<span class="brand-name">abulia terminal</span>
 		</a>
 
-		<button class="menu-toggle" id="menu-toggle" type="button" aria-label="menú" aria-expanded="false">
-			<span></span><span></span><span></span>
-		</button>
+		<div class="header-actions">
+			<button
+				class="header-donate-btn"
+				type="button"
+				data-open-donate
+				aria-label="Donar a abulia terminal"
+			>
+				donar
+			</button>
+			<button class="menu-toggle" id="menu-toggle" type="button" aria-label="menú" aria-expanded="false">
+				<span></span><span></span><span></span>
+			</button>
+		</div>
 
 		<nav class="nav" id="nav">
 			<a href="/novedades">novedades</a>
@@ -30,6 +40,14 @@ const categories = CATEGORIES.map(
 				</div>
 			</div>
 			<a class="cta" href="/contacto">contáctanos</a>
+			<button
+				class="nav-donate-btn"
+				type="button"
+				data-open-donate
+				aria-label="Donar a abulia terminal"
+			>
+				donar
+			</button>
 			<button
 				class="theme-toggle"
 				id="theme-toggle"
@@ -123,6 +141,37 @@ const categories = CATEGORIES.map(
 		font-weight: 900;
 		font-size: 1.25rem;
 		letter-spacing: -0.01em;
+	}
+
+	.header-actions {
+		display: none;
+	}
+	.header-donate-btn {
+		display: none;
+	}
+	.nav-donate-btn {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		font-weight: 700;
+		color: var(--ink);
+		background: transparent;
+		border: 2px solid var(--ink);
+		cursor: pointer;
+		padding: 0.32rem 0.65rem;
+		margin-left: 0.25rem;
+		white-space: nowrap;
+		letter-spacing: 0.02em;
+		transition:
+			background 0.15s ease,
+			color 0.15s ease,
+			transform 0.15s ease,
+			box-shadow 0.15s ease;
+	}
+	.nav-donate-btn:hover {
+		background: var(--pink);
+		color: var(--ink);
+		box-shadow: 2px 2px 0 var(--ink);
+		transform: translate(-1px, -1px);
 	}
 
 	.menu-toggle {
@@ -245,6 +294,31 @@ const categories = CATEGORIES.map(
 	}
 
 	@media (max-width: 760px) {
+		.header-actions {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+		.header-donate-btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			font-family: var(--font-mono);
+			font-size: 0.76rem;
+			font-weight: 700;
+			text-transform: lowercase;
+			letter-spacing: 0.04em;
+			color: var(--ink);
+			background: var(--paper-2);
+			border: 2px solid var(--ink);
+			padding: 0.35rem 0.65rem;
+			height: 40px;
+			cursor: pointer;
+			transition: background 0.15s ease;
+		}
+		.header-donate-btn:hover {
+			background: var(--pink);
+		}
 		.menu-toggle {
 			display: flex;
 		}
@@ -272,6 +346,18 @@ const categories = CATEGORIES.map(
 			margin-top: 0.6rem;
 			text-align: center;
 			border: 2px solid var(--ink);
+		}
+		.nav-donate-btn {
+			width: 100%;
+			margin: 0.6rem 0 0;
+			padding: 0.85rem 0.6rem;
+			text-align: center;
+			border: 2px solid var(--ink);
+			background: var(--paper-2);
+			font-size: 0.95rem;
+		}
+		.nav-donate-btn:hover {
+			background: var(--pink);
 		}
 		.theme-toggle {
 			width: 100%;
