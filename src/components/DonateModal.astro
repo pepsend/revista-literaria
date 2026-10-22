@@ -1,6 +1,7 @@
 ---
 // Componente de donaciones / aportes para Abulia Terminal
-// Cuenta de destino: Mercado Pago (Tomás Ignacio Ragga Sepúlveda)
+// Pasarela: Mercado Pago (link.mercadopago.cl/abuliaterminal)
+// Cuenta de destino TEF: Tomás Ignacio Ragga Sepúlveda (Cuenta Vista Mercado Pago)
 ---
 
 <dialog id="donate-modal" class="donate-dialog" aria-labelledby="donate-dialog-title" aria-modal="true">
@@ -20,15 +21,54 @@
 
 		<!-- Mensaje editorial -->
 		<p class="donate-lead">
-			somos una revista literaria independiente y autogestionada. tu aporte voluntario
-			nos ayuda a financiar servidores, dominio y retribuir el trabajo de autores y colaboradores.
+			somos una revista literaria independiente y autogestionada. tu aporte nos permite financiar
+			servidores, dominio y retribuir las colaboraciones de autores y editores.
 		</p>
 
-		<!-- Ficha de datos bancarios con estética de ticket editorial -->
+		<!-- BLOQUE 1: PAGO ONLINE DIRECTO CON MERCADO PAGO -->
+		<div class="donate-mp-box">
+			<div class="donate-mp-top">
+				<div class="donate-mp-badge-wrap">
+					<img
+						src="/mercadopago.png"
+						alt="Mercado Pago"
+						width="125"
+						height="32"
+						class="donate-mp-logo"
+						loading="eager"
+					/>
+				</div>
+				<span class="donate-mp-pill">link oficial</span>
+			</div>
+
+			<p class="donate-mp-desc">
+				aporta con un clic usando tu <strong>saldo de Mercado Pago</strong>, tarjeta de <strong>débito (Redcompra / Webpay)</strong> o <strong>crédito</strong>:
+			</p>
+
+			<a
+				href="https://link.mercadopago.cl/abuliaterminal"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="donate-mp-cta"
+				title="Abrir checkout seguro en Mercado Pago"
+			>
+				<span class="donate-mp-cta-label">donar con Mercado Pago ↗</span>
+				<span class="donate-mp-cta-url">link.mercadopago.cl/abuliaterminal</span>
+			</a>
+		</div>
+
+		<!-- Divisor de opciones -->
+		<div class="donate-sep">
+			<span class="donate-sep-line"></span>
+			<span class="donate-sep-text">// o mediante transferencia electrónica directa</span>
+			<span class="donate-sep-line"></span>
+		</div>
+
+		<!-- BLOQUE 2: FICHA DE DATOS BANCARIOS (TEF sin comisión) -->
 		<div class="donate-card">
 			<div class="donate-card-header">
 				<span class="donate-card-tag">Mercado Pago · Cuenta Vista</span>
-				<span class="donate-card-tef">Transferencia (TEF)</span>
+				<span class="donate-card-tef">0% comisiones</span>
 			</div>
 
 			<dl class="donate-fields">
@@ -48,7 +88,7 @@
 							class="donate-copy-btn"
 							data-copy="20638381K"
 							aria-label="Copiar RUT"
-							title="Copiar RUT para transferencias"
+							title="Copiar RUT sin puntos ni guion"
 						>
 							copiar
 						</button>
@@ -94,7 +134,7 @@
 							type="button"
 							class="donate-copy-btn"
 							data-copy="t.traggas@gmail.com"
-							aria-label="Copiar correo"
+							aria-label="Copiar correo electrónico"
 							title="Copiar correo"
 						>
 							copiar
@@ -102,44 +142,30 @@
 					</dd>
 				</div>
 			</dl>
-		</div>
 
-		<!-- Acciones principales -->
-		<div class="donate-actions">
+			<!-- Botón para copiar todos los datos juntos -->
 			<button
 				type="button"
-				class="donate-btn-primary"
+				class="donate-copy-all-btn"
 				id="donate-copy-all-btn"
-				title="Copiar todos los datos de transferencia de una sola vez"
+				title="Copiar todos los datos de transferencia para tu aplicación bancaria"
 			>
 				<svg class="donate-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
 					<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
 				</svg>
-				<span class="donate-btn-label">copiar todos los datos</span>
+				<span class="donate-copy-all-label">copiar todos los datos para transferir</span>
 			</button>
-
-			<a
-				href="https://www.mercadopago.cl"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="donate-btn-secondary"
-				title="Ir al sitio o abrir la app de Mercado Pago"
-			>
-				abrir Mercado Pago ↗
-			</a>
 		</div>
 
 		<!-- Mensaje de confirmación accesible -->
 		<p id="donate-status" class="donate-status" role="status" aria-live="polite"></p>
 
-		<!-- Garantías de seguridad y compatibilidad bancaria -->
+		<!-- Garantías de seguridad -->
 		<div class="donate-security">
 			<span class="donate-lock-icon" aria-hidden="true">🔒</span>
 			<p>
-				<strong>Transferencia segura:</strong> puedes transferir desde cualquier banco chileno
-				(BancoEstado, Banco de Chile, Santander, Bci, etc.) seleccionando <em>Mercado Pago</em>
-				como institución de destino, o enviando directamente desde tu app de Mercado Pago al correo.
+				<strong>Plataforma segura:</strong> los pagos online son procesados directamente por la infraestructura oficial de Mercado Pago con cifrado SSL. También puedes transferir desde cualquier banco de Chile seleccionando <em>Mercado Pago</em> como institución de destino.
 			</p>
 		</div>
 	</div>
@@ -202,7 +228,7 @@
 				document.body.removeChild(ta);
 				if (ok && onSuccess) onSuccess();
 			} catch (err) {
-				showStatus('No se pudo copiar automáticamente. Por favor copia los datos manualmente.');
+				showStatus('Por favor copia los datos manualmente.');
 			}
 		}
 
@@ -240,14 +266,14 @@
 			});
 		}
 
-		// Cerrar al hacer clic en el backdrop (fondo oscuro)
+		// Cerrar al hacer clic en el backdrop
 		modal.addEventListener('click', function (e) {
 			if (e.target === modal) {
 				closeModal();
 			}
 		});
 
-		// Restaurar scroll si se cierra con la tecla Esc
+		// Restaurar scroll si se cierra con Esc
 		modal.addEventListener('cancel', function () {
 			document.body.style.overflow = '';
 		});
@@ -278,11 +304,11 @@
 		if (copyAllBtn) {
 			copyAllBtn.addEventListener('click', function () {
 				copyToClipboard(ALL_DATA_TEXT, function () {
-					var lbl = copyAllBtn.querySelector('.donate-btn-label');
-					var origText = lbl ? lbl.textContent : 'copiar todos los datos';
-					if (lbl) lbl.textContent = '✓ ¡datos copiados!';
+					var lbl = copyAllBtn.querySelector('.donate-copy-all-label');
+					var origText = lbl ? lbl.textContent : 'copiar todos los datos para transferir';
+					if (lbl) lbl.textContent = '✓ ¡datos copiados al portapapeles!';
 					copyAllBtn.classList.add('is-copied');
-					showStatus('✓ Todos los datos copiados para tu app bancaria.');
+					showStatus('✓ Datos listos para pegar en tu app bancaria.');
 					setTimeout(function () {
 						if (lbl) lbl.textContent = origText;
 						copyAllBtn.classList.remove('is-copied');
@@ -294,7 +320,7 @@
 </script>
 
 <style>
-	/* Diálogo nativo modal con diseño editorial Abulia Terminal */
+	/* Diálogo nativo modal */
 	.donate-dialog {
 		margin: auto;
 		padding: 0;
@@ -302,13 +328,13 @@
 		background: var(--paper);
 		color: var(--ink);
 		width: min(540px, calc(100vw - 2rem));
-		max-height: 90vh;
+		max-height: 92vh;
 		overflow-y: auto;
 		box-shadow: 6px 6px 0 var(--ink);
 	}
 
 	.donate-dialog::backdrop {
-		background: rgba(19, 18, 17, 0.72);
+		background: rgba(19, 18, 17, 0.76);
 		backdrop-filter: blur(3px);
 		-webkit-backdrop-filter: blur(3px);
 	}
@@ -317,7 +343,7 @@
 		padding: 1.6rem 1.8rem;
 		display: flex;
 		flex-direction: column;
-		gap: 1.1rem;
+		gap: 1.15rem;
 	}
 
 	.donate-head {
@@ -373,7 +399,128 @@
 		margin: 0;
 	}
 
-	/* Tarjeta de datos tipo ticket bancario */
+	/* BLOQUE 1: PAGO DIRECTO CON LOGO DE MERCADO PAGO */
+	.donate-mp-box {
+		border: 2px solid var(--ink);
+		background: var(--paper-2);
+		padding: 1.15rem 1.25rem;
+		box-shadow: 4px 4px 0 var(--ink);
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+	}
+
+	.donate-mp-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.donate-mp-badge-wrap {
+		background: #ffffff;
+		border: 1.5px solid var(--ink);
+		padding: 0.35rem 0.7rem;
+		display: inline-flex;
+		align-items: center;
+		border-radius: 4px;
+	}
+
+	.donate-mp-logo {
+		display: block;
+		height: auto;
+		max-width: 125px;
+	}
+
+	.donate-mp-pill {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		background: var(--pink);
+		color: var(--ink);
+		border: 1px solid var(--ink);
+		padding: 0.2rem 0.5rem;
+	}
+
+	.donate-mp-desc {
+		font-family: var(--font-mono);
+		font-size: 0.82rem;
+		line-height: 1.5;
+		color: var(--text-soft);
+		margin: 0;
+	}
+
+	.donate-mp-desc strong {
+		color: var(--ink);
+	}
+
+	.donate-mp-cta {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		background: #009ee3;
+		color: #ffffff !important;
+		border: 2px solid var(--ink);
+		padding: 0.85rem 1.2rem;
+		cursor: pointer;
+		font-family: var(--font-mono);
+		text-align: center;
+		transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+		box-shadow: 3px 3px 0 var(--ink);
+	}
+
+	.donate-mp-cta:hover {
+		background: #007eb5;
+		transform: translate(-1px, -1px);
+		box-shadow: 4px 4px 0 var(--ink);
+	}
+
+	.donate-mp-cta-label {
+		font-size: 0.92rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.donate-mp-cta-url {
+		font-size: 0.72rem;
+		opacity: 0.9;
+		letter-spacing: 0.02em;
+		margin-top: 0.2rem;
+	}
+
+	/* Separador entre link online y transferencia */
+	.donate-sep {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		margin: 0.2rem 0;
+	}
+
+	.donate-sep-line {
+		flex: 1;
+		height: 1px;
+		background: var(--line);
+	}
+
+	.donate-sep-text {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--muted);
+		white-space: nowrap;
+	}
+
+	/* BLOQUE 2: FICHA DE DATOS BANCARIOS */
 	.donate-card {
 		border: 1.5px solid var(--ink);
 		background: var(--paper-2);
@@ -390,7 +537,7 @@
 		flex-wrap: wrap;
 		gap: 0.5rem;
 		border-bottom: 1px dashed var(--line);
-		padding-bottom: 0.6rem;
+		padding-bottom: 0.55rem;
 		font-family: var(--font-mono);
 	}
 
@@ -400,23 +547,24 @@
 		text-transform: uppercase;
 		letter-spacing: 0.08em;
 		color: var(--ink);
-		background: var(--pink);
+		background: var(--paper);
 		padding: 0.2rem 0.5rem;
 		border: 1px solid var(--ink);
 	}
 
 	.donate-card-tef {
 		font-size: 0.7rem;
-		color: var(--muted);
+		color: var(--orange);
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
+		font-weight: 700;
 	}
 
 	.donate-fields {
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.55rem;
+		gap: 0.5rem;
 	}
 
 	.donate-field {
@@ -498,75 +646,53 @@
 		background: var(--pink);
 		color: var(--ink);
 		font-weight: 700;
-		border-color: var(--ink);
 	}
 
-	/* Botones de acción */
-	.donate-actions {
-		display: flex;
-		gap: 0.75rem;
-		flex-wrap: wrap;
-		margin-top: 0.2rem;
-	}
-
-	.donate-btn-primary,
-	.donate-btn-secondary {
+	.donate-copy-all-btn {
 		font-family: var(--font-mono);
-		font-size: 0.82rem;
+		font-size: 0.78rem;
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.04em;
-		text-decoration: none;
+		background: var(--paper);
+		color: var(--ink);
+		border: 1.5px solid var(--ink);
+		padding: 0.65rem 0.9rem;
+		cursor: pointer;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.5rem;
-		padding: 0.75rem 1.1rem;
-		cursor: pointer;
-		border: 2px solid var(--ink);
-		transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+		gap: 0.45rem;
+		width: 100%;
+		margin-top: 0.3rem;
+		transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
 	}
 
-	.donate-btn-primary {
-		flex: 1 1 13rem;
-		background: var(--pink);
-		color: var(--ink);
-	}
-
-	.donate-btn-primary:hover {
-		box-shadow: 3px 3px 0 var(--ink);
-		transform: translate(-1px, -1px);
-	}
-
-	.donate-btn-primary.is-copied {
-		background: var(--orange);
-		color: var(--paper);
-	}
-
-	.donate-btn-secondary {
-		flex: 1 1 11rem;
-		background: transparent;
-		color: var(--ink);
-	}
-
-	.donate-btn-secondary:hover {
+	.donate-copy-all-btn:hover {
 		background: var(--ink);
 		color: var(--paper);
-		box-shadow: 3px 3px 0 var(--ink);
+		box-shadow: 2px 2px 0 var(--pink);
 		transform: translate(-1px, -1px);
+	}
+
+	.donate-copy-all-btn.is-copied {
+		background: var(--orange);
+		color: #ffffff;
+		border-color: var(--ink);
 	}
 
 	.donate-icon {
 		flex-shrink: 0;
 	}
 
-	/* Estado accesible */
+	/* Estado de confirmación */
 	.donate-status {
 		margin: -0.3rem 0 0;
 		font-family: var(--font-mono);
 		font-size: 0.78rem;
 		color: var(--orange);
 		min-height: 1.2rem;
+		font-weight: 700;
 		transition: opacity 0.2s ease;
 	}
 
@@ -594,7 +720,7 @@
 		flex-shrink: 0;
 	}
 
-	/* Responsive móvil */
+	/* Adaptación móvil */
 	@media (max-width: 580px) {
 		.donate-dialog-inner {
 			padding: 1.25rem 1rem;
@@ -603,6 +729,10 @@
 
 		.donate-title {
 			font-size: 1.25rem;
+		}
+
+		.donate-mp-box {
+			padding: 0.95rem;
 		}
 
 		.donate-card {
@@ -621,14 +751,10 @@
 			text-align: left;
 		}
 
-		.donate-actions {
-			flex-direction: column;
-		}
-
-		.donate-btn-primary,
-		.donate-btn-secondary {
-			width: 100%;
-			padding: 0.7rem 0.8rem;
+		.donate-sep-text {
+			font-size: 0.65rem;
+			white-space: normal;
+			text-align: center;
 		}
 	}
 </style>
