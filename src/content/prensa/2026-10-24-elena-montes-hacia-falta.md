@@ -10,7 +10,7 @@ heroImage: "/uploads/hacia-falta-portada.jpg"
 imagePosition: "center"
 authorImage: "/uploads/elena-montes.jpg"
 authorBio: "Elena Montes es comunicadora audiovisual y escritora. Durante la última década ha participado en diversos talleres literarios y actualmente cursa un Máster en Poesía. Publicó el poemario El Ulmo nace de una Espina en Editorial Cuarto Propio y hoy se desempeña como directora general de Póstuma Ediciones, sello especializado en poesía y traducción. Nació en Chile y reside en Santiago."
-summary: "Una inquietante exploración de la muerte y los vínculos familiares relatada desde la voz de una victimaria adolescente. Publicada por Editorial Cuarto Propio."
+summary: "Publicada por Editorial Cuarto Propio, la primera novela de Elena Montes aborda la soledad y la fragilidad de los lazos filiales desde la voz de una victimaria adolescente."
 ---
 
 Una voz adolescente, incómoda y feroz, con una sensibilidad inquietante y profundamente singular, atraviesa las páginas de *Hacía falta*, la primera novela de Elena Montes Lira, autora chilena proveniente del mundo de la poesía. Publicada por Editorial Cuarto Propio, esta obra explora la soledad adolescente, la fragilidad de los vínculos familiares y la búsqueda de identidad en un entorno percibido como caótico e incomprensible.

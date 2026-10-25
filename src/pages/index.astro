@@ -129,10 +129,11 @@ const homeJsonLd = {
 						<div class="at-container">
 							<div class="gaceta-bar">
 								<div class="gaceta-title">
-									novedades <span>· agenda & prensa</span>
+									novedades<span class="gaceta-sub"> · agenda & prensa</span>
 								</div>
 								<a class="gaceta-link-all" href="/novedades">
-									todas las novedades →
+									<span class="link-full">todas las novedades →</span>
+									<span class="link-short">ver todas →</span>
 								</a>
 							</div>
 
@@ -471,15 +472,21 @@ const homeJsonLd = {
 		align-items: baseline;
 		gap: 0.4rem;
 	}
-	.gaceta-title span {
+	.gaceta-title .gaceta-sub {
 		color: var(--pink);
+		font-weight: 400;
 	}
 	.gaceta-link-all {
 		font-size: 0.72rem;
 		color: var(--muted);
 		text-decoration: none;
 		letter-spacing: 0.05em;
+		white-space: nowrap;
+		flex-shrink: 0;
 		transition: color 0.15s;
+	}
+	.gaceta-link-all .link-short {
+		display: none;
 	}
 	.gaceta-link-all:hover {
 		color: var(--pink);
@@ -499,6 +506,10 @@ const homeJsonLd = {
 		grid-template-columns: 90px 1fr;
 		border-right: none;
 		padding-right: 0;
+	}
+	.gaceta-grid[data-count="1"] .gaceta-item-title {
+		display: block;
+		-webkit-line-clamp: unset;
 	}
 	.gaceta-grid[data-count="2"] {
 		grid-template-columns: repeat(2, 1fr);
@@ -670,6 +681,29 @@ const homeJsonLd = {
 		.hero-visual {
 			aspect-ratio: 3 / 2;
 			box-shadow: 4px 4px 0 var(--ink);
+		}
+		.gaceta-bar {
+			align-items: center;
+			gap: 0.6rem;
+			padding-bottom: 0.45rem;
+			margin-bottom: 1rem;
+		}
+		.gaceta-title {
+			font-size: 0.68rem;
+			letter-spacing: 0.12em;
+			white-space: nowrap;
+		}
+		.gaceta-title .gaceta-sub {
+			display: none;
+		}
+		.gaceta-link-all {
+			font-size: 0.68rem;
+		}
+		.gaceta-link-all .link-full {
+			display: none;
+		}
+		.gaceta-link-all .link-short {
+			display: inline;
 		}
 		.gaceta-grid {
 			grid-template-columns: 1fr;
