@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Local backups & drafts
+backup-novedades-prensa/
+demo-novedades.html

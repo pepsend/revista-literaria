@@ -66,6 +66,50 @@ collections:
       - { label: "Biografía del autor", name: "authorBio", widget: "text", required: false, hint: "Bio breve que aparece destacada al final del texto. Si la dejas vacía, se usa la que el autor tenga guardada en «Autores»." }
       - { label: "Obras citadas", name: "citations", widget: "text", required: false, hint: "Bibliografía: una entrada por línea. Se muestra en un bloque aparte al final, distinto del cuerpo." }
 
+  - name: "prensa"
+    label: "Prensa"
+    label_singular: "Novedad"
+    folder: "src/content/prensa"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string", hint: "Título del comunicado o novedad literaria." }
+      - label: "Tipo / Etiqueta"
+        name: "type"
+        widget: "select"
+        options:
+          - "Lanzamiento"
+          - "Convocatoria"
+          - "Feria"
+          - "Seminario"
+          - "Noticia"
+          - "Evento"
+          - "Premio"
+        default: "Lanzamiento"
+        hint: "Define la etiqueta y clasificación de la novedad."
+      - { label: "Fecha de publicación", name: "date", widget: "datetime" }
+      - { label: "Autor / Autora (opcional)", name: "author", widget: "string", required: false, hint: "Nombre del autor/a de la obra o expositor/a si aplica (ej: Elena Montes Lira)." }
+      - { label: "Rango de fechas / Cuándo ocurre", name: "eventDates", widget: "string", required: false, hint: "Ej: '15 al 20 de noviembre' o 'Hasta el 30 nov'" }
+      - { label: "Editorial u Organización / Entidad", name: "location", widget: "string", required: false, hint: "Si es libro: nombre de la editorial (ej: Editorial Cuarto Propio). Si es evento: entidad o lugar (ej: Estación Mapocho, Fondo del Libro)." }
+      - { label: "Enlace oficial o compra", name: "link", widget: "string", required: false, hint: "Enlace a bases, inscripción o compra." }
+      - { label: "Afiche o Portada", name: "heroImage", widget: "image", required: false, hint: "Afiche del evento o portada del libro." }
+      - { label: "Encaje de la imagen", name: "imagePosition", widget: "focalpoint", required: false, default: "50% 50%", hint: "Arrastra para centrar la imagen." }
+      - { label: "Bajada breve para el Home", name: "summary", widget: "text", required: false, hint: "Resumen breve (1 a 2 líneas) para la gaceta del Home." }
+      - label: "Contenido completo"
+        name: "body"
+        widget: "markdown"
+        hint: "Texto íntegro de la nota o comunicado de prensa."
+        buttons:
+          - bold
+          - italic
+          - link
+          - heading-one
+          - heading-two
+          - heading-three
+          - quote
+          - bulleted-list
+          - numbered-list
+
   - name: "authors"
     label: "Autores"
     label_singular: "Autor"

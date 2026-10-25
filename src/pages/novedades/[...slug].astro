@@ -1,0 +1,322 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_TITLE } from '../../consts';
+import { getOptimizedImageUrl } from '../../utils/images';
+
+export async function getStaticPaths() {
+	const items = await getCollection('prensa');
+	return items.map((item) => ({
+		params: { slug: item.id },
+		props: { item },
+	}));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+
+const isBook = item.data.type?.toLowerCase() === 'lanzamiento';
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead
+			title={`${item.data.title} · Novedades · ${SITE_TITLE}`}
+			description={item.data.summary || item.data.title}
+			image={item.data.heroImage}
+		/>
+	</head>
+	<body>
+		<Header />
+
+		<article class="art-wrap at-container">
+			<nav class="art-back" aria-label="Volver">
+				<a href="/novedades">← volver a novedades</a>
+			</nav>
+
+			<header class="art-head">
+				<div class="art-kicker">novedades · {item.data.type || 'prensa'}</div>
+				<h1 class="art-title">{item.data.title}</h1>
+
+				<div class="art-meta-bar">
+					{
+						isBook ? (
+							<>
+								{item.data.location && (
+									<div>
+										editorial: <b>{item.data.location}</b>
+									</div>
+								)}
+								{item.data.author && (
+									<div>
+										autora / autor: <b>{item.data.author}</b>
+									</div>
+								)}
+							</>
+						) : (
+							<>
+								{item.data.location && (
+									<div>
+										organización / lugar: <b>{item.data.location}</b>
+									</div>
+								)}
+								{item.data.eventDates && (
+									<div>
+										fechas / plazos: <b>{item.data.eventDates}</b>
+									</div>
+								)}
+							</>
+						)
+					}
+					<div>
+						publicado: <FormattedDate date={item.data.date} />
+					</div>
+				</div>
+			</header>
+
+			<div class="art-layout">
+				{
+					item.data.heroImage && (
+						<aside class="art-aside">
+							<div class="art-aside-card">
+								<img
+									class="art-aside-cover at-duotone"
+									src={getOptimizedImageUrl(item.data.heroImage, { width: 400, height: 600, crop: 'fill', quality: 'auto:good' })}
+									alt={item.data.title}
+									loading="eager"
+									decoding="async"
+									width="220"
+									height="330"
+									style={`object-position: ${item.data.imagePosition || 'center'};`}
+								/>
+								<div class="art-aside-specs">
+									{isBook ? (
+										<>
+											{item.data.author && (
+												<p>
+													<strong>autora / autor:</strong> {item.data.author}
+												</p>
+											)}
+											{item.data.location && (
+												<p>
+													<strong>editorial:</strong> {item.data.location}
+												</p>
+											)}
+										</>
+									) : (
+										<>
+											{item.data.location && (
+												<p>
+													<strong>organiza / lugar:</strong> {item.data.location}
+												</p>
+											)}
+											{item.data.eventDates && (
+												<p>
+													<strong>plazo / fecha:</strong> {item.data.eventDates}
+												</p>
+											)}
+										</>
+									)}
+									{item.data.link && (
+										<a
+											class="art-aside-link"
+											href={item.data.link}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											{isBook ? 'sitio editorial / venta ↗' : 'más información / bases ↗'}
+										</a>
+									)}
+								</div>
+							</div>
+						</aside>
+					)
+				}
+
+				<div class="art-body">
+					{item.data.summary && <div class="art-lead">{item.data.summary}</div>}
+					<div class="art-markdown">
+						<Content />
+					</div>
+				</div>
+			</div>
+		</article>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.art-wrap {
+		max-width: 860px;
+		margin: 0 auto;
+		padding: 2.5rem 1.5rem 5rem;
+	}
+	.art-back {
+		font-family: var(--font-mono);
+		font-size: 0.76rem;
+		margin-bottom: 1.5rem;
+	}
+	.art-back a {
+		color: var(--muted);
+		text-decoration: none;
+		transition: color 0.15s;
+	}
+	.art-back a:hover {
+		color: var(--pink);
+		text-decoration: underline;
+	}
+	.art-kicker {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--pink);
+		font-weight: 700;
+		margin-bottom: 0.4rem;
+	}
+	.art-title {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: clamp(2rem, 5vw, 2.9rem);
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+		margin-bottom: 1.2rem;
+	}
+	.art-meta-bar {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		flex-wrap: wrap;
+		font-family: var(--font-mono);
+		font-size: 0.74rem;
+		color: var(--muted);
+		border-top: 1px solid var(--ink);
+		border-bottom: 1px solid var(--ink);
+		padding: 0.6rem 0;
+		margin-bottom: 2.2rem;
+	}
+	.art-meta-bar b {
+		color: var(--ink);
+	}
+	.art-layout {
+		display: grid;
+		grid-template-columns: 220px 1fr;
+		gap: 2.4rem;
+		align-items: start;
+	}
+	.art-aside-card {
+		border: 1.5px solid var(--ink);
+		padding: 0.8rem;
+		background: var(--paper-2);
+		box-shadow: 3px 3px 0 var(--ink);
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		line-height: 1.6;
+	}
+	.art-aside-cover {
+		width: 100%;
+		aspect-ratio: 2 / 3;
+		object-fit: cover;
+		border: 1px solid var(--ink);
+		margin-bottom: 0.6rem;
+		display: block;
+	}
+	.art-aside-specs p {
+		margin: 0.2rem 0;
+	}
+	.art-aside-link {
+		display: block;
+		margin-top: 0.8rem;
+		text-align: center;
+		background: var(--ink);
+		color: var(--paper);
+		padding: 0.45rem;
+		text-decoration: none;
+		font-weight: 700;
+		font-size: 0.7rem;
+		transition: background 0.15s, color 0.15s;
+	}
+	.art-aside-link:hover {
+		background: var(--pink);
+		color: var(--ink);
+	}
+	.art-lead {
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.15rem;
+		line-height: 1.45;
+		color: var(--ink);
+		border-left: 3px solid var(--pink);
+		padding-left: 1rem;
+		margin-bottom: 1.8rem;
+		font-style: italic;
+	}
+	.art-body {
+		min-width: 0;
+	}
+	.art-markdown {
+		font-family: var(--font-mono);
+		font-size: 0.92rem;
+		line-height: 1.75;
+		color: var(--text);
+	}
+	.art-markdown :global(p) {
+		margin-bottom: 1.3rem;
+	}
+	.art-markdown :global(h2),
+	.art-markdown :global(h3) {
+		font-family: var(--font-display);
+		font-weight: 700;
+		margin: 2rem 0 0.8rem;
+		line-height: 1.2;
+	}
+	.art-markdown :global(blockquote) {
+		border-left: 3px solid var(--pink);
+		padding-left: 1.2rem;
+		margin: 1.8rem 0;
+		font-style: italic;
+		font-family: var(--font-display);
+		font-size: 1.15rem;
+		line-height: 1.35;
+	}
+	.art-markdown :global(img) {
+		border: 1.5px solid var(--ink);
+		box-shadow: 3px 3px 0 var(--ink);
+		max-width: 100%;
+		height: auto;
+		margin: 1.5rem 0;
+	}
+
+	@media (max-width: 760px) {
+		.art-wrap {
+			padding: 1.8rem 1rem 3.5rem;
+		}
+		.art-title {
+			font-size: 1.4rem;
+			line-height: 1.2;
+			margin-bottom: 0.8rem;
+		}
+		.art-layout {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+		.art-aside-card {
+			max-width: 200px;
+			margin: 0 auto 1rem;
+		}
+		.art-markdown {
+			font-size: 0.84rem;
+			line-height: 1.65;
+		}
+		.art-lead {
+			font-size: 1rem;
+			padding-left: 0.8rem;
+			margin-bottom: 1.2rem;
+		}
+	}
+</style>

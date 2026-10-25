@@ -74,4 +74,21 @@ const pages = defineCollection({
 	}),
 });
 
-export const collections = { posts, authors, pages };
+// Colección de Prensa / Novedades: eventos, convocatorias, ferias y lanzamientos literarios
+const prensa = defineCollection({
+	loader: glob({ base: './src/content/prensa', pattern: '**/*.{md,mdx}' }),
+	schema: z.object({
+		title: z.string(),
+		date: z.coerce.date(),
+		author: z.string().optional(),
+		type: z.string().default('Lanzamiento'),
+		eventDates: z.string().optional(),
+		location: z.string().optional(),
+		link: z.string().optional(),
+		heroImage: z.string().optional(),
+		imagePosition: z.string().optional().default('center'),
+		summary: z.string().optional(),
+	}),
+});
+
+export const collections = { posts, authors, pages, prensa };

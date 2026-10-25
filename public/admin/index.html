@@ -631,7 +631,40 @@
         },
       });
 
+      var PrensaPreview = createClass({
+        render: function () {
+          var entry = this.props.entry;
+          var data = entry.get('data');
+          var title = data.get('title') || 'Sin título';
+          var type = data.get('type') || 'Lanzamiento';
+          var eventDates = data.get('eventDates');
+          var location = data.get('location');
+          var hero = data.get('heroImage');
+          var pos = data.get('imagePosition') || 'center';
+          var summary = data.get('summary');
+
+          return h('div', { className: 'pv-wrap' }, [
+            h('span', { className: 'pv-tag', key: 'type' }, type),
+            h('h1', { className: 'pv-title', key: 'title' }, title),
+            h('p', { className: 'pv-meta', key: 'meta' }, [
+              eventDates ? h('span', { key: 'd' }, eventDates) : null,
+              (eventDates && location) ? ' · ' : '',
+              location ? h('b', { key: 'l' }, location) : null,
+            ]),
+            summary ? h('p', { style: { fontStyle: 'italic', margin: '1rem 0', color: '#554d42' }, key: 's' }, summary) : null,
+            h(HeroImg, {
+              key: 'hero',
+              path: hero,
+              position: pos,
+              getAsset: this.props.getAsset,
+            }),
+            h('div', { className: 'pv-body', key: 'body' }, this.props.widgetFor('body')),
+          ]);
+        },
+      });
+
       CMS.registerPreviewTemplate('posts', PostPreview);
+      CMS.registerPreviewTemplate('prensa', PrensaPreview);
     </script>
   </body>
 </html>
