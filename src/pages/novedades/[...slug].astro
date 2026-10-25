@@ -19,6 +19,42 @@ const { item } = Astro.props;
 const { Content } = await render(item);
 
 const isBook = item.data.type?.toLowerCase() === 'lanzamiento';
+
+// URL canónica del texto para los botones de compartir.
+const shareUrl = new URL(Astro.url.pathname, Astro.site).href;
+const waHref = `https://wa.me/?text=${encodeURIComponent(`${item.data.title} — ${shareUrl}`)}`;
+const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(item.data.title)}&url=${encodeURIComponent(shareUrl)}`;
+
+// Tarjeta vertical 9:16 para Instagram Stories (imagen + marca + título + URL)
+const cldText = (s: string): string =>
+	encodeURIComponent(s).replace(/%2C/g, '%252C').replace(/%2F/g, '%252F');
+
+const buildStoryCard = (url: string, t: string, meta: string): string => {
+	const enc = cldText(t);
+	const lineLayer = 'b_rgb:3d3d3d,w_920,h_2,c_fill,l_text:arial_2:./g_north,y_1180,fl_layer_apply/';
+	const metaLayer = meta
+		? 'co_rgb:d2c7b5,l_text:Georgia_40_bold:' + cldText(meta) + '/g_south,y_260,fl_layer_apply/'
+		: '';
+	const layers =
+		'co_rgb:ffffff,l_text:Georgia_40_bold:abulia%20terminal/e_shadow:70,x_0,y_2,co_black/g_north,y_90,fl_layer_apply/' +
+		lineLayer +
+		'w_920,c_fit,co_rgb:ffffff,l_text:Georgia_72_bold:' +
+		enc +
+		'/g_south,y_380,fl_layer_apply/' +
+		metaLayer +
+		'co_rgb:8e8880,l_text:Georgia_28_bold:abuliaterminal.cl/g_south,y_150,fl_layer_apply';
+	const overlay = 'w_1080,h_1180,c_fill,g_auto,f_jpg,q_auto:good/w_1080,h_1920,c_pad,g_north,b_rgb:0e0e0e/' + layers;
+	const marker = '/image/upload/';
+	const idx = url.indexOf(marker);
+	if (idx !== -1 && url.includes('res.cloudinary.com')) {
+		return `${url.slice(0, idx + marker.length)}${overlay}/${url.slice(idx + marker.length)}`;
+	}
+	const abs = url.startsWith('http') ? url : new URL(url, Astro.site).href;
+	return `https://res.cloudinary.com/cs8tnt88/image/fetch/${overlay}/${abs}`;
+};
+
+const storyMeta = [item.data.type || 'Novedad', item.data.author || item.data.location].filter(Boolean).join(' · ');
+const storyCard = item.data.heroImage ? buildStoryCard(item.data.heroImage, item.data.title, storyMeta) : null;
 ---
 
 <!doctype html>
@@ -77,6 +113,39 @@ const isBook = item.data.type?.toLowerCase() === 'lanzamiento';
 					</div>
 				</div>
 			</header>
+
+			<div class="art-share">
+				<span class="art-share-label">compartir</span>
+				<div class="art-share-btns">
+					<button
+						class="share-btn share-btn--native"
+						type="button"
+						id="native-share"
+						data-title={item.data.title}
+						data-url={shareUrl}
+						style="display: none;"
+						aria-label="Compartir en tu dispositivo"
+					>
+						⤤ compartir
+					</button>
+					<a class="share-btn" href={waHref} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+					<a class="share-btn" href={xHref} target="_blank" rel="noopener noreferrer">X</a>
+					{storyCard && (
+						<button
+							class="share-btn share-btn--story"
+							type="button"
+							id="share-story"
+							data-story={storyCard}
+							data-url={shareUrl}
+						>
+							Instagram
+						</button>
+					)}
+					<button class="share-btn" type="button" id="copy-link" data-url={shareUrl}>
+						copiar enlace
+					</button>
+				</div>
+			</div>
 
 			<div class="art-layout">
 				{
@@ -174,6 +243,82 @@ const isBook = item.data.type?.toLowerCase() === 'lanzamiento';
 		</article>
 
 		<Footer />
+		<script is:inline>
+			(function () {
+				// Copiar enlace
+				var copyBtn = document.getElementById('copy-link');
+				if (copyBtn) {
+					copyBtn.addEventListener('click', function () {
+						var url = copyBtn.getAttribute('data-url') || location.href;
+						var done = function () {
+							copyBtn.textContent = '¡copiado!';
+							setTimeout(function () {
+								copyBtn.textContent = 'copiar enlace';
+							}, 1600);
+						};
+						if (navigator.clipboard && navigator.clipboard.writeText) {
+							navigator.clipboard.writeText(url).then(done).catch(done);
+						} else {
+							var ta = document.createElement('textarea');
+							ta.value = url;
+							document.body.appendChild(ta);
+							ta.select();
+							try {
+								document.execCommand('copy');
+							} catch (e) {}
+							document.body.removeChild(ta);
+							done();
+						}
+					});
+				}
+				// Botón nativo de compartir para celulares (iOS Safari / Android Chrome)
+				var nativeBtn = document.getElementById('native-share');
+				if (nativeBtn && navigator.share) {
+					nativeBtn.style.display = 'inline-flex';
+					nativeBtn.addEventListener('click', function () {
+						navigator.share({
+							title: nativeBtn.getAttribute('data-title') || document.title,
+							url: nativeBtn.getAttribute('data-url') || location.href,
+						}).catch(function () {});
+					});
+				}
+				// Compartir a Instagram (celular): imagen vertical 9:16
+				var storyBtn = document.getElementById('share-story');
+				if (storyBtn) {
+					var storyImg = storyBtn.getAttribute('data-story');
+					var storyFile = null;
+					var isPrep = false;
+					var prepStory = function () {
+						if (!storyImg || storyFile || isPrep) return;
+						isPrep = true;
+						fetch(storyImg)
+							.then(function (r) { return r.blob(); })
+							.then(function (b) {
+								storyFile = new File([b], 'abulia-terminal.jpg', {
+									type: b.type || 'image/jpeg',
+								});
+							})
+							.catch(function () {})
+							.finally(function () { isPrep = false; });
+					};
+					storyBtn.addEventListener('mouseenter', prepStory, { passive: true });
+					storyBtn.addEventListener('touchstart', prepStory, { passive: true });
+					storyBtn.addEventListener('click', function () {
+						if (storyFile && navigator.canShare && navigator.canShare({ files: [storyFile] })) {
+							navigator.share({ files: [storyFile] }).catch(function () {});
+							try {
+								if (navigator.clipboard) navigator.clipboard.writeText(storyBtn.getAttribute('data-url') || '');
+							} catch (e) {}
+							return;
+						}
+						try {
+							if (navigator.clipboard) navigator.clipboard.writeText(storyBtn.getAttribute('data-url') || '');
+						} catch (e) {}
+						if (storyImg) window.open(storyImg, '_blank');
+					});
+				}
+			})();
+		</script>
 	</body>
 </html>
 
@@ -229,6 +374,54 @@ const isBook = item.data.type?.toLowerCase() === 'lanzamiento';
 	}
 	.art-meta-bar b {
 		color: var(--ink);
+	}
+	/* Compartir */
+	.art-share {
+		margin: 0 0 2.2rem;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.4rem 0.7rem;
+	}
+	.art-share-label {
+		font-family: var(--font-mono);
+		font-size: 0.66rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--pink);
+	}
+	.art-share-btns {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+	.share-btn {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		color: var(--ink);
+		background: transparent;
+		border: 1.5px solid var(--ink);
+		padding: 0.3rem 0.6rem;
+		text-decoration: none;
+		cursor: pointer;
+		min-height: 32px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		transition: background 0.15s ease, color 0.15s ease;
+	}
+	.share-btn--native {
+		background: var(--pink);
+		color: var(--ink);
+		font-weight: 700;
+	}
+	.share-btn--native:hover {
+		background: var(--ink);
+		color: var(--paper);
+	}
+	.share-btn:hover {
+		background: var(--ink);
+		color: var(--paper);
 	}
 	.art-layout {
 		display: grid;
