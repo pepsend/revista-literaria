@@ -98,19 +98,30 @@ const ogCard = heroImage ? buildOgCard(heroImage, title) : null;
 // 3. Línea divisoria elegante y textos (título, autor, URL) en el bloque oscuro.
 const buildStoryCard = (url: string, t: string, meta: string): string => {
 	const enc = cldText(t);
-	const lineLayer = 'b_rgb:3d3d3d,w_920,h_2,c_fill,l_text:arial_2:./g_north,y_1180,fl_layer_apply/';
+	// 1. Barra superior sólida (#0e0e0e) de 130px: 'abulia terminal' centrado en y=55 sobre fondo oscuro propio, NUNCA sobre la imagen.
+	const topBrandLayer =
+		'co_rgb:ffffff,l_text:Georgia_34_bold:abulia%20terminal/g_north,y_55,fl_layer_apply/';
+	// 2. Línea divisoria elegante justo donde termina la imagen (y=1130).
+	const lineLayer =
+		'b_rgb:3d3d3d,w_920,h_2,c_fill,l_text:arial_2:./g_north,y_1130,fl_layer_apply/';
+	// 3. Título en bloque oscuro inferior, ordenado de arriba a abajo (g_north, y=1170) con tamaño equilibrado (48px) para que nunca invada la imagen hacia arriba.
+	const titleLayer =
+		'w_920,c_fit,co_rgb:ffffff,l_text:Georgia_48_bold:' + enc + '/g_north,y_1170,fl_layer_apply/';
+	// 4. Metadatos (categoría / autor / editorial) en la parte inferior.
 	const metaLayer = meta
-		? 'co_rgb:d2c7b5,l_text:Georgia_40_bold:' + cldText(meta) + '/g_south,y_260,fl_layer_apply/'
+		? 'co_rgb:d2c7b5,l_text:Georgia_34_bold:' + cldText(meta) + '/g_south,y_180,fl_layer_apply/'
 		: '';
-	const layers =
-		'co_rgb:ffffff,l_text:Georgia_40_bold:abulia%20terminal/e_shadow:70,x_0,y_2,co_black/g_north,y_90,fl_layer_apply/' +
-		lineLayer +
-		'w_920,c_fit,co_rgb:ffffff,l_text:Georgia_72_bold:' +
-		enc +
-		'/g_south,y_380,fl_layer_apply/' +
-		metaLayer +
-		'co_rgb:8e8880,l_text:Georgia_28_bold:abuliaterminal.cl/g_south,y_150,fl_layer_apply';
-	const overlay = 'w_1080,h_1180,c_fill,g_auto,f_jpg,q_auto:good/w_1080,h_1920,c_pad,g_north,b_rgb:0e0e0e/' + layers;
+	// 5. Enlace al pie.
+	const siteLayer =
+		'co_rgb:8e8880,l_text:Georgia_26_bold:abuliaterminal.cl/g_south,y_110,fl_layer_apply';
+
+	const layers = topBrandLayer + lineLayer + titleLayer + metaLayer + siteLayer;
+	// La imagen se ajusta a 1080x1000 y se desplaza 130px hacia abajo (y_130) mediante c_pad sobre lienzo negro #0e0e0e de 1080x1920 (9:16).
+	// De este modo, la imagen queda en su propia ventana limpia entre y=130 e y=1130, con CERO textos encima.
+	const overlay =
+		'w_1080,h_1000,c_fill,g_auto,f_jpg,q_auto:good/w_1080,h_1920,c_pad,g_north,y_130,b_rgb:0e0e0e/' +
+		layers;
+
 	const marker = '/image/upload/';
 	const idx = url.indexOf(marker);
 	if (idx !== -1 && url.includes('res.cloudinary.com')) {
