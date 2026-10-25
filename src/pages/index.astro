@@ -136,7 +136,7 @@ const homeJsonLd = {
 								</a>
 							</div>
 
-							<div class="gaceta-grid">
+							<div class="gaceta-grid" data-count={novedades.length}>
 								{novedades.map((item) => (
 									<a class="gaceta-item" href={`/novedades/${item.id}/`}>
 										{item.data.heroImage && (
@@ -490,6 +490,18 @@ const homeJsonLd = {
 		grid-template-columns: repeat(3, 1fr);
 		gap: 1.6rem;
 		align-items: start;
+	}
+	.gaceta-grid[data-count="1"] {
+		grid-template-columns: 1fr;
+		max-width: 680px;
+	}
+	.gaceta-grid[data-count="1"] .gaceta-item {
+		grid-template-columns: 90px 1fr;
+		border-right: none;
+		padding-right: 0;
+	}
+	.gaceta-grid[data-count="2"] {
+		grid-template-columns: repeat(2, 1fr);
 	}
 	.gaceta-item {
 		text-decoration: none;
