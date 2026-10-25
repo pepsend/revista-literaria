@@ -142,6 +142,33 @@ const isBook = item.data.type?.toLowerCase() === 'lanzamiento';
 					<div class="art-markdown">
 						<Content />
 					</div>
+
+					{
+						(item.data.authorBio || item.data.authorImage) && (
+							<aside class="art-author">
+								<p class="art-author-label">{isBook ? 'sobre la autora' : 'nota biográfica'}</p>
+								<div class="art-author-inner">
+									{item.data.authorImage && (
+										<img
+											class="art-author-photo at-duotone"
+											src={getOptimizedImageUrl(item.data.authorImage, { width: 200, height: 200, crop: 'fill', quality: 'auto:good' })}
+											alt={item.data.author || 'Autora'}
+											width="85"
+											height="85"
+										/>
+									)}
+									<div class="art-author-text">
+										{item.data.author && <h3 class="art-author-name">{item.data.author}</h3>}
+										{item.data.authorBio && (
+											<div class="art-author-bio">
+												<p>{item.data.authorBio}</p>
+											</div>
+										)}
+									</div>
+								</div>
+							</aside>
+						)
+					}
 				</div>
 			</div>
 		</article>
@@ -292,6 +319,56 @@ const isBook = item.data.type?.toLowerCase() === 'lanzamiento';
 		margin: 1.5rem 0;
 	}
 
+	.art-author {
+		margin-top: 3rem;
+		padding: 1.6rem 1.6rem 1.5rem;
+		border: 2px solid var(--ink);
+		background: var(--negro);
+		color: var(--crema);
+		box-shadow: 4px 4px 0 var(--ink);
+	}
+	.art-author-label {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--pink);
+		margin: 0 0 0.8rem;
+	}
+	.art-author-inner {
+		display: flex;
+		gap: 1.2rem;
+		align-items: flex-start;
+	}
+	.art-author-photo {
+		width: 85px;
+		height: 85px;
+		object-fit: cover;
+		border: 1.5px solid var(--crema);
+		box-shadow: 2px 2px 0 var(--pink);
+		flex-shrink: 0;
+	}
+	.art-author-text {
+		min-width: 0;
+	}
+	.art-author-name {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: 1.25rem;
+		margin: 0 0 0.4rem;
+		color: var(--crema);
+	}
+	.art-author-bio {
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: 0.95rem;
+		line-height: 1.55;
+		color: #d8ccb6;
+	}
+	.art-author-bio p {
+		margin: 0;
+	}
+
 	@media (max-width: 760px) {
 		.art-wrap {
 			padding: 1.8rem 1rem 3.5rem;
@@ -317,6 +394,14 @@ const isBook = item.data.type?.toLowerCase() === 'lanzamiento';
 			font-size: 1rem;
 			padding-left: 0.8rem;
 			margin-bottom: 1.2rem;
+		}
+		.art-author-inner {
+			flex-direction: column;
+			gap: 0.8rem;
+		}
+		.art-author-photo {
+			width: 75px;
+			height: 75px;
 		}
 	}
 </style>

@@ -87,6 +87,8 @@ const prensa = defineCollection({
 		link: z.string().optional(),
 		heroImage: z.string().optional(),
 		imagePosition: z.string().optional().default('center'),
+		authorBio: z.string().optional(),
+		authorImage: z.string().optional(),
 		summary: z.string().optional(),
 	}),
 });

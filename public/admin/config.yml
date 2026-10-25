@@ -94,6 +94,8 @@ collections:
       - { label: "Enlace oficial o compra", name: "link", widget: "string", required: false, hint: "Enlace a bases, inscripción o compra." }
       - { label: "Afiche o Portada", name: "heroImage", widget: "image", required: false, hint: "Afiche del evento o portada del libro." }
       - { label: "Encaje de la imagen", name: "imagePosition", widget: "focalpoint", required: false, default: "50% 50%", hint: "Arrastra para centrar la imagen." }
+      - { label: "Bio del autor/a (opcional)", name: "authorBio", widget: "text", required: false, hint: "Nota biográfica para el bloque 'sobre la autora / autor' al pie de la nota." }
+      - { label: "Foto del autor/a (opcional)", name: "authorImage", widget: "image", required: false, hint: "Fotografía del autor/a para acompañar la nota biográfica." }
       - { label: "Bajada breve para el Home", name: "summary", widget: "text", required: false, hint: "Resumen breve (1 a 2 líneas) para la gaceta del Home." }
       - label: "Contenido completo"
         name: "body"

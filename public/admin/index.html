@@ -642,6 +642,9 @@
           var hero = data.get('heroImage');
           var pos = data.get('imagePosition') || 'center';
           var summary = data.get('summary');
+          var author = data.get('author');
+          var authorBio = data.get('authorBio');
+          var authorImage = data.get('authorImage');
 
           return h('div', { className: 'pv-wrap' }, [
             h('span', { className: 'pv-tag', key: 'type' }, type),
@@ -659,6 +662,20 @@
               getAsset: this.props.getAsset,
             }),
             h('div', { className: 'pv-body', key: 'body' }, this.props.widgetFor('body')),
+            (authorBio || authorImage) ? h('div', {
+              key: 'author-box',
+              style: {
+                marginTop: '2rem',
+                padding: '1.2rem',
+                background: '#0e0e0e',
+                color: '#fbf8ef',
+                border: '2px solid #0e0e0e',
+              }
+            }, [
+              h('p', { key: 'lbl', style: { color: '#ff3366', fontSize: '0.72rem', textTransform: 'uppercase', margin: '0 0 0.5rem' } }, 'sobre la autora / autor'),
+              author ? h('h4', { key: 'nm', style: { margin: '0 0 0.4rem', color: '#fbf8ef' } }, author) : null,
+              authorBio ? h('p', { key: 'bio', style: { margin: 0, fontSize: '0.88rem', color: '#d8ccb6' } }, authorBio) : null,
+            ]) : null,
           ]);
         },
       });
