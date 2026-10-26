@@ -22,12 +22,7 @@ authorBio: >-
   (Extraído de la web, https://boriscamposernst.com/)
 authorImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1793022241/Foto_Boris_Campos_Ernst_crfqbo.jpg
 ---
-
-
 <div class="aln" data-aln data-align="centro" style="text-align:center;white-space:pre-wrap;"></div>
-
-
-
 
 *Insistente trazo* es el nombre de la exposición que reúne una importante serie de obras gráficas de Boris Campos Ernst que se exhiben en Museo Taller a partir del 16 de octubre.
 
@@ -42,3 +37,5 @@ Impresionante es la exhibición de *En horamala*, obra de gran formato montada e
 *Exponer en Museo Taller es muy importante para mí, por lo que significa este espacio y su manera de valorar los oficios, las técnicas y los procesos de creación. Me parece fascinante poder mostrar todo aquello que hay detrás de una obra terminada: el trabajo, la experimentación y los distintos procesos que forman parte de su desarrollo. Además, esto se relaciona directamente con mi forma de trabajar y entender la gráfica,* explica Boris Campos Ernst.
 
 La exposición ofrece una oportunidad única para asistir a la maestría de los procesos creativos y manuales, comprendiendo el uso de técnicas como la xilografía, fotoserigrafía, xilografía a taco perdido, monotipia y frottage. La muestra estará abierta hasta el 20 de enero de 2027.
+
+![](https://res.cloudinary.com/cs8tnt88/image/upload/v1793022276/01_umdt1r.jpg)
