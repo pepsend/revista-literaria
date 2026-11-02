@@ -20,6 +20,7 @@ authorBio: >
   Dignidad”, publicada por Editorial Catalonia y traducida al alemán y al
   inglés. Es profesora emérita de la Universidad de Nevada, Reno, donde fundó el
   Centro de Estudios Latinos. Actualmente reside en Valencia, España.
+authorImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1793644028/Emma_Sepu%CC%81lveda_saknri.jpg
 summary: "Autora viene a Chile a presentar su novela:"
 ---
 **Los secretos del emblemático hotel Valdivia inspiran la nueva novela de Emma Sepúlveda**
