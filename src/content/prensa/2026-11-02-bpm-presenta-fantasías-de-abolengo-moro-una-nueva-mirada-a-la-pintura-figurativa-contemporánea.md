@@ -8,7 +8,7 @@ eventDates: 07 al 28 de noviembre
 location: Centro cultural Espacio Londres
 link: https://www.victormahana.com/bpm-colectivo/
 heroImage: https://res.cloudinary.com/cs8tnt88/image/upload/v1793644621/BPM_1_ykrpqe.jpg
-imagePosition: 50% 50%
+imagePosition: 54% 4%
 summary: >
   La exposición marca el lanzamiento del colectivo integrado por Lina Buso, Raúl
   Pizarro y Víctor Mahana, tres artistas que dialogan con la tradición pictórica
