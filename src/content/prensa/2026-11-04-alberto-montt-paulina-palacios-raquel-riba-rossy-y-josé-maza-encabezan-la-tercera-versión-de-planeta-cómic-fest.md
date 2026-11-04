@@ -18,7 +18,24 @@ summary: >
 
   En el stand de ventas disponible en el festival habrá descuentos especiales.
 carousel:
+  - image: /uploads/raquel-riba-rossy_libro_final-©blanca-de-la-cruz.jpg
+    caption: Raquel Riba
+  - image: /uploads/paulina-palacios-3.jpeg
+    caption: Paulina Palacios
+  - image: /uploads/monica_molina_foto_alberto_montt-21.jpg
+    caption: Alberto Montt
+  - image: /uploads/monica_molina_fotografia_planeta_jose_maza_hr-15.jpg
+    caption: "Jose Maza "
+  - image: /uploads/planetacomicfest_08-11-25-116-©fundación-cultural-de-providencia-©mariana-canobra.jpg
+  - image: /uploads/planetacomicfest_08-11-25-075-©fundación-cultural-de-providencia-©mariana-canobra.jpg
+  - image: /uploads/planetacomicfest_08-11-25-025-©fundación-cultural-de-providencia-©mariana-canobra-1-.jpg
+  - image: /uploads/planetacomicfest_08-11-25-025-©fundación-cultural-de-providencia-©mariana-canobra.jpg
+  - image: /uploads/paulina-palacios-planeta-cómic-fest-2025-©fundación-cultural-de-providencia-©mariana-canobra.jpg
+  - image: /uploads/fernanda-frick-planeta-cómic-fest-2025-©fundación-cultural-de-providencia-©mariana-canobra.jpg
+  - image: /uploads/félix-vega-planeta-cómic-fest-2025-©fundación-cultural-de-providencia-©mariana-canobra.jpg
   - image: /uploads/daniela-thiers-planeta-cómic-fest-2025-©fundación-cultural-de-providencia-©mariana-canobra.jpg
+  - image: /uploads/planetacomicfest_08-11-25-127-©fundación-cultural-de-providencia-©mariana-canobra.jpg
+  - image: /uploads/planetacomicfest_08-11-25-126-©fundación-cultural-de-providencia-©mariana-canobra.jpg
 ---
 Por tercer año consecutivo, Grupo Planeta y la Fundación Cultural de Providencia realizarán Planeta Cómic Fest, encuentro dedicado al cómic, el manga, la ilustración y la novela gráfica que reunirá a autores destacados en una jornada gratuita para toda la familia. 
 
