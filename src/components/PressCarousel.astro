@@ -58,21 +58,15 @@ const srcsetFor = (url: string) =>
 					aria-roledescription="diapositiva"
 					aria-label={`${index + 1} de ${total}`}
 				>
-					<div class="pc-frame">
-						<div class="pc-stage">
-							<img
-								src={srcFor(photo.image)}
-								srcset={srcsetFor(photo.image)}
-								sizes="(max-width: 760px) calc(100vw - 32px), 553px"
-								alt={photo.alt || photo.caption || title}
-								loading="lazy"
-								decoding="async"
-								width="1200"
-								height="800"
-								class="at-duotone"
-							/>
-						</div>
-					</div>
+					<img
+						class="pc-photo at-duotone"
+						src={srcFor(photo.image)}
+						srcset={srcsetFor(photo.image)}
+						sizes="(max-width: 760px) calc(100vw - 32px), 553px"
+						alt={photo.alt || photo.caption || title}
+						loading="lazy"
+						decoding="async"
+					/>
 					<figcaption class="pc-cap">
 						<b>{pad(index + 1)}</b>
 						{photo.caption && <span>{photo.caption}</span>}
@@ -245,36 +239,33 @@ const srcsetFor = (url: string) =>
 		outline-offset: 4px;
 	}
 	.pc-slide {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.65rem;
 		flex: 0 0 100%;
 		min-width: 0;
 		margin: 0;
 		scroll-snap-align: start;
 	}
-	.pc-frame {
-		position: relative;
-		aspect-ratio: 3 / 2;
-		background: var(--paper-2);
+	.pc-photo {
+		display: block;
+		width: auto;
+		height: auto;
+		max-width: 100%;
+		max-height: min(70vh, 620px);
 		border: 1.5px solid var(--ink);
 		box-shadow: 4px 4px 0 var(--ink);
-		overflow: hidden;
-	}
-	.pc-stage {
-		position: absolute;
-		inset: 0.55rem;
-	}
-	.pc-stage img {
-		position: absolute;
-		inset: 0;
-		display: block;
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
+		background: var(--paper-2);
 	}
 	.pc-cap {
 		display: flex;
 		align-items: baseline;
 		gap: 0.6rem;
-		margin: 0.6rem 0 0;
+		width: 100%;
+		max-width: 553px;
+		margin: 0;
 		font-family: var(--font-mono);
 		font-size: 0.74rem;
 		line-height: 1.5;
@@ -300,12 +291,9 @@ const srcsetFor = (url: string) =>
 			min-width: 4.2rem;
 			font-size: 0.68rem;
 		}
-		.pc-frame {
-			aspect-ratio: 3 / 2;
+		.pc-photo {
+			max-height: min(62vh, 520px);
 			box-shadow: 3px 3px 0 var(--ink);
-		}
-		.pc-stage {
-			inset: 0.4rem;
 		}
 		.pc-cap {
 			font-size: 0.7rem;
