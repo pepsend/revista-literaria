@@ -25,7 +25,7 @@ carousel:
   - image: /uploads/monica_molina_foto_alberto_montt-21.jpg
     caption: Alberto Montt
   - image: /uploads/monica_molina_fotografia_planeta_jose_maza_hr-15.jpg
-    caption: "Jose Maza "
+    caption: "José Maza "
   - image: /uploads/planetacomicfest_08-11-25-116-©fundación-cultural-de-providencia-©mariana-canobra.jpg
   - image: /uploads/planetacomicfest_08-11-25-075-©fundación-cultural-de-providencia-©mariana-canobra.jpg
   - image: /uploads/planetacomicfest_08-11-25-025-©fundación-cultural-de-providencia-©mariana-canobra-1-.jpg
