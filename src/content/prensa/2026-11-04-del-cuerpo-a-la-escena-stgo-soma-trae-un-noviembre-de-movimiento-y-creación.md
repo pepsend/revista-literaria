@@ -4,7 +4,7 @@ type: Evento
 date: 2026-11-04T15:38:00.000-03:00
 eventDates: del 06/11/26 al 15/11/26
 heroImage: /uploads/poly-rodríguez.jpg
-imagePosition: 51% 53%
+imagePosition: 49% 50%
 carousel:
   - image: /uploads/humana-1.jpeg
   - image: /uploads/humana-2.jpeg
