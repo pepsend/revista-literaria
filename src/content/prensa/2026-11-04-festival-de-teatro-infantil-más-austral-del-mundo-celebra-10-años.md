@@ -7,7 +7,7 @@ eventDates: 10, 11 y 12 de noviembre
 location: Fundación Cultural Escena Sur
 link: https://escenasur.cl/
 heroImage: /uploads/image.jpeg
-imagePosition: 50% 50%
+imagePosition: 44% 99%
 summary: >+
   FESTIVAL DE TEATRO INFANTIL MÁS AUSTRAL DEL MUNDO CELEBRA UNA DÉCADA CON 19
   OBRAS DE CINCO REGIONES
