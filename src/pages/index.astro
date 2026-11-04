@@ -143,12 +143,10 @@ const homeJsonLd = {
 										{item.data.heroImage && (
 											<img
 												class="gaceta-thumb at-duotone"
-												src={getOptimizedImageUrl(item.data.heroImage, { width: 160, height: 240, crop: 'fill', quality: 'auto:good' })}
+												src={getOptimizedImageUrl(item.data.heroImage, { width: 240, crop: 'fit', quality: 'auto:good' })}
 												alt={item.data.title}
 												loading="lazy"
 												decoding="async"
-												width="80"
-												height="120"
 												style={`object-position: ${item.data.imagePosition || 'center'};`}
 											/>
 										)}
@@ -533,10 +531,11 @@ const homeJsonLd = {
 		color: var(--pink);
 	}
 	.gaceta-thumb {
-		width: 80px;
+		width: auto;
+		height: auto;
 		max-width: 100%;
-		aspect-ratio: 2 / 3;
-		object-fit: cover;
+		max-height: 120px;
+		object-fit: contain;
 		border: 1.5px solid var(--ink);
 		box-shadow: 2px 2px 0 var(--ink);
 		background: var(--paper-2);
@@ -722,8 +721,8 @@ const homeJsonLd = {
 			padding-bottom: 0;
 		}
 		.gaceta-thumb {
-			width: 75px;
 			max-width: 75px;
+			max-height: 112px;
 		}
 		.gaceta-item-title {
 			font-size: 0.95rem;

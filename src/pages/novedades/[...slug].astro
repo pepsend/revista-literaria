@@ -41,19 +41,19 @@ const buildStoryCard = (url: string, t: string, meta: string): string => {
 	// 3. Título en bloque oscuro inferior, ordenado de arriba a abajo (g_north, y=1170) con tamaño equilibrado (48px) para que nunca invada la imagen hacia arriba.
 	const titleLayer =
 		'w_920,c_fit,co_rgb:ffffff,l_text:Georgia_48_bold:' + enc + '/g_north,y_1170,fl_layer_apply/';
-	// 4. Metadatos (categoría / autor / editorial) en la parte inferior.
+	// 4. Metadatos (categoría / autor / editorial) en la parte inferior, con ancho máximo para que envuelvan en lugar de salirse del lienzo.
 	const metaLayer = meta
-		? 'co_rgb:d2c7b5,l_text:Georgia_34_bold:' + cldText(meta) + '/g_south,y_180,fl_layer_apply/'
+		? 'w_920,c_fit,co_rgb:d2c7b5,l_text:Georgia_34_bold:' + cldText(meta) + '/g_south,y_180,fl_layer_apply/'
 		: '';
 	// 5. Enlace al pie.
 	const siteLayer =
 		'co_rgb:8e8880,l_text:Georgia_26_bold:abuliaterminal.cl/g_south,y_110,fl_layer_apply';
 
 	const layers = topBrandLayer + lineLayer + titleLayer + metaLayer + siteLayer;
-	// La imagen se ajusta a 1080x1000 y se desplaza 130px hacia abajo (y_130) mediante c_pad sobre lienzo negro #0e0e0e de 1080x1920 (9:16).
-	// De este modo, la imagen queda en su propia ventana limpia entre y=130 e y=1130, con CERO textos encima.
+	// La imagen se contiene dentro de una ventana 1080x1000 con relleno negro (sin recortarla) y se desplaza 130px hacia abajo (y_130) sobre un lienzo negro #0e0e0e de 1080x1920 (9:16).
+	// De este modo, la foto completa queda en su propia ventana limpia entre y=130 e y=1130, con CERO textos encima.
 	const overlay =
-		'w_1080,h_1000,c_fill,g_auto,f_jpg,q_auto:good/w_1080,h_1920,c_pad,g_north,y_130,b_rgb:0e0e0e/' +
+		'w_1080,h_1000,c_pad,b_rgb:0e0e0e,f_jpg,q_auto:good/w_1080,h_1920,c_pad,g_north,y_130,b_rgb:0e0e0e/' +
 		layers;
 
 	const marker = '/image/upload/';
