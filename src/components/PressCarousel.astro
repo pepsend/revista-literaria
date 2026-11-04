@@ -1,0 +1,324 @@
+---
+import { getOptimizedImageUrl } from '../utils/images';
+
+interface CarouselImage {
+	image: string;
+	caption?: string;
+	alt?: string;
+}
+
+interface Props {
+	images: CarouselImage[];
+	title: string;
+}
+
+const { images, title } = Astro.props;
+const total = images.length;
+const widths = [640, 960, 1280, 1600];
+const pad = (n: number) => String(n).padStart(2, '0');
+
+const srcFor = (url: string) =>
+	getOptimizedImageUrl(url, { width: 1280, crop: 'fit', quality: 'auto:good' });
+
+const srcsetFor = (url: string) =>
+	widths
+		.map(
+			(width) =>
+				`${getOptimizedImageUrl(url, { width, crop: 'fit', quality: 'auto:good' })} ${width}w`,
+		)
+		.join(', ');
+---
+
+<section
+	class="press-carousel"
+	data-carousel
+	role="region"
+	aria-roledescription="carrusel"
+	aria-label="Galería de fotos de la nota"
+>
+	<div class="pc-head">
+		<span class="pc-kicker">galería de fotos</span>
+		<div class="pc-controls">
+			<button class="pc-btn" type="button" data-prev aria-label="Foto anterior">←</button>
+			<span class="pc-count" aria-live="polite"><span data-current>01</span> / {pad(total)}</span>
+			<button class="pc-btn" type="button" data-next aria-label="Foto siguiente">→</button>
+		</div>
+	</div>
+	<div
+		class="pc-viewport"
+		data-track
+		tabindex="0"
+		aria-label="Fotos de la galería. Usa las flechas para navegar."
+	>
+		{
+			images.map((photo, index) => (
+				<figure
+					class="pc-slide"
+					role="group"
+					aria-roledescription="diapositiva"
+					aria-label={`${index + 1} de ${total}`}
+				>
+					<div class="pc-frame">
+						<div class="pc-stage">
+							<img
+								src={srcFor(photo.image)}
+								srcset={srcsetFor(photo.image)}
+								sizes="(max-width: 760px) calc(100vw - 32px), 553px"
+								alt={photo.alt || photo.caption || title}
+								loading="lazy"
+								decoding="async"
+								width="1200"
+								height="800"
+								class="at-duotone"
+							/>
+						</div>
+					</div>
+					<figcaption class="pc-cap">
+						<b>{pad(index + 1)}</b>
+						{photo.caption && <span>{photo.caption}</span>}
+					</figcaption>
+				</figure>
+			))
+		}
+	</div>
+</section>
+
+<script>
+	(function () {
+		var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		document.querySelectorAll('[data-carousel]').forEach(function (root) {
+			var track = root.querySelector('[data-track]');
+			var slides = Array.prototype.slice.call(track.children);
+			var current = root.querySelector('[data-current]');
+			var prev = root.querySelector('[data-prev]');
+			var next = root.querySelector('[data-next]');
+			var index = 0;
+			if (!slides.length) return;
+			root.setAttribute('data-ready', '');
+			function pad(n) {
+				return (n < 10 ? '0' : '') + n;
+			}
+			function step() {
+				var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+				return slides[0].getBoundingClientRect().width + gap;
+			}
+			function update() {
+				var s = step();
+				var i = s ? Math.round(track.scrollLeft / s) : 0;
+				index = Math.max(0, Math.min(slides.length - 1, i));
+				current.textContent = pad(index + 1);
+			}
+			function go(i) {
+				index = (i + slides.length) % slides.length;
+				track.scrollTo({ left: slides[index].offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
+				current.textContent = pad(index + 1);
+			}
+			prev.addEventListener('click', function () {
+				go(index - 1);
+			});
+			next.addEventListener('click', function () {
+				go(index + 1);
+			});
+			track.addEventListener('keydown', function (e) {
+				if (e.key === 'ArrowLeft') {
+					e.preventDefault();
+					go(index - 1);
+				}
+				if (e.key === 'ArrowRight') {
+					e.preventDefault();
+					go(index + 1);
+				}
+				if (e.key === 'Home') {
+					e.preventDefault();
+					go(0);
+				}
+				if (e.key === 'End') {
+					e.preventDefault();
+					go(slides.length - 1);
+				}
+			});
+			var ticking = false;
+			track.addEventListener(
+				'scroll',
+				function () {
+					if (ticking) return;
+					ticking = true;
+					requestAnimationFrame(function () {
+						update();
+						ticking = false;
+					});
+				},
+				{ passive: true },
+			);
+			update();
+		});
+	})();
+</script>
+
+<style>
+	.press-carousel {
+		--pc-accent: #b81f5e;
+		--pc-muted: #6e604f;
+		margin: 2.4rem 0 0;
+		padding: 0.9rem 0 1.1rem;
+		border-top: 1.5px solid var(--ink);
+		border-bottom: 1.5px solid var(--ink);
+	}
+	:root[data-theme='terminal'] .press-carousel {
+		--pc-accent: var(--pink);
+		--pc-muted: var(--muted);
+	}
+	.pc-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.7rem;
+	}
+	.pc-kicker {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--pc-accent);
+	}
+	.press-carousel:not([data-ready]) .pc-controls {
+		display: none;
+	}
+	.pc-controls {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	.pc-btn {
+		display: grid;
+		place-items: center;
+		width: 40px;
+		height: 40px;
+		padding: 0;
+		font-family: var(--font-mono);
+		font-size: 1rem;
+		line-height: 1;
+		color: var(--ink);
+		background: var(--paper);
+		border: 1.5px solid var(--ink);
+		box-shadow: 2px 2px 0 var(--ink);
+		cursor: pointer;
+		transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+	}
+	.pc-btn:hover {
+		color: #1b1916;
+		background: var(--pink);
+		border-color: #1b1916;
+		box-shadow: 2px 2px 0 #1b1916;
+	}
+	.pc-btn:focus-visible {
+		outline: 2px solid var(--pc-accent);
+		outline-offset: 3px;
+	}
+	.pc-count {
+		min-width: 4.7rem;
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.08em;
+		color: var(--pc-muted);
+		text-align: center;
+		white-space: nowrap;
+	}
+	.pc-viewport {
+		position: relative;
+		display: flex;
+		gap: 1rem;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		scrollbar-width: none;
+		padding: 0 0 0.35rem;
+		outline: none;
+	}
+	.pc-viewport::-webkit-scrollbar {
+		display: none;
+	}
+	.pc-viewport:focus-visible {
+		outline: 2px solid var(--pc-accent);
+		outline-offset: 4px;
+	}
+	.pc-slide {
+		flex: 0 0 100%;
+		min-width: 0;
+		margin: 0;
+		scroll-snap-align: start;
+	}
+	.pc-frame {
+		position: relative;
+		aspect-ratio: 3 / 2;
+		background: var(--paper-2);
+		border: 1.5px solid var(--ink);
+		box-shadow: 4px 4px 0 var(--ink);
+		overflow: hidden;
+	}
+	.pc-stage {
+		position: absolute;
+		inset: 0.55rem;
+	}
+	.pc-stage img {
+		position: absolute;
+		inset: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+	.pc-cap {
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
+		margin: 0.6rem 0 0;
+		font-family: var(--font-mono);
+		font-size: 0.74rem;
+		line-height: 1.5;
+		color: var(--pc-muted);
+	}
+	.pc-cap b {
+		flex-shrink: 0;
+		color: var(--pc-accent);
+		font-weight: 700;
+	}
+	@media (max-width: 760px) {
+		.press-carousel {
+			margin-top: 1.8rem;
+		}
+		.pc-head {
+			margin-bottom: 0.55rem;
+		}
+		.pc-btn {
+			width: 44px;
+			height: 44px;
+		}
+		.pc-count {
+			min-width: 4.2rem;
+			font-size: 0.68rem;
+		}
+		.pc-frame {
+			aspect-ratio: 3 / 2;
+			box-shadow: 3px 3px 0 var(--ink);
+		}
+		.pc-stage {
+			inset: 0.4rem;
+		}
+		.pc-cap {
+			font-size: 0.7rem;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.pc-viewport {
+			scroll-behavior: auto;
+		}
+	}
+	@media print {
+		.press-carousel {
+			display: none;
+		}
+	}
+</style>

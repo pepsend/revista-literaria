@@ -90,6 +90,17 @@ const prensa = defineCollection({
 		authorBio: z.string().optional(),
 		authorImage: z.string().optional(),
 		summary: z.string().optional(),
+		// Galería de fotos al final del texto. Opcional: las notas antiguas no la tienen.
+		carousel: z
+			.array(
+				z.object({
+					image: z.string(),
+					caption: z.string().optional(),
+					alt: z.string().optional(),
+				}),
+			)
+			.optional()
+			.default([]),
 	}),
 });
 
