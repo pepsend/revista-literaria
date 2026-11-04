@@ -18,6 +18,8 @@ summary: >
 
   En el stand de ventas disponible en el festival habrá descuentos especiales.
 carousel:
+  - image: /uploads/3er-planeta-comic-fest-kv.jpg
+    caption: Afiche oficial
   - image: /uploads/raquel-riba-rossy_libro_final-©blanca-de-la-cruz.jpg
     caption: Raquel Riba
   - image: /uploads/paulina-palacios-3.jpeg
