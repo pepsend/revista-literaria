@@ -1,7 +1,7 @@
 ---
 title: "La memoria de la tierra: arte, raíces y resistencia latinoamericana"
 heroImage: /uploads/tejidos.png
-imagePosition: 50% 50%
+imagePosition: 51% 52%
 date: 2026-11-04T16:16:00.000-03:00
 author: Catalina Villalobos Díaz
 category: Ensayo
