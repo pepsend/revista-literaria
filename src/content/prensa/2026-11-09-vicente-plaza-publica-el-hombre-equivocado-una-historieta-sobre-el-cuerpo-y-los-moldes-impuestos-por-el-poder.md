@@ -5,7 +5,7 @@ type: Lanzamiento
 date: 2026-11-09T13:28:00.000-03:00
 eventDates: el sábado 14 de noviembre a las 14:00
 heroImage: /uploads/portada-equivocado.jpg
-imagePosition: 50% 50%
+imagePosition: 49% 52%
 authorImage: /uploads/vicente-plaza-archivo-personal-3-.jpg
 carousel:
   - image: /uploads/invitacion-a-la-presentación.jpg
