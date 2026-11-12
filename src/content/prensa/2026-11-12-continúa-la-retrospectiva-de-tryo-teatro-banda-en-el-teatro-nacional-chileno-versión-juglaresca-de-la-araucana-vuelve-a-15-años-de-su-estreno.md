@@ -7,7 +7,7 @@ author: Tryo Teatro. Banda
 eventDates: 11 al 14 de noviembre
 location: Tryo Teatro Banda
 link: https://tnch.uchile.cl
-heroImage: /uploads/image.jpeg
+heroImage: /uploads/tryo-teatro-banda-musicos.jpeg
 imagePosition: 50% 50%
 authorBio: Tryo Teatro Banda es una compañía chilena de teatro popular fundada
   en el año 2000 por Francisco Sánchez y Carolina González. En más de dos
