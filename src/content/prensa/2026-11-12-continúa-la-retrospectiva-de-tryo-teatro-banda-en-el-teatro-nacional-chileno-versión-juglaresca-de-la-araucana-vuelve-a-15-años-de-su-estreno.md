@@ -46,3 +46,15 @@ Una retrospectiva que continúa con Carrera
 Fundada en 2000 por Francisco Sánchez y Carolina González, la agrupación reúne 26 años de trayectoria, más de 25 espectáculos creados y sobre 3.600 funciones dentro y fuera de Chile. Su trabajo ha recorrido teatros, plazas y escuelas, desarrollando un lenguaje que pone la música y el humor al servicio de una revisión crítica de la historia nacional.
 
 La retrospectiva concluirá con *Carrera*, del 18 al 21 de noviembre. Protagonizado y dirigido por Sebastián Vila y Francisco Sánchez, con música en vivo de la chelista Anaís Prieto, el montaje aborda la vida del líder independentista y fue distinguido por su dirección por el Círculo de Críticos de Arte de Chile. Así, el ciclo enlaza la Conquista, la resistencia mapuche y las disputas de la Independencia a través de tres momentos del repertorio de la compañía.
+
+\-----------------------------------------------------------------------------------------
+
+11 al 14 de noviembre
+
+miércoles a sábado, 19:30 hrs.
+
+Teatro Nacional chileno, Sala Antonio Varas, Morandé 25, Santiago. Metro Universidad de Chile
+
+Valores: $10.000 general; $5.000 estudiantes y personas mayores; $3.500 estudiantes y funcionarios de la Universidad de Chile con TUI; $4.000 personas con discapacidad con credencial. 
+
+TICKETS: <https://ticketplus.cl/events/retrospectiva-tryo-teatro-banda-la-araucana>
