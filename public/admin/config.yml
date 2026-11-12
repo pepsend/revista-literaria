@@ -48,6 +48,9 @@ collections:
         name: "body"
         widget: "markdown"
         hint: "Usa el interruptor «Rich Text» (arriba a la derecha del editor) para el modo visual: negrita, cursiva, títulos, citas, listas, enlaces e insertar imágenes entre párrafos con el botón +."
+        modes:
+          - rich_text
+          - raw
         buttons:
           - bold
           - italic
@@ -101,7 +104,10 @@ collections:
       - label: "Contenido completo"
         name: "body"
         widget: "markdown"
-        hint: "Texto íntegro de la nota o comunicado de prensa."
+        hint: "Texto íntegro de la nota o comunicado de prensa. Puedes usar el interruptor «Rich Text» arriba a la derecha para alternar entre edición visual y Markdown."
+        modes:
+          - rich_text
+          - raw
         buttons:
           - bold
           - italic

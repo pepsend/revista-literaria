@@ -180,9 +180,133 @@
           justify-content: flex-end;
         }
       }
+      /* Área de edición: asegurar que el cuerpo editable abarque todo el bloque para permitir clic derecho (Pegar) */
+      .cms-editor-visual [contenteditable="true"],
+      .cms-editor-raw [contenteditable="true"] {
+        min-height: 260px;
+        cursor: text;
+      }
     </style>
   </head>
   <body>
+    <script>
+      /* ---------- Parche de compatibilidad de pegado (Paste) para Decap CMS / Slate ----------
+       * Problema: al editar notas existentes, el deserializador HTML de Slate en Decap CMS
+       * falla al procesar etiquetas como <span> con estilos o <div> (comunes al copiar desde
+       * Safari, Chrome, Google Docs, Word o la web). Al arrojar excepción sin try/catch,
+       * el evento de pegado se aborta por completo y no pega nada.
+       * Además, en Safari, al hacer clic derecho en el espacio inferior del editor, el menú
+       * "Pegar" quedaba deshabilitado porque el contenedor inferior no era contenteditable.
+       *
+       * Solución:
+       * 1) Sanitizar el HTML entrante de DataTransfer.prototype.getData para convertir <div> a <p>,
+       *    desenvolver <span> de bloques y garantizar una estructura compatible con Slate.
+       *    Si algo falla, devuelve "" para activar el respaldo nativo y seguro de texto plano.
+       * 2) Mantener el área editable con min-height y reenfocar al hacer clic/clic derecho en el área vacía.
+       */
+      (function () {
+        if (typeof window !== 'undefined' && window.DataTransfer && window.DataTransfer.prototype) {
+          var originalGetData = window.DataTransfer.prototype.getData;
+          window.DataTransfer.prototype.getData = function (format) {
+            var raw = originalGetData.call(this, format);
+            if (format && String(format).toLowerCase() === 'text/html' && raw) {
+              try {
+                // Si es un fragmento nativo de Slate copiado dentro de la misma aplicación, no tocarlo
+                if (raw.indexOf('data-slate-fragment') !== -1) return raw;
+
+                var doc = new DOMParser().parseFromString(raw, 'text/html');
+                if (!doc || !doc.body) return '';
+
+                // 1. Eliminar etiquetas propietarias o basura
+                var bad = doc.body.querySelectorAll('script, style, meta, link, noscript, o\\:p, xml');
+                for (var i = 0; i < bad.length; i++) {
+                  if (bad[i].parentNode) bad[i].parentNode.removeChild(bad[i]);
+                }
+
+                // 2. Desenvolver <span> que envuelven bloques
+                var spans = doc.body.querySelectorAll('span');
+                for (var s = spans.length - 1; s >= 0; s--) {
+                  var sp = spans[s];
+                  if (sp.querySelector('p, div, h1, h2, h3, h4, h5, h6, ul, ol, blockquote')) {
+                    while (sp.firstChild) sp.parentNode.insertBefore(sp.firstChild, sp);
+                    sp.parentNode.removeChild(sp);
+                  }
+                }
+
+                // 3. Convertir <div> a <p>
+                var divs = doc.body.querySelectorAll('div');
+                for (var d = 0; d < divs.length; d++) {
+                  var div = divs[d];
+                  var p = doc.createElement('p');
+                  while (div.firstChild) p.appendChild(div.firstChild);
+                  if (div.parentNode) div.parentNode.replaceChild(p, div);
+                }
+
+                // 4. Envolver texto o inlines huérfanos directamente bajo body en <p>
+                var child = doc.body.firstChild;
+                var curP = null;
+                while (child) {
+                  var next = child.nextSibling;
+                  var isBlk = child.nodeType === 1 && /^(P|H[1-6]|BLOCKQUOTE|UL|OL|PRE|FIGURE)$/i.test(child.nodeName);
+                  if (!isBlk) {
+                    if (!curP) {
+                      curP = doc.createElement('p');
+                      doc.body.insertBefore(curP, child);
+                    }
+                    curP.appendChild(child);
+                  } else {
+                    curP = null;
+                  }
+                  child = next;
+                }
+
+                return doc.body.innerHTML || '';
+              } catch (e) {
+                // Ante cualquier error, retornar vacío para que Decap CMS use text/plain
+                return '';
+              }
+            }
+            return raw;
+          };
+        }
+
+        // Asegurar que clic o clic derecho debajo del texto en el editor enfoque y habilite 'Pegar'
+        function placeCursorAtEnd(container) {
+          if (!container) return;
+          var editable = container.querySelector('[contenteditable="true"]');
+          if (!editable) return;
+          editable.focus();
+          try {
+            var sel = window.getSelection();
+            if (sel) {
+              var range = document.createRange();
+              range.selectNodeContents(editable);
+              range.collapse(false);
+              sel.removeAllRanges();
+              sel.addRange(range);
+            }
+          } catch (e) {}
+        }
+
+        document.addEventListener('mousedown', function (e) {
+          var container = e.target && e.target.closest && e.target.closest('.cms-editor-visual, .cms-editor-raw');
+          if (!container) return;
+          var editable = container.querySelector('[contenteditable="true"]');
+          if (editable && !editable.contains(e.target)) {
+            placeCursorAtEnd(container);
+          }
+        }, true);
+
+        document.addEventListener('contextmenu', function (e) {
+          var container = e.target && e.target.closest && e.target.closest('.cms-editor-visual, .cms-editor-raw');
+          if (!container) return;
+          var editable = container.querySelector('[contenteditable="true"]');
+          if (editable && !editable.contains(e.target)) {
+            placeCursorAtEnd(container);
+          }
+        }, true);
+      })();
+    </script>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     <script>
       /* ---------- Utilidad: resolver la URL de un asset (aunque no esté publicado) ---------- */
