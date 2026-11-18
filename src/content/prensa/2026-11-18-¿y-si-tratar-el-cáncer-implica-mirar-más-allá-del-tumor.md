@@ -14,6 +14,8 @@ authorBio: >
   observar la enfermedad desde una perspectiva más amplia, crítica y humana.
 authorImage: /uploads/carola-foto-libro1.jpg
 summary: Bar Liguria de Lastarria, en Merced 298, Santiago de Chile
+carousel:
+  - image: /uploads/invitacion_website_cuerpo_recuerda_1200x627.jpg
 ---
 
 
