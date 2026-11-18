@@ -5,7 +5,7 @@ date: 2026-11-17T22:36:00.000-03:00
 eventDates: 19 de noviembre a las 19:00
 location: "Editorial Forja "
 heroImage: /uploads/invitacion_website_cuerpo_recuerda_1080x1920.jpg
-imagePosition: 50% 49%
+imagePosition: 49% 49%
 authorBio: >
   Carolina Bezamat Walters es periodista e investigadora en temas de salud y
   medicina integrativa. Desde 2010 ha investigado sobre alimentación, hábitos,
